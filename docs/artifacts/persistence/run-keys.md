@@ -16,7 +16,7 @@ tags:
 
 `Run` 和 `RunOnce` 用于配置登录时自动启动的程序，是恶意软件和正常软件都会频繁使用的持久化位置。
 
-## Registry Paths
+## 注册表路径
 
 | Hive | Path | Scope |
 |---|---|---|
@@ -26,27 +26,27 @@ tags:
 | `HKLM` | `Software\Microsoft\Windows\CurrentVersion\RunOnce` | 所有用户 |
 | `HKLM` | `Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run` | 32 位视图 |
 
-## Forensic Meaning
+## 取证含义
 
 这些键表示某个命令被配置为用户登录时启动。value name 通常是显示名称，value data 通常是可执行文件路径或命令行。
 
-## What It Can Prove
+## 可以证明
 
 - 程序或命令被配置为自启动。
 - 配置范围是用户级还是机器级。
 - key 的 LastWrite 可帮助估计该键最近一次变化时间。
 
-## What It Cannot Prove
+## 不能证明
 
 - 程序一定已经执行。
 - 某个 value 的创建时间精确等于 key 的 LastWrite。
 - 该启动项一定恶意。
 
-## Timestamp Notes
+## 时间戳说明
 
 注册表 value 通常没有独立时间戳。key LastWrite 表示该 key 的直接内容发生变化，不能直接当作某个具体 value 的创建时间。
 
-## Detection Ideas
+## 检测思路
 
 重点关注：
 
@@ -56,7 +56,7 @@ tags:
 - 伪装成系统组件的 value name。
 - HKLM 启动项指向用户 profile。
 
-## Collection
+## 采集方式
 
 === "PowerShell"
 
@@ -72,7 +72,7 @@ tags:
     reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
     ```
 
-## Cross Validation
+## 交叉验证
 
 - Startup folder
 - Scheduled Tasks

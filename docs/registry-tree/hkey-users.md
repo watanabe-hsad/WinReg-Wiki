@@ -6,10 +6,10 @@
 
 | 子项 | 含义 | 常见来源 |
 |---|---|---|
-| `.DEFAULT` | 默认系统账户配置，常用于登录界面和系统上下文。 | `C:\Windows\System32\Config\DEFAULT` |
-| `S-1-5-18` | Local System。 | 系统账户 hive |
-| `S-1-5-19` | Local Service。 | 服务账户 hive |
-| `S-1-5-20` | Network Service。 | 服务账户 hive |
+| [`.DEFAULT`](hku/default.md) | 默认系统账户配置，常用于登录界面和系统上下文。 | `C:\Windows\System32\Config\DEFAULT` |
+| [`S-1-5-18`](hku/service-sids.md) | Local System。 | 系统账户 hive |
+| [`S-1-5-19`](hku/service-sids.md) | Local Service。 | 服务账户 hive |
+| [`S-1-5-20`](hku/service-sids.md) | Network Service。 | 服务账户 hive |
 | `<user-SID>` | 普通本地或域用户。 | `C:\Users\<user>\NTUSER.DAT` |
 | `<user-SID>_Classes` | 用户级 Classes 视图。 | `C:\Users\<user>\AppData\Local\Microsoft\Windows\UsrClass.dat` |
 

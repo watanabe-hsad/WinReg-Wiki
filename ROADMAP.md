@@ -9,10 +9,12 @@
 
 ## Phase 2: Registry Tree Depth
 
-- Deepen `HKLM\SYSTEM` with ControlSet, Services, Enum, USB, MountedDevices, RDP server configuration, network interfaces, time zone, and computer name analysis.
-- Deepen `HKLM\SOFTWARE` with Run / RunOnce, Uninstall, IFEO, Winlogon, Explorer, Defender, Policies, Classes, and WOW6432Node.
-- Deepen `HKCU` and `HKU\<SID>` with user hive mapping, Explorer behavior, RunMRU, RecentDocs, ComDlg32, RDP client history, Environment, user-level persistence, `NTUSER.DAT`, and `UsrClass.dat`.
-- Add practical analyst checklists to major registry tree pages.
+- Current status: registry-location navigation now follows a Windows-registry-like hierarchy instead of investigation themes.
+- Completed path-reference pages: `HKLM\SYSTEM\Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, and `Lsa`.
+- Completed path-reference pages: `HKLM\SOFTWARE\ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, and `Classes`.
+- Completed path-reference pages: HKCU Explorer, ComDlg32, RunMRU, RecentDocs, Internet Settings, Classes, Terminal Server Client, plus HKU `.DEFAULT` and service-account SID pages.
+- Next: add device-specific pages for USB, DeviceClasses, `SWD\WPDBUSENUM`, EMDMgmt, Portable Devices, and VolumeInfoCache.
+- Next: add HKCU ZoneMap, Printers, Environment, user-level Run / Command Processor, and network profile pages.
 
 ## Phase 3: High-Value Artifacts
 
@@ -28,6 +30,7 @@
 ## Phase 4: Structured Data and Generated Indexes
 
 - Current status: every manual artifact page currently has a matching YAML record.
+- Current status: generated artifact index display is localized to Chinese while preserving YAML field names.
 - Keep `scripts/generate-artifact-index.py` small and dependency-light.
 - Generate `docs/artifacts/generated-index.md` from YAML without overwriting manual narrative indexes.
 - Add stable fields for ATT&CK mappings, event IDs, collection commands, parser support, and confidence levels.

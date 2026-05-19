@@ -15,32 +15,32 @@ tags:
 
 ShimCache, also known as AppCompatCache, 是 Windows 应用兼容性机制的一部分。它常被用于发现系统上出现过的可执行文件路径。
 
-## Registry Paths
+## 注册表路径
 
 | Hive | Path |
 |---|---|
 | `HKLM\SYSTEM` | `ControlSet00x\Control\Session Manager\AppCompatCache` |
 
-## Forensic Meaning
+## 取证含义
 
 ShimCache 可以提供程序路径和缓存时间线线索，但执行语义在不同 Windows 版本上差异明显。
 
-## What It Can Prove
+## 可以证明
 
 - 系统缓存中存在某个程序路径。
 - 可辅助发现已删除或不再明显存在的程序路径。
 
-## What It Cannot Prove
+## 不能证明
 
 - 程序一定执行。
 - 缓存顺序一定是执行顺序。
 - 时间戳一定表示执行时间。
 
-## Timestamp Notes
+## 时间戳说明
 
 ShimCache 的时间语义高度依赖 Windows 版本和解析方法。报告中建议使用保守表述，并附解析工具名称。
 
-## Cross Validation
+## 交叉验证
 
 - Amcache
 - Prefetch

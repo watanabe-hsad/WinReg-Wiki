@@ -26,18 +26,18 @@ HKLM\SOFTWARE\WOW6432Node
 |---|---|
 | `Microsoft\Windows\CurrentVersion\Run` | 机器级登录启动项。 |
 | `Microsoft\Windows\CurrentVersion\RunOnce` | 机器级一次性登录启动项。 |
-| `Microsoft\Windows\CurrentVersion\Uninstall` | 软件安装登记。 |
-| `Microsoft\Windows NT\CurrentVersion\Image File Execution Options` | IFEO、Debugger、进程启动相关配置。 |
-| `Microsoft\Windows NT\CurrentVersion\Winlogon` | `Userinit`、`Shell`、自动登录等。 |
-| `Microsoft\Windows NT\CurrentVersion\ProfileList` | SID 到用户 profile 路径的映射。 |
+| [`Microsoft\Windows\CurrentVersion\Uninstall`](software/uninstall.md) | 软件安装登记。 |
+| [`Microsoft\Windows NT\CurrentVersion\Image File Execution Options`](software/ifeo.md) | IFEO、Debugger、进程启动相关配置。 |
+| [`Microsoft\Windows NT\CurrentVersion\Winlogon`](software/winlogon.md) | `Userinit`、`Shell`、自动登录等。 |
+| [`Microsoft\Windows NT\CurrentVersion\ProfileList`](software/profilelist.md) | SID 到用户 profile 路径的映射。 |
 | `Microsoft\Windows\CurrentVersion\Explorer` | Explorer 机器级配置、StartupApproved。 |
-| `Microsoft\Windows Defender` | Defender 本地状态和配置线索。 |
-| `Policies` | GPO / MDM / 本地策略写入位置。 |
+| [`Microsoft\Windows Defender`](software/defender.md) | Defender 本地状态和配置线索。 |
+| [`Policies`](software/policies.md) | GPO / MDM / 本地策略写入位置。 |
 | `Policies\Microsoft\Windows Defender` | Defender 策略和排除项。 |
 | `Microsoft\Windows\CurrentVersion\Policies\System` | UAC 和部分系统策略。 |
 | `Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList` | 登录界面隐藏用户配置。 |
-| `WOW6432Node` | 32 位应用注册表视图。 |
-| `Classes` | 机器级文件关联、COM、协议处理器。 |
+| [`WOW6432Node`](software/wow6432node.md) | 32 位应用注册表视图。 |
+| [`Classes`](software/classes.md) | 机器级文件关联、COM、协议处理器。 |
 
 ## 注意
 

@@ -24,7 +24,7 @@ HKLM\SYSTEM\ControlSet001
 HKLM\SYSTEM\ControlSet002
 ```
 
-`CurrentControlSet` 的映射由 `HKLM\SYSTEM\Select` 决定。
+`CurrentControlSet` 的映射由 [`HKLM\SYSTEM\Select`](system/select.md) 决定。
 
 | Value | 含义 |
 |---|---|
@@ -37,21 +37,22 @@ HKLM\SYSTEM\ControlSet002
 
 | 路径 | 含义 |
 |---|---|
-| `Select` | 控制集映射。 |
-| `ControlSet00x\Services` | 服务、驱动、网络组件配置。 |
+| [`Select`](system/select.md) | 控制集映射。 |
+| [`ControlSet00x`](system/controlset.md) | 真实控制集。 |
+| [`ControlSet00x\Services`](system/services.md) | 服务、驱动、网络组件配置。 |
 | `ControlSet00x\Services\bam\State\UserSettings\<SID>` | BAM 程序活动记录。 |
 | `ControlSet00x\Services\dam\State\UserSettings\<SID>` | DAM 相关记录。 |
-| `ControlSet00x\Enum` | 设备枚举树。 |
+| [`ControlSet00x\Enum`](system/enum.md) | 设备枚举树。 |
 | `ControlSet00x\Enum\USBSTOR` | USB 存储设备枚举。 |
 | `ControlSet00x\Enum\USB` | USB 设备枚举。 |
-| `MountedDevices` | 卷 GUID、盘符、设备映射。 |
-| `ControlSet00x\Control\Terminal Server` | RDP 服务端开关。 |
+| [`MountedDevices`](system/mounteddevices.md) | 卷 GUID、盘符、设备映射。 |
+| [`ControlSet00x\Control\Terminal Server`](system/terminal-server.md) | RDP 服务端开关。 |
 | `ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp` | RDP listener、端口、NLA / 安全层。 |
-| `ControlSet00x\Services\Tcpip\Parameters` | TCP/IP 全局配置。 |
+| [`ControlSet00x\Services\Tcpip\Parameters`](system/tcpip.md) | TCP/IP 全局配置。 |
 | `ControlSet00x\Services\Tcpip\Parameters\Interfaces\<GUID>` | 网卡 IP、DNS、DHCP、网关。 |
-| `ControlSet00x\Control\TimeZoneInformation` | 时区和 Bias。 |
-| `ControlSet00x\Control\ComputerName` | 主机名。 |
-| `ControlSet00x\Control\Lsa` | LSA 运行配置和认证包。 |
+| [`ControlSet00x\Control\TimeZoneInformation`](system/timezone.md) | 时区和 Bias。 |
+| [`ControlSet00x\Control\ComputerName`](system/computername.md) | 主机名。 |
+| [`ControlSet00x\Control\Lsa`](system/lsa.md) | LSA 运行配置和认证包。 |
 | `ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy` | Windows Firewall 配置。 |
 
 ## 注意

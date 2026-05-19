@@ -19,70 +19,70 @@ tags:
 
 一句话说明这个 artifact 的调查价值。
 
-## Summary
+## 摘要
 
 一句话说明这个 artifact 的核心价值。
 
-## Registry Paths
+## 注册表路径
 
-| View | Hive / File | Path | Value | Scope |
+| 视图 | Hive / 文件 | 路径 | Value | 范围 |
 |---|---|---|---|---|
 | Live path | `HKCU` | `Software\...` | `ValueName` | Current user |
 | Offline hive path | `NTUSER.DAT` | `Software\...` | `ValueName` | User SID |
 
-## Native Registry View
+## 原生注册表视图
 
 说明在 `regedit.exe` 中通常从哪里展开，以及 live 视图和真实 hive 的关系。
 
-## Offline Location
+## 离线位置
 
 说明离线镜像中对应哪个 hive 文件、是否需要 SID 映射或 ControlSet 解析。
 
-## Data Meaning
+## 字段含义
 
-| Field | Meaning |
+| 字段 | 含义 |
 |---|---|
 | value / subkey | 具体含义 |
 
-## Forensic Meaning
+## 取证含义
 
 说明它通常记录什么。
 
-## What It Can Prove
+## 可以证明
 
 - ...
 
-## What It Cannot Prove
+## 不能证明
 
 - ...
 
-## Timestamp Notes
+## 时间戳说明
 
 说明 LastWrite、value 时间戳、工具解析差异。
 
-## OS Version Notes
+## 系统版本差异
 
 说明 Windows 7 / 10 / 11 / Server 差异；未知就写“待验证”。
 
-## Attacker Usage
+## 攻击滥用
 
 说明攻击者如何滥用这个位置或如何清理痕迹。
 
-## Detection Ideas
+## 检测思路
 
 - ...
 
-## False Positives
+## 常见误报
 
 - ...
 
-## Collection
+## 采集方式
 
 ```powershell
 Get-ItemProperty "HKCU:\..."
 ```
 
-## Parsing Tools
+## 解析工具
 
 - RECmd
 - Registry Explorer
@@ -90,23 +90,23 @@ Get-ItemProperty "HKCU:\..."
 - KAPE
 - Velociraptor
 
-## Cross Validation
+## 交叉验证
 
 - Event Log
 - Prefetch
 - Amcache
 - File system timeline
 
-## Example Findings
+## 示例结论
 
 - 报告风格判断句，明确证据强度。
 
-## Related Pages
+## 相关页面
 
 - 场景：...
 - 注册表位置：...
 
-## References
+## 参考资料
 
 - ...
 ```

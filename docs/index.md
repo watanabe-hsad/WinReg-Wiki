@@ -24,19 +24,19 @@
 
 ## 当前覆盖
 
-当前手册已经从 demo 扩展为按调查问题和注册表原生结构组织的实战索引，优先覆盖高价值 artifact：
+当前手册已经从 demo 扩展为按调查问题、注册表原生结构和注册表 Artifact 组织的查询型知识库，优先覆盖常见 DFIR 条目：
 
 | 场景 | 示例条目 |
 |---|---|
 | 程序执行 / 程序存在 | [UserAssist](artifacts/execution/userassist.md), [Amcache](artifacts/execution/amcache.md), [ShimCache](artifacts/execution/shimcache.md), [BAM / DAM](artifacts/execution/bam-dam.md), [MUICache](artifacts/execution/muicache.md) |
 | 持久化 | [Run / RunOnce](artifacts/persistence/run-keys.md), [StartupApproved](artifacts/persistence/startupapproved.md), [Services](artifacts/persistence/services.md), [IFEO](artifacts/persistence/ifeo.md), [Winlogon Userinit](artifacts/persistence/winlogon-userinit.md), [Winlogon Shell](artifacts/persistence/winlogon-shell.md), [LSA Authentication Packages](artifacts/persistence/lsa-authentication-packages.md), [Command Processor AutoRun](artifacts/persistence/command-processor-autorun.md) |
 | USB / 外接设备 | [USBSTOR](artifacts/usb/usbstor.md), [MountedDevices](artifacts/usb/mounteddevices.md), [MountPoints2](artifacts/usb/mountpoints2.md) |
-| 远程访问 | [Terminal Server Client](artifacts/rdp/terminal-server-client.md) |
+| 远程访问 | [Terminal Server Client](artifacts/rdp/terminal-server-client.md), [fDenyTSConnections](artifacts/rdp/fdenytsconnections.md), [RDP-Tcp PortNumber](artifacts/rdp/rdp-tcp-portnumber.md), [CredSSP / NLA](artifacts/rdp/credssp-nla.md) |
 | 账户 / 安全 / 防护策略 | [ProfileList](artifacts/security/profilelist.md), [Defender Policies](artifacts/security/defender-policies.md), [LSA Authentication Packages](artifacts/persistence/lsa-authentication-packages.md) |
 
 ## 页面原则
 
-每个 artifact 页面都尽量回答这些问题：
+每个注册表 Artifact 页面都尽量回答这些问题：
 
 - 这个注册表项通常记录什么？
 - 它能证明什么，不能证明什么？

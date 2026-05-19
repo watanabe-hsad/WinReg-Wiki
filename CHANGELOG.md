@@ -8,6 +8,10 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-tree path reference pages for `HKLM\SYSTEM`: `Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, and `Lsa`.
+- Added registry-tree path reference pages for `HKLM\SOFTWARE`: `ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, and `Classes`.
+- Added registry-tree path reference pages for `HKCU`: `ComDlg32`, `RunMRU`, `RecentDocs`, `Internet Settings`, and `Classes`.
+- Added registry-tree path reference pages for `HKU`: `.DEFAULT` and service-account SIDs.
 - Added GitHub Pages deployment workflow at `.github/workflows/pages.yml`.
 - Added project handoff and maintenance documents: `PROJECT_STATUS.md`, `ROADMAP.md`, and `CHANGELOG.md`.
 - Added GitHub-ready README content with project positioning, local usage, content principles, current scope, contribution notes, and license status.
@@ -31,6 +35,11 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Localized the top-level Artifact navigation to `注册表 Artifact`.
+- Localized Artifact category navigation, manual artifact index headings, generated artifact data index headings, and generated category/value labels.
+- Localized artifact page section headings and `docs/contributing/template.md` section headings to Chinese while keeping artifact file names and URLs in English.
+- Reworked `docs/registry-tree/index.md` as a concise directory-style entry page.
+- Expanded `mkdocs.yml` registry-location navigation to better match the Windows registry tree hierarchy.
 - Changed registry-location navigation from section-style grouping to expanded multi-level tree navigation.
 - Rewrote registry-tree pages to be concise key/value reference pages instead of long forensic-analysis pages.
 - Updated `site_url` to `http://hsad.xyz/windows-registry-forensics-handbook/`.
@@ -48,6 +57,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used briefly for local preview of `注册表位置`, `注册表 Artifact`, and `结构化数据索引`.
 - `.venv/bin/python scripts/generate-artifact-index.py` completed successfully and wrote `docs/artifacts/generated-index.md`.
 - `.venv/bin/mkdocs build --strict` completed successfully.
 - The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build; it is not treated as a project build failure.

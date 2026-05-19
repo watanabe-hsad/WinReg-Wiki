@@ -14,10 +14,13 @@
 |---|---|
 | `Microsoft\Windows\CurrentVersion\Run` | 用户级登录启动项。 |
 | `Microsoft\Command Processor` | `cmd.exe` 的 `AutoRun` 配置。 |
-| `Microsoft\Terminal Server Client` | RDP 客户端历史。 |
-| `Microsoft\Windows\CurrentVersion\Explorer` | Explorer / Shell 相关用户痕迹。 |
-| `Microsoft\Windows\CurrentVersion\Internet Settings` | 用户代理、PAC、ZoneMap、WinINet 设置。 |
-| `Classes` | 用户级 Classes，通常来自 `UsrClass.dat`。 |
+| [`Microsoft\Terminal Server Client`](terminal-server-client.md) | RDP 客户端历史。 |
+| [`Microsoft\Windows\CurrentVersion\Explorer`](explorer.md) | Explorer / Shell 相关用户痕迹。 |
+| [`Microsoft\Windows\CurrentVersion\Explorer\RunMRU`](software/runmru.md) | Win+R 输入历史。 |
+| [`Microsoft\Windows\CurrentVersion\Explorer\RecentDocs`](software/recentdocs.md) | 最近文档名称和 MRU。 |
+| [`Microsoft\Windows\CurrentVersion\Explorer\ComDlg32`](software/comdlg32.md) | Common dialog MRU。 |
+| [`Microsoft\Windows\CurrentVersion\Internet Settings`](software/internet-settings.md) | 用户代理、PAC、ZoneMap、WinINet 设置。 |
+| [`Classes`](software/classes.md) | 用户级 Classes，通常来自 `UsrClass.dat`。 |
 
 ## 注意
 

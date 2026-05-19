@@ -85,26 +85,64 @@ nav:
           - 概览: registry-tree/hkey-current-user.md
           - Software:
               - 概览: registry-tree/hkcu/software.md
-              - Explorer: registry-tree/hkcu/explorer.md
-              - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
+              - Microsoft:
+                  - Windows:
+                      - CurrentVersion:
+                          - Explorer:
+                              - 概览: registry-tree/hkcu/explorer.md
+                              - RunMRU: registry-tree/hkcu/software/runmru.md
+                              - RecentDocs: registry-tree/hkcu/software/recentdocs.md
+                              - ComDlg32: registry-tree/hkcu/software/comdlg32.md
+                          - Internet Settings: registry-tree/hkcu/software/internet-settings.md
+                  - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
+              - Classes: registry-tree/hkcu/software/classes.md
       - HKEY_LOCAL_MACHINE:
           - 概览: registry-tree/hkey-local-machine.md
           - SAM: registry-tree/hklm/sam.md
           - SECURITY: registry-tree/hklm/security.md
-          - SOFTWARE: registry-tree/hklm/software.md
-          - SYSTEM: registry-tree/hklm/system.md
+          - SOFTWARE:
+              - 概览: registry-tree/hklm/software.md
+              - Microsoft:
+                  - Windows NT:
+                      - CurrentVersion:
+                          - ProfileList: registry-tree/hklm/software/profilelist.md
+                          - Winlogon: registry-tree/hklm/software/winlogon.md
+                          - Image File Execution Options: registry-tree/hklm/software/ifeo.md
+                  - Windows:
+                      - CurrentVersion:
+                          - Uninstall: registry-tree/hklm/software/uninstall.md
+                  - Windows Defender: registry-tree/hklm/software/defender.md
+              - Policies: registry-tree/hklm/software/policies.md
+              - WOW6432Node: registry-tree/hklm/software/wow6432node.md
+              - Classes: registry-tree/hklm/software/classes.md
+          - SYSTEM:
+              - 概览: registry-tree/hklm/system.md
+              - Select: registry-tree/hklm/system/select.md
+              - ControlSet00x:
+                  - 概览: registry-tree/hklm/system/controlset.md
+                  - Services: registry-tree/hklm/system/services.md
+                  - Enum: registry-tree/hklm/system/enum.md
+                  - Control:
+                      - Terminal Server: registry-tree/hklm/system/terminal-server.md
+                      - TimeZoneInformation: registry-tree/hklm/system/timezone.md
+                      - ComputerName: registry-tree/hklm/system/computername.md
+                      - Lsa: registry-tree/hklm/system/lsa.md
+                  - Services\Tcpip: registry-tree/hklm/system/tcpip.md
+              - MountedDevices: registry-tree/hklm/system/mounteddevices.md
           - HARDWARE: registry-tree/hklm/hardware.md
           - BCD00000000: registry-tree/hklm/bcd.md
       - HKEY_USERS:
           - 概览: registry-tree/hkey-users.md
+          - .DEFAULT: registry-tree/hku/default.md
+          - 服务账户 SID: registry-tree/hku/service-sids.md
           - SID 映射: registry-tree/hku/sid-mapping.md
           - NTUSER.DAT: registry-tree/hku/ntuser.md
           - UsrClass.dat: registry-tree/hku/usrclass.md
       - HKEY_CURRENT_CONFIG: registry-tree/hkey-current-config.md
-  - Artifact:
-      - artifacts/index.md
-      - Generated Data Index: artifacts/generated-index.md
-      - Persistence:
+  - 注册表 Artifact:
+      - 总览: artifacts/index.md
+      - 结构化数据索引: artifacts/generated-index.md
+      - 持久化 / 自启动:
           - Run / RunOnce: artifacts/persistence/run-keys.md
           - StartupApproved: artifacts/persistence/startupapproved.md
           - Services: artifacts/persistence/services.md
@@ -113,27 +151,27 @@ nav:
           - Winlogon Shell: artifacts/persistence/winlogon-shell.md
           - LSA Authentication Packages: artifacts/persistence/lsa-authentication-packages.md
           - Command Processor AutoRun: artifacts/persistence/command-processor-autorun.md
-      - Execution:
+      - 程序执行 / 程序存在:
           - UserAssist: artifacts/execution/userassist.md
           - BAM / DAM: artifacts/execution/bam-dam.md
           - Amcache: artifacts/execution/amcache.md
           - ShimCache: artifacts/execution/shimcache.md
           - MUICache: artifacts/execution/muicache.md
-      - User Activity:
+      - 用户行为:
           - RunMRU: artifacts/user-activity/runmru.md
           - RecentDocs: artifacts/user-activity/recentdocs.md
           - OpenSavePidlMRU: artifacts/user-activity/opensavepidlmru.md
           - LastVisitedPidlMRU: artifacts/user-activity/lastvisitedpidlmru.md
-      - USB:
+      - USB / 外接设备:
           - USBSTOR: artifacts/usb/usbstor.md
           - MountedDevices: artifacts/usb/mounteddevices.md
           - MountPoints2: artifacts/usb/mountpoints2.md
-      - RDP:
+      - RDP / 远程访问:
           - Terminal Server Client: artifacts/rdp/terminal-server-client.md
           - fDenyTSConnections: artifacts/rdp/fdenytsconnections.md
           - RDP-Tcp PortNumber: artifacts/rdp/rdp-tcp-portnumber.md
           - CredSSP / NLA: artifacts/rdp/credssp-nla.md
-      - Security:
+      - 账户与安全策略:
           - ProfileList: artifacts/security/profilelist.md
           - Defender Policies: artifacts/security/defender-policies.md
           - UAC Policies: artifacts/security/uac-policies.md

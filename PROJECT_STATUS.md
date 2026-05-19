@@ -2,7 +2,7 @@
 
 ## Current Goal
 
-GitHub Pages deployment is configured for the Windows Registry Forensics Handbook. The current maintenance state is to keep the site query-oriented, keep registry-tree pages concise, and continue artifact expansion.
+The current maintenance state is to keep the site query-oriented, keep registry-tree pages concise, and continue artifact expansion. The most recent round localized the Artifact entry and expanded registry-tree path pages.
 
 ## Repository
 
@@ -16,15 +16,34 @@ GitHub Pages deployment is configured for the Windows Registry Forensics Handboo
 
 ## Current Structure
 
-- `docs/registry-tree/`: Windows native registry tree entry point. It explains live roots such as `HKLM`, `HKCU`, `HKU`, `HKCR`, `HKCC`, and maps them back to offline hive files.
+- `docs/registry-tree/`: Windows native registry tree entry point. It explains live roots such as `HKLM`, `HKCU`, `HKU`, `HKCR`, `HKCC`, and maps them back to offline hive files. The navigation is organized as a registry-like tree, not by investigation scenario.
 - `docs/questions/`: investigation scenario entry point. Pages are organized by real DFIR questions such as execution, persistence, USB, RDP, accounts, security policy, network configuration, software installation, anti-forensics, and Shell / Explorer behavior.
-- `docs/artifacts/`: manually written artifact pages. Artifact pages should remain practical and evidence-oriented, not generic registry encyclopedia entries.
+- `docs/artifacts/`: manually written artifact pages. The navigation and index are localized as `注册表 Artifact`; artifact technical names and URL paths remain English.
 - `data/artifacts/`: structured artifact YAML records for future generated indexes and exports.
 - `scripts/`: lightweight automation. `scripts/generate-artifact-index.py` reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
-- `mkdocs.yml`: site configuration and navigation. It currently includes the generated artifact data index in the Artifact section.
+- `mkdocs.yml`: site configuration and navigation. It currently includes the generated artifact data index in the `注册表 Artifact` section.
 - `.github/workflows/pages.yml`: GitHub Actions workflow that builds and deploys the MkDocs site to GitHub Pages.
 
 ## Last Completed Round
+
+Current completed round:
+
+- Localized the Artifact entry:
+  - top-level navigation changed from `Artifact` to `注册表 Artifact`;
+  - artifact category navigation changed to Chinese labels such as `持久化 / 自启动`, `程序执行 / 程序存在`, `用户行为`, `USB / 外接设备`, `RDP / 远程访问`, and `账户与安全策略`;
+  - `docs/artifacts/index.md` was rewritten as a concise Chinese knowledge-base index;
+  - `scripts/generate-artifact-index.py` now renders Chinese headings, category labels, and value labels while preserving the original YAML field names;
+  - `docs/artifacts/generated-index.md` is generated as `结构化数据索引`;
+  - artifact section headings in `docs/artifacts/**/*.md` and `docs/contributing/template.md` were localized to Chinese.
+- Expanded registry-tree path pages while keeping them concise and path-oriented:
+  - `HKLM\SYSTEM`: `Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, `Lsa`.
+  - `HKLM\SOFTWARE`: `ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, `Classes`.
+  - `HKCU`: `Explorer`, `ComDlg32`, `RunMRU`, `RecentDocs`, `Internet Settings`, `Classes`, and refreshed `Terminal Server Client`.
+  - `HKU`: `.DEFAULT` and service-account SID reference pages.
+- Reworked `docs/registry-tree/index.md` into a directory-style entry page and expanded `mkdocs.yml` registry-location navigation to better resemble the real Windows registry hierarchy.
+- Confirmed local preview pages for `注册表位置`, `注册表 Artifact`, and `结构化数据索引` served correctly under `/windows-registry-forensics-handbook/`.
+
+Previous completed round:
 
 - Cleaned the registry-tree navigation and registry-location content style.
 - Removed `navigation.sections` in favor of expanded multi-level navigation so the registry tree reads more like a hierarchy and avoids duplicate root labels.
@@ -90,24 +109,26 @@ Last verified locally in the most recent round:
 ```bash
 .venv/bin/python scripts/generate-artifact-index.py
 .venv/bin/mkdocs build --strict
+.venv/bin/mkdocs serve -a 127.0.0.1:8000
 ```
 
-Both commands completed successfully. The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build and is expected; it is not currently a project build error.
+The generated-index command and strict build completed successfully. The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build and is expected; it is not currently a project build error. Local preview was used briefly to check the localized Artifact and registry-tree pages.
 
 Remote verification was also performed with `git ls-remote origin refs/heads/main`; the remote `main` hash matched local `HEAD` after the Pages and handoff updates were pushed.
 
 ## Next Priorities
 
-- Confirm GitHub Pages settings in the repository UI if the first workflow run does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
+- Continue localizing remaining prose inside older artifact pages where useful; their section headings are already localized.
+- Add HKLM\SYSTEM device-specific pages such as `USB`, `DeviceClasses`, `SWD\WPDBUSENUM`, `EMDMgmt`, Portable Devices, and VolumeInfoCache.
+- Add HKLM\SOFTWARE persistence pages such as Active Setup, AppInit_DLLs, ShellServiceObjectDelayLoad, Print Monitors, and LSA Security Packages.
+- Add HKCU pages for ZoneMap, Network, Printers, Environment, and user-level Run / Command Processor subkeys.
+- Confirm GitHub Pages settings in the repository UI if deployment does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
 - If a shorter URL is desired, use a project custom domain such as `registry.hsad.xyz` or move the site to the apex/root domain. The current `/windows-registry-forensics-handbook/` suffix is expected for a GitHub Pages project site.
 - Choose a license and add a `LICENSE` file. Suggested split: docs under `CC BY 4.0`, scripts under `MIT`, or a simpler single-repo `MIT` if preferred.
-- Add persistence pages for AppInit_DLLs, Active Setup, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, Services DLL details, and Drivers.
-- Add USB and device pages for USB, DeviceClasses, Enum\SWD\WPDBUSENUM, EMDMgmt, Portable Devices, and VolumeInfoCache.
 - Add account/security pages for CachedLogonsCount, LogonUI, local group membership details, and SAM user record interpretation.
-- Add network/system pages for NetworkList, Tcpip Interfaces, Internet Settings proxy, ZoneMap, TimeZoneInformation, ComputerName, and Select / ControlSet.
+- Add network/system pages for NetworkList, Tcpip Interfaces, Internet Settings proxy, and ZoneMap.
 - Add detection mapping fields such as ATT&CK technique, common event IDs, Sigma-friendly registry path selectors, and known false-positive families.
 - Add contribution and citation guidance before public release.
-- Decide on license and add a `LICENSE` file.
 - Consider renaming the local directory from `registry-forensics-handbook-demo` to `windows-registry-forensics-handbook` after confirming local tooling will not break.
 
 ## Notes For Next Agent

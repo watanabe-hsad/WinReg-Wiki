@@ -1,29 +1,33 @@
-# Terminal Server Client
+# HKCU\Software\Microsoft\Terminal Server Client
 
-`HKCU\Software\Microsoft\Terminal Server Client` 保存 MSTSC 客户端侧历史。
+`Terminal Server Client` 保存当前用户 MSTSC 客户端侧目标历史。
 
-## 文件
+## 位置
 
-| Live 视图 | 离线文件 |
+| 视图 | 路径 |
 |---|---|
-| `HKCU\Software\Microsoft\Terminal Server Client` | `C:\Users\<user>\NTUSER.DAT` |
+| Live | `HKCU\Software\Microsoft\Terminal Server Client` |
+| 离线 | `NTUSER.DAT\Software\Microsoft\Terminal Server Client` |
 
-## 常用路径
+## 常见子键 / value
 
-| 路径 | 含义 |
+| 名称 | 类型 | 含义 |
+|---|---|---|
+| `Default` | Key | RDP MRU 目标列表。 |
+| `Default\MRU0`、`MRU1` ... | `REG_SZ` | 远程主机名、IP 或目标字符串。 |
+| `Servers\<host>` | Key | 单个目标主机记录。 |
+| `Servers\<host>\UsernameHint` | `REG_SZ` | 用户名提示。 |
+
+## 说明
+
+| 项 | 内容 |
 |---|---|
-| `Default` | RDP MRU 目标列表。 |
-| `Servers\<host>` | 单个目标主机记录，可能包含用户名提示。 |
-| `Servers\<host>\UsernameHint` | 用户名提示。 |
-
-## 注意
-
-| 项 | 说明 |
-|---|---|
-| 客户端侧 | 这里记录本机作为 RDP 客户端的目标，不是服务端登录日志。 |
-| 连接成功 | 条目存在不等于 RDP 登录成功。 |
-| 服务端证据 | 服务端调查看目标主机 Security.evtx 和 TerminalServices 日志。 |
+| 数据来源 | 用户 `NTUSER.DAT`。 |
+| 常见写入者 | Microsoft Remote Desktop Client / `mstsc.exe`。 |
+| 注意 | 这是本机作为 RDP 客户端的历史，不是本机作为 RDP 服务端的登录记录。 |
 
 ## 相关 Artifact
 
-[Terminal Server Client](../../artifacts/rdp/terminal-server-client.md)
+- [Terminal Server Client](../../artifacts/rdp/terminal-server-client.md)
+- [fDenyTSConnections](../../artifacts/rdp/fdenytsconnections.md)
+- [RDP-Tcp PortNumber](../../artifacts/rdp/rdp-tcp-portnumber.md)
