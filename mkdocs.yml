@@ -1,6 +1,6 @@
 site_name: Windows 注册表取证与检测手册
 site_description: 面向 DFIR、威胁狩猎和检测工程的 Windows Registry Artifact Handbook
-site_url: https://watanabe-hsad.github.io/windows-registry-forensics-handbook/
+site_url: http://hsad.xyz/windows-registry-forensics-handbook/
 repo_name: watanabe-hsad/windows-registry-forensics-handbook
 repo_url: https://github.com/watanabe-hsad/windows-registry-forensics-handbook
 edit_uri: edit/main/docs/
@@ -23,7 +23,7 @@ theme:
         name: 切换到浅色模式
   features:
     - navigation.tabs
-    - navigation.sections
+    - navigation.expand
     - navigation.indexes
     - navigation.top
     - navigation.tracking
@@ -79,23 +79,24 @@ nav:
       - 软件安装与卸载: questions/software-install.md
       - 反取证与清理痕迹: questions/anti-forensics.md
   - 注册表位置:
-      - registry-tree/index.md
+      - 总览: registry-tree/index.md
       - HKEY_CLASSES_ROOT: registry-tree/hkey-classes-root.md
       - HKEY_CURRENT_USER:
-          - registry-tree/hkey-current-user.md
-          - HKCU\Software: registry-tree/hkcu/software.md
-          - HKCU Explorer: registry-tree/hkcu/explorer.md
-          - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
+          - 概览: registry-tree/hkey-current-user.md
+          - Software:
+              - 概览: registry-tree/hkcu/software.md
+              - Explorer: registry-tree/hkcu/explorer.md
+              - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
       - HKEY_LOCAL_MACHINE:
-          - registry-tree/hkey-local-machine.md
-          - HKLM\SAM: registry-tree/hklm/sam.md
-          - HKLM\SECURITY: registry-tree/hklm/security.md
-          - HKLM\SOFTWARE: registry-tree/hklm/software.md
-          - HKLM\SYSTEM: registry-tree/hklm/system.md
-          - HKLM\HARDWARE: registry-tree/hklm/hardware.md
-          - HKLM\BCD00000000: registry-tree/hklm/bcd.md
+          - 概览: registry-tree/hkey-local-machine.md
+          - SAM: registry-tree/hklm/sam.md
+          - SECURITY: registry-tree/hklm/security.md
+          - SOFTWARE: registry-tree/hklm/software.md
+          - SYSTEM: registry-tree/hklm/system.md
+          - HARDWARE: registry-tree/hklm/hardware.md
+          - BCD00000000: registry-tree/hklm/bcd.md
       - HKEY_USERS:
-          - registry-tree/hkey-users.md
+          - 概览: registry-tree/hkey-users.md
           - SID 映射: registry-tree/hku/sid-mapping.md
           - NTUSER.DAT: registry-tree/hku/ntuser.md
           - UsrClass.dat: registry-tree/hku/usrclass.md

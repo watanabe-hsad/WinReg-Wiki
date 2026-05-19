@@ -31,6 +31,10 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Changed registry-location navigation from section-style grouping to expanded multi-level tree navigation.
+- Rewrote registry-tree pages to be concise key/value reference pages instead of long forensic-analysis pages.
+- Updated `site_url` to `http://hsad.xyz/windows-registry-forensics-handbook/`.
+- Updated README and project handoff notes to describe the current custom-domain project path and shorter URL options.
 - Added `site_url`, `repo_name`, `repo_url`, and `edit_uri` repository metadata to `mkdocs.yml`.
 - Updated `README.md` with the online site URL and GitHub Actions deployment notes.
 - Updated `PROJECT_STATUS.md` with GitHub Pages deployment information, first-time Pages settings guidance, and pushed-branch handoff status.

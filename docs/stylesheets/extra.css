@@ -54,3 +54,16 @@
   font-size: 0.82rem;
 }
 
+.md-sidebar .md-nav__link {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  margin-top: 0.18rem;
+}
+
+.md-sidebar .md-nav__item--nested > .md-nav__link {
+  font-weight: 700;
+}
+
+.md-sidebar .md-nav__title {
+  font-size: 0.72rem;
+}

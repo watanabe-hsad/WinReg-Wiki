@@ -2,13 +2,14 @@
 
 ## Current Goal
 
-GitHub Pages deployment is configured for the Windows Registry Forensics Handbook. The current maintenance state is to monitor the first GitHub Actions Pages run, confirm the published site, and continue content expansion.
+GitHub Pages deployment is configured for the Windows Registry Forensics Handbook. The current maintenance state is to keep the site query-oriented, keep registry-tree pages concise, and continue artifact expansion.
 
 ## Repository
 
 - Local path: `/Users/hsad/Documents/CodeProject/registry-forensics-handbook-demo`
 - GitHub repository: `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`
-- GitHub Pages: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`
+- GitHub Pages: `http://hsad.xyz/windows-registry-forensics-handbook/`
+- Default GitHub Pages URL: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`
 - Repository name: `windows-registry-forensics-handbook`
 - Default branch: `main`
 - Local directory note: the local folder still has the older `registry-forensics-handbook-demo` name; consider renaming later after confirming no scripts or local references depend on it.
@@ -25,10 +26,15 @@ GitHub Pages deployment is configured for the Windows Registry Forensics Handboo
 
 ## Last Completed Round
 
+- Cleaned the registry-tree navigation and registry-location content style.
+- Removed `navigation.sections` in favor of expanded multi-level navigation so the registry tree reads more like a hierarchy and avoids duplicate root labels.
+- Rewrote registry-tree pages as concise key/value reference pages. Registry-location pages should explain what keys and values mean, with only brief forensic notes; deeper evidence and detection discussion belongs in scenario and artifact pages.
+- Updated `site_url` to the currently reachable custom-domain project path: `http://hsad.xyz/windows-registry-forensics-handbook/`.
 - Added GitHub Pages deployment workflow at `.github/workflows/pages.yml`.
 - Added `site_url`, `repo_name`, `repo_url`, and `edit_uri` to `mkdocs.yml`.
 - Updated `README.md` with the online site URL and deployment workflow notes.
-- GitHub Pages expected URL: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`.
+- GitHub Pages custom-domain project URL: `http://hsad.xyz/windows-registry-forensics-handbook/`.
+- Default GitHub Pages project URL: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`.
 - Deployment source should be GitHub Actions. If first-time Pages setup is needed, use: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
 - The Pages deployment changes were committed and pushed to `origin/main`. The latest pushed branch should contain `.github/workflows/pages.yml`, the `mkdocs.yml` Pages metadata, and the README / handoff documentation updates.
 - On each push to `main`, the workflow runs:
@@ -68,6 +74,8 @@ Earlier completed round:
 ## Important Decisions
 
 - Keep the two primary user entries: investigation scenarios and the Windows native registry tree.
+- Keep the site knowledge-base oriented. Prefer concise, objective reference text over subjective prose.
+- Registry-tree pages should stay clean: path, source hive, key/value meaning, short caveats, and linked artifacts.
 - Artifact pages must use a fixed evidence-oriented template.
 - Evidence semantics come first: `What It Can Prove` and `What It Cannot Prove` must remain separate.
 - Timestamp interpretation must stay conservative. Do not treat key LastWrite as the creation time of a specific value.
@@ -91,6 +99,7 @@ Remote verification was also performed with `git ls-remote origin refs/heads/mai
 ## Next Priorities
 
 - Confirm GitHub Pages settings in the repository UI if the first workflow run does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
+- If a shorter URL is desired, use a project custom domain such as `registry.hsad.xyz` or move the site to the apex/root domain. The current `/windows-registry-forensics-handbook/` suffix is expected for a GitHub Pages project site.
 - Choose a license and add a `LICENSE` file. Suggested split: docs under `CC BY 4.0`, scripts under `MIT`, or a simpler single-repo `MIT` if preferred.
 - Add persistence pages for AppInit_DLLs, Active Setup, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, Services DLL details, and Drivers.
 - Add USB and device pages for USB, DeviceClasses, Enum\SWD\WPDBUSENUM, EMDMgmt, Portable Devices, and VolumeInfoCache.

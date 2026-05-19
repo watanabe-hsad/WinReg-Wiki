@@ -4,7 +4,7 @@ Windows Registry Forensics Handbook is a MkDocs Material knowledge base for Wind
 
 GitHub repository: `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`
 
-The handbook is not a general Windows Registry encyclopedia. It is an investigation-oriented registry artifact handbook: each page should help an analyst understand where to look, what a key or value can prove, what it cannot prove, how timestamps should be interpreted, how attackers may abuse the location, what detection logic can watch, and which external artifacts should be used for validation.
+The handbook is a registry artifact knowledge base. It prioritizes paths, value meanings, offline hive mapping, timestamp caveats, artifact semantics, and cross references.
 
 ## Main Entry Points
 
@@ -16,6 +16,10 @@ The site keeps two primary navigation paths:
 ## Online Site
 
 The handbook is intended to be published with GitHub Pages:
+
+http://hsad.xyz/windows-registry-forensics-handbook/
+
+The same project can also be served from the default GitHub Pages URL:
 
 https://watanabe-hsad.github.io/windows-registry-forensics-handbook/
 
@@ -56,7 +60,9 @@ Generate the structured artifact data index:
 
 ## Content Principles
 
-- Keep the handbook practical: prioritize paths, fields, evidence semantics, timestamps, abuse cases, detection ideas, false positives, collection notes, parsing tools, and cross validation.
+- Keep pages concise and query-oriented.
+- For registry-tree pages, prioritize key meaning, value meaning, live/offline mapping, and linked artifacts.
+- Keep deeper evidence interpretation in artifact pages and scenario pages.
 - Separate evidence strength clearly: configuration exists, program exists, user interaction, program execution, device presence, policy weakening, and malicious behavior are different claims.
 - Do not treat registry key LastWrite as a value creation time unless that is explicitly supported by the artifact and tool output.
 - Explain live-to-offline mappings accurately: `HKCU`, `HKCR`, `HKCC`, and `CurrentControlSet` are views or mappings, not simple standalone hive files.
@@ -70,8 +76,8 @@ Current coverage includes:
 - Program execution and program presence: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
 - Persistence and autoruns: Run / RunOnce, StartupApproved, Services, IFEO, Winlogon Userinit, Winlogon Shell, LSA Authentication Packages, Command Processor AutoRun.
 - USB and external devices: USBSTOR, MountedDevices, MountPoints2.
-- RDP and remote access: Terminal Server Client, plus registry-tree guidance for RDP server configuration.
-- Accounts and security policy: ProfileList, Defender Policies, LSA-related configuration.
+- RDP and remote access: Terminal Server Client, fDenyTSConnections, RDP-Tcp PortNumber, CredSSP / NLA.
+- Accounts and security policy: ProfileList, Defender Policies, UAC Policies, Firewall Policies, Audit Policy, SpecialAccounts\UserList.
 - Native registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM subtrees.
 
 ## Structured Data
