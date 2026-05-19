@@ -33,7 +33,8 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 - Added `site_url`, `repo_name`, `repo_url`, and `edit_uri` repository metadata to `mkdocs.yml`.
 - Updated `README.md` with the online site URL and GitHub Actions deployment notes.
-- Updated `PROJECT_STATUS.md` with GitHub Pages deployment information and first-time Pages settings guidance.
+- Updated `PROJECT_STATUS.md` with GitHub Pages deployment information, first-time Pages settings guidance, and pushed-branch handoff status.
+- Pushed the current project state and GitHub Pages workflow to `origin/main`.
 - Deepened core registry-tree pages for `HKEY_LOCAL_MACHINE`, `HKLM\SYSTEM`, `HKLM\SOFTWARE`, `HKEY_CURRENT_USER`, and `HKEY_USERS`.
 - Enhanced `scripts/generate-artifact-index.py` to read all YAML records and generate a richer Markdown table with artifact, category, native root, hive/offline file, evidence type, forensic value, detection value, and primary paths.
 - Added `PyYAML` to `requirements.txt` because artifact index generation depends on YAML parsing.

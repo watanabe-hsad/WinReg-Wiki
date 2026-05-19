@@ -2,7 +2,7 @@
 
 ## Current Goal
 
-Configure GitHub Pages deployment for the Windows Registry Forensics Handbook, verify the MkDocs build, commit the deployment configuration, and push it to GitHub.
+GitHub Pages deployment is configured for the Windows Registry Forensics Handbook. The current maintenance state is to monitor the first GitHub Actions Pages run, confirm the published site, and continue content expansion.
 
 ## Repository
 
@@ -30,6 +30,7 @@ Configure GitHub Pages deployment for the Windows Registry Forensics Handbook, v
 - Updated `README.md` with the online site URL and deployment workflow notes.
 - GitHub Pages expected URL: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`.
 - Deployment source should be GitHub Actions. If first-time Pages setup is needed, use: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
+- The Pages deployment changes were committed and pushed to `origin/main`. The latest pushed branch should contain `.github/workflows/pages.yml`, the `mkdocs.yml` Pages metadata, and the README / handoff documentation updates.
 - On each push to `main`, the workflow runs:
 
 ```bash
@@ -51,7 +52,7 @@ Earlier completed round:
 
 - Added `PROJECT_STATUS.md`, `ROADMAP.md`, and `CHANGELOG.md` so future maintenance does not depend on chat history.
 - Rewrote the README as a GitHub-ready project homepage and documented `License: TBD`.
-- Initialized a local git repository on branch `main` and set `origin` to `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`. No commit or push has been performed.
+- Initialized a local git repository on branch `main` and set `origin` to `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`. The project has since been committed and pushed to `origin/main`.
 - Deepened `HKEY_LOCAL_MACHINE`, `HKLM\SYSTEM`, `HKLM\SOFTWARE`, `HKEY_CURRENT_USER`, and `HKEY_USERS` with native/offline mapping, forensic role, detection role, timestamp caveats, common misinterpretations, high-value subkeys, linked artifacts, collection notes, and analyst checklists.
 - Enhanced `scripts/generate-artifact-index.py` so it reads all `data/artifacts/*.yml` records and writes `docs/artifacts/generated-index.md`.
 - Added `PyYAML` to `requirements.txt` and added the generated artifact data index to MkDocs navigation.
@@ -85,6 +86,8 @@ Last verified locally in the most recent round:
 
 Both commands completed successfully. The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build and is expected; it is not currently a project build error.
 
+Remote verification was also performed with `git ls-remote origin refs/heads/main`; the remote `main` hash matched local `HEAD` after the Pages and handoff updates were pushed.
+
 ## Next Priorities
 
 - Confirm GitHub Pages settings in the repository UI if the first workflow run does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
@@ -103,7 +106,7 @@ Both commands completed successfully. The Material for MkDocs upstream warning a
 - This directory is now initialized as a git repository with `origin` set to `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`.
 - Current branch is `main` tracking `origin/main`.
 - GitHub Pages deployment is configured through `.github/workflows/pages.yml`.
-- The user explicitly allowed commit and push for GitHub Pages setup in this round.
+- The user explicitly allowed commit and push for GitHub Pages setup in this round, and the Pages configuration has been pushed to GitHub.
 - Preserve `site/` as ignored generated output.
 - Prefer small content increments with strict build validation.
 - If changing generated artifact index behavior, update this file and `CHANGELOG.md`.
