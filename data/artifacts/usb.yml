@@ -1,0 +1,68 @@
+id: usb
+title: USB
+category:
+  - USB
+  - Device
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Enum\USB
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Enum\USB
+    scope: Offline machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - USB bus device enumeration
+timestamp_semantics: Device instance key LastWrite can support timeline analysis but is not a precise first insertion, last insertion, or removal time.
+can_prove:
+  - The system enumerated a USB device or USB interface with a specific VID/PID and instance ID.
+  - Device descriptors and ContainerID may support correlation with other device artifacts.
+cannot_prove:
+  - The device was a storage device.
+  - Files were accessed or copied.
+  - Key LastWrite is the exact connection time.
+key_values:
+  - name: VID_xxxx&PID_yyyy
+    meaning: Vendor ID and product ID grouping.
+  - name: <instance ID>
+    meaning: Device instance identifier, sometimes serial-like.
+  - name: ContainerID
+    meaning: Identifier that may link multiple interfaces of the same physical device.
+  - name: FriendlyName
+    meaning: Human-readable name when present.
+attacker_usage:
+  - USB devices may be used for tool transfer, data staging, or exfiltration, leaving enumeration traces.
+  - Non-storage USB devices can be used as HID or network adapters and will not always appear in USBSTOR.
+detection_ideas:
+  - New unknown VID/PID on sensitive hosts.
+  - USB device enumeration close to file access, LNK, Jump Lists, or removable-media EDR events.
+  - Same ContainerID correlated across USB, WPD, and DeviceClasses records.
+false_positives:
+  - Keyboards, mice, cameras, phones, docks, security keys, card readers, printers, and virtualization USB redirection.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Enum\USB" /s'
+collection_offline:
+  - Collect SYSTEM hive, transaction logs, setupapi.dev.log, and device-related event logs.
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - USB Detective
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USBSTOR
+  - DeviceClasses
+  - Enum SWD WPDBUSENUM
+  - SetupAPI.dev.log
+  - DriverFrameworks-UserMode/Operational
+references:
+  - "https://learn.microsoft.com/en-ca/windows-hardware/drivers/install/hklm-system-currentcontrolset-enum-registry-tree"
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

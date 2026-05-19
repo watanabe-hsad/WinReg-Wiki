@@ -1,0 +1,69 @@
+id: appinit-dlls
+title: AppInit_DLLs
+category:
+  - Persistence
+  - Hijacking
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows
+    value: AppInit_DLLs
+    scope: Machine
+  - hive: HKLM
+    path: SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Windows
+    value: AppInit_DLLs
+    scope: 32-bit view
+forensic_value: High
+detection_value: High
+evidence_type:
+  - User32 DLL load configuration
+timestamp_semantics: Key LastWrite records configuration changes; actual DLL load time requires module telemetry or memory evidence.
+can_prove:
+  - AppInit_DLLs configuration exists.
+  - LoadAppInit_DLLs enables or disables the mechanism.
+  - DLL path or list can be extracted for file validation.
+cannot_prove:
+  - The DLL was loaded by any specific process.
+  - The DLL executed malicious behavior.
+  - The setting is effective without considering signing policy and OS version.
+key_values:
+  - name: AppInit_DLLs
+    meaning: DLL list or path loaded by processes using User32.dll when enabled.
+  - name: LoadAppInit_DLLs
+    meaning: REG_DWORD enablement flag.
+  - name: RequireSignedAppInit_DLLs
+    meaning: REG_DWORD signature requirement flag.
+attacker_usage:
+  - Configure malicious DLLs for broad user-mode process injection.
+  - Disable signature requirement or enable loading where policy allows.
+detection_ideas:
+  - LoadAppInit_DLLs changes from 0 to 1.
+  - AppInit_DLLs points to user-writable or unsigned DLLs.
+  - WOW6432Node and native views differ unexpectedly.
+false_positives:
+  - Legacy security software, DLP, input methods, accessibility software, graphics tools, and old business applications.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows" /v AppInit_DLLs'
+  - 'reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Windows" /v AppInit_DLLs'
+collection_offline:
+  - Collect SOFTWARE hive and inspect native and WOW6432Node paths.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 7
+  - EDR module telemetry
+  - DLL signature and hash
+  - Sysmon Event ID 13
+  - Prefetch
+references:
+  - "https://learn.microsoft.com/en-us/windows/win32/win7appqual/appinit-dlls-in-windows-7-and-windows-server-2008-r2"
+  - "https://attack.mitre.org/techniques/T1546/010/"
+

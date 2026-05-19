@@ -1,0 +1,61 @@
+id: emdmgmt
+title: EMDMgmt
+category:
+  - USB
+  - Volume
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt
+    scope: Machine
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - ReadyBoost or external memory device metadata
+timestamp_semantics: Subkey LastWrite can show EMDMgmt metadata updates but does not independently prove insertion, file access, or exfiltration.
+can_prove:
+  - Windows recorded EMDMgmt metadata for a removable or external memory device.
+  - Device label-like strings and volume identifiers may support correlation with other artifacts.
+cannot_prove:
+  - ReadyBoost was actively used.
+  - Files were copied to or from the device.
+  - The artifact exists on every Windows host.
+key_values:
+  - name: <device or volume subkey>
+    meaning: Device metadata key name, often containing label or serial-like information.
+  - name: LastUsedTime
+    meaning: Time-like value reported by some parsers; exact semantics require parser and OS validation.
+  - name: FriendlyName
+    meaning: Human-readable device name when present.
+attacker_usage:
+  - Removable storage used for staging or transfer may leave supplemental EMDMgmt traces.
+  - Lack of EMDMgmt does not exclude USB use.
+detection_ideas:
+  - Use as a supporting correlation artifact rather than a primary detection source.
+  - Compare with USBSTOR, MountedDevices, MountPoints2, and VolumeInfoCache.
+false_positives:
+  - ReadyBoost testing, removable flash drives, card readers, backup drives, and normal user removable media.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /s'
+collection_offline:
+  - Collect SOFTWARE hive and correlate with SYSTEM and user NTUSER.DAT hives.
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USBSTOR
+  - MountedDevices
+  - MountPoints2
+  - VolumeInfoCache
+  - SetupAPI.dev.log
+references:
+  - "https://www.hecfblog.com/2013/08/daily-blog-65-understanding-artifacts.html"
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

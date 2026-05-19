@@ -8,6 +8,33 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added USB / device artifact pages and YAML:
+  - USB
+  - DeviceClasses
+  - Enum SWD WPDBUSENUM
+  - EMDMgmt
+  - Portable Devices
+  - VolumeInfoCache
+- Added persistence / autorun artifact pages and YAML:
+  - Active Setup
+  - AppInit_DLLs
+  - ShellServiceObjectDelayLoad
+  - Print Monitors
+  - LSA Security Packages
+  - Drivers
+- Added registry-tree path reference pages for USB/device and persistence paths:
+  - `HKLM\SYSTEM\ControlSet00x\Enum\USB`
+  - `HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses`
+  - `HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Print\Monitors`
+  - `HKLM\SYSTEM\ControlSet00x\Services\<DriverName>`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Lsa\Security Packages`
+  - `HKLM\SOFTWARE\Microsoft\Active Setup`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad`
+  - `HKLM\SOFTWARE\Microsoft\Windows Portable Devices`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt`
+  - `HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache`
 - Added registry-tree path reference pages for `HKLM\SYSTEM`: `Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, and `Lsa`.
 - Added registry-tree path reference pages for `HKLM\SOFTWARE`: `ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, and `Classes`.
 - Added registry-tree path reference pages for `HKCU`: `ComDlg32`, `RunMRU`, `RecentDocs`, `Internet Settings`, and `Classes`.
@@ -35,6 +62,9 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Updated `mkdocs.yml` so the new USB/device and persistence artifacts appear in `注册表 Artifact`, and the new path pages appear under `注册表位置`.
+- Updated `docs/artifacts/index.md`, scenario pages, detection page, and registry-tree overview pages to link the new artifacts.
+- Regenerated `docs/artifacts/generated-index.md`; it now includes 42 YAML-backed artifacts.
 - Localized the top-level Artifact navigation to `注册表 Artifact`.
 - Localized Artifact category navigation, manual artifact index headings, generated artifact data index headings, and generated category/value labels.
 - Localized artifact page section headings and `docs/contributing/template.md` section headings to Chinese while keeping artifact file names and URLs in English.
@@ -53,7 +83,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 - Added `PyYAML` to `requirements.txt` because artifact index generation depends on YAML parsing.
 - Added the generated data index to MkDocs navigation without overwriting the manually curated artifact index.
 - Updated `mkdocs.yml`, `docs/artifacts/index.md`, scenario pages, detection page, and registry-tree pages to link the new artifact pages.
-- Regenerated `docs/artifacts/generated-index.md`; it now includes 30 YAML-backed artifacts.
+- Previously regenerated `docs/artifacts/generated-index.md` with 30 YAML-backed artifacts before the current USB/device and persistence expansion.
 
 ### Verification
 

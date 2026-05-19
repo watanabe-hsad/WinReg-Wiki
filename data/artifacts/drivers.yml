@@ -1,0 +1,71 @@
+id: drivers
+title: Drivers
+category:
+  - Persistence
+  - Services
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Services\<DriverName>
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Services\<DriverName>
+    scope: Offline machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Kernel or file system driver configuration
+timestamp_semantics: Driver service key LastWrite indicates configuration changes; actual load time requires driver load logs or telemetry.
+can_prove:
+  - A driver service is configured.
+  - Type, Start, ImagePath, and Group define load behavior.
+  - Suspicious or vulnerable driver persistence may be present.
+cannot_prove:
+  - The driver loaded successfully.
+  - The driver is malicious without file and behavior validation.
+  - Disabled or demand-start drivers are irrelevant.
+key_values:
+  - name: Type
+    meaning: REG_DWORD service type; 1 kernel driver, 2 file system driver.
+  - name: Start
+    meaning: REG_DWORD startup type; 0 boot, 1 system, 2 auto, 3 demand, 4 disabled.
+  - name: ImagePath
+    meaning: Driver image path.
+  - name: Group
+    meaning: Load group.
+  - name: ErrorControl
+    meaning: Failure handling behavior.
+attacker_usage:
+  - Install malicious or vulnerable drivers for kernel persistence, rootkit behavior, or EDR tampering.
+  - Configure boot/system-start drivers to load before many user-mode controls.
+detection_ideas:
+  - New Type 1/2 service with Start 0/1/2.
+  - ImagePath outside System32\drivers or unsigned driver file.
+  - Driver service creation close to suspicious file write or Code Integrity events.
+false_positives:
+  - EDR, VPN, disk encryption, backup, virtualization, storage, printer, OEM, and hardware management drivers.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s /v ImagePath'
+collection_offline:
+  - Collect SYSTEM hive, driver files, System.evtx, CodeIntegrity logs, and file timeline.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - Sigcheck
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Services
+  - Sysmon Event ID 6
+  - System.evtx Service Control Manager
+  - CodeIntegrity/Operational
+  - Driver file signature and hash
+references:
+  - "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
+  - "https://attack.mitre.org/techniques/T1547/006/"
+

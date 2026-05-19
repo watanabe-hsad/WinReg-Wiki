@@ -1,0 +1,65 @@
+id: swd-wpdbusenum
+title: Enum SWD WPDBUSENUM
+category:
+  - USB
+  - Device
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Enum\SWD\WPDBUSENUM
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM
+    scope: Offline machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Windows Portable Device enumeration
+timestamp_semantics: Device key LastWrite is a registry update time and should be cross-validated with WPD, setupapi.dev.log, and user artifacts.
+can_prove:
+  - Windows enumerated a WPD device or portable storage interface.
+  - FriendlyName, ContainerID, and instance strings may link to USB and Portable Devices records.
+cannot_prove:
+  - File browsing or copying occurred.
+  - The device was connected exactly at LastWrite.
+  - Every USB storage device will appear here.
+key_values:
+  - name: FriendlyName
+    meaning: Display name for the WPD device when present.
+  - name: ContainerID
+    meaning: Correlation ID for interfaces belonging to the same physical device.
+  - name: ParentIdPrefix
+    meaning: Identifier that may correlate with USBSTOR-style records.
+attacker_usage:
+  - Phones and media devices can be used for transfer without classic USBSTOR semantics.
+  - WPD traces can expose device use that would otherwise be missed by USBSTOR-only triage.
+detection_ideas:
+  - New WPD devices on restricted hosts.
+  - WPD device creation close to archive creation, sensitive document access, or removable media alerts.
+  - Same ContainerID across USB, WPD, DeviceClasses, and Portable Devices.
+false_positives:
+  - Phones, tablets, cameras, media players, MTP devices, scanners, and enterprise mobile management.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Enum\SWD\WPDBUSENUM" /s'
+collection_offline:
+  - Collect SYSTEM hive, setupapi.dev.log, and device event logs.
+tools:
+  - Registry Explorer
+  - RECmd
+  - USB Detective
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USB
+  - DeviceClasses
+  - Portable Devices
+  - SetupAPI.dev.log
+  - ShellBags
+references:
+  - "https://research.splunk.com/endpoint/52b48e8b-eb6e-48b0-b8f1-73273f6b134e/"
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

@@ -105,13 +105,19 @@ nav:
               - Microsoft:
                   - Windows NT:
                       - CurrentVersion:
+                          - EMDMgmt: registry-tree/hklm/software/emdmgmt.md
                           - ProfileList: registry-tree/hklm/software/profilelist.md
                           - Winlogon: registry-tree/hklm/software/winlogon.md
                           - Image File Execution Options: registry-tree/hklm/software/ifeo.md
+                          - Windows: registry-tree/hklm/software/appinit-dlls.md
                   - Windows:
                       - CurrentVersion:
                           - Uninstall: registry-tree/hklm/software/uninstall.md
+                          - ShellServiceObjectDelayLoad: registry-tree/hklm/software/shellserviceobjectdelayload.md
                   - Windows Defender: registry-tree/hklm/software/defender.md
+                  - Active Setup: registry-tree/hklm/software/active-setup.md
+                  - Windows Portable Devices: registry-tree/hklm/software/portable-devices.md
+                  - Windows Search\VolumeInfoCache: registry-tree/hklm/software/volumeinfocache.md
               - Policies: registry-tree/hklm/software/policies.md
               - WOW6432Node: registry-tree/hklm/software/wow6432node.md
               - Classes: registry-tree/hklm/software/classes.md
@@ -120,14 +126,23 @@ nav:
               - Select: registry-tree/hklm/system/select.md
               - ControlSet00x:
                   - 概览: registry-tree/hklm/system/controlset.md
-                  - Services: registry-tree/hklm/system/services.md
-                  - Enum: registry-tree/hklm/system/enum.md
+                  - Services:
+                      - 概览: registry-tree/hklm/system/services.md
+                      - Drivers: registry-tree/hklm/system/drivers.md
+                      - Services\Tcpip: registry-tree/hklm/system/tcpip.md
+                  - Enum:
+                      - 概览: registry-tree/hklm/system/enum.md
+                      - USB: registry-tree/hklm/system/usb.md
+                      - SWD\WPDBUSENUM: registry-tree/hklm/system/swd-wpdbusenum.md
                   - Control:
+                      - DeviceClasses: registry-tree/hklm/system/deviceclasses.md
                       - Terminal Server: registry-tree/hklm/system/terminal-server.md
                       - TimeZoneInformation: registry-tree/hklm/system/timezone.md
                       - ComputerName: registry-tree/hklm/system/computername.md
-                      - Lsa: registry-tree/hklm/system/lsa.md
-                  - Services\Tcpip: registry-tree/hklm/system/tcpip.md
+                      - Print\Monitors: registry-tree/hklm/system/print-monitors.md
+                      - Lsa:
+                          - 概览: registry-tree/hklm/system/lsa.md
+                          - Security Packages: registry-tree/hklm/system/lsa-security-packages.md
               - MountedDevices: registry-tree/hklm/system/mounteddevices.md
           - HARDWARE: registry-tree/hklm/hardware.md
           - BCD00000000: registry-tree/hklm/bcd.md
@@ -144,13 +159,19 @@ nav:
       - 结构化数据索引: artifacts/generated-index.md
       - 持久化 / 自启动:
           - Run / RunOnce: artifacts/persistence/run-keys.md
+          - Active Setup: artifacts/persistence/active-setup.md
           - StartupApproved: artifacts/persistence/startupapproved.md
           - Services: artifacts/persistence/services.md
+          - Drivers: artifacts/persistence/drivers.md
           - IFEO: artifacts/persistence/ifeo.md
+          - AppInit_DLLs: artifacts/persistence/appinit-dlls.md
           - Winlogon Userinit: artifacts/persistence/winlogon-userinit.md
           - Winlogon Shell: artifacts/persistence/winlogon-shell.md
           - LSA Authentication Packages: artifacts/persistence/lsa-authentication-packages.md
+          - LSA Security Packages: artifacts/persistence/lsa-security-packages.md
           - Command Processor AutoRun: artifacts/persistence/command-processor-autorun.md
+          - ShellServiceObjectDelayLoad: artifacts/persistence/shellserviceobjectdelayload.md
+          - Print Monitors: artifacts/persistence/print-monitors.md
       - 程序执行 / 程序存在:
           - UserAssist: artifacts/execution/userassist.md
           - BAM / DAM: artifacts/execution/bam-dam.md
@@ -163,9 +184,15 @@ nav:
           - OpenSavePidlMRU: artifacts/user-activity/opensavepidlmru.md
           - LastVisitedPidlMRU: artifacts/user-activity/lastvisitedpidlmru.md
       - USB / 外接设备:
+          - USB: artifacts/usb/usb.md
           - USBSTOR: artifacts/usb/usbstor.md
+          - DeviceClasses: artifacts/usb/deviceclasses.md
+          - Enum SWD WPDBUSENUM: artifacts/usb/swd-wpdbusenum.md
           - MountedDevices: artifacts/usb/mounteddevices.md
           - MountPoints2: artifacts/usb/mountpoints2.md
+          - EMDMgmt: artifacts/usb/emdmgmt.md
+          - Portable Devices: artifacts/usb/portable-devices.md
+          - VolumeInfoCache: artifacts/usb/volumeinfocache.md
       - RDP / 远程访问:
           - Terminal Server Client: artifacts/rdp/terminal-server-client.md
           - fDenyTSConnections: artifacts/rdp/fdenytsconnections.md

@@ -1,0 +1,60 @@
+id: volumeinfocache
+title: VolumeInfoCache
+category:
+  - USB
+  - Volume
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows Search\VolumeInfoCache
+    scope: Machine
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Windows Search volume metadata cache
+timestamp_semantics: VolumeInfoCache LastWrite indicates cache updates; it is not a definitive mount, insertion, or user access timestamp.
+can_prove:
+  - Windows Search recorded metadata for a volume.
+  - Drive letter, volume label, or volume GUID style data may support volume correlation when present.
+cannot_prove:
+  - USB insertion occurred.
+  - File copy or indexing completed.
+  - The artifact exists or is populated on all Windows systems.
+key_values:
+  - name: <volume subkey>
+    meaning: Cached volume identifier.
+  - name: DriveLetter
+    meaning: Drive letter when recorded; exact value name may vary.
+  - name: VolumeLabel
+    meaning: Volume label when recorded; exact value name may vary.
+attacker_usage:
+  - Removable volume use may leave cache metadata useful for reconstruction.
+  - Attackers clearing user-level traces may overlook Windows Search volume metadata.
+detection_ideas:
+  - Use as supporting evidence for newly seen removable volumes.
+  - Compare volume label and GUID with MountedDevices and MountPoints2.
+false_positives:
+  - Normal fixed disks, backup volumes, external disks, indexed removable media, enterprise search/indexing behavior.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache" /s'
+collection_offline:
+  - Collect SOFTWARE hive and correlate with SYSTEM and user hives.
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - MountedDevices
+  - MountPoints2
+  - USBSTOR
+  - Windows Search logs
+  - File system timeline
+references:
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

@@ -57,8 +57,14 @@ level: medium
 | 登录启动项指向用户可写目录 | [Run / RunOnce](../artifacts/persistence/run-keys.md), [StartupApproved](../artifacts/persistence/startupapproved.md) | Sysmon 13, Prefetch, BAM |
 | Winlogon 登录链被追加 | [Winlogon Userinit](../artifacts/persistence/winlogon-userinit.md), [Winlogon Shell](../artifacts/persistence/winlogon-shell.md) | 登录事件, 进程创建, Autoruns |
 | LSASS 加载链异常 | [LSA Authentication Packages](../artifacts/persistence/lsa-authentication-packages.md) | 模块加载, 文件签名, 重启时间线 |
+| LSA Security Packages 异常 | [LSA Security Packages](../artifacts/persistence/lsa-security-packages.md) | LSASS 模块, 文件签名, Security 4657 |
+| AppInit_DLLs 启用或指向异常 DLL | [AppInit_DLLs](../artifacts/persistence/appinit-dlls.md) | Sysmon 7, DLL 签名, WOW6432Node |
+| Active Setup 新增异常 StubPath | [Active Setup](../artifacts/persistence/active-setup.md) | 用户登录, 进程创建, Prefetch |
+| Print Monitor 注册异常 DLL | [Print Monitors](../artifacts/persistence/print-monitors.md) | Spooler 模块加载, PrintService, 文件签名 |
+| Kernel driver 持久化或易受攻击驱动 | [Drivers](../artifacts/persistence/drivers.md) | Sysmon 6, Code Integrity, System.evtx |
 | cmd.exe 启动钩子 | [Command Processor AutoRun](../artifacts/persistence/command-processor-autorun.md) | cmd 子进程, PowerShell logs |
 | Defender 被削弱 | [Defender Policies](../artifacts/security/defender-policies.md) | Defender Operational, GPO/MDM, EDR |
 | RDP 服务端暴露 | [fDenyTSConnections](../artifacts/rdp/fdenytsconnections.md), [RDP-Tcp PortNumber](../artifacts/rdp/rdp-tcp-portnumber.md), [Firewall Policies](../artifacts/security/firewall-policies.md) | TerminalServices, Security 4624, firewall logs |
 | 审计能力降低 | [Audit Policy](../artifacts/security/audit-policy.md) | Security 4719, GroupPolicy, event log gaps |
 | 隐藏账户 | [SpecialAccounts\UserList](../artifacts/security/specialaccounts-userlist.md), [ProfileList](../artifacts/security/profilelist.md) | SAM, Security 4720/4732/4738 |
+| 新外接设备出现 | [USB](../artifacts/usb/usb.md), [USBSTOR](../artifacts/usb/usbstor.md), [Enum SWD WPDBUSENUM](../artifacts/usb/swd-wpdbusenum.md) | SetupAPI.dev.log, DriverFrameworks, LNK/Jump Lists |

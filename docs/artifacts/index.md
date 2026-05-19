@@ -17,13 +17,19 @@
 | Artifact | 分类 | 注册表根键 | 离线 hive | 证据类型 | 取证价值 | 检测价值 |
 |---|---|---|---|---|---|---|
 | [Run / RunOnce](persistence/run-keys.md) | 持久化 / 自启动 | `HKCU`, `HKLM` | `NTUSER.DAT`, `SOFTWARE` | 登录启动配置 | 高 | 高 |
+| [Active Setup](persistence/active-setup.md) | 用户登录初始化 | `HKLM`, `HKCU` | `SOFTWARE`, `NTUSER.DAT` | 每用户初始化命令 | 高 | 高 |
 | [StartupApproved](persistence/startupapproved.md) | 自启动状态 | `HKCU`, `HKLM` | `NTUSER.DAT`, `SOFTWARE` | 启动项启用 / 禁用状态 | 中 | 中 |
 | [Services](persistence/services.md) | 服务 / 驱动 | `HKLM` | `SYSTEM` | 服务和驱动配置 | 高 | 高 |
+| [Drivers](persistence/drivers.md) | 驱动配置 | `HKLM` | `SYSTEM` | kernel / file system driver 配置 | 高 | 高 |
 | [IFEO](persistence/ifeo.md) | 进程启动劫持 | `HKLM` | `SOFTWARE` | Debugger / SilentProcessExit 配置 | 高 | 高 |
+| [AppInit_DLLs](persistence/appinit-dlls.md) | DLL 加载链 | `HKLM` | `SOFTWARE` | User32 相关 DLL 加载配置 | 高 | 高 |
 | [Winlogon Userinit](persistence/winlogon-userinit.md) | 登录链 | `HKLM` | `SOFTWARE` | `Userinit` 登录初始化配置 | 高 | 高 |
 | [Winlogon Shell](persistence/winlogon-shell.md) | 登录 Shell | `HKLM`, `HKCU` | `SOFTWARE`, `NTUSER.DAT` | Shell 替换或追加配置 | 高 | 高 |
 | [LSA Authentication Packages](persistence/lsa-authentication-packages.md) | LSASS 加载链 | `HKLM` | `SYSTEM` | 认证包配置 | 高 | 高 |
+| [LSA Security Packages](persistence/lsa-security-packages.md) | LSASS SSP 加载链 | `HKLM` | `SYSTEM` | 安全支持包配置 | 高 | 高 |
 | [Command Processor AutoRun](persistence/command-processor-autorun.md) | 命令解释器启动钩子 | `HKCU`, `HKLM` | `NTUSER.DAT`, `SOFTWARE` | `cmd.exe` AutoRun 配置 | 高 | 高 |
+| [ShellServiceObjectDelayLoad](persistence/shellserviceobjectdelayload.md) | Explorer COM 加载 | `HKLM` | `SOFTWARE` | Shell service object 配置 | 高 | 中 |
+| [Print Monitors](persistence/print-monitors.md) | Spooler DLL 加载 | `HKLM` | `SYSTEM` | 打印端口监视器 DLL 配置 | 高 | 高 |
 
 ## 用户行为
 
@@ -38,9 +44,15 @@
 
 | Artifact | 分类 | 注册表根键 | 离线 hive | 证据类型 | 取证价值 | 检测价值 |
 |---|---|---|---|---|---|---|
+| [USB](usb/usb.md) | USB 设备枚举 | `HKLM` | `SYSTEM` | USB 总线设备实例 | 高 | 中 |
 | [USBSTOR](usb/usbstor.md) | USB 存储设备 | `HKLM` | `SYSTEM` | USB 存储枚举 | 高 | 中 |
+| [DeviceClasses](usb/deviceclasses.md) | 设备接口类 | `HKLM` | `SYSTEM` | 设备接口注册 | 中 | 低 |
+| [Enum SWD WPDBUSENUM](usb/swd-wpdbusenum.md) | WPD / MTP 设备 | `HKLM` | `SYSTEM` | 便携设备枚举 | 高 | 中 |
 | [MountedDevices](usb/mounteddevices.md) | 卷 / 盘符 | `HKLM` | `SYSTEM` | 卷 GUID 和盘符映射 | 高 | 中 |
 | [MountPoints2](usb/mountpoints2.md) | 用户可见卷 | `HKCU` | `NTUSER.DAT` | 用户见过的卷或共享 | 高 | 低 |
+| [EMDMgmt](usb/emdmgmt.md) | 外接存储元数据 | `HKLM` | `SOFTWARE` | ReadyBoost / 外接存储辅助记录 | 中 | 低 |
+| [Portable Devices](usb/portable-devices.md) | WPD 元数据 | `HKLM` | `SOFTWARE` | 便携设备元数据 | 中 | 低 |
+| [VolumeInfoCache](usb/volumeinfocache.md) | 卷信息缓存 | `HKLM` | `SOFTWARE` | Windows Search 卷缓存 | 中 | 低 |
 
 ## RDP / 远程访问
 

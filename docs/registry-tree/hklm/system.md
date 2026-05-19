@@ -40,19 +40,24 @@ HKLM\SYSTEM\ControlSet002
 | [`Select`](system/select.md) | 控制集映射。 |
 | [`ControlSet00x`](system/controlset.md) | 真实控制集。 |
 | [`ControlSet00x\Services`](system/services.md) | 服务、驱动、网络组件配置。 |
+| [`ControlSet00x\Services\<DriverName>`](system/drivers.md) | 驱动服务配置。 |
 | `ControlSet00x\Services\bam\State\UserSettings\<SID>` | BAM 程序活动记录。 |
 | `ControlSet00x\Services\dam\State\UserSettings\<SID>` | DAM 相关记录。 |
 | [`ControlSet00x\Enum`](system/enum.md) | 设备枚举树。 |
 | `ControlSet00x\Enum\USBSTOR` | USB 存储设备枚举。 |
-| `ControlSet00x\Enum\USB` | USB 设备枚举。 |
+| [`ControlSet00x\Enum\USB`](system/usb.md) | USB 设备枚举。 |
+| [`ControlSet00x\Enum\SWD\WPDBUSENUM`](system/swd-wpdbusenum.md) | Windows Portable Devices 枚举。 |
+| [`ControlSet00x\Control\DeviceClasses`](system/deviceclasses.md) | 设备接口类注册。 |
 | [`MountedDevices`](system/mounteddevices.md) | 卷 GUID、盘符、设备映射。 |
 | [`ControlSet00x\Control\Terminal Server`](system/terminal-server.md) | RDP 服务端开关。 |
 | `ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp` | RDP listener、端口、NLA / 安全层。 |
+| [`ControlSet00x\Control\Print\Monitors`](system/print-monitors.md) | 打印端口监视器配置。 |
 | [`ControlSet00x\Services\Tcpip\Parameters`](system/tcpip.md) | TCP/IP 全局配置。 |
 | `ControlSet00x\Services\Tcpip\Parameters\Interfaces\<GUID>` | 网卡 IP、DNS、DHCP、网关。 |
 | [`ControlSet00x\Control\TimeZoneInformation`](system/timezone.md) | 时区和 Bias。 |
 | [`ControlSet00x\Control\ComputerName`](system/computername.md) | 主机名。 |
 | [`ControlSet00x\Control\Lsa`](system/lsa.md) | LSA 运行配置和认证包。 |
+| [`ControlSet00x\Control\Lsa\Security Packages`](system/lsa-security-packages.md) | LSA 安全支持包列表。 |
 | `ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy` | Windows Firewall 配置。 |
 
 ## 注意
@@ -68,8 +73,14 @@ HKLM\SYSTEM\ControlSet002
 ## 相关 Artifact
 
 [Services](../../artifacts/persistence/services.md),
+[Drivers](../../artifacts/persistence/drivers.md),
 [BAM / DAM](../../artifacts/execution/bam-dam.md),
 [LSA Authentication Packages](../../artifacts/persistence/lsa-authentication-packages.md),
+[LSA Security Packages](../../artifacts/persistence/lsa-security-packages.md),
+[Print Monitors](../../artifacts/persistence/print-monitors.md),
+[USB](../../artifacts/usb/usb.md),
+[DeviceClasses](../../artifacts/usb/deviceclasses.md),
+[Enum SWD WPDBUSENUM](../../artifacts/usb/swd-wpdbusenum.md),
 [USBSTOR](../../artifacts/usb/usbstor.md),
 [MountedDevices](../../artifacts/usb/mounteddevices.md),
 [fDenyTSConnections](../../artifacts/rdp/fdenytsconnections.md),

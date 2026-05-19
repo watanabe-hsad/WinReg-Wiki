@@ -1,0 +1,67 @@
+id: shellserviceobjectdelayload
+title: ShellServiceObjectDelayLoad
+category:
+  - Persistence
+  - Shell
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad
+    scope: Machine
+  - hive: HKLM
+    path: SOFTWARE\Classes\CLSID\<GUID>\InprocServer32
+    scope: COM registration
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Explorer COM autoload configuration
+timestamp_semantics: ShellServiceObjectDelayLoad and CLSID LastWrite values show registry updates, not DLL load time.
+can_prove:
+  - A Shell service object is configured.
+  - The referenced CLSID can be mapped to a COM DLL.
+  - Explorer Shell loading surface includes a non-baseline object.
+cannot_prove:
+  - Explorer loaded the DLL.
+  - The CLSID is malicious without file and baseline validation.
+  - HKCR is a standalone offline hive.
+key_values:
+  - name: <value name>
+    meaning: Display name for the Shell service object.
+  - name: <value data>
+    meaning: CLSID referenced by the Shell service object.
+  - name: InprocServer32
+    meaning: COM DLL path for the CLSID.
+attacker_usage:
+  - Register a malicious COM DLL and add its CLSID for Explorer Shell loading.
+  - Use system-like value names to blend into shell extension lists.
+detection_ideas:
+  - New ShellServiceObjectDelayLoad value.
+  - CLSID InprocServer32 points to user-writable or unsigned DLL.
+  - Explorer loads non-baseline DLL shortly after logon.
+false_positives:
+  - Cloud sync clients, compression tools, shell extensions, DLP, input methods, enterprise desktop software.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad" /s'
+  - 'reg query "HKLM\SOFTWARE\Classes\CLSID" /s'
+collection_offline:
+  - Collect SOFTWARE and relevant user Classes hives if HKCU COM override is suspected.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Explorer module load events
+  - Sysmon Event ID 7
+  - Sysmon Event ID 13
+  - COM CLSID registration
+  - DLL file timeline
+references:
+  - "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+  - "https://attack.mitre.org/techniques/T1547/"
+

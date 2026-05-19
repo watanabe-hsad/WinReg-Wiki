@@ -24,13 +24,19 @@ HKLM\SOFTWARE\WOW6432Node
 
 | 路径 | 含义 |
 |---|---|
+| [`Microsoft\Active Setup\Installed Components`](software/active-setup.md) | Active Setup 机器级组件定义。 |
 | `Microsoft\Windows\CurrentVersion\Run` | 机器级登录启动项。 |
 | `Microsoft\Windows\CurrentVersion\RunOnce` | 机器级一次性登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\Uninstall`](software/uninstall.md) | 软件安装登记。 |
 | [`Microsoft\Windows NT\CurrentVersion\Image File Execution Options`](software/ifeo.md) | IFEO、Debugger、进程启动相关配置。 |
+| [`Microsoft\Windows NT\CurrentVersion\Windows`](software/appinit-dlls.md) | `AppInit_DLLs`、`LoadAppInit_DLLs` 等。 |
 | [`Microsoft\Windows NT\CurrentVersion\Winlogon`](software/winlogon.md) | `Userinit`、`Shell`、自动登录等。 |
 | [`Microsoft\Windows NT\CurrentVersion\ProfileList`](software/profilelist.md) | SID 到用户 profile 路径的映射。 |
 | `Microsoft\Windows\CurrentVersion\Explorer` | Explorer 机器级配置、StartupApproved。 |
+| [`Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad`](software/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载配置。 |
+| [`Microsoft\Windows Portable Devices`](software/portable-devices.md) | 便携设备元数据。 |
+| [`Microsoft\Windows NT\CurrentVersion\EMDMgmt`](software/emdmgmt.md) | EMDMgmt / ReadyBoost 相关记录。 |
+| [`Microsoft\Windows Search\VolumeInfoCache`](software/volumeinfocache.md) | Windows Search 卷信息缓存。 |
 | [`Microsoft\Windows Defender`](software/defender.md) | Defender 本地状态和配置线索。 |
 | [`Policies`](software/policies.md) | GPO / MDM / 本地策略写入位置。 |
 | `Policies\Microsoft\Windows Defender` | Defender 策略和排除项。 |
@@ -51,10 +57,16 @@ HKLM\SOFTWARE\WOW6432Node
 ## 相关 Artifact
 
 [Run / RunOnce](../../artifacts/persistence/run-keys.md),
+[Active Setup](../../artifacts/persistence/active-setup.md),
 [StartupApproved](../../artifacts/persistence/startupapproved.md),
 [IFEO](../../artifacts/persistence/ifeo.md),
+[AppInit_DLLs](../../artifacts/persistence/appinit-dlls.md),
 [Winlogon Userinit](../../artifacts/persistence/winlogon-userinit.md),
 [Winlogon Shell](../../artifacts/persistence/winlogon-shell.md),
+[ShellServiceObjectDelayLoad](../../artifacts/persistence/shellserviceobjectdelayload.md),
+[Portable Devices](../../artifacts/usb/portable-devices.md),
+[EMDMgmt](../../artifacts/usb/emdmgmt.md),
+[VolumeInfoCache](../../artifacts/usb/volumeinfocache.md),
 [ProfileList](../../artifacts/security/profilelist.md),
 [Defender Policies](../../artifacts/security/defender-policies.md),
 [UAC Policies](../../artifacts/security/uac-policies.md),

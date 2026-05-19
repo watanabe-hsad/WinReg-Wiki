@@ -1,0 +1,71 @@
+id: active-setup
+title: Active Setup
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_LOCAL_MACHINE / HKEY_CURRENT_USER
+hive:
+  - SOFTWARE
+  - NTUSER.DAT
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Active Setup\Installed Components
+    scope: Machine component definitions
+  - hive: HKCU
+    path: Software\Microsoft\Active Setup\Installed Components
+    scope: Per-user initialization state
+forensic_value: High
+detection_value: High
+evidence_type:
+  - User logon initialization configuration
+timestamp_semantics: Component key LastWrite indicates configuration or per-user state updates, not command execution time by itself.
+can_prove:
+  - A machine-level or user-level Active Setup component exists.
+  - StubPath configures a command that may run during user initialization.
+  - Per-user HKCU mirror presence can support whether a user has completed initialization.
+cannot_prove:
+  - StubPath definitely executed successfully.
+  - All users were affected.
+  - Version comparison semantics without OS and application context.
+key_values:
+  - name: StubPath
+    meaning: Command that may run for a user during Active Setup processing.
+  - name: Version
+    meaning: Version used for HKLM/HKCU comparison.
+  - name: Locale
+    meaning: Locale comparison value when used.
+  - name: IsInstalled
+    meaning: Component install-state flag when present.
+attacker_usage:
+  - Add HKLM Active Setup component to execute payload on future user logons.
+  - Increment Version to retrigger initialization for users with older HKCU mirrors.
+detection_ideas:
+  - New or modified StubPath under HKLM Active Setup.
+  - StubPath points to user-writable paths, scripts, LOLBins, or network locations.
+  - HKLM component appears close to suspicious user logon or process creation events.
+false_positives:
+  - Browser, Office, VDI, enterprise software, input method, and installer per-user initialization.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /s'
+  - 'reg query "HKCU\Software\Microsoft\Active Setup\Installed Components" /s'
+collection_offline:
+  - Collect SOFTWARE and each user's NTUSER.DAT.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Security logon events
+  - Sysmon Event ID 1
+  - Sysmon Event ID 13
+  - Prefetch
+  - BAM / DAM
+references:
+  - "https://attack.mitre.org/techniques/T1547/014/"
+  - "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+

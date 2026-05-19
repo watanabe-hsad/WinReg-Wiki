@@ -29,6 +29,6 @@
 ## 相关 Artifact
 
 - [LSA Authentication Packages](../../../artifacts/persistence/lsa-authentication-packages.md)
+- [LSA Security Packages](../../../artifacts/persistence/lsa-security-packages.md)
 - [UAC Policies](../../../artifacts/security/uac-policies.md)
 - [Audit Policy](../../../artifacts/security/audit-policy.md)
-

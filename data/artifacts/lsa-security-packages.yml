@@ -1,0 +1,73 @@
+id: lsa-security-packages
+title: LSA Security Packages
+category:
+  - Persistence
+  - CredentialAccess
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Control\Lsa
+    value: Security Packages
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Control\Lsa\OSConfig
+    value: Security Packages
+    scope: OS configuration
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Control\Lsa
+    value: Security Packages
+    scope: Offline machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - LSASS security support provider configuration
+timestamp_semantics: Lsa key LastWrite reflects configuration updates; actual LSASS package load must be confirmed with module or memory evidence.
+can_prove:
+  - Security Packages value includes specific SSP/AP names.
+  - A non-baseline package is configured in the LSA loading surface.
+  - OSConfig and active package lists can be compared.
+cannot_prove:
+  - The SSP was loaded.
+  - Credentials were captured.
+  - The package DLL path without resolving search behavior and files.
+key_values:
+  - name: Security Packages
+    meaning: REG_MULTI_SZ list of LSA security packages.
+  - name: OSConfig\Security Packages
+    meaning: System-controlled package configuration on newer Windows versions.
+  - name: RunAsPPL
+    meaning: LSA protection setting related to LSASS hardening.
+attacker_usage:
+  - Add custom security package for LSASS context persistence and credential access.
+  - Pair registry modification with DLL placement and reboot or logon trigger.
+detection_ideas:
+  - Non-baseline package name in Security Packages.
+  - Registry value set by suspicious process.
+  - Package DLL unsigned, recently created, or outside expected directories.
+false_positives:
+  - VPN, MFA, smart card, EDR, DLP, identity providers, domain-controller components.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "Security Packages"'
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig" /v "Security Packages"'
+collection_offline:
+  - Collect SYSTEM hive and resolve Select\Current.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - LSA Authentication Packages
+  - Sysmon Event ID 7
+  - Sysmon Event ID 13
+  - Security 4657
+  - LSASS module telemetry
+references:
+  - "https://learn.microsoft.com/en-us/windows/win32/secauthn/restrictions-around-registering-and-installing-a-security-package"
+  - "https://attack.mitre.org/techniques/T1547/005/"
+

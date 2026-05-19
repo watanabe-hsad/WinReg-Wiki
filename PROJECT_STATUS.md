@@ -2,7 +2,7 @@
 
 ## Current Goal
 
-The current maintenance state is to keep the site query-oriented, keep registry-tree pages concise, and continue artifact expansion. The most recent round localized the Artifact entry and expanded registry-tree path pages.
+The current maintenance state is to keep the site query-oriented, keep registry-tree pages concise, and continue artifact expansion. The most recent round added USB/device artifacts and persistence artifacts, with matching YAML data and registry-tree path pages.
 
 ## Repository
 
@@ -27,6 +27,40 @@ The current maintenance state is to keep the site query-oriented, keep registry-
 ## Last Completed Round
 
 Current completed round:
+
+- Added 12 high-value artifact pages and matching YAML records.
+- USB / device artifacts:
+  - `USB`
+  - `DeviceClasses`
+  - `Enum SWD WPDBUSENUM`
+  - `EMDMgmt`
+  - `Portable Devices`
+  - `VolumeInfoCache`
+- Persistence / autorun artifacts:
+  - `Active Setup`
+  - `AppInit_DLLs`
+  - `ShellServiceObjectDelayLoad`
+  - `Print Monitors`
+  - `LSA Security Packages`
+  - `Drivers`
+- Added short registry-tree path reference pages for:
+  - `HKLM\SYSTEM\ControlSet00x\Enum\USB`
+  - `HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses`
+  - `HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Print\Monitors`
+  - `HKLM\SYSTEM\ControlSet00x\Services\<DriverName>`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Lsa\Security Packages`
+  - `HKLM\SOFTWARE\Microsoft\Active Setup`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad`
+  - `HKLM\SOFTWARE\Microsoft\Windows Portable Devices`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt`
+  - `HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache`
+- Updated `mkdocs.yml`, manual artifact index, generated artifact index, scenario pages, detection page, and registry-tree overview pages so the new artifacts are reachable from both `注册表 Artifact` and `注册表位置`.
+- YAML coverage is currently complete for manual artifact pages: 42 artifact pages under `docs/artifacts/` excluding `index.md` and `generated-index.md`, and 42 YAML records under `data/artifacts/`.
+- Regenerated `docs/artifacts/generated-index.md` from YAML.
+
+Previous completed round:
 
 - Localized the Artifact entry:
   - top-level navigation changed from `Artifact` to `注册表 Artifact`;
@@ -109,18 +143,17 @@ Last verified locally in the most recent round:
 ```bash
 .venv/bin/python scripts/generate-artifact-index.py
 .venv/bin/mkdocs build --strict
-.venv/bin/mkdocs serve -a 127.0.0.1:8000
 ```
 
-The generated-index command and strict build completed successfully. The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build and is expected; it is not currently a project build error. Local preview was used briefly to check the localized Artifact and registry-tree pages.
+The generated-index command and strict build completed successfully. The Material for MkDocs upstream warning about MkDocs 2.0 appeared during build and is expected; it is not currently a project build error.
 
 Remote verification was also performed with `git ls-remote origin refs/heads/main`; the remote `main` hash matched local `HEAD` after the Pages and handoff updates were pushed.
 
 ## Next Priorities
 
 - Continue localizing remaining prose inside older artifact pages where useful; their section headings are already localized.
-- Add HKLM\SYSTEM device-specific pages such as `USB`, `DeviceClasses`, `SWD\WPDBUSENUM`, `EMDMgmt`, Portable Devices, and VolumeInfoCache.
-- Add HKLM\SOFTWARE persistence pages such as Active Setup, AppInit_DLLs, ShellServiceObjectDelayLoad, Print Monitors, and LSA Security Packages.
+- Add deeper USB/storage pages for `Enum\USBSTOR` subkey interpretation, `Enum\STORAGE`, `MountedDevices` binary parsing notes, and user-level `MountPoints2` variants.
+- Add remaining persistence pages such as AppCompatFlags Compatibility Assistant Store, App Paths, KnownDLLs, Winlogon Notify, BootExecute, Scheduled Tasks registry cache, and WMI-related registry locations if evidence-backed.
 - Add HKCU pages for ZoneMap, Network, Printers, Environment, and user-level Run / Command Processor subkeys.
 - Confirm GitHub Pages settings in the repository UI if deployment does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
 - If a shorter URL is desired, use a project custom domain such as `registry.hsad.xyz` or move the site to the apex/root domain. The current `/windows-registry-forensics-handbook/` suffix is expected for a GitHub Pages project site.
@@ -136,7 +169,7 @@ Remote verification was also performed with `git ls-remote origin refs/heads/mai
 - This directory is now initialized as a git repository with `origin` set to `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`.
 - Current branch is `main` tracking `origin/main`.
 - GitHub Pages deployment is configured through `.github/workflows/pages.yml`.
-- The user explicitly allowed commit and push for GitHub Pages setup in this round, and the Pages configuration has been pushed to GitHub.
+- The user explicitly allowed commit and push for the current content expansion round.
 - Preserve `site/` as ignored generated output.
 - Prefer small content increments with strict build validation.
 - If changing generated artifact index behavior, update this file and `CHANGELOG.md`.

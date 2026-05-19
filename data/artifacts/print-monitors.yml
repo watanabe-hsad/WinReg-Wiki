@@ -1,0 +1,66 @@
+id: print-monitors
+title: Print Monitors
+category:
+  - Persistence
+  - Services
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Control\Print\Monitors\<MonitorName>
+    value: Driver
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Control\Print\Monitors\<MonitorName>
+    value: Driver
+    scope: Offline machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Print spooler monitor DLL configuration
+timestamp_semantics: Monitor key LastWrite supports configuration timeline analysis; spooler load time must be verified separately.
+can_prove:
+  - A print monitor is registered.
+  - Driver value identifies the monitor DLL name or path.
+  - Non-baseline DLL loading surface exists for the Print Spooler.
+cannot_prove:
+  - The DLL was loaded by Spooler.
+  - A print job occurred.
+  - A vendor monitor is malicious without validation.
+key_values:
+  - name: <MonitorName>
+    meaning: Print monitor subkey name.
+  - name: Driver
+    meaning: Monitor DLL name or path loaded by Spooler.
+attacker_usage:
+  - Register malicious monitor DLL for high-privilege Spooler loading.
+  - Trigger loading by restarting Spooler or the system.
+detection_ideas:
+  - New Print\Monitors subkey or Driver value.
+  - Driver points to non-System32, user-writable, network, or unsigned DLL.
+  - Registry change followed by Spooler restart or module load.
+false_positives:
+  - Printer drivers, PDF printers, scanners, vendor management tools, RDP printer redirection, VDI printing.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Print\Monitors" /s'
+collection_offline:
+  - Collect SYSTEM hive, PrintService logs, System.evtx, and monitor DLL files.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - System.evtx Service Control Manager
+  - PrintService/Admin
+  - PrintService/Operational
+  - Sysmon Event ID 7
+  - Sysmon Event ID 13
+references:
+  - "https://attack.mitre.org/techniques/T1547/010/"
+  - "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/winsplp/ns-winsplp-_monitorreg"
+

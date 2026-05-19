@@ -1,0 +1,66 @@
+id: deviceclasses
+title: DeviceClasses
+category:
+  - USB
+  - Device
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - hive: HKLM
+    path: SYSTEM\CurrentControlSet\Control\DeviceClasses
+    scope: Machine
+  - hive: HKLM
+    path: SYSTEM\ControlSet00x\Control\DeviceClasses
+    scope: Offline machine
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Device interface class registration
+timestamp_semantics: Interface and instance key LastWrite can indicate registry updates but does not equal user access or device use time.
+can_prove:
+  - Device interfaces were registered for particular class GUIDs.
+  - Interface paths may correlate device instances with mounted storage, WPD, or USB records.
+cannot_prove:
+  - A user accessed files.
+  - A device was connected at the LastWrite timestamp without corroboration.
+  - A class GUID alone identifies a unique physical device.
+key_values:
+  - name: <class GUID>
+    meaning: Device interface class GUID.
+  - name: <symbolic link / interface path>
+    meaning: Interface instance path that may include USBSTOR, USB, SWD, or volume identifiers.
+  - name: DeviceInstance
+    meaning: Device instance relationship when present.
+attacker_usage:
+  - Attackers using removable media or device emulation may leave interface registration traces.
+  - DeviceClasses can help tie a suspicious removable device to a volume or WPD path.
+detection_ideas:
+  - Correlate newly registered device interfaces with USBSTOR and MountedDevices changes.
+  - Investigate unusual device interface activity on restricted systems.
+  - Use ContainerID and instance identifiers to connect multi-interface devices.
+false_positives:
+  - Normal driver installation, phones, printers, cameras, docks, storage controllers, VPN adapters, and virtualization devices.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\DeviceClasses" /s'
+collection_offline:
+  - Collect SYSTEM hive and resolve Select\Current.
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - USB Detective
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USB
+  - USBSTOR
+  - MountedDevices
+  - SWD WPDBUSENUM
+  - SetupAPI.dev.log
+references:
+  - "https://learn.microsoft.com/en-gb/windows-hardware/drivers/install/hklm-system-currentcontrolset-control-registry-tree"
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

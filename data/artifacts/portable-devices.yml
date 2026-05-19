@@ -1,0 +1,64 @@
+id: portable-devices
+title: Portable Devices
+category:
+  - USB
+  - Device
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows Portable Devices
+    scope: Machine
+  - hive: HKLM
+    path: SOFTWARE\Microsoft\Windows Portable Devices\Devices
+    scope: Machine
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Windows Portable Devices metadata
+timestamp_semantics: Key LastWrite can reflect WPD metadata updates but not precise connection or file activity time.
+can_prove:
+  - Windows recorded portable device metadata.
+  - FriendlyName and device IDs may correlate with SWD WPDBUSENUM and USB records.
+cannot_prove:
+  - User opened or copied files.
+  - The device was connected at the LastWrite time.
+  - Every MTP or portable device will have complete metadata.
+key_values:
+  - name: Devices
+    meaning: Container for portable device records.
+  - name: FriendlyName
+    meaning: Human-readable device name when present.
+  - name: <device ID>
+    meaning: Device identifier that may contain WPD, USB, or serial-like data.
+attacker_usage:
+  - Phones, cameras, and MTP devices can be used for data movement and may leave WPD metadata.
+  - Portable device records can support investigations where USBSTOR is absent.
+detection_ideas:
+  - New portable device on restricted hosts.
+  - Correlate WPD metadata with sensitive file access and removable media alerts.
+  - Compare with SWD WPDBUSENUM and DeviceClasses ContainerID values.
+false_positives:
+  - Phones, cameras, tablets, MTP media players, scanners, enterprise MDM workflows.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows Portable Devices" /s'
+collection_offline:
+  - Collect SOFTWARE hive and relevant SYSTEM/user hives for device correlation.
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - SWD WPDBUSENUM
+  - USB
+  - DeviceClasses
+  - MountPoints2
+  - ShellBags
+references:
+  - "https://artefacts.help/windows_registry_usb_activity.html"
+

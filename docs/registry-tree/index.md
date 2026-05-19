@@ -30,21 +30,33 @@
 | [Select](hklm/system/select.md) | `CurrentControlSet` 到 `ControlSet00x` 的映射。 |
 | [ControlSet00x](hklm/system/controlset.md) | 真实控制集。 |
 | [ControlSet00x\Services](hklm/system/services.md) | 服务、驱动和网络组件配置。 |
+| [ControlSet00x\Services\<DriverName>](hklm/system/drivers.md) | 驱动服务配置。 |
 | [ControlSet00x\Enum](hklm/system/enum.md) | 设备枚举树。 |
+| [ControlSet00x\Enum\USB](hklm/system/usb.md) | USB 总线设备枚举。 |
+| [ControlSet00x\Enum\SWD\WPDBUSENUM](hklm/system/swd-wpdbusenum.md) | WPD / MTP 设备枚举。 |
+| [ControlSet00x\Control\DeviceClasses](hklm/system/deviceclasses.md) | 设备接口类注册。 |
 | [MountedDevices](hklm/system/mounteddevices.md) | 卷、盘符和设备映射。 |
 | [Control\Terminal Server](hklm/system/terminal-server.md) | RDP 服务端配置。 |
+| [Control\Print\Monitors](hklm/system/print-monitors.md) | 打印端口监视器配置。 |
 | [Services\Tcpip](hklm/system/tcpip.md) | TCP/IP 全局和接口配置。 |
 | [Control\TimeZoneInformation](hklm/system/timezone.md) | 时区配置。 |
 | [Control\ComputerName](hklm/system/computername.md) | 计算机名配置。 |
 | [Control\Lsa](hklm/system/lsa.md) | LSA 运行配置。 |
+| [Control\Lsa\Security Packages](hklm/system/lsa-security-packages.md) | LSA 安全支持包列表。 |
 
 ## HKLM\SOFTWARE 常见分支
 
 | 路径 | 内容 |
 |---|---|
+| [Microsoft\Active Setup](hklm/software/active-setup.md) | 每用户初始化组件定义。 |
 | [ProfileList](hklm/software/profilelist.md) | SID 到 profile 路径映射。 |
 | [Winlogon](hklm/software/winlogon.md) | 交互式登录配置。 |
 | [Image File Execution Options](hklm/software/ifeo.md) | 按进程名生效的启动配置。 |
+| [Windows NT\CurrentVersion\Windows](hklm/software/appinit-dlls.md) | `AppInit_DLLs` 相关配置。 |
+| [Windows\CurrentVersion\ShellServiceObjectDelayLoad](hklm/software/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 |
+| [Microsoft\Windows Portable Devices](hklm/software/portable-devices.md) | WPD / MTP 设备元数据。 |
+| [Windows NT\CurrentVersion\EMDMgmt](hklm/software/emdmgmt.md) | EMDMgmt / ReadyBoost 辅助记录。 |
+| [Windows Search\VolumeInfoCache](hklm/software/volumeinfocache.md) | Windows Search 卷信息缓存。 |
 | [Policies](hklm/software/policies.md) | 机器级策略写入位置。 |
 | [Microsoft\Windows Defender](hklm/software/defender.md) | Defender 配置和状态相关项。 |
 | [Uninstall](hklm/software/uninstall.md) | 软件安装登记。 |
