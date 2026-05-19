@@ -1,5 +1,9 @@
 site_name: Windows 注册表取证与检测手册
 site_description: 面向 DFIR、威胁狩猎和检测工程的 Windows Registry Artifact Handbook
+site_url: https://watanabe-hsad.github.io/windows-registry-forensics-handbook/
+repo_name: watanabe-hsad/windows-registry-forensics-handbook
+repo_url: https://github.com/watanabe-hsad/windows-registry-forensics-handbook
+edit_uri: edit/main/docs/
 
 theme:
   name: material

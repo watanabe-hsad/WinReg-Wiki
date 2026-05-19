@@ -2,12 +2,13 @@
 
 ## Current Goal
 
-Continue the Windows Registry Forensics Handbook by completing YAML coverage for existing artifact pages and adding high-value user behavior, RDP server configuration, and security policy artifacts. This round completed those goals and kept the site structure stable.
+Configure GitHub Pages deployment for the Windows Registry Forensics Handbook, verify the MkDocs build, commit the deployment configuration, and push it to GitHub.
 
 ## Repository
 
 - Local path: `/Users/hsad/Documents/CodeProject/registry-forensics-handbook-demo`
 - GitHub repository: `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`
+- GitHub Pages: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`
 - Repository name: `windows-registry-forensics-handbook`
 - Default branch: `main`
 - Local directory note: the local folder still has the older `registry-forensics-handbook-demo` name; consider renaming later after confirming no scripts or local references depend on it.
@@ -20,8 +21,23 @@ Continue the Windows Registry Forensics Handbook by completing YAML coverage for
 - `data/artifacts/`: structured artifact YAML records for future generated indexes and exports.
 - `scripts/`: lightweight automation. `scripts/generate-artifact-index.py` reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
 - `mkdocs.yml`: site configuration and navigation. It currently includes the generated artifact data index in the Artifact section.
+- `.github/workflows/pages.yml`: GitHub Actions workflow that builds and deploys the MkDocs site to GitHub Pages.
 
 ## Last Completed Round
+
+- Added GitHub Pages deployment workflow at `.github/workflows/pages.yml`.
+- Added `site_url`, `repo_name`, `repo_url`, and `edit_uri` to `mkdocs.yml`.
+- Updated `README.md` with the online site URL and deployment workflow notes.
+- GitHub Pages expected URL: `https://watanabe-hsad.github.io/windows-registry-forensics-handbook/`.
+- Deployment source should be GitHub Actions. If first-time Pages setup is needed, use: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
+- On each push to `main`, the workflow runs:
+
+```bash
+python scripts/generate-artifact-index.py
+mkdocs build --strict
+```
+
+Previous completed round:
 
 - Added missing YAML records for the previously existing artifact pages: UserAssist, Amcache, ShimCache / AppCompatCache, Services, IFEO, Terminal Server Client, USBSTOR, and MountedDevices.
 - Added user behavior artifact pages and YAML: RunMRU, RecentDocs, OpenSavePidlMRU, LastVisitedPidlMRU.
@@ -31,7 +47,7 @@ Continue the Windows Registry Forensics Handbook by completing YAML coverage for
 - YAML coverage is currently complete for manual artifact pages: 30 artifact pages under `docs/artifacts/` excluding `index.md` and `generated-index.md`, and 30 YAML records under `data/artifacts/`.
 - Regenerated `docs/artifacts/generated-index.md` from YAML.
 
-Previous completed round:
+Earlier completed round:
 
 - Added `PROJECT_STATUS.md`, `ROADMAP.md`, and `CHANGELOG.md` so future maintenance does not depend on chat history.
 - Rewrote the README as a GitHub-ready project homepage and documented `License: TBD`.
@@ -60,7 +76,7 @@ Earlier completed round:
 
 ## Verification
 
-Last verified in the most recent round:
+Last verified locally in the most recent round:
 
 ```bash
 .venv/bin/python scripts/generate-artifact-index.py
@@ -71,6 +87,8 @@ Both commands completed successfully. The Material for MkDocs upstream warning a
 
 ## Next Priorities
 
+- Confirm GitHub Pages settings in the repository UI if the first workflow run does not publish: `Settings -> Pages -> Build and deployment -> Source -> GitHub Actions`.
+- Choose a license and add a `LICENSE` file. Suggested split: docs under `CC BY 4.0`, scripts under `MIT`, or a simpler single-repo `MIT` if preferred.
 - Add persistence pages for AppInit_DLLs, Active Setup, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, Services DLL details, and Drivers.
 - Add USB and device pages for USB, DeviceClasses, Enum\SWD\WPDBUSENUM, EMDMgmt, Portable Devices, and VolumeInfoCache.
 - Add account/security pages for CachedLogonsCount, LogonUI, local group membership details, and SAM user record interpretation.
@@ -83,9 +101,9 @@ Both commands completed successfully. The Material for MkDocs upstream warning a
 ## Notes For Next Agent
 
 - This directory is now initialized as a git repository with `origin` set to `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`.
-- Because git was initialized after files already existed, the current working tree contains untracked project files until the first commit is made.
-- The user said this round may push, but no commit or push has been performed. Confirm commit/push intent before doing it.
-- Do not auto-commit unless the user explicitly asks.
+- Current branch is `main` tracking `origin/main`.
+- GitHub Pages deployment is configured through `.github/workflows/pages.yml`.
+- The user explicitly allowed commit and push for GitHub Pages setup in this round.
 - Preserve `site/` as ignored generated output.
 - Prefer small content increments with strict build validation.
 - If changing generated artifact index behavior, update this file and `CHANGELOG.md`.

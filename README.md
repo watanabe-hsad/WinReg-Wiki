@@ -13,12 +13,26 @@ The site keeps two primary navigation paths:
 - Investigation scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, security policy changes, network configuration, software installation, and anti-forensics.
 - Native registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`, then map the live view back to offline hive files.
 
+## Online Site
+
+The handbook is intended to be published with GitHub Pages:
+
+https://watanabe-hsad.github.io/windows-registry-forensics-handbook/
+
+Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
+
+1. installs dependencies from `requirements.txt`;
+2. regenerates `docs/artifacts/generated-index.md` from `data/artifacts/*.yml`;
+3. runs `mkdocs build --strict`;
+4. deploys the generated `site/` directory to GitHub Pages.
+
 ## Local Preview
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python scripts/generate-artifact-index.py
 mkdocs serve
 ```
 
