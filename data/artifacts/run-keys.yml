@@ -1,0 +1,72 @@
+id: run-keys
+title: Run / RunOnce
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_CURRENT_USER / HKEY_LOCAL_MACHINE
+hive:
+  - NTUSER.DAT
+  - SOFTWARE
+offline_file:
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - hive: HKCU
+    path: Software\Microsoft\Windows\CurrentVersion\Run
+    scope: Current user
+  - hive: HKCU
+    path: Software\Microsoft\Windows\CurrentVersion\RunOnce
+    scope: Current user
+  - hive: HKLM
+    path: Software\Microsoft\Windows\CurrentVersion\Run
+    scope: All users
+  - hive: HKLM
+    path: Software\Microsoft\Windows\CurrentVersion\RunOnce
+    scope: All users
+forensic_value: High
+detection_value: High
+artifact_type: Persistence
+evidence_type:
+  - Autorun configuration
+  - User-level or machine-level persistence
+timestamp_semantics: Key LastWrite updates when values under the key are modified; value-level timestamps are not normally available.
+can_prove:
+  - A command was configured to start automatically.
+  - The persistence scope was user-level or machine-level.
+cannot_prove:
+  - The command definitely executed.
+  - The LastWrite timestamp is the exact creation time of a specific value.
+key_values:
+  - name: "<value name>"
+    meaning: Display name chosen by installer, user, or attacker.
+  - name: "<value data>"
+    meaning: Command line executed at user logon when the startup mechanism is active.
+attacker_usage:
+  - Add commands under HKCU for low-privilege persistence or HKLM for all-user persistence.
+detection_ideas:
+  - User writable paths
+  - Script interpreters
+  - LOLBins
+  - Long encoded commands
+false_positives:
+  - Updaters
+  - Collaboration software
+  - Endpoint management agents
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"'
+  - 'reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"'
+collection_offline:
+  - Collect each user's NTUSER.DAT and the machine SOFTWARE hive.
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Startup folder
+  - Scheduled Tasks
+  - Services
+  - Prefetch
+  - Sysmon Event ID 1
+  - Sysmon Event ID 13

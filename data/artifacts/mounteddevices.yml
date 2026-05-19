@@ -1,0 +1,66 @@
+id: mounteddevices
+title: MountedDevices
+category:
+  - USB
+  - Volume
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\MountedDevices'
+    scope: Machine
+  - view: offline
+    root: HKLM
+    path: 'SYSTEM\MountedDevices'
+    scope: Machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Volume to drive-letter mapping
+timestamp_semantics: 'MountedDevices key LastWrite indicates mapping changes at the key level; individual value creation times are not normally available.'
+can_prove:
+  - Volume GUIDs and DOS drive-letter mappings existed in the system registry.
+  - Mappings can help connect USBSTOR devices to drive letters or volumes.
+cannot_prove:
+  - Current drive-letter assignment.
+  - User accessed files.
+  - Exact device connection time.
+key_values:
+  - name: '\DosDevices\X:'
+    meaning: DOS drive-letter mapping value name.
+  - name: '\??\Volume{GUID}'
+    meaning: Volume GUID mapping value name.
+  - name: '<binary value data>'
+    meaning: Disk signature, volume serial, or device identifier depending on volume type.
+attacker_usage:
+  - External volumes used for staging or exfiltration may leave mappings even after removal.
+  - Clearing mappings can break correlation between USBSTOR and user activity artifacts.
+detection_ideas:
+  - New removable volume mapping near sensitive file access.
+  - Volume GUID correlated with MountPoints2 and LNK target paths.
+false_positives:
+  - Normal USB drives, backup disks, VHD mounts, card readers, BitLocker volumes.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\MountedDevices"'
+collection_offline:
+  - 'Collect SYSTEM hive and correlate with USBSTOR and user hives.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USBSTOR
+  - MountPoints2
+  - SetupAPI.dev.log
+  - LNK
+  - Jump Lists
+  - ShellBags
+references:
+  - 'https://artefacts.help/windows_registry_mounteddevices.html'
+  - 'https://www.sans.org/posters/windows-forensic-analysis/'

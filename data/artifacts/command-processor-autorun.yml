@@ -1,0 +1,62 @@
+id: command-processor-autorun
+title: Command Processor\AutoRun
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+  - SOFTWARE
+offline_file:
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - view: live
+    root: HKCU
+    path: "Software\\Microsoft\\Command Processor"
+    value: AutoRun
+    scope: User
+  - view: live
+    root: HKLM
+    path: "Software\\Microsoft\\Command Processor"
+    value: AutoRun
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Command shell autorun
+timestamp_semantics: "Command Processor key LastWrite is key-level; value-level timestamp is not normally available."
+can_prove:
+  - cmd.exe AutoRun command is configured.
+  - Command may execute when cmd.exe starts without /D.
+cannot_prove:
+  - cmd.exe instance triggered it.
+  - Command succeeded.
+key_values:
+  - name: AutoRun
+    meaning: "Command executed by cmd.exe startup unless /D disables AutoRun."
+attacker_usage:
+  - "User-level persistence triggered when administrators or scripts open cmd.exe."
+detection_ideas:
+  - "Any non-empty AutoRun outside approved baseline."
+  - "AutoRun invoking PowerShell, LOLBins, network paths or encoded commands."
+false_positives:
+  - "Developer shell initialization, enterprise environment setup scripts."
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Command Processor" /v AutoRun'
+  - 'reg query "HKLM\Software\Microsoft\Command Processor" /v AutoRun'
+collection_offline:
+  - "Inspect SOFTWARE and each user's NTUSER.DAT."
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 13
+  - Sysmon Event ID 1
+  - Security Event ID 4688
+  - PowerShell logs
+references:
+  - "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd"
+  - "https://attack.mitre.org/techniques/T1059/003/"

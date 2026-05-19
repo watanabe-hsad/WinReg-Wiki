@@ -1,0 +1,55 @@
+id: rdp-tcp-portnumber
+title: RDP-Tcp PortNumber
+category:
+  - RDP
+  - RemoteAccess
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
+    value: PortNumber
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - RDP listener port configuration
+timestamp_semantics: 'RDP-Tcp key LastWrite is key-level; actual listener start requires service and network evidence.'
+can_prove:
+  - RDP-Tcp listener port registry configuration.
+  - Whether the configured port differs from default 3389.
+cannot_prove:
+  - Port is reachable.
+  - RDP login occurred.
+  - Firewall permits the port.
+key_values:
+  - name: PortNumber
+    meaning: DWORD port value; regedit may show hex or decimal.
+attacker_usage:
+  - Change RDP to non-default port for exposure management or evasion.
+detection_ideas:
+  - PortNumber changes from baseline, especially with firewall and TermService changes.
+false_positives:
+  - Legitimate hardening, jump boxes, test environments, managed hosting.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber'
+collection_offline:
+  - 'Collect SYSTEM hive and inspect current ControlSet00x.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - fDenyTSConnections
+  - Firewall rules
+  - TermService
+  - netstat
+  - TerminalServices logs
+references:
+  - 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/change-listening-port-remote-desktop'
+  - 'https://attack.mitre.org/techniques/T1021/001/'

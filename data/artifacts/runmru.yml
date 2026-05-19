@@ -1,0 +1,57 @@
+id: runmru
+title: RunMRU
+category:
+  - UserActivity
+  - Shell
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU'
+    scope: User
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Run dialog input history
+timestamp_semantics: 'RunMRU key LastWrite is a key-level update time; values do not have independent creation timestamps.'
+can_prove:
+  - A user profile contains Run dialog input text.
+  - MRUList can show relative order of input entries.
+cannot_prove:
+  - The command executed successfully.
+  - The typed program or path existed.
+key_values:
+  - name: 'a, b, c...'
+    meaning: Command, path, URL, or shell item entered in Run dialog.
+  - name: MRUList
+    meaning: Relative ordering of value letters.
+attacker_usage:
+  - Operators may use Win+R to launch commands, tools, RDP, or network paths.
+detection_ideas:
+  - RunMRU entries containing encoded PowerShell, LOLBins, UNC admin shares, or suspicious URLs.
+false_positives:
+  - Admins, developers, helpdesk, and power users routinely use Run dialog.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"'
+collection_offline:
+  - 'Collect user NTUSER.DAT and map SID with ProfileList.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 1
+  - Security Event ID 4688
+  - PowerShell logs
+  - UserAssist
+  - LNK
+  - Jump Lists
+references:
+  - 'https://artefacts.help/windows_registry_runmru.html'
+  - 'https://www.sans.org/posters/windows-forensic-analysis/'

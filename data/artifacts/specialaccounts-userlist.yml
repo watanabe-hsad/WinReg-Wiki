@@ -1,0 +1,56 @@
+id: specialaccounts-userlist
+title: SpecialAccounts\UserList
+category:
+  - Accounts
+  - SecurityPolicy
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - 'C:\Windows\System32\Config\SOFTWARE'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList'
+    scope: Machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Logon UI account visibility configuration
+timestamp_semantics: 'UserList key LastWrite is key-level and does not prove account creation or logon time.'
+can_prove:
+  - A username is configured in the logon UI visibility list.
+  - A value of 0 commonly indicates hidden from logon UI.
+cannot_prove:
+  - Account exists.
+  - Account logged on.
+  - Account is malicious or privileged.
+key_values:
+  - name: '<username>'
+    meaning: DWORD controlling logon UI visibility for that account name.
+attacker_usage:
+  - Hide newly created or existing local accounts from the logon screen.
+detection_ideas:
+  - New UserList value 0 near account creation or Administrators group membership change.
+false_positives:
+  - Kiosk, VDI, OEM, shared devices, legitimate hidden service or support accounts.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList"'
+collection_offline:
+  - 'Collect SOFTWARE, SAM, and Security.evtx.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+  - RegRipper
+cross_validation:
+  - SAM
+  - Security.evtx 4720
+  - Security.evtx 4732
+  - Security.evtx 4738
+  - ProfileList
+  - RDP logs
+references:
+  - 'https://learn.microsoft.com/en-us/windows/win32/secauthn/winlogon-and-credential-providers'
+  - 'https://attack.mitre.org/techniques/T1136/'

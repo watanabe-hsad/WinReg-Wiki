@@ -1,0 +1,66 @@
+id: defender-policies
+title: Defender Policies
+category:
+  - SecurityPolicy
+  - Defender
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - view: live
+    root: HKLM
+    path: "SOFTWARE\\Policies\\Microsoft\\Windows Defender"
+    scope: Machine
+  - view: live
+    root: HKLM
+    path: "SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Exclusions\\Paths"
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Security control configuration
+timestamp_semantics: "Policy key LastWrite is key-level; actual policy source and enforcement require logs and Defender state."
+can_prove:
+  - Defender policy or exclusion registry value exists.
+  - Security configuration may be weakened.
+cannot_prove:
+  - Defender was actually disabled.
+  - Policy source was malicious.
+key_values:
+  - name: DisableRealtimeMonitoring
+    meaning: "Realtime protection policy value; actual effect depends on platform and tamper protection."
+  - name: Exclusions\\Paths
+    meaning: "Path exclusions."
+  - name: Exclusions\\Processes
+    meaning: "Process exclusions."
+attacker_usage:
+  - "Add exclusions or disable protection to allow payload execution."
+detection_ideas:
+  - "Exclusions under user-writable directories or whole drives."
+  - "Disable protection values deviate from baseline."
+  - "Set-MpPreference or reg.exe modifying Defender policies."
+false_positives:
+  - "Enterprise AV exclusions, database servers, backup and virtualization software."
+collection_live:
+  - "Get-MpPreference"
+  - 'reg query "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /s'
+collection_offline:
+  - "Collect SOFTWARE hive, Defender Operational log, GroupPolicy logs."
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+  - Microsoft Defender PowerShell cmdlets
+cross_validation:
+  - Defender Operational log
+  - PowerShell logs
+  - Sysmon Event ID 13
+  - GroupPolicy Operational log
+  - EDR telemetry
+references:
+  - "https://learn.microsoft.com/en-us/defender-endpoint/configure-microsoft-defender-antivirus-features"
+  - "https://learn.microsoft.com/en-us/defender-endpoint/configure-extension-file-exclusions-microsoft-defender-antivirus"
+  - "https://attack.mitre.org/techniques/T1562/"

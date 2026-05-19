@@ -1,0 +1,56 @@
+:root {
+  --rfh-accent: #00897b;
+  --rfh-warn: #c77700;
+  --rfh-danger: #b3261e;
+  --rfh-muted: #5f6673;
+}
+
+.md-typeset .rfh-kicker {
+  color: var(--rfh-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.md-typeset .rfh-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0 1.2rem;
+}
+
+.md-typeset .rfh-badge {
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 0.35rem;
+  color: var(--md-default-fg-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.36rem 0.5rem;
+}
+
+.md-typeset .rfh-badge.high {
+  border-color: color-mix(in srgb, var(--rfh-danger), transparent 45%);
+  color: var(--rfh-danger);
+}
+
+.md-typeset .rfh-badge.medium {
+  border-color: color-mix(in srgb, var(--rfh-warn), transparent 35%);
+  color: var(--rfh-warn);
+}
+
+.md-typeset .rfh-path {
+  word-break: break-all;
+}
+
+.md-typeset .rfh-table-sm td,
+.md-typeset .rfh-table-sm th {
+  font-size: 0.72rem;
+}
+
+.md-typeset .rfh-note {
+  color: var(--rfh-muted);
+  font-size: 0.82rem;
+}
+

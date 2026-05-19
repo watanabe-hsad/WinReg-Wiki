@@ -1,0 +1,59 @@
+id: profilelist
+title: ProfileList
+category:
+  - Accounts
+  - UserProfiles
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - view: live
+    root: HKLM
+    path: "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList\\<SID>"
+    scope: Machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - SID to profile mapping
+timestamp_semantics: "ProfileList subkey LastWrite indicates profile record change, not necessarily first or last logon."
+can_prove:
+  - A SID has or had a profile mapping.
+  - The mapped profile path.
+cannot_prove:
+  - Account still exists.
+  - Recent logon or user activity.
+key_values:
+  - name: ProfileImagePath
+    meaning: "Profile directory path for SID."
+  - name: State
+    meaning: "Profile state; parse cautiously by OS version."
+  - name: Flags
+    meaning: "Profile flags; parse cautiously by OS version."
+attacker_usage:
+  - "Profile paths may reveal hidden accounts, unusual user directories, or new local accounts."
+detection_ideas:
+  - "New SID mapped to non-standard path."
+  - "ProfileList changes followed by user-level persistence."
+false_positives:
+  - "Domain user first logon, VDI, FSLogix, roaming profiles."
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /s'
+collection_offline:
+  - "Collect SOFTWARE hive, then map ProfileImagePath to user hives."
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - SAM
+  - Security Event ID 4624
+  - User Profile Service log
+  - NTUSER.DAT
+  - UsrClass.dat
+references:
+  - "https://artefacts.help/windows_registry_profilelist.html"
+  - "https://learn.microsoft.com/en-us/windows/client-management/client-tools/mandatory-user-profile"

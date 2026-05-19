@@ -1,0 +1,56 @@
+id: winlogon-userinit
+title: Winlogon\Userinit
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - view: live
+    root: HKLM
+    path: "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    value: Userinit
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Logon autorun configuration
+timestamp_semantics: "Winlogon key LastWrite may be updated by multiple values; value-level timestamp is not normally available."
+can_prove:
+  - Userinit logon initialization command is configured.
+  - Non-default appended commands exist if present in value data.
+cannot_prove:
+  - Command actually executed at logon.
+  - Identity of the modifying process without telemetry.
+key_values:
+  - name: Userinit
+    meaning: "Comma-delimited user initialization command list; default usually userinit.exe with trailing comma."
+attacker_usage:
+  - "Append malicious executable after userinit.exe for logon persistence."
+detection_ideas:
+  - "Userinit differs from normalized default."
+  - "Additional paths under user-writable directories."
+false_positives:
+  - "Kiosk, VDI, shell replacement, hardening tools."
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit'
+collection_offline:
+  - "Collect SOFTWARE hive and transaction logs."
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 13
+  - Security Event ID 4657
+  - Logon events
+  - Prefetch
+  - BAM / DAM
+references:
+  - "https://attack.mitre.org/techniques/T1547/004/"
+  - "https://learn.microsoft.com/en-us/windows/win32/secauthn/winlogon-and-credential-providers"

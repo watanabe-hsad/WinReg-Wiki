@@ -1,0 +1,141 @@
+site_name: Windows 注册表取证与检测手册
+site_description: 面向 DFIR、威胁狩猎和检测工程的 Windows Registry Artifact Handbook
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+  - tags
+
+nav:
+  - 首页: index.md
+  - 基础概念:
+      - 注册表基础: getting-started/registry-basics.md
+      - 时间戳语义: getting-started/timestamps.md
+  - 调查场景:
+      - questions/index.md
+      - 程序执行: questions/execution.md
+      - Shell / Explorer 用户行为: questions/shell-explorer.md
+      - 自启动与持久化: questions/persistence.md
+      - USB 与外接设备: questions/usb.md
+      - RDP 与远程访问: questions/rdp.md
+      - 账户与安全: questions/accounts-security.md
+      - 安全策略与防护配置: questions/policy-security.md
+      - 网络与系统环境: questions/network.md
+      - 软件安装与卸载: questions/software-install.md
+      - 反取证与清理痕迹: questions/anti-forensics.md
+  - 注册表位置:
+      - registry-tree/index.md
+      - HKEY_CLASSES_ROOT: registry-tree/hkey-classes-root.md
+      - HKEY_CURRENT_USER:
+          - registry-tree/hkey-current-user.md
+          - HKCU\Software: registry-tree/hkcu/software.md
+          - HKCU Explorer: registry-tree/hkcu/explorer.md
+          - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
+      - HKEY_LOCAL_MACHINE:
+          - registry-tree/hkey-local-machine.md
+          - HKLM\SAM: registry-tree/hklm/sam.md
+          - HKLM\SECURITY: registry-tree/hklm/security.md
+          - HKLM\SOFTWARE: registry-tree/hklm/software.md
+          - HKLM\SYSTEM: registry-tree/hklm/system.md
+          - HKLM\HARDWARE: registry-tree/hklm/hardware.md
+          - HKLM\BCD00000000: registry-tree/hklm/bcd.md
+      - HKEY_USERS:
+          - registry-tree/hkey-users.md
+          - SID 映射: registry-tree/hku/sid-mapping.md
+          - NTUSER.DAT: registry-tree/hku/ntuser.md
+          - UsrClass.dat: registry-tree/hku/usrclass.md
+      - HKEY_CURRENT_CONFIG: registry-tree/hkey-current-config.md
+  - Artifact:
+      - artifacts/index.md
+      - Generated Data Index: artifacts/generated-index.md
+      - Persistence:
+          - Run / RunOnce: artifacts/persistence/run-keys.md
+          - StartupApproved: artifacts/persistence/startupapproved.md
+          - Services: artifacts/persistence/services.md
+          - IFEO: artifacts/persistence/ifeo.md
+          - Winlogon Userinit: artifacts/persistence/winlogon-userinit.md
+          - Winlogon Shell: artifacts/persistence/winlogon-shell.md
+          - LSA Authentication Packages: artifacts/persistence/lsa-authentication-packages.md
+          - Command Processor AutoRun: artifacts/persistence/command-processor-autorun.md
+      - Execution:
+          - UserAssist: artifacts/execution/userassist.md
+          - BAM / DAM: artifacts/execution/bam-dam.md
+          - Amcache: artifacts/execution/amcache.md
+          - ShimCache: artifacts/execution/shimcache.md
+          - MUICache: artifacts/execution/muicache.md
+      - User Activity:
+          - RunMRU: artifacts/user-activity/runmru.md
+          - RecentDocs: artifacts/user-activity/recentdocs.md
+          - OpenSavePidlMRU: artifacts/user-activity/opensavepidlmru.md
+          - LastVisitedPidlMRU: artifacts/user-activity/lastvisitedpidlmru.md
+      - USB:
+          - USBSTOR: artifacts/usb/usbstor.md
+          - MountedDevices: artifacts/usb/mounteddevices.md
+          - MountPoints2: artifacts/usb/mountpoints2.md
+      - RDP:
+          - Terminal Server Client: artifacts/rdp/terminal-server-client.md
+          - fDenyTSConnections: artifacts/rdp/fdenytsconnections.md
+          - RDP-Tcp PortNumber: artifacts/rdp/rdp-tcp-portnumber.md
+          - CredSSP / NLA: artifacts/rdp/credssp-nla.md
+      - Security:
+          - ProfileList: artifacts/security/profilelist.md
+          - Defender Policies: artifacts/security/defender-policies.md
+          - UAC Policies: artifacts/security/uac-policies.md
+          - Firewall Policies: artifacts/security/firewall-policies.md
+          - Audit Policy: artifacts/security/audit-policy.md
+          - SpecialAccounts\UserList: artifacts/security/specialaccounts-userlist.md
+  - 检测工程: detection/index.md
+  - 贡献:
+      - 页面模板: contributing/template.md
+  - 标签: tags.md

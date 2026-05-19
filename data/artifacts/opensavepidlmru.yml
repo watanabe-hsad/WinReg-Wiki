@@ -1,0 +1,60 @@
+id: opensavepidlmru
+title: OpenSavePidlMRU
+category:
+  - UserActivity
+  - ComDlg32
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU'
+    scope: User
+forensic_value: High
+detection_value: Low
+evidence_type:
+  - Common dialog file path clue
+timestamp_semantics: 'Key LastWrite and MRUListEx indicate MRU updates and order; PIDL internal timestamps require parser-specific interpretation.'
+can_prove:
+  - A user profile contains common dialog MRU records.
+  - PIDL parsing may recover paths, filenames, volumes, or network locations.
+cannot_prove:
+  - File open or save completed.
+  - File contents were read.
+  - Parsed path still exists.
+key_values:
+  - name: '<extension subkey>'
+    meaning: File type grouping, including wildcard `*`.
+  - name: '<numbered PIDL value>'
+    meaning: Shell item / PIDL data parsed to paths or namespace items.
+  - name: MRUListEx
+    meaning: Binary MRU ordering.
+attacker_usage:
+  - File open/save dialogs during staging, upload, archive creation, or document access may leave path traces.
+detection_ideas:
+  - PIDL paths pointing to sensitive shares, removable media, or tool directories.
+false_positives:
+  - Office apps, browsers, editors, archive tools, and mail clients commonly update this key.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU" /s'
+collection_offline:
+  - 'Collect user NTUSER.DAT and parse with a PIDL-aware tool.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - ShellBags Explorer
+  - RegRipper
+  - KAPE
+cross_validation:
+  - LastVisitedPidlMRU
+  - RecentDocs
+  - LNK
+  - Jump Lists
+  - ShellBags
+  - Browser history
+references:
+  - 'https://artefacts.help/windows_registry_opensavepidlmru.html'
+  - 'https://ericzimmerman.github.io/'

@@ -1,0 +1,64 @@
+id: ifeo
+title: Image File Execution Options
+category:
+  - Persistence
+  - Hijacking
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - 'C:\Windows\System32\Config\SOFTWARE'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<ImageName>'
+    value: Debugger
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Process launch hijack
+  - Debugger configuration
+timestamp_semantics: 'IFEO subkey LastWrite indicates configuration update for that image key; it does not prove the target image was launched.'
+can_prove:
+  - An executable name has IFEO configuration.
+  - A Debugger value can redirect or prepend process launch behavior.
+cannot_prove:
+  - The target process was launched.
+  - The debugger command executed successfully.
+  - The configuration is malicious without context.
+key_values:
+  - name: Debugger
+    meaning: Command invoked when the target image is launched under IFEO semantics.
+  - name: GlobalFlag
+    meaning: Debugging/diagnostic flags sometimes used legitimately.
+  - name: SilentProcessExit
+    meaning: Related monitoring/hijack path requiring additional subkeys.
+attacker_usage:
+  - Hijack security tools, browsers, accessibility binaries, or common admin utilities.
+  - Use IFEO Debugger for persistence or defensive tool blocking.
+detection_ideas:
+  - Debugger value outside development workstations.
+  - Debugger pointing to user-writable paths, script interpreters, or LOLBins.
+  - IFEO targeting security tools, `sethc.exe`, `utilman.exe`, browsers, or office apps.
+false_positives:
+  - Visual Studio, debuggers, crash collection tools, application compatibility testing.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /s'
+collection_offline:
+  - 'Collect SOFTWARE hive and inspect Image File Execution Options subkeys.'
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 13
+  - Security Event ID 4657
+  - Process creation logs
+  - File system timeline
+  - Security product tamper alerts
+references:
+  - 'https://attack.mitre.org/techniques/T1546/012/'
+  - 'https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns'

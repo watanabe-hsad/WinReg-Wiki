@@ -1,0 +1,61 @@
+id: shimcache
+title: ShimCache / AppCompatCache
+category:
+  - Execution
+  - ProgramPresence
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: offline
+    root: HKLM
+    path: 'SYSTEM\ControlSet00x\Control\Session Manager\AppCompatCache'
+    scope: Machine
+forensic_value: Medium
+detection_value: Medium
+evidence_type:
+  - Program path cache
+  - Compatibility metadata
+timestamp_semantics: 'ShimCache timestamp and ordering semantics vary significantly by Windows version; key LastWrite and parsed fields must be reported conservatively.'
+can_prove:
+  - A program path exists in the application compatibility cache.
+  - The cache can reveal deleted or previously present executable paths.
+cannot_prove:
+  - Program execution on its own.
+  - Execution order from cache order alone.
+  - Exact execution time from parsed timestamp alone.
+key_values:
+  - name: AppCompatCache binary data
+    meaning: Binary cache parsed by tools into paths, timestamps, flags, and entries depending on OS version.
+attacker_usage:
+  - Execution or presence of tools may leave cached paths even after deletion.
+  - Attackers may clear compatibility caches as part of anti-forensics.
+detection_ideas:
+  - Suspicious paths in user-writable directories.
+  - Deleted tools with ShimCache plus Amcache or Prefetch support.
+  - Known attacker tool names appearing on servers where Prefetch may be unavailable.
+false_positives:
+  - Installers, legitimate admin tools, updater binaries, and software inventory activity.
+collection_live:
+  - 'reg save HKLM\SYSTEM C:\Temp\SYSTEM.hiv'
+collection_offline:
+  - 'Collect SYSTEM hive and resolve Select\Current before parsing ControlSet00x.'
+tools:
+  - AppCompatCacheParser
+  - RECmd
+  - Registry Explorer
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Amcache
+  - Prefetch
+  - BAM / DAM
+  - UserAssist
+  - '$MFT'
+  - '$UsnJrnl'
+  - EDR process telemetry
+references:
+  - 'https://ericzimmerman.github.io/'
+  - 'https://artefacts.help/windows_registry_shimcache.html'

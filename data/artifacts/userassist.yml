@@ -1,0 +1,70 @@
+id: userassist
+title: UserAssist
+category:
+  - Execution
+  - UserActivity
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count'
+    scope: User
+  - view: offline
+    root: HKU
+    path: '<SID>\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count'
+    scope: User SID
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Explorer-mediated user interaction
+  - Program execution indicator
+timestamp_semantics: 'Entry fields may include parser-decoded last run time and run count; key LastWrite is a container update time and not a value creation time.'
+can_prove:
+  - A user profile contains an Explorer-related interaction record for a program or shortcut.
+  - ROT13-decoded names can identify paths or known shell items.
+  - Parsed fields can support user-context execution when validated.
+cannot_prove:
+  - The user manually double-clicked the program.
+  - Every execution is captured.
+  - Run count equals true process execution count.
+key_values:
+  - name: '{GUID}'
+    meaning: UserAssist category GUID; interpretation varies by Windows version.
+  - name: '<ROT13 value name>'
+    meaning: Encoded program path, shortcut, or shell item name.
+  - name: '<binary value data>'
+    meaning: Parsed by tools for run count, focus count, and last run fields depending on OS version.
+attacker_usage:
+  - Execution of tools through Explorer, Start Menu, or shortcuts may leave UserAssist traces.
+  - Attackers may clear UserAssist keys to reduce user interaction evidence.
+detection_ideas:
+  - UserAssist entries for suspicious binaries under user-writable directories.
+  - UserAssist path close in time to BAM, Prefetch, Sysmon Event ID 1, or EDR process telemetry.
+  - Known tool names or LOLBin-launched paths under a user SID.
+false_positives:
+  - Normal Start Menu launches, application shortcuts, admin tools, installers, and portable utilities.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist" /s'
+collection_offline:
+  - 'Collect each user NTUSER.DAT and map SID with ProfileList before reporting.'
+tools:
+  - RECmd
+  - Registry Explorer
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Prefetch
+  - BAM / DAM
+  - Amcache
+  - LNK
+  - Jump Lists
+  - ShellBags
+  - Sysmon Event ID 1
+references:
+  - 'https://artefacts.help/windows_registry_userassist.html'
+  - 'https://ericzimmerman.github.io/'

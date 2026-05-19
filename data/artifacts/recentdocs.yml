@@ -1,0 +1,62 @@
+id: recentdocs
+title: RecentDocs
+category:
+  - UserActivity
+  - Shell
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs'
+    scope: User
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.<ext>'
+    scope: User
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Recent document name clue
+timestamp_semantics: 'RecentDocs key LastWrite and MRUListEx show list updates and ordering, not exact file open or read time.'
+can_prove:
+  - A user profile references a file name or extension group in RecentDocs.
+  - MRU order can support relative recency.
+cannot_prove:
+  - The file content was read.
+  - The complete path is known unless parser recovers it.
+  - The file still exists.
+key_values:
+  - name: MRUListEx
+    meaning: Binary MRU ordering.
+  - name: '<numbered value>'
+    meaning: Recent item data, often requiring parser decoding.
+attacker_usage:
+  - Sensitive documents, archives, scripts, or removable media files opened through Explorer may leave traces.
+detection_ideas:
+  - Sensitive filenames, credential stores, archive files, or script names appearing near incident time.
+false_positives:
+  - Normal office documents, downloads, email attachments, and browser-saved files.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /s'
+collection_offline:
+  - 'Collect user NTUSER.DAT and parse RecentDocs root plus extension subkeys.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - LNK
+  - Jump Lists
+  - ShellBags
+  - OpenSavePidlMRU
+  - '$MFT'
+  - '$UsnJrnl'
+references:
+  - 'https://artefacts.help/windows_registry_recentdocs.html'
+  - 'https://www.sans.org/posters/windows-forensic-analysis/'

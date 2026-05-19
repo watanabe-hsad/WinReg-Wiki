@@ -1,0 +1,55 @@
+id: fdenytsconnections
+title: fDenyTSConnections
+category:
+  - RDP
+  - RemoteAccess
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Control\Terminal Server'
+    value: fDenyTSConnections
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - RDP server allow/deny configuration
+timestamp_semantics: 'Terminal Server key LastWrite is key-level and does not prove a connection or exact value modification time.'
+can_prove:
+  - RDP service-side allow or deny configuration exists.
+  - The system may be configured to allow RDP when value is 0.
+cannot_prove:
+  - RDP logon occurred.
+  - Firewall allowed access.
+  - TermService was listening.
+key_values:
+  - name: fDenyTSConnections
+    meaning: Usually 0 means allow Remote Desktop connections, 1 means deny.
+attacker_usage:
+  - Enable RDP for interactive access or lateral movement.
+detection_ideas:
+  - Value changes from 1 to 0, especially followed by firewall rule changes or LogonType 10.
+false_positives:
+  - IT administration, GPO/MDM policy, remote support, server deployment.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections'
+collection_offline:
+  - 'Collect SYSTEM hive; resolve Select\Current before reading ControlSet00x.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Security.evtx 4624 LogonType 10
+  - TerminalServices logs
+  - Firewall rules
+  - TermService state
+  - Sysmon Event ID 13
+references:
+  - 'https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-allow-access'
+  - 'https://attack.mitre.org/techniques/T1021/001/'

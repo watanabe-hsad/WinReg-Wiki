@@ -1,0 +1,58 @@
+id: lsa-authentication-packages
+title: LSA Authentication Packages
+category:
+  - Persistence
+  - CredentialAccess
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - view: live
+    root: HKLM
+    path: "SYSTEM\\CurrentControlSet\\Control\\Lsa"
+    value: "Authentication Packages"
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - LSASS load chain configuration
+timestamp_semantics: "Control\\Lsa key LastWrite is key-level; actual LSASS load time requires module or event evidence."
+can_prove:
+  - LSA authentication package list is configured.
+  - Non-baseline package names exist if present.
+cannot_prove:
+  - DLL loaded by LSASS.
+  - Credential theft occurred.
+key_values:
+  - name: "Authentication Packages"
+    meaning: "REG_MULTI_SZ list of LSA authentication package names; default commonly includes msv1_0."
+attacker_usage:
+  - "Register a malicious authentication package for LSASS persistence or credential access."
+detection_ideas:
+  - "Authentication Packages deviates from baseline."
+  - "Registry set event under Control\\Lsa."
+  - "New package DLL unsigned or recently created."
+false_positives:
+  - "MFA, VPN, smart card, EDR, identity management products."
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v "Authentication Packages"'
+collection_offline:
+  - "Collect SYSTEM hive; resolve Select\\Current before parsing."
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - LSASS module load telemetry
+  - Sysmon Event ID 7
+  - Sysmon Event ID 13
+  - File signature
+  - System restart and logon timeline
+references:
+  - "https://learn.microsoft.com/en-us/windows/win32/secauthn/lsa-authentication"
+  - "https://learn.microsoft.com/en-us/windows/win32/secauthn/msv1-0-authentication-package"
+  - "https://attack.mitre.org/techniques/T1547/002/"

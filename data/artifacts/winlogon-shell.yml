@@ -1,0 +1,63 @@
+id: winlogon-shell
+title: Winlogon\Shell
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+  - NTUSER.DAT
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+paths:
+  - view: live
+    root: HKLM
+    path: "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    value: Shell
+    scope: Machine
+  - view: live
+    root: HKCU
+    path: "Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    value: Shell
+    scope: User
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Logon shell configuration
+timestamp_semantics: "Winlogon key LastWrite is a key-level update time; user-level and machine-level values must be interpreted separately."
+can_prove:
+  - Shell configuration exists.
+  - Non-default shell or appended command is configured.
+cannot_prove:
+  - Shell command actually executed.
+  - Modification source without telemetry.
+key_values:
+  - name: Shell
+    meaning: "Shell executable or command, default usually explorer.exe."
+attacker_usage:
+  - "Replace or append Shell value for logon persistence."
+detection_ideas:
+  - "Shell not equal to explorer.exe after normalization."
+  - "User-level Shell pointing to user-writable path."
+false_positives:
+  - "Kiosk, VDI, Citrix, Shell Launcher, custom desktop environments."
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell'
+  - 'reg query "HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Shell'
+collection_offline:
+  - "Inspect SOFTWARE and every user's NTUSER.DAT."
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 13
+  - Shell process creation
+  - Logon events
+  - Kiosk or VDI baseline
+references:
+  - "https://attack.mitre.org/techniques/T1547/004/"
+  - "https://learn.microsoft.com/en-us/windows/configuration/shell-launcher/"

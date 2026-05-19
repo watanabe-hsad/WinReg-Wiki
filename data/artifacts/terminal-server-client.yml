@@ -1,0 +1,67 @@
+id: terminal-server-client
+title: Terminal Server Client
+category:
+  - RDP
+  - RemoteAccess
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Terminal Server Client\Default'
+    scope: User
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Terminal Server Client\Servers'
+    scope: User
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - RDP client target history
+  - User remote access clue
+timestamp_semantics: 'Terminal Server Client key LastWrite can indicate MRU or server entry update, not successful authentication time.'
+can_prove:
+  - A user hive contains MSTSC target history or server entries.
+  - Hostnames, IP addresses, and username hints may be recoverable.
+cannot_prove:
+  - RDP logon succeeded.
+  - The local machine was the RDP server.
+  - The remote host was compromised.
+key_values:
+  - name: Default\MRU*
+    meaning: RDP client target MRU entries.
+  - name: Servers\<host>
+    meaning: Per-target server entry.
+  - name: UsernameHint
+    meaning: Username hint saved for a target when present.
+attacker_usage:
+  - Lateral movement via MSTSC can leave target history in the operator user's hive.
+  - Attackers may clear server entries after use.
+detection_ideas:
+  - Workstation user connects to server, domain controller, or unusual external IP.
+  - New RDP target near credential dumping, tunneling, or administrative tool execution.
+false_positives:
+  - Helpdesk, administrators, jump-box usage, vendors, and normal remote support.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Terminal Server Client" /s'
+collection_offline:
+  - 'Collect each user NTUSER.DAT and map SID with ProfileList.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Security.evtx 4624
+  - Security.evtx 4778
+  - Security.evtx 4779
+  - TerminalServices logs
+  - Firewall logs
+  - Jump Lists
+references:
+  - 'https://artefacts.help/windows_registry_terminal_server_client.html'
+  - 'https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients'

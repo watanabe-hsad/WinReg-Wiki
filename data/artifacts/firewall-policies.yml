@@ -1,0 +1,68 @@
+id: firewall-policies
+title: Firewall Policies
+category:
+  - SecurityPolicy
+  - Firewall
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+  - SOFTWARE
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+  - 'C:\Windows\System32\Config\SOFTWARE'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy'
+    scope: Machine
+  - view: live
+    root: HKLM
+    path: 'SOFTWARE\Policies\Microsoft\WindowsFirewall'
+    scope: Policy
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Firewall rule configuration
+  - Network exposure policy
+timestamp_semantics: 'FirewallPolicy key LastWrite is key-level; individual rule values do not provide reliable creation timestamps.'
+can_prove:
+  - Firewall rules or profile settings exist.
+  - A port, application, or profile may be allowed or blocked by configuration.
+cannot_prove:
+  - A connection occurred.
+  - Rule was hit.
+  - The policy source was malicious.
+key_values:
+  - name: FirewallRules
+    meaning: Rule value collection containing action, direction, protocol, port, app, and profile fields.
+  - name: EnableFirewall
+    meaning: Profile firewall enabled state.
+attacker_usage:
+  - Open inbound RDP, WinRM, SMB, C2, or remote tool ports.
+detection_ideas:
+  - New inbound allow rules for RDP, WinRM, SMB, high-risk custom ports, or user-writable app paths.
+false_positives:
+  - Software installs, VPN, remote support, database services, GPO, management agents.
+collection_live:
+  - 'Get-NetFirewallProfile'
+  - 'Get-NetFirewallRule -PolicyStore ActiveStore'
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy" /s'
+collection_offline:
+  - 'Collect SYSTEM and SOFTWARE hives, GroupPolicy artifacts, and firewall logs.'
+tools:
+  - PowerShell NetSecurity cmdlets
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Windows Firewall logs
+  - Security.evtx 5156
+  - Security.evtx 5157
+  - Sysmon Event ID 3
+  - Sysmon Event ID 13
+  - RDP PortNumber
+references:
+  - 'https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/'
+  - 'https://learn.microsoft.com/en-us/powershell/module/netsecurity/get-netfirewallrule'
+  - 'https://attack.mitre.org/techniques/T1562/'

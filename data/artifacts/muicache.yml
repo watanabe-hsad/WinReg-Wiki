@@ -1,0 +1,65 @@
+id: muicache
+title: MUICache
+category:
+  - Execution
+  - ProgramPresence
+native_root: HKEY_CURRENT_USER
+hive:
+  - UsrClass.dat
+  - NTUSER.DAT
+offline_file:
+  - "C:\\Users\\<user>\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat"
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+paths:
+  - view: live
+    root: HKCU
+    path: "Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache"
+    scope: Current user
+  - view: offline
+    root: HKU
+    path: "<SID>_Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache"
+    scope: User SID
+forensic_value: Medium
+detection_value: Low
+evidence_type:
+  - Program presence
+  - Shell cache
+timestamp_semantics: "Value-level timestamps are not normally available; key LastWrite is the MuiCache container update time."
+can_prove:
+  - A user's Shell cache contains a program path or display string.
+  - The path can support program presence or Shell exposure.
+cannot_prove:
+  - Program execution.
+  - User intent.
+  - File still exists.
+key_values:
+  - name: "<value name>"
+    meaning: "Program path or resource-like identifier."
+  - name: "<value data>"
+    meaning: "Cached friendly display string."
+attacker_usage:
+  - "Attackers may rely on misleading file version resources to make cached names look benign."
+detection_ideas:
+  - "Low-confidence hunt for known tool names or suspicious user-writable paths."
+false_positives:
+  - "Shell browsing, installers, legitimate portable tools."
+collection_live:
+  - 'reg query "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache"'
+collection_offline:
+  - "Collect UsrClass.dat and NTUSER.DAT for each user."
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Prefetch
+  - BAM / DAM
+  - UserAssist
+  - Amcache
+  - LNK
+  - Jump Lists
+references:
+  - "https://artefacts.help/windows_registry_muicache.html"
+  - "https://ericzimmerman.github.io/"

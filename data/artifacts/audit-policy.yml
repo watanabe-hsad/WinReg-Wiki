@@ -1,0 +1,58 @@
+id: audit-policy
+title: Audit Policy
+category:
+  - SecurityPolicy
+  - AuditPolicy
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SECURITY
+offline_file:
+  - 'C:\Windows\System32\Config\SECURITY'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SECURITY\Policy\PolAdtEv'
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Audit visibility configuration
+timestamp_semantics: 'SECURITY policy key LastWrite is key-level; audit policy changes should be validated with event logs or auditpol output.'
+can_prove:
+  - Audit policy data exists.
+  - Audit settings may reduce or enable security event visibility.
+cannot_prove:
+  - Logs were deleted.
+  - A missing event means activity did not occur.
+  - Attacker changed the policy.
+key_values:
+  - name: Policy\PolAdtEv
+    meaning: Binary audit policy data requiring parser or auditpol interpretation.
+attacker_usage:
+  - Lower audit visibility before or during malicious activity.
+detection_ideas:
+  - Security 4719 policy changes, audit categories set to No Auditing, followed by suspicious activity.
+false_positives:
+  - GPO baseline updates, noise reduction, compliance tuning, lab settings.
+collection_live:
+  - 'auditpol /get /category:*'
+  - 'secedit /export /cfg C:\Temp\secpol.cfg'
+collection_offline:
+  - 'Collect SECURITY hive, Security.evtx, and GroupPolicy logs.'
+tools:
+  - auditpol.exe
+  - secedit.exe
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Security.evtx 4719
+  - Security.evtx 1102
+  - GroupPolicy Operational log
+  - Sysmon Event ID 13
+  - EDR policy telemetry
+references:
+  - 'https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/auditpol'
+  - 'https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/advanced-security-audit-policy-settings'
+  - 'https://attack.mitre.org/techniques/T1070/'

@@ -1,0 +1,77 @@
+id: services
+title: Services
+category:
+  - Persistence
+  - Services
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Services\<ServiceName>'
+    scope: Machine
+  - view: offline
+    root: HKLM
+    path: 'SYSTEM\ControlSet00x\Services\<ServiceName>'
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - Service configuration
+  - Driver configuration
+  - Persistence
+timestamp_semantics: 'Service key LastWrite indicates service configuration key update, not service start time or binary creation time.'
+can_prove:
+  - A service or driver configuration exists in a control set.
+  - ImagePath, Start, Type, DisplayName, ObjectName, and ServiceDll may define execution behavior.
+cannot_prove:
+  - The service started successfully.
+  - The service binary still exists.
+  - The service name is trustworthy or legitimate.
+key_values:
+  - name: ImagePath
+    meaning: Service executable, driver path, or command.
+  - name: Start
+    meaning: Boot/system/auto/manual/disabled startup type.
+  - name: Type
+    meaning: Service, driver, kernel driver, file system driver, or shared process type.
+  - name: Parameters\ServiceDll
+    meaning: DLL loaded by svchost-style service.
+  - name: ObjectName
+    meaning: Account context for the service.
+attacker_usage:
+  - Create auto-start services or drivers for persistence.
+  - Abuse svchost ServiceDll configuration to load malicious DLLs.
+  - Masquerade service names and display names as Windows components.
+detection_ideas:
+  - New auto-start service with ImagePath under user-writable directories.
+  - ServiceDll pointing outside system directories.
+  - Driver service with unsigned or recently created binary.
+  - Registry set under Services followed by service start or network activity.
+false_positives:
+  - EDR, VPN, backup, printer, updater, virtualization, database, and management agents.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s'
+  - 'Get-ChildItem "HKLM:\SYSTEM\CurrentControlSet\Services"'
+collection_offline:
+  - 'Collect SYSTEM hive and transaction logs; resolve Select\Current before interpreting ControlSet00x.'
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - System.evtx Service Control Manager events
+  - Sysmon Event ID 6
+  - Sysmon Event ID 12
+  - Sysmon Event ID 13
+  - Prefetch
+  - Amcache
+  - File signature and hash
+references:
+  - 'https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree'
+  - 'https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns'

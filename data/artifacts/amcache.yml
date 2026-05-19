@@ -1,0 +1,69 @@
+id: amcache
+title: Amcache
+category:
+  - Execution
+  - ProgramMetadata
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - Amcache.hve
+offline_file:
+  - 'C:\Windows\AppCompat\Programs\Amcache.hve'
+paths:
+  - view: hive
+    root: Amcache.hve
+    path: 'Root\File'
+    scope: Machine
+  - view: hive
+    root: Amcache.hve
+    path: 'Root\InventoryApplicationFile'
+    scope: Machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Program presence
+  - File metadata
+timestamp_semantics: 'Amcache records can include parser-decoded timestamps whose semantics vary by Windows version and key family; they do not prove execution by themselves.'
+can_prove:
+  - The system recorded metadata for a file path or application inventory item.
+  - File name, path, publisher, version, size, and hash-like fields may be available depending on version.
+cannot_prove:
+  - The program definitely executed.
+  - The file still exists.
+  - A parsed timestamp is necessarily first execution time.
+key_values:
+  - name: Path / Name fields
+    meaning: Recorded file path or application file identity.
+  - name: SHA1 / hash fields
+    meaning: Hash-like metadata when present; parser and OS version determine exact field.
+  - name: ProgramId / Publisher / Version
+    meaning: Application inventory metadata useful for software presence analysis.
+attacker_usage:
+  - Dropped tools and portable executables may be recorded even after deletion.
+  - Attackers may clear Amcache or rely on in-memory execution to reduce file metadata traces.
+detection_ideas:
+  - Suspicious executable paths under user-writable directories.
+  - Recently recorded unsigned tools with names matching admin or credential utilities.
+  - Amcache path with no current file but corroborating execution telemetry.
+false_positives:
+  - Software installs, updates, portable tools, developer builds, and legitimate admin utilities.
+collection_live:
+  - 'Copy C:\Windows\AppCompat\Programs\Amcache.hve with appropriate forensic tooling.'
+collection_offline:
+  - 'Collect C:\Windows\AppCompat\Programs\Amcache.hve and transaction logs if present.'
+tools:
+  - AmcacheParser
+  - RECmd
+  - Registry Explorer
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Prefetch
+  - UserAssist
+  - BAM / DAM
+  - ShimCache
+  - SRUM
+  - Sysmon Event ID 1
+  - File system timeline
+references:
+  - 'https://ericzimmerman.github.io/'
+  - 'https://artefacts.help/windows_registry_amcache.html'

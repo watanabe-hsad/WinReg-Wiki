@@ -1,0 +1,63 @@
+id: startupapproved
+title: StartupApproved
+category:
+  - Persistence
+  - Autoruns
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+  - SOFTWARE
+offline_file:
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+  - "C:\\Windows\\System32\\Config\\SOFTWARE"
+paths:
+  - view: live
+    root: HKCU
+    path: "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run"
+    scope: Current user
+  - view: live
+    root: HKLM
+    path: "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run"
+    scope: Machine
+forensic_value: Medium
+detection_value: Medium
+evidence_type:
+  - Autorun state
+timestamp_semantics: "Binary value may encode state metadata; key LastWrite is only the container update time."
+can_prove:
+  - Startup item state record exists.
+  - Startup item may be enabled or disabled depending on parser output.
+cannot_prove:
+  - Startup command content.
+  - Program execution.
+key_values:
+  - name: "<value name>"
+    meaning: "Startup item name matching Run value or Startup Folder item."
+  - name: "<value data>"
+    meaning: "Binary state interpreted by tools."
+attacker_usage:
+  - "Attackers may align StartupApproved with malicious Run keys or remove disabled records."
+detection_ideas:
+  - "Suspicious Run item paired with enabled StartupApproved state."
+  - "Registry set events under Explorer\\StartupApproved."
+false_positives:
+  - "User or Task Manager startup app changes, installers, cleanup utilities."
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved" /s'
+  - 'reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved" /s'
+collection_offline:
+  - "Collect SOFTWARE and each user's NTUSER.DAT."
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Run / RunOnce
+  - Startup Folder
+  - Scheduled Tasks
+  - Sysmon Event ID 13
+references:
+  - "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+  - "https://ericzimmerman.github.io/"

@@ -1,0 +1,62 @@
+id: uac-policies
+title: UAC Policies
+category:
+  - SecurityPolicy
+  - UAC
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SOFTWARE
+offline_file:
+  - 'C:\Windows\System32\Config\SOFTWARE'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+    scope: Machine
+forensic_value: High
+detection_value: High
+evidence_type:
+  - UAC policy configuration
+  - Privilege elevation policy
+timestamp_semantics: 'Policies\System key LastWrite is key-level and can be updated by multiple policy values.'
+can_prove:
+  - UAC policy registry values exist.
+  - Values may deviate from security baseline.
+cannot_prove:
+  - UAC bypass occurred.
+  - Attacker made the change.
+  - Policy was effective without reboot or policy validation.
+key_values:
+  - name: EnableLUA
+    meaning: UAC enablement-related value.
+  - name: ConsentPromptBehaviorAdmin
+    meaning: Administrator elevation prompt behavior.
+  - name: PromptOnSecureDesktop
+    meaning: Secure desktop prompt behavior.
+  - name: LocalAccountTokenFilterPolicy
+    meaning: Remote local administrator token filtering behavior.
+attacker_usage:
+  - Lower UAC prompts or remote token filtering to ease privilege use and lateral movement.
+detection_ideas:
+  - UAC values lowered from baseline, especially LocalAccountTokenFilterPolicy=1 on workstations.
+false_positives:
+  - GPO, MDM, legacy application compatibility, kiosk, VDI, lab systems.
+collection_live:
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"'
+collection_offline:
+  - 'Collect SOFTWARE hive and policy logs.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Sysmon Event ID 13
+  - Security Event ID 4657
+  - GroupPolicy Operational log
+  - Security.evtx 4672
+  - Service creation logs
+references:
+  - 'https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration'
+  - 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/user-account-control-and-remote-restriction'
+  - 'https://attack.mitre.org/techniques/T1562/'

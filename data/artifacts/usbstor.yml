@@ -1,0 +1,67 @@
+id: usbstor
+title: USBSTOR
+category:
+  - USB
+  - Device
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Enum\USBSTOR'
+    scope: Machine
+  - view: offline
+    root: HKLM
+    path: 'SYSTEM\ControlSet00x\Enum\USBSTOR'
+    scope: Machine
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - USB storage device enumeration
+timestamp_semantics: 'Subkey LastWrite can support device enumeration timeline analysis but is not a precise first or last connection time by itself.'
+can_prove:
+  - The system enumerated a USB storage device.
+  - Vendor, product, version, and serial-like identifiers may be recoverable.
+cannot_prove:
+  - User accessed files on the device.
+  - File copy occurred.
+  - LastWrite equals exact insertion time.
+key_values:
+  - name: '<device type & vendor/product key>'
+    meaning: Device class, vendor, product, and revision string.
+  - name: '<serial subkey>'
+    meaning: Device serial or instance identifier.
+  - name: FriendlyName
+    meaning: Human-readable device label when present.
+attacker_usage:
+  - Use of USB storage for staging, exfiltration, or tool transfer may leave enumeration traces.
+  - Attackers may use devices without stable serials or clear registry traces.
+detection_ideas:
+  - New unauthorized serial number on sensitive hosts.
+  - Same serial appears across multiple hosts near incident window.
+  - USBSTOR enumeration close to LNK/Jump List sensitive file access.
+false_positives:
+  - Normal removable media, phones exposing mass storage, card readers, backup drives.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR" /s'
+collection_offline:
+  - 'Collect SYSTEM hive and resolve Select\Current.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - MountedDevices
+  - MountPoints2
+  - SetupAPI.dev.log
+  - DriverFrameworks-UserMode/Operational
+  - LNK
+  - Jump Lists
+references:
+  - 'https://artefacts.help/windows_registry_usbstor.html'
+  - 'https://www.sans.org/posters/windows-forensic-analysis/'

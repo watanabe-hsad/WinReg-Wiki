@@ -1,0 +1,67 @@
+id: bam-dam
+title: BAM / DAM
+category:
+  - Execution
+  - ProgramPresence
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+offline_file:
+  - "C:\\Windows\\System32\\Config\\SYSTEM"
+paths:
+  - view: live
+    root: HKLM
+    path: "SYSTEM\\CurrentControlSet\\Services\\bam\\State\\UserSettings\\<SID>"
+    value: "<executable NT device path>"
+    scope: User SID
+  - view: offline
+    root: HKLM
+    path: "SYSTEM\\ControlSet00x\\Services\\bam\\State\\UserSettings\\<SID>"
+    value: "<executable NT device path>"
+    scope: User SID
+forensic_value: High
+detection_value: Medium
+evidence_type:
+  - Execution indicator
+  - User SID attribution
+timestamp_semantics: "Value data may contain parser-decodable FILETIME; key LastWrite is only the container update time."
+can_prove:
+  - A BAM/DAM record exists for an executable path under a SID.
+  - On supported versions, the record can support recent execution or activity by that SID.
+cannot_prove:
+  - User intent or foreground interaction.
+  - Complete process execution history.
+  - Exact execution time from key LastWrite alone.
+key_values:
+  - name: "<value name>"
+    meaning: "Executable path, often in \\Device\\HarddiskVolumeX form."
+  - name: "<value data>"
+    meaning: "Binary data parsed by tools for activity timestamp and metadata."
+attacker_usage:
+  - "Attackers may leave records when executing dropped tools, then delete BAM values during cleanup."
+detection_ideas:
+  - "Executable path under user-writable directories."
+  - "Known attacker tools or LOLBins appearing under a user SID."
+  - "Registry set events under Services\\bam\\State\\UserSettings."
+false_positives:
+  - "Updaters, collaboration tools, portable applications, developer tools."
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Services\bam\State\UserSettings" /s'
+collection_offline:
+  - "Collect SYSTEM hive and transaction logs; resolve SYSTEM\\Select before parsing ControlSet00x."
+tools:
+  - RECmd
+  - Registry Explorer
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - Prefetch
+  - Amcache
+  - UserAssist
+  - SRUM
+  - Sysmon Event ID 1
+  - File system timeline
+references:
+  - "https://artefacts.help/windows_registry_bam_dam.html"
+  - "https://ericzimmerman.github.io/"

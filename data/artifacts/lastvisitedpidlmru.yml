@@ -1,0 +1,58 @@
+id: lastvisitedpidlmru
+title: LastVisitedPidlMRU
+category:
+  - UserActivity
+  - ComDlg32
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - 'C:\Users\<user>\NTUSER.DAT'
+paths:
+  - view: live
+    root: HKCU
+    path: 'Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU'
+    scope: User
+forensic_value: High
+detection_value: Low
+evidence_type:
+  - Application to last visited folder relationship
+timestamp_semantics: 'Key LastWrite is the MRU container update time; PIDL timestamps and MRU order must be interpreted separately.'
+can_prove:
+  - A user profile contains an application-to-location MRU record.
+  - The record can associate an application with a recently visited folder or shell item.
+cannot_prove:
+  - File open/save succeeded.
+  - Directory contents were read.
+  - User intent or maliciousness.
+key_values:
+  - name: '<numbered value>'
+    meaning: Application name plus PIDL / shell item data.
+  - name: MRUListEx
+    meaning: Binary MRU ordering.
+attacker_usage:
+  - Graphical tools, browsers, editors, and archive utilities may reveal directories used during staging or exfiltration.
+detection_ideas:
+  - Sensitive share or removable media associated with archive tools, browsers, editors, or remote admin tools.
+false_positives:
+  - Normal file dialog use by office apps, editors, browsers, and archive tools.
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU"'
+collection_offline:
+  - 'Collect user NTUSER.DAT and parse LastVisitedPidlMRU with a PIDL-aware parser.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - ShellBags Explorer
+  - RegRipper
+  - KAPE
+cross_validation:
+  - OpenSavePidlMRU
+  - RecentDocs
+  - LNK
+  - Jump Lists
+  - ShellBags
+  - UserAssist
+references:
+  - 'https://artefacts.help/windows_registry_lastvisitedpidlmru.html'
+  - 'https://ericzimmerman.github.io/'

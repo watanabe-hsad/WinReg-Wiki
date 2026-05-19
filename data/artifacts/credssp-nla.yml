@@ -1,0 +1,74 @@
+id: credssp-nla
+title: CredSSP / NLA
+category:
+  - RDP
+  - RemoteAccess
+  - SecurityPolicy
+native_root: HKEY_LOCAL_MACHINE
+hive:
+  - SYSTEM
+  - SOFTWARE
+offline_file:
+  - 'C:\Windows\System32\Config\SYSTEM'
+  - 'C:\Windows\System32\Config\SOFTWARE'
+paths:
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
+    value: UserAuthentication
+    scope: Machine
+  - view: live
+    root: HKLM
+    path: 'SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
+    value: SecurityLayer
+    scope: Machine
+  - view: live
+    root: HKLM
+    path: 'SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters'
+    value: AllowEncryptionOracle
+    scope: Machine
+forensic_value: Medium
+detection_value: High
+evidence_type:
+  - RDP authentication security configuration
+timestamp_semantics: 'Key LastWrite indicates configuration area changes; GPO/MDM and service state determine actual enforcement.'
+can_prove:
+  - RDP listener or CredSSP policy configuration values exist.
+  - Configuration may deviate from security baseline.
+cannot_prove:
+  - RDP login occurred.
+  - Credential theft occurred.
+  - The policy was attacker-controlled.
+key_values:
+  - name: UserAuthentication
+    meaning: NLA-related RDP listener value; interpret against OS and policy baseline.
+  - name: SecurityLayer
+    meaning: RDP security layer setting.
+  - name: AllowEncryptionOracle
+    meaning: CredSSP encryption oracle remediation policy.
+attacker_usage:
+  - Lower RDP authentication requirements or relax CredSSP policy for compatibility or access.
+detection_ideas:
+  - NLA or security layer deviates from hardened baseline.
+  - CredSSP policy relaxed outside approved GPO.
+false_positives:
+  - Legacy client compatibility, remote support, GPO updates, lab systems.
+collection_live:
+  - 'reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication'
+  - 'reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters" /s'
+collection_offline:
+  - 'Collect SYSTEM and SOFTWARE hives; resolve SYSTEM\Select.'
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - TerminalServices logs
+  - Security.evtx 4624 LogonType 10
+  - GroupPolicy Operational logs
+  - Firewall rules
+  - fDenyTSConnections
+references:
+  - 'https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/credssp-encryption-oracle-remediation'
+  - 'https://attack.mitre.org/techniques/T1021/001/'

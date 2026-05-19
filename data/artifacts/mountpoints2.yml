@@ -1,0 +1,55 @@
+id: mountpoints2
+title: MountPoints2
+category:
+  - USB
+  - UserActivity
+native_root: HKEY_CURRENT_USER
+hive:
+  - NTUSER.DAT
+offline_file:
+  - "C:\\Users\\<user>\\NTUSER.DAT"
+paths:
+  - view: live
+    root: HKCU
+    path: "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2"
+    scope: User
+forensic_value: High
+detection_value: Low
+evidence_type:
+  - User-visible volume or share
+timestamp_semantics: "Subkey LastWrite may indicate Shell update near access, not device insertion time."
+can_prove:
+  - A user's hive contains a volume, mount point, or network share record.
+  - The record can connect device/share evidence to a SID.
+cannot_prove:
+  - File copy or file open.
+  - Physical insertion time.
+key_values:
+  - name: "<volume GUID or ##server#share subkey>"
+    meaning: "Volume or network share seen by the user's Shell context."
+attacker_usage:
+  - "Use of USB, mounted VHD, or SMB share may leave user-level records."
+detection_ideas:
+  - "Hunt sensitive SMB shares or suspicious volume GUIDs in user hives."
+false_positives:
+  - "Normal removable media, enterprise file shares, backups."
+collection_live:
+  - 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2" /s'
+collection_offline:
+  - "Collect each user's NTUSER.DAT plus SYSTEM hive for MountedDevices and USBSTOR."
+tools:
+  - Registry Explorer
+  - RECmd
+  - RegRipper
+  - KAPE
+  - Velociraptor
+cross_validation:
+  - USBSTOR
+  - MountedDevices
+  - SetupAPI.dev.log
+  - LNK
+  - Jump Lists
+  - ShellBags
+references:
+  - "https://artefacts.help/windows_registry_mountpoints2.html"
+  - "https://www.sans.org/posters/windows-forensic-analysis/"
