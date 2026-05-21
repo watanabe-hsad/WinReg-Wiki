@@ -10,6 +10,9 @@
 |---|---|---|
 | [HKCU Run / RunOnce](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级登录启动项。 | 只作用于对应用户 SID。 |
 | [HKLM Run / RunOnce](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 | 32 位视图需看 `WOW6432Node`。 |
+| [Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md) | 用户级 `cmd.exe` `AutoRun`。 | 只在命令处理器启动时触发。 |
+| [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量和 `Path`。 | 影响进程环境，不等于命令执行。 |
+| [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量和 `Path`。 | 需要结合具体进程环境。 |
 | [Active Setup](../registry-tree/hklm/software/microsoft/active-setup.md) | 每用户初始化命令。 | 需比对 HKLM 组件和 HKCU stub。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务和驱动配置。 | 服务配置存在不等于已启动。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需验证签名、路径和加载事件。 |
@@ -26,6 +29,7 @@
 - 命令指向用户可写目录、临时目录、可移动盘、网络共享或解释器时，需补进程和文件时间线。
 - LSA、Print Monitors、AppInit_DLLs、ShellServiceObjectDelayLoad 证明加载链配置存在；是否加载需要运行时证据。
 - StartupApproved 只解释启动项状态，完整命令仍要回到 Run key 或 Startup Folder。
+- 环境变量和 `Path` 修改只说明执行环境变化；要判断实际劫持或执行需结合进程命令行和文件命中路径。
 
 ## 交叉验证
 

@@ -9,7 +9,11 @@
 | 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
 | [Tcpip](../registry-tree/hklm/system/controlset/services/tcpip.md) | TCP/IP 全局参数、接口 DNS、DHCP、网关。 | 配置存在不等于连接发生。 |
+| [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md) | 单个接口 IP、DNS、DHCP、网关和租约字段。 | DHCP 租约时间不是会话结束时间。 |
 | [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户级代理、PAC、WinINet 配置。 | 只影响使用相关 API 的应用。 |
+| [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 | 区域映射不等于站点访问。 |
+| [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络 profile 名称、类别和连接时间线索。 | 时间字段需工具和时区处理。 |
+| [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | 防火墙 profile 和规则配置。 | 规则存在不等于连接发生。 |
 | [ComputerName](../registry-tree/hklm/system/controlset/control/computername.md) | 主机名和环境标识。 | 名称可能变更，需要时间线。 |
 | [TimeZoneInformation](../registry-tree/hklm/system/controlset/control/timezone.md) | 时区和 bias。 | 用于时间线归一化。 |
 | [Select](../registry-tree/hklm/system/select.md) | CurrentControlSet 映射。 | 离线分析必须先解析。 |
@@ -18,8 +22,9 @@
 
 - 用户级代理指向本机异常端口、内网未知主机或公网代理时，记录 SID 和 profile。
 - `NameServer`、DHCP DNS、接口 GUID 需要分开解释。
+- `NetworkList\Profiles` 的 `Category` 会影响防火墙 profile 语义，但不能单独证明网络流量。
+- `ZoneMap` 说明安全区域映射，不能单独证明用户访问了该站点。
 - 时区和主机名用于解释日志和时间线，不是安全事件本身。
-- 网络 profile 页面仍待补齐；当前可先结合 NetworkList 原始路径和事件日志。
 
 ## 交叉验证
 

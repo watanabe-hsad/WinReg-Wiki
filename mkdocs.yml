@@ -69,10 +69,13 @@ nav:
           - registry-tree/hkcr/index.md
       - HKEY_CURRENT_USER:
           - registry-tree/hkcu/index.md
+          - Environment: registry-tree/hkcu/environment.md
+          - Printers: registry-tree/hkcu/printers.md
           - Software:
               - registry-tree/hkcu/software/index.md
               - Classes: registry-tree/hkcu/software/classes.md
               - Microsoft:
+                  - Command Processor: registry-tree/hkcu/software/microsoft/command-processor.md
                   - Terminal Server Client: registry-tree/hkcu/software/microsoft/terminal-server-client.md
                   - Windows:
                       - CurrentVersion:
@@ -83,7 +86,9 @@ nav:
                           - RecentDocs: registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md
                           - ComDlg32: registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md
                           - MountPoints2: registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md
-                          - Internet Settings: registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md
+                          - Internet Settings:
+                              - registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md
+                              - ZoneMap: registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md
       - HKEY_LOCAL_MACHINE:
           - registry-tree/hklm/index.md
           - SAM: registry-tree/hklm/sam.md
@@ -91,13 +96,16 @@ nav:
           - SOFTWARE:
               - registry-tree/hklm/software/index.md
               - Classes: registry-tree/hklm/software/classes.md
-              - Policies: registry-tree/hklm/software/policies.md
+              - Policies:
+                  - registry-tree/hklm/software/policies.md
+                  - Microsoft\Windows Defender: registry-tree/hklm/software/policies/microsoft/windows-defender.md
               - WOW6432Node: registry-tree/hklm/software/wow6432node.md
               - Microsoft:
                   - Active Setup: registry-tree/hklm/software/microsoft/active-setup.md
                   - Windows NT:
                       - CurrentVersion:
                           - EMDMgmt: registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md
+                          - NetworkList\Profiles: registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
                           - ProfileList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
                           - Winlogon: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
                           - Image File Execution Options: registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md
@@ -120,7 +128,11 @@ nav:
                   - Services:
                       - registry-tree/hklm/system/controlset/services/index.md
                       - Drivers: registry-tree/hklm/system/controlset/services/drivers.md
-                      - Tcpip: registry-tree/hklm/system/controlset/services/tcpip.md
+                      - EventLog: registry-tree/hklm/system/controlset/services/eventlog.md
+                      - SharedAccess\FirewallPolicy: registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md
+                      - Tcpip:
+                          - registry-tree/hklm/system/controlset/services/tcpip.md
+                          - Parameters\Interfaces: registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md
                   - Enum:
                       - registry-tree/hklm/system/controlset/enum/index.md
                       - USBSTOR: registry-tree/hklm/system/controlset/enum/usbstor.md
@@ -131,6 +143,7 @@ nav:
                       - Terminal Server: registry-tree/hklm/system/controlset/control/terminal-server.md
                       - TimeZoneInformation: registry-tree/hklm/system/controlset/control/timezone.md
                       - ComputerName: registry-tree/hklm/system/controlset/control/computername.md
+                      - Session Manager\Environment: registry-tree/hklm/system/controlset/control/session-manager/environment.md
                       - Print\Monitors: registry-tree/hklm/system/controlset/control/print-monitors.md
                       - Lsa:
                           - registry-tree/hklm/system/controlset/control/lsa/index.md

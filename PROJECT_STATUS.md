@@ -34,6 +34,40 @@ Current content model:
 
 ## Last Completed Round
 
+- Expanded and normalized registry-location reference pages so `注册表位置` remains the primary dictionary entry point.
+- Added or rewrote these registry-location pages in the short key/value style:
+  - `HKCU\Environment`
+  - `HKCU\Printers`
+  - `HKCU\Software\Microsoft\Command Processor`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap`
+  - `HKLM\SYSTEM\ControlSet00x\Services\EventLog`
+  - `HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy`
+  - `HKLM\SOFTWARE\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`
+  - `HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Environment`
+- Updated registry-tree overview/support pages so HKCU, HKLM SOFTWARE, HKLM SYSTEM, Services, Tcpip, and Policies point to the new pages.
+- Updated scenario pages so the main investigation path points to registry-location pages first:
+  - `registry-checklist.md`
+  - `network.md`
+  - `policy-security.md`
+  - `persistence.md`
+  - `anti-forensics.md`
+  - `execution.md`
+  - `questions/index.md`
+- Compressed these artifact pages into supplemental entries after moving their practical facts into registry-location/scenario pages:
+  - `command-processor-autorun.md`
+  - `defender-policies.md`
+  - `firewall-policies.md`
+  - `audit-policy.md`
+  - `run-keys.md`
+  - `services.md`
+- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. Artifact pages remain supplemental/internal and are intentionally not part of the primary top-level navigation.
+
+## Previous Completed Round
+
 - Refined the site into a registry-first dual-entry knowledge base:
   - scenario pages now use `取证场景 -> 注册表位置` as the main flow;
   - artifact pages are explicitly documented as supplemental/internal detail;
@@ -60,7 +94,7 @@ Current content model:
 - Updated key registry-location pages to include `相关场景` and changed old `相关 Artifact` sections to `补充阅读` where touched.
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
 
-## Previous Completed Round
+## Earlier Completed Round
 
 - Renamed the site and repository metadata to `WinReg Wiki`.
 - Switched `origin` to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
@@ -115,12 +149,22 @@ Last verified locally:
 
 Both commands completed successfully after the registry-first scenario rewrite. The Material for MkDocs upstream warning about MkDocs 2.0 may appear during build; it is not currently a project build error. MkDocs may also print INFO that artifact pages are not in `nav`; this is expected because artifact pages are supplemental.
 
+Latest verification for the registry-tree expansion and artifact compression:
+
+```bash
+.venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/mkdocs build --strict
+```
+
+Both commands completed successfully. The generated index remained valid for 42 YAML-backed artifacts. The MkDocs Material upstream warning and MkDocs INFO about artifact pages outside `nav` are expected in the current architecture.
+
 ## Next Priorities
 
 - Confirm GitHub Pages settings for the new repository and decide whether the online path should remain under the old custom-domain path or move to a new path / subdomain.
 - Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
-- Add deeper registry-location pages for `HKCU\Environment`, `HKCU\Software\Microsoft\Command Processor`, ZoneMap, Printers, NetworkList, TCP/IP Interfaces, EventLog, FirewallPolicy, and Defender policy subkeys.
+- Continue cleaning older registry-tree pages into the same short dictionary structure used by the latest HKCU/HKLM additions.
 - Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
+- Add deeper registry-location pages for `HKLM\SOFTWARE\Microsoft\Command Processor`, `HKLM\SOFTWARE\Microsoft\WindowsFirewall`, `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`, `BootExecute`, `App Paths`, and `LogonUI`.
 - Add remaining registry artifacts only after the architecture settles: KnownDLLs, App Paths, Winlogon Notify, BootExecute, CachedLogonsCount, LogonUI.
 - Add contribution guide and source-quality expectations.
 - Choose a license and add a `LICENSE` file.

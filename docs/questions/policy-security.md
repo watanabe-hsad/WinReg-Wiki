@@ -10,6 +10,9 @@
 |---|---|---|
 | [Policies](../registry-tree/hklm/software/policies.md) | GPO / MDM / 本地策略写入位置。 | 值存在不说明来源。 |
 | [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender 本地配置和排除项线索。 | 需结合 Tamper Protection 和 Defender 日志。 |
+| [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | Defender 策略禁用、排除项和实时保护相关值。 | 策略值不等于实际防护状态。 |
+| [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall profile 和规则配置。 | 规则存在不等于连接发生。 |
+| [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道大小、保留和文件路径配置。 | 这里不是日志内容。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | LSA 包、RunAsPPL、认证相关配置。 | 未知条目需验证 DLL 和模块加载。 |
 | [LSA Security Packages](../registry-tree/hklm/system/controlset/control/lsa/security-packages.md) | 安全包列表。 | 列表变化不等于 DLL 已加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 本地安全策略、审计策略、LSA Secrets。 | 需要专门工具解析。 |
@@ -21,6 +24,7 @@
 - Defender 排除项、禁用值和实时保护配置要记录路径、来源和是否被平台保护拦截。
 - UAC 相关值通常位于 `Policies\System`，应结合管理员操作、服务创建和远程执行记录。
 - 防火墙规则要区分本地规则、GPO 规则和 MDM 规则。
+- EventLog 配置变化说明日志可见性配置变化，不等于日志已经被清理。
 - LSA 包、驱动、RDP 配置都先证明配置状态；实际加载或登录另证。
 
 ## 交叉验证

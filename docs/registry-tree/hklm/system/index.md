@@ -52,10 +52,13 @@ HKLM\SYSTEM\ControlSet002
 | [`ControlSet00x\Control\Terminal Server`](controlset/control/terminal-server.md) | RDP 服务端开关。 |
 | `ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp` | RDP listener、端口、NLA / 安全层。 |
 | [`ControlSet00x\Control\Print\Monitors`](controlset/control/print-monitors.md) | 打印端口监视器配置。 |
+| [`ControlSet00x\Services\EventLog`](controlset/services/eventlog.md) | 事件日志通道配置。 |
+| [`ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy`](controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall 本地配置。 |
 | [`ControlSet00x\Services\Tcpip\Parameters`](controlset/services/tcpip.md) | TCP/IP 全局配置。 |
-| `ControlSet00x\Services\Tcpip\Parameters\Interfaces\<GUID>` | 网卡 IP、DNS、DHCP、网关。 |
+| [`ControlSet00x\Services\Tcpip\Parameters\Interfaces\<GUID>`](controlset/services/tcpip/parameters/interfaces.md) | 网卡 IP、DNS、DHCP、网关。 |
 | [`ControlSet00x\Control\TimeZoneInformation`](controlset/control/timezone.md) | 时区和 Bias。 |
 | [`ControlSet00x\Control\ComputerName`](controlset/control/computername.md) | 主机名。 |
+| [`ControlSet00x\Control\Session Manager\Environment`](controlset/control/session-manager/environment.md) | 系统级环境变量。 |
 | [`ControlSet00x\Control\Lsa`](controlset/control/lsa/index.md) | LSA 运行配置和认证包。 |
 | [`ControlSet00x\Control\Lsa\Security Packages`](controlset/control/lsa/security-packages.md) | LSA 安全支持包列表。 |
 | `ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy` | Windows Firewall 配置。 |
@@ -77,6 +80,7 @@ HKLM\SYSTEM\ControlSet002
 - [USB 与外接设备](../../../questions/usb.md)
 - [RDP 与远程访问](../../../questions/rdp.md)
 - [安全策略与防护配置](../../../questions/policy-security.md)
+- [网络与系统环境](../../../questions/network.md)
 
 ## 补充阅读
 

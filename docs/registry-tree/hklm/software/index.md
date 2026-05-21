@@ -37,9 +37,10 @@ HKLM\SOFTWARE\WOW6432Node
 | [`Microsoft\Windows Portable Devices`](microsoft/windows-portable-devices.md) | 便携设备元数据。 |
 | [`Microsoft\Windows NT\CurrentVersion\EMDMgmt`](microsoft/windows-nt/currentversion/emdmgmt.md) | EMDMgmt / ReadyBoost 相关记录。 |
 | [`Microsoft\Windows Search\VolumeInfoCache`](microsoft/windows-search/volumeinfocache.md) | Windows Search 卷信息缓存。 |
+| [`Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`](microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络配置文件。 |
 | [`Microsoft\Windows Defender`](microsoft/windows-defender.md) | Defender 本地状态和配置线索。 |
 | [`Policies`](policies.md) | GPO / MDM / 本地策略写入位置。 |
-| `Policies\Microsoft\Windows Defender` | Defender 策略和排除项。 |
+| [`Policies\Microsoft\Windows Defender`](policies/microsoft/windows-defender.md) | Defender 策略和排除项。 |
 | `Microsoft\Windows\CurrentVersion\Policies\System` | UAC 和部分系统策略。 |
 | `Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList` | 登录界面隐藏用户配置。 |
 | [`WOW6432Node`](wow6432node.md) | 32 位应用注册表视图。 |
@@ -58,6 +59,7 @@ HKLM\SOFTWARE\WOW6432Node
 
 - [自启动与持久化](../../../questions/persistence.md)
 - [安全策略与防护配置](../../../questions/policy-security.md)
+- [网络与系统环境](../../../questions/network.md)
 - [常规注册表检查](../../../questions/registry-checklist.md)
 
 ## 补充阅读

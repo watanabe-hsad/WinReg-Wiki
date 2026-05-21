@@ -8,133 +8,61 @@ tags:
 
 # Firewall Policies
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge high">检测价值 高</span>
-<span class="rfh-badge">防火墙规则与配置</span>
-</div>
+此页保留 Windows Defender Firewall 配置 artifact 的补充细节。主入口请先查看注册表位置页和取证场景页。
 
-## 摘要
+## 对应注册表位置
 
-Firewall Policies 记录 Windows Defender Firewall 配置和规则，可证明本机入站/出站访问控制状态，但策略来源可能是本地、GPO、MDM 或安全产品。
-
-## 注册表路径
-
-| View | Hive / File | Path | Scope |
-|---|---|---|---|
-| Live path | `HKLM\SYSTEM` | `CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy` | 机器级 |
-| Offline hive path | `SYSTEM` | `ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy` | 机器级 |
-| Policy path | `HKLM\SOFTWARE` | `Policies\Microsoft\WindowsFirewall` | GPO / policy |
-
-## 原生注册表视图
-
-本地防火墙运行配置常位于 `HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy`。策略路径可位于 `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`。离线时必须解析 `SYSTEM\Select`。
-
-## 离线位置
-
-主要来自 `C:\Windows\System32\Config\SYSTEM`，策略来源还可能在 `C:\Windows\System32\Config\SOFTWARE`。调查 GPO 时还应收集 `C:\Windows\System32\GroupPolicy` 和 GroupPolicy Operational 日志。
-
-## 字段含义
-
-| Field | Meaning |
+| 位置 | 说明 |
 |---|---|
-| `FirewallRules` | 防火墙规则集合，value data 通常是规则字符串 |
-| `DomainProfile` / `PublicProfile` / `StandardProfile` | 不同网络 profile 的防火墙状态和默认动作 |
-| `EnableFirewall` | 对应 profile 防火墙启用状态 |
-| rule data | 包含 action、dir、protocol、local port、app、profile 等字段 |
+| [HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy](../../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | 本地 profile、规则和受限服务配置。 |
+| [HKLM\SOFTWARE\Policies](../../registry-tree/hklm/software/policies.md) | GPO / MDM 等策略来源可能写入的软件策略位置。 |
 
-## 取证含义
+## 字段语义
 
-Firewall Policies 能说明某端口、程序或 profile 是否被允许或阻断。RDP、SMB、WinRM、RPC、反连端口和远控工具端口是高价值检查点。它证明规则配置存在，不证明连接发生。
+| 子键 / Value | 类型 | 含义 |
+|---|---|---|
+| `DomainProfile` | Key | 域网络 profile 配置。 |
+| `PrivateProfile` | Key | 专用网络 profile 配置。 |
+| `PublicProfile` | Key | 公用网络 profile 配置。 |
+| `FirewallRules` | Key | 本地防火墙规则集合。 |
+| `RestrictedServices` | Key | 服务级网络规则。 |
+| `EnableFirewall` | `REG_DWORD` | 对应 profile 的防火墙开关。 |
+| `DefaultInboundAction` | `REG_DWORD` | 默认入站行为。 |
+| `DefaultOutboundAction` | `REG_DWORD` | 默认出站行为。 |
 
-## 可以证明
+## 采集与工具
 
-- 防火墙规则或 profile 配置在注册表中存在。
-- 某端口、程序或方向可能被允许/阻断。
-- 防火墙状态是否偏离基线。
+```powershell
+Get-NetFirewallProfile
+Get-NetFirewallRule -PolicyStore ActiveStore | Select-Object DisplayName, Enabled, Direction, Action
+reg query "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy" /s
+```
 
-## 不能证明
+- Registry Explorer / RECmd：查看规则字符串和 key LastWrite。
+- PowerShell NetSecurity cmdlets：live 系统核对有效规则。
+- KAPE / Velociraptor：采集 SYSTEM、SOFTWARE、Firewall logs 和策略记录。
 
-- 网络连接实际发生。
-- 规则实际被命中。
-- 配置来源一定是攻击者。
-- 本机所有流量都受该规则控制，第三方防火墙和安全产品可能介入。
+## 常见误读
 
-## 时间戳说明
-
-FirewallPolicy key LastWrite 是 key 级更新时间。具体规则 value 没有独立注册表时间戳。应结合 NetSecurity cmdlet 输出、Event Logs、Sysmon Event ID 13、Security 5156/5157、防火墙日志和 GPO 记录。
-
-## 系统版本差异
-
-Windows 7/10/11/Server 均有 Windows Firewall / Defender Firewall 配置，但规则字段、profile 名称和策略来源可能不同。GPO、MDM、安全产品和服务器角色会改变基线。
-
-## 攻击滥用
-
-攻击者可能开放 RDP、SMB、WinRM、C2 listener 或隧道端口，也可能关闭防火墙 profile。也可能添加看似系统组件的 allow rule。
-
-## 检测思路
-
-- 新增入站 allow rule，开放 `3389`、`5985/5986`、`445`、高危自定义端口。
-- 防火墙 profile 被关闭或默认入站动作放宽。
-- 规则 `App` 指向用户可写目录、远控工具或未知二进制。
-- RDP port 改动与防火墙放行同一端口。
-
-## 常见误报
-
-- 软件安装、VPN、远控工具、数据库、开发服务、企业管理代理、GPO 基线、云主机初始化。
-
-## 采集方式
-
-=== "PowerShell"
-
-    ```powershell
-    Get-NetFirewallProfile
-    Get-NetFirewallRule -PolicyStore ActiveStore | Select-Object DisplayName, Enabled, Direction, Action
-    ```
-
-=== "reg.exe"
-
-    ```cmd
-    reg query "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy" /s
-    reg query "HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall" /s
-    ```
-
-=== "Offline"
-
-    ```text
-    Collect SYSTEM and SOFTWARE hives. Resolve SYSTEM\Select before reading FirewallPolicy.
-    ```
-
-## 解析工具
-
-- Registry Explorer
-- RECmd
-- KAPE
-- Velociraptor
-- PowerShell NetSecurity cmdlets for live systems
+- 规则存在不等于网络连接发生或规则被命中。
+- GPO、MDM、安全产品或云初始化脚本可能覆盖本地配置。
+- 第三方防火墙或 EDR 网络控制可能影响实际流量。
 
 ## 交叉验证
 
-- Windows Firewall logs
-- Security.evtx `5156`, `5157`
-- Sysmon Event ID 3
-- Sysmon Event ID 13
-- RDP `PortNumber`
-- `fDenyTSConnections`
-- Network telemetry
+- Windows Firewall logs。
+- Security.evtx `5156`、`5157`。
+- Sysmon Event ID 3、Event ID 13。
+- RDP `PortNumber`、`fDenyTSConnections`、网络流量和 EDR telemetry。
 
-## 示例结论
+## 相关场景
 
-- FirewallPolicy contains an enabled inbound allow rule for local port `5001`, and RDP `PortNumber` is also `5001`; this proves matching exposure configuration, not a successful RDP login.
-- DomainProfile `EnableFirewall=0` appears after a GPO update event; this should be investigated as a policy change, not immediately attributed to malware.
+- [安全策略与防护配置](../../questions/policy-security.md)
+- [网络与系统环境](../../questions/network.md)
+- [RDP 与远程访问](../../questions/rdp.md)
+- [常规注册表检查](../../questions/registry-checklist.md)
 
 ## 参考资料
 
-- [Microsoft Learn: Windows Defender Firewall with Advanced Security](https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/)
-- [Microsoft Learn: Get-NetFirewallRule](https://learn.microsoft.com/en-us/powershell/module/netsecurity/get-netfirewallrule)
-- [MITRE ATT&CK: Impair Defenses](https://attack.mitre.org/techniques/T1562/)
-
-## 相关页面
-
-- 场景：[安全策略与防护配置](../../questions/policy-security.md), [RDP 与远程访问](../../questions/rdp.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md), [HKLM\SOFTWARE](../../registry-tree/hklm/software/index.md)
+- [Microsoft Learn: Windows Firewall](https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/windows-firewall/)
+- [Microsoft Learn: Firewall CSP](https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp)

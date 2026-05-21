@@ -14,6 +14,9 @@
 | 名称 | 类型 | 含义 |
 |---|---|---|
 | `<ServiceName>` | Key | 单个服务或驱动配置。 |
+| [`EventLog`](eventlog.md) | Key | Windows Event Log 服务和通道配置。 |
+| [`SharedAccess\Parameters\FirewallPolicy`](sharedaccess/firewallpolicy.md) | Key | Windows Defender Firewall 本地配置。 |
+| [`Tcpip`](tcpip.md) | Key | TCP/IP 全局和接口配置。 |
 | `ImagePath` | `REG_EXPAND_SZ` / `REG_SZ` | 服务可执行文件或驱动路径。 |
 | `Type` | `REG_DWORD` | 服务类型，例如 Win32 service、kernel driver。 |
 | `Start` | `REG_DWORD` | 启动类型，例如 boot、system、auto、demand、disabled。 |

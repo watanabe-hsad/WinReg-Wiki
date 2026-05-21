@@ -21,7 +21,19 @@ Current project name: `WinReg Wiki`.
 - Completed path-reference pages: device-specific pages for USB, DeviceClasses, `SWD\WPDBUSENUM`, EMDMgmt, Portable Devices, and VolumeInfoCache.
 - Completed path-reference pages: persistence/load-chain pages for Active Setup, AppInit_DLLs, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, and driver service entries.
 - Completed path-reference pages added for the registry-first scenario rewrite: HKLM Run / RunOnce, HKCU Run / RunOnce, UserAssist, MountPoints2, and USBSTOR.
-- Next: add HKCU ZoneMap, Printers, Environment, Command Processor, NetworkList, TCP/IP Interfaces, EventLog, FirewallPolicy, and Defender policy subkey pages.
+- Completed path-reference pages for the registry-tree expansion:
+  - `HKCU\Environment`
+  - `HKCU\Printers`
+  - `HKCU\Software\Microsoft\Command Processor`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap`
+  - `HKLM\SYSTEM\ControlSet00x\Services\EventLog`
+  - `HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy`
+  - `HKLM\SOFTWARE\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`
+  - `HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Environment`
+- Next: add or deepen `HKLM\SOFTWARE\Microsoft\Command Processor`, `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`, `KnownDLLs`, `BootExecute`, `App Paths`, `LogonUI`, and additional HKCU network / shell policy locations.
 
 ## Phase 3: High-Value Artifacts
 
@@ -49,6 +61,8 @@ Current project name: `WinReg Wiki`.
 
 - Current status: scenario pages now link primarily to registry-location pages and keep artifact links as supplemental reading.
 - Current status: `取证场景 / 常规注册表检查` provides the first cross-scenario registry checklist.
+- Current status: `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, and `execution` now link to the latest registry-location pages before artifact supplements.
+- Current status: `command-processor-autorun`, `defender-policies`, `firewall-policies`, `audit-policy`, `run-keys`, and `services` artifact pages have been compressed into supplemental entries.
 - Add Sigma-friendly registry path selectors for high-value persistence and policy weakening keys.
 - Add Sysmon, Security.evtx, Defender, TerminalServices, PowerShell, and EDR telemetry references per artifact.
 - Add Velociraptor and KAPE collection notes where useful.

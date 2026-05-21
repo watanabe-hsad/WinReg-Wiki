@@ -8,6 +8,17 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-location pages for additional HKCU and HKLM reference targets:
+  - `HKCU\Environment`
+  - `HKCU\Printers`
+  - `HKCU\Software\Microsoft\Command Processor`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap`
+  - `HKLM\SYSTEM\ControlSet00x\Services\EventLog`
+  - `HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy`
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`
+  - `HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Environment`
 - Added registry-first scenario page `docs/questions/registry-checklist.md` for 常规注册表检查.
 - Added registry-location pages for common scenario targets:
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
@@ -69,6 +80,16 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Updated `mkdocs.yml` registry-tree navigation to include the new HKCU and HKLM pages without adding any new top-level navigation entries.
+- Updated registry overview/support pages for HKCU, HKCU Software, HKLM SOFTWARE, HKLM SYSTEM, Services, Tcpip, and Policies.
+- Updated `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, `execution`, and scenario index pages so primary links point to registry-location pages.
+- Compressed artifact pages into supplemental entries:
+  - `docs/artifacts/persistence/command-processor-autorun.md`
+  - `docs/artifacts/security/defender-policies.md`
+  - `docs/artifacts/security/firewall-policies.md`
+  - `docs/artifacts/security/audit-policy.md`
+  - `docs/artifacts/persistence/run-keys.md`
+  - `docs/artifacts/persistence/services.md`
 - Reworked `取证场景` pages into checklist-style investigation pages that primarily link to `docs/registry-tree/` registry-location pages.
 - Downgraded artifact pages from a major reader entry to supplemental/internal detail:
   - `docs/artifacts/index.md` is now `Artifact 补充索引`;
@@ -108,6 +129,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-tree expansion and artifact compression.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-first scenario rewrite.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the `WinReg Wiki` navigation and file-tree rewrite.
 - `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used briefly for local preview of `注册表位置`, `注册表 Artifact`, and `结构化数据索引`.

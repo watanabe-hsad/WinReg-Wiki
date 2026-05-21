@@ -31,6 +31,9 @@
 | [ControlSet00x](hklm/system/controlset/index.md) | 真实控制集。 |
 | [ControlSet00x\Services](hklm/system/controlset/services/index.md) | 服务、驱动和网络组件配置。 |
 | [ControlSet00x\Services\<DriverName>](hklm/system/controlset/services/drivers.md) | 驱动服务配置。 |
+| [ControlSet00x\Services\EventLog](hklm/system/controlset/services/eventlog.md) | 事件日志通道配置。 |
+| [SharedAccess\FirewallPolicy](hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall 本地配置。 |
+| [Tcpip\Parameters\Interfaces](hklm/system/controlset/services/tcpip/parameters/interfaces.md) | 网卡 TCP/IP 配置。 |
 | [ControlSet00x\Enum](hklm/system/controlset/enum/index.md) | 设备枚举树。 |
 | [ControlSet00x\Enum\USBSTOR](hklm/system/controlset/enum/usbstor.md) | USB 存储设备枚举。 |
 | [ControlSet00x\Enum\USB](hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 |
@@ -42,6 +45,7 @@
 | [Services\Tcpip](hklm/system/controlset/services/tcpip.md) | TCP/IP 全局和接口配置。 |
 | [Control\TimeZoneInformation](hklm/system/controlset/control/timezone.md) | 时区配置。 |
 | [Control\ComputerName](hklm/system/controlset/control/computername.md) | 计算机名配置。 |
+| [Control\Session Manager\Environment](hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 |
 | [Control\Lsa](hklm/system/controlset/control/lsa/index.md) | LSA 运行配置。 |
 | [Control\Lsa\Security Packages](hklm/system/controlset/control/lsa/security-packages.md) | LSA 安全支持包列表。 |
 
@@ -60,7 +64,9 @@
 | [Windows NT\CurrentVersion\EMDMgmt](hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md) | EMDMgmt / ReadyBoost 辅助记录。 |
 | [Windows Search\VolumeInfoCache](hklm/software/microsoft/windows-search/volumeinfocache.md) | Windows Search 卷信息缓存。 |
 | [Policies](hklm/software/policies.md) | 机器级策略写入位置。 |
+| [Policies\Microsoft\Windows Defender](hklm/software/policies/microsoft/windows-defender.md) | Defender 策略位置。 |
 | [Microsoft\Windows Defender](hklm/software/microsoft/windows-defender.md) | Defender 配置和状态相关项。 |
+| [NetworkList\Profiles](hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络配置文件。 |
 | [Uninstall](hklm/software/microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |
 | [WOW6432Node](hklm/software/wow6432node.md) | 32 位应用注册表视图。 |
 | [Classes](hklm/software/classes.md) | 机器级文件关联和 COM。 |
@@ -70,14 +76,18 @@
 | 路径 | 内容 |
 |---|---|
 | [HKCU\Software](hkcu/software/index.md) | 用户软件和应用配置。 |
+| [HKCU\Environment](hkcu/environment.md) | 用户级环境变量。 |
+| [HKCU\Printers](hkcu/printers.md) | 用户级打印机连接和配置。 |
 | [Run / RunOnce](hkcu/software/microsoft/windows/currentversion/run.md) | 用户级登录启动项。 |
+| [Command Processor](hkcu/software/microsoft/command-processor.md) | 用户级 `cmd.exe` 配置。 |
 | [Explorer](hkcu/software/microsoft/windows/currentversion/explorer.md) | Shell / Explorer 用户级配置入口。 |
 | [UserAssist](hkcu/software/microsoft/windows/currentversion/userassist.md) | Explorer 相关程序交互记录。 |
 | [ComDlg32](hkcu/software/microsoft/windows/currentversion/comdlg32.md) | Common dialog MRU。 |
 | [MountPoints2](hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷、盘符或网络共享。 |
 | [RunMRU](hkcu/software/microsoft/windows/currentversion/runmru.md) | Win+R 输入历史。 |
 | [RecentDocs](hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU。 |
-| [Internet Settings](hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet、ZoneMap。 |
+| [Internet Settings](hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet。 |
+| [Internet Settings\ZoneMap](hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 |
 | [Terminal Server Client](hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端历史。 |
 | [Classes](hkcu/software/classes.md) | 用户级文件关联和 COM。 |
 

@@ -8,76 +8,56 @@ tags:
 
 # Run / RunOnce
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge high">检测价值 高</span>
-<span class="rfh-badge">用户级 / 机器级</span>
-</div>
+此页保留 Run / RunOnce artifact 的补充细节。主入口请先查看注册表位置页和取证场景页。
 
-`Run` 和 `RunOnce` 用于配置登录时自动启动的程序，是恶意软件和正常软件都会频繁使用的持久化位置。
+## 对应注册表位置
 
-## 注册表路径
-
-| Hive | Path | Scope |
+| 范围 | 位置 | 说明 |
 |---|---|---|
-| `HKCU` | `Software\Microsoft\Windows\CurrentVersion\Run` | 当前用户 |
-| `HKCU` | `Software\Microsoft\Windows\CurrentVersion\RunOnce` | 当前用户 |
-| `HKLM` | `Software\Microsoft\Windows\CurrentVersion\Run` | 所有用户 |
-| `HKLM` | `Software\Microsoft\Windows\CurrentVersion\RunOnce` | 所有用户 |
-| `HKLM` | `Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run` | 32 位视图 |
+| 用户级 | [HKCU\Software\Microsoft\Windows\CurrentVersion\Run](../../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 当前用户登录自启动。 |
+| 机器级 | [HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run](../../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录自启动。 |
+| 32 位视图 | [WOW6432Node](../../registry-tree/hklm/software/wow6432node.md) | 32 位应用写入的 Run 位置可能出现在此视图。 |
 
-## 取证含义
+## 字段语义
 
-这些键表示某个命令被配置为用户登录时启动。value name 通常是显示名称，value data 通常是可执行文件路径或命令行。
+| Key / Value | 类型 | 含义 |
+|---|---|---|
+| `Run` | Key | 用户登录时加载的常驻启动项。 |
+| `RunOnce` | Key | 用户登录后执行一次的启动项。 |
+| `<value name>` | `REG_SZ` / `REG_EXPAND_SZ` | 显示名或任意名称。 |
+| `<value data>` | 字符串命令 | 可执行文件路径或命令行。 |
 
-## 可以证明
+## 采集与工具
 
-- 程序或命令被配置为自启动。
-- 配置范围是用户级还是机器级。
-- key 的 LastWrite 可帮助估计该键最近一次变化时间。
+```cmd
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+```
 
-## 不能证明
+- Autoruns：适合 live 系统快速枚举自启动位置。
+- Registry Explorer / RECmd：适合离线 hive 和 LastWrite。
+- KAPE / Velociraptor：跨用户、跨主机采集和基线对比。
 
-- 程序一定已经执行。
-- 某个 value 的创建时间精确等于 key 的 LastWrite。
-- 该启动项一定恶意。
+## 常见误读
 
-## 时间戳说明
-
-注册表 value 通常没有独立时间戳。key LastWrite 表示该 key 的直接内容发生变化，不能直接当作某个具体 value 的创建时间。
-
-## 检测思路
-
-重点关注：
-
-- 指向用户可写目录的启动项。
-- 使用 `powershell.exe`、`wscript.exe`、`mshta.exe`、`rundll32.exe`、`regsvr32.exe`。
-- 隐藏窗口、Base64、下载执行、长命令行。
-- 伪装成系统组件的 value name。
-- HKLM 启动项指向用户 profile。
-
-## 采集方式
-
-=== "PowerShell"
-
-    ```powershell
-    Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
-    Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"
-    ```
-
-=== "reg.exe"
-
-    ```cmd
-    reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
-    reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
-    ```
+- 启动项存在不等于程序已经执行。
+- key LastWrite 不是单个 value 的精确创建时间。
+- 正常软件、驱动工具、同步盘、VPN、浏览器和企业代理常写入 Run key。
 
 ## 交叉验证
 
-- Startup folder
-- Scheduled Tasks
-- Services
-- Prefetch
-- Sysmon Event ID 1 and 13
-- Security logon events
+- Prefetch、Amcache、Shimcache、BAM/DAM。
+- Sysmon Event ID 1 / 13、Security 4688 / 4657。
+- Startup folder、Scheduled Tasks、Services。
+- 文件签名、哈希、路径权限和文件系统时间线。
 
+## 相关场景
+
+- [自启动与持久化](../../questions/persistence.md)
+- [程序执行痕迹](../../questions/execution.md)
+- [常规注册表检查](../../questions/registry-checklist.md)
+
+## 参考资料
+
+- [Microsoft Sysinternals: Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
+- [MITRE ATT&CK: Registry Run Keys / Startup Folder](https://attack.mitre.org/techniques/T1060/)
