@@ -51,6 +51,7 @@
 ## 相关位置
 
 - [HKCU Environment](../../../../../hkcu/environment.md)
+- [Session Manager](index.md)
 - [ControlSet00x](../../index.md)
 - [Command Processor](../../../../../hkcu/software/microsoft/command-processor.md)
 

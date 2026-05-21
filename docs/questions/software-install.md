@@ -11,12 +11,13 @@
 | [HKLM Uninstall](../registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md) | 机器级软件安装 / 卸载登记。 | 不证明程序当前仍安装或执行过。 |
 | [HKLM\SOFTWARE](../registry-tree/hklm/software/index.md) | 软件、策略、Classes、Winlogon 等机器级入口。 | 需要进入具体子路径解释。 |
 | [WOW6432Node](../registry-tree/hklm/software/wow6432node.md) | 32 位应用注册表视图。 | 64 位系统需同时检查。 |
+| [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 注册路径不等于程序执行。 |
 | [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | 用户 Shell 交互程序线索。 | 不覆盖所有执行方式。 |
 | [HKCU Run](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级安装器或应用自启动。 | 配置存在不等于执行成功。 |
 
 ## 判断要点
 
-- `DisplayName`、`DisplayVersion`、`Publisher`、`InstallLocation`、`InstallDate` 和 `UninstallString` 要一起看。
+- `DisplayName`、`DisplayVersion`、`Publisher`、`InstallLocation`、`InstallDate`、`UninstallString` 和 App Paths 默认路径要一起看。
 - `InstallDate` 是安装器写入的字符串，可靠性取决于安装器。
 - 便携软件可能没有 Uninstall 记录，但会出现在 Amcache、Prefetch、UserAssist 或文件系统时间线。
 - 卸载后 Uninstall 记录可能被删除，残留证据需要从文件系统和执行 artifact 还原。

@@ -25,6 +25,8 @@ HKLM\SOFTWARE\WOW6432Node
 | 路径 | 含义 |
 |---|---|
 | [`Microsoft\Active Setup\Installed Components`](microsoft/active-setup.md) | Active Setup 机器级组件定义。 |
+| [`Microsoft\Command Processor`](microsoft/command-processor.md) | 机器级 `cmd.exe` 配置和 `AutoRun`。 |
+| [`Microsoft\Windows\CurrentVersion\App Paths`](microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 |
 | [`Microsoft\Windows\CurrentVersion\Run`](microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\RunOnce`](microsoft/windows/currentversion/run.md) | 机器级一次性登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\Uninstall`](microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |
@@ -41,6 +43,7 @@ HKLM\SOFTWARE\WOW6432Node
 | [`Microsoft\Windows Defender`](microsoft/windows-defender.md) | Defender 本地状态和配置线索。 |
 | [`Policies`](policies.md) | GPO / MDM / 本地策略写入位置。 |
 | [`Policies\Microsoft\Windows Defender`](policies/microsoft/windows-defender.md) | Defender 策略和排除项。 |
+| [`Policies\Microsoft\WindowsFirewall`](policies/microsoft/windowsfirewall.md) | Windows Firewall 策略配置。 |
 | `Microsoft\Windows\CurrentVersion\Policies\System` | UAC 和部分系统策略。 |
 | `Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList` | 登录界面隐藏用户配置。 |
 | [`WOW6432Node`](wow6432node.md) | 32 位应用注册表视图。 |
@@ -59,6 +62,7 @@ HKLM\SOFTWARE\WOW6432Node
 
 - [自启动与持久化](../../../questions/persistence.md)
 - [安全策略与防护配置](../../../questions/policy-security.md)
+- [程序执行痕迹](../../../questions/execution.md)
 - [网络与系统环境](../../../questions/network.md)
 - [常规注册表检查](../../../questions/registry-checklist.md)
 

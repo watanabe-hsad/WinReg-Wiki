@@ -99,9 +99,11 @@ nav:
               - Policies:
                   - registry-tree/hklm/software/policies.md
                   - Microsoft\Windows Defender: registry-tree/hklm/software/policies/microsoft/windows-defender.md
+                  - Microsoft\WindowsFirewall: registry-tree/hklm/software/policies/microsoft/windowsfirewall.md
               - WOW6432Node: registry-tree/hklm/software/wow6432node.md
               - Microsoft:
                   - Active Setup: registry-tree/hklm/software/microsoft/active-setup.md
+                  - Command Processor: registry-tree/hklm/software/microsoft/command-processor.md
                   - Windows NT:
                       - CurrentVersion:
                           - EMDMgmt: registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md
@@ -112,6 +114,7 @@ nav:
                           - Windows: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md
                   - Windows:
                       - CurrentVersion:
+                          - App Paths: registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md
                           - Run / RunOnce: registry-tree/hklm/software/microsoft/windows/currentversion/run.md
                           - Uninstall: registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md
                           - ShellServiceObjectDelayLoad: registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md
@@ -143,7 +146,12 @@ nav:
                       - Terminal Server: registry-tree/hklm/system/controlset/control/terminal-server.md
                       - TimeZoneInformation: registry-tree/hklm/system/controlset/control/timezone.md
                       - ComputerName: registry-tree/hklm/system/controlset/control/computername.md
-                      - Session Manager\Environment: registry-tree/hklm/system/controlset/control/session-manager/environment.md
+                      - Session Manager:
+                          - registry-tree/hklm/system/controlset/control/session-manager/index.md
+                          - BootExecute: registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md
+                          - KnownDLLs: registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md
+                          - PendingFileRenameOperations: registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md
+                          - Environment: registry-tree/hklm/system/controlset/control/session-manager/environment.md
                       - Print\Monitors: registry-tree/hklm/system/controlset/control/print-monitors.md
                       - Lsa:
                           - registry-tree/hklm/system/controlset/control/lsa/index.md

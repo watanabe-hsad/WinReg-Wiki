@@ -13,7 +13,7 @@
 
 | 名称 | 类型 | 含义 |
 |---|---|---|
-| `Control` | Key | 系统控制配置，例如 LSA、Terminal Server、TimeZoneInformation、ComputerName。 |
+| `Control` | Key | 系统控制配置，例如 LSA、Session Manager、Terminal Server、TimeZoneInformation、ComputerName。 |
 | `Enum` | Key | 设备枚举树。 |
 | `Services` | Key | 服务、驱动和网络组件配置。 |
 | `Hardware Profiles` | Key | 硬件配置 profile；`HKCC` 通常映射到其中的 current profile。 |
@@ -32,6 +32,7 @@
 - [自启动与持久化](../../../../questions/persistence.md)
 - [USB 与外接设备](../../../../questions/usb.md)
 - [RDP 与远程访问](../../../../questions/rdp.md)
+- [反取证与清理痕迹](../../../../questions/anti-forensics.md)
 
 ## 补充阅读
 

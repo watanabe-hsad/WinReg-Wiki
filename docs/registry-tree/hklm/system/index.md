@@ -58,6 +58,10 @@ HKLM\SYSTEM\ControlSet002
 | [`ControlSet00x\Services\Tcpip\Parameters\Interfaces\<GUID>`](controlset/services/tcpip/parameters/interfaces.md) | 网卡 IP、DNS、DHCP、网关。 |
 | [`ControlSet00x\Control\TimeZoneInformation`](controlset/control/timezone.md) | 时区和 Bias。 |
 | [`ControlSet00x\Control\ComputerName`](controlset/control/computername.md) | 主机名。 |
+| [`ControlSet00x\Control\Session Manager`](controlset/control/session-manager/index.md) | 启动早期、KnownDLLs、环境变量和延迟文件操作队列。 |
+| [`ControlSet00x\Control\Session Manager\BootExecute`](controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 |
+| [`ControlSet00x\Control\Session Manager\KnownDLLs`](controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 |
+| [`ControlSet00x\Control\Session Manager\PendingFileRenameOperations`](controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 |
 | [`ControlSet00x\Control\Session Manager\Environment`](controlset/control/session-manager/environment.md) | 系统级环境变量。 |
 | [`ControlSet00x\Control\Lsa`](controlset/control/lsa/index.md) | LSA 运行配置和认证包。 |
 | [`ControlSet00x\Control\Lsa\Security Packages`](controlset/control/lsa/security-packages.md) | LSA 安全支持包列表。 |
@@ -69,6 +73,7 @@ HKLM\SYSTEM\ControlSet002
 |---|---|
 | `ControlSet001` | 不一定是当前配置；先读 `Select\Current`。 |
 | `Services` | 证明服务配置存在，不等于服务成功启动。 |
+| `Session Manager` | 靠近启动和会话初始化流程；配置存在不等于已经执行。 |
 | `USBSTOR` | 证明设备枚举，不等于文件复制。 |
 | `MountedDevices` | 盘符可复用，需结合卷 GUID 和设备信息。 |
 | `TimeZoneInformation` | 会影响本地时间线解释。 |

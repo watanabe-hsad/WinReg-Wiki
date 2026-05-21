@@ -70,7 +70,7 @@ Generate the structured artifact data index:
 Current coverage includes:
 
 - Registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM / HKCU subtrees.
-- Registry-location references for environment variables, Command Processor, Internet Settings / ZoneMap, Printers, NetworkList Profiles, TCP/IP interfaces, EventLog, FirewallPolicy, and Defender policy locations.
+- Registry-location references for environment variables, Command Processor, Internet Settings / ZoneMap, Printers, NetworkList Profiles, TCP/IP interfaces, EventLog, FirewallPolicy, Defender policies, WindowsFirewall policies, App Paths, and Session Manager locations.
 - Program execution and program presence artifacts: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
 - Persistence and autoruns: Run / RunOnce, StartupApproved, Services, Drivers, IFEO, Active Setup, AppInit_DLLs, Winlogon Userinit, Winlogon Shell, LSA Authentication Packages, LSA Security Packages, Command Processor AutoRun, ShellServiceObjectDelayLoad, Print Monitors.
 - USB and external devices: USB, USBSTOR, DeviceClasses, SWD WPDBUSENUM, MountedDevices, MountPoints2, EMDMgmt, Portable Devices, VolumeInfoCache.

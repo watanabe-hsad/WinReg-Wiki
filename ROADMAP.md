@@ -33,7 +33,15 @@ Current project name: `WinReg Wiki`.
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`
   - `HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Environment`
-- Next: add or deepen `HKLM\SOFTWARE\Microsoft\Command Processor`, `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`, `KnownDLLs`, `BootExecute`, `App Paths`, `LogonUI`, and additional HKCU network / shell policy locations.
+- Completed follow-up path-reference pages:
+  - `HKLM\SOFTWARE\Microsoft\Command Processor`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
+  - `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\BootExecute`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\PendingFileRenameOperations`
+- Next: add or deepen `LogonUI`, `Winlogon\Notify`, `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCertDlls`, `AeDebug`, `Policies\System`, and additional HKCU network / shell policy locations.
 
 ## Phase 3: High-Value Artifacts
 
@@ -63,6 +71,7 @@ Current project name: `WinReg Wiki`.
 - Current status: `取证场景 / 常规注册表检查` provides the first cross-scenario registry checklist.
 - Current status: `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, and `execution` now link to the latest registry-location pages before artifact supplements.
 - Current status: `command-processor-autorun`, `defender-policies`, `firewall-policies`, `audit-policy`, `run-keys`, and `services` artifact pages have been compressed into supplemental entries.
+- Current status: `drivers`, `appinit-dlls`, and `ifeo` artifact pages have also been compressed into supplemental entries.
 - Add Sigma-friendly registry path selectors for high-value persistence and policy weakening keys.
 - Add Sysmon, Security.evtx, Defender, TerminalServices, PowerShell, and EDR telemetry references per artifact.
 - Add Velociraptor and KAPE collection notes where useful.

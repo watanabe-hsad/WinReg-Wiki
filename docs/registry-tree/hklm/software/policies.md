@@ -15,7 +15,7 @@
 |---|---|---|
 | `Microsoft` | Key | Microsoft 产品和 Windows 组件策略。 |
 | [`Microsoft\Windows Defender`](policies/microsoft/windows-defender.md) | Key | Defender 策略。 |
-| `Microsoft\WindowsFirewall` | Key | Windows Firewall 策略。 |
+| [`Microsoft\WindowsFirewall`](policies/microsoft/windowsfirewall.md) | Key | Windows Firewall 策略。 |
 | `Microsoft\Windows\System` | Key | 部分系统策略；具体 value 需按子组件确认。 |
 
 ## 说明
@@ -35,6 +35,7 @@
 ## 相关位置
 
 - [Defender Policies](policies/microsoft/windows-defender.md)
+- [WindowsFirewall Policies](policies/microsoft/windowsfirewall.md)
 - [Windows Defender](microsoft/windows-defender.md)
 - [FirewallPolicy](../system/controlset/services/sharedaccess/firewallpolicy.md)
 

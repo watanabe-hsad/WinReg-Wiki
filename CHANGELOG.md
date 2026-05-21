@@ -8,6 +8,14 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-location pages for the next HKLM reference batch:
+  - `HKLM\SOFTWARE\Microsoft\Command Processor`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
+  - `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\BootExecute`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\PendingFileRenameOperations`
 - Added registry-location pages for additional HKCU and HKLM reference targets:
   - `HKCU\Environment`
   - `HKCU\Printers`
@@ -80,6 +88,12 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Updated scenario pages so `registry-checklist`, `persistence`, `execution`, `anti-forensics`, `policy-security`, `network`, `software-install`, and the scenario index link to the new HKLM registry-location pages.
+- Updated registry-tree navigation and overview pages for Session Manager, App Paths, HKLM Command Processor, and WindowsFirewall policies.
+- Compressed additional artifact pages into supplemental entries:
+  - `docs/artifacts/persistence/drivers.md`
+  - `docs/artifacts/persistence/appinit-dlls.md`
+  - `docs/artifacts/persistence/ifeo.md`
 - Updated `mkdocs.yml` registry-tree navigation to include the new HKCU and HKLM pages without adding any new top-level navigation entries.
 - Updated registry overview/support pages for HKCU, HKCU Software, HKLM SOFTWARE, HKLM SYSTEM, Services, Tcpip, and Policies.
 - Updated `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, `execution`, and scenario index pages so primary links point to registry-location pages.
@@ -129,6 +143,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the HKLM Session Manager / App Paths / WindowsFirewall expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-tree expansion and artifact compression.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-first scenario rewrite.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the `WinReg Wiki` navigation and file-tree rewrite.

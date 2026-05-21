@@ -13,8 +13,11 @@
 | [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | Defender 禁用、排除项和实时保护相关策略。 | 需验证平台版本和实际状态。 |
 | [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道大小、保留和文件路径配置。 | 不是日志内容本身。 |
 | [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | 防火墙 profile 和规则配置。 | 规则变化不等于连接发生。 |
+| [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md) | 防火墙策略位置。 | 策略存在不等于 ActiveStore 状态。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 审计和本地安全策略。 | 需要专门工具解析。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | EventLog、Defender、EDR、日志相关服务配置。 | 服务配置异常要结合事件日志。 |
+| [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待删除或重命名队列。 | 队列存在不等于操作已完成。 |
+| [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 异常项需结合重启和文件证据。 |
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量。 | 可解释命令环境变化。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 | `Path` 异常需结合进程证据。 |
 | [HKCU Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md) | 用户行为 artifact 所在入口。 | 缺失不是反取证证据本身。 |
@@ -23,6 +26,7 @@
 
 - Defender 排除项、禁用尝试和审计策略变化应与日志、EDR 和进程记录对齐。
 - EventLog 服务配置异常、通道大小变化和日志清理事件要分开解释。
+- `PendingFileRenameOperations` 可解释计划删除或替换，但必须确认重启和文件系统结果。
 - 环境变量变化可能用于影响执行环境，也可能来自正常安装器或开发工具。
 - 多个用户 hive 中预期存在的 Shell 线索同时缺失时，才考虑清理方向。
 - “没有发现”只能写成证据缺口，不能直接写成清理结论。

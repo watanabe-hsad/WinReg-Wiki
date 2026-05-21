@@ -13,18 +13,24 @@
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量。 | 已启动进程可能保留旧环境。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 | `Path` 变化不等于命令已执行。 |
 | [Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md) | 用户级 `cmd.exe` 配置和 `AutoRun`。 | `AutoRun` 存在不等于 `cmd.exe` 已启动。 |
+| [HKLM Command Processor](../registry-tree/hklm/software/microsoft/command-processor.md) | 机器级 `cmd.exe` 配置和 `AutoRun`。 | 影响范围更大，但仍需进程证据。 |
+| [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 程序注册不等于执行。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务、驱动、网络组件配置。 | 服务配置存在不等于服务已启动。 |
 | [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道配置。 | 这里不是日志内容。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需结合驱动加载、签名和 Code Integrity。 |
 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录和隐藏账户相关配置。 | 登录事实要回到 Security.evtx。 |
 | [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试器、开发工具和 EDR 也可能写入。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、安全包和 LSASS 保护相关配置。 | 未知 DLL 需验证路径、签名和模块加载。 |
+| [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 配置存在不等于已经重启执行。 |
+| [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 异常需结合模块加载和基线。 |
+| [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 | 队列存在不等于文件已删除。 |
 | [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关、端口和 NLA。 | 允许连接不等于发生登录。 |
 | [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端目标历史。 | 这是客户端侧记录。 |
 | [Policies](../registry-tree/hklm/software/policies.md) | GPO / MDM / 本地策略写入位置。 | 注册表值不直接说明策略来源。 |
 | [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender 本地配置和排除项线索。 | 需结合 Tamper Protection 和 Defender 日志。 |
 | [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | Defender 策略位置。 | 策略值不等于实际防护状态。 |
 | [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall 本地 profile 和规则配置。 | 规则存在不等于连接发生。 |
+| [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md) | Windows Firewall 策略配置。 | 策略值不等于 ActiveStore 状态。 |
 | [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md) | USB 存储设备枚举。 | 不证明文件复制。 |
 | [USB](../registry-tree/hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 | 可覆盖非存储 USB 设备。 |
 | [MountedDevices](../registry-tree/hklm/system/mounteddevices.md) | 卷 GUID、盘符和设备映射。 | 盘符可复用。 |

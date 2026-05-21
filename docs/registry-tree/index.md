@@ -45,6 +45,10 @@
 | [Services\Tcpip](hklm/system/controlset/services/tcpip.md) | TCP/IP 全局和接口配置。 |
 | [Control\TimeZoneInformation](hklm/system/controlset/control/timezone.md) | 时区配置。 |
 | [Control\ComputerName](hklm/system/controlset/control/computername.md) | 计算机名配置。 |
+| [Control\Session Manager](hklm/system/controlset/control/session-manager/index.md) | 启动早期、KnownDLLs、环境变量和延迟文件操作队列。 |
+| [Control\Session Manager\BootExecute](hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 |
+| [Control\Session Manager\KnownDLLs](hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 |
+| [Control\Session Manager\PendingFileRenameOperations](hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 |
 | [Control\Session Manager\Environment](hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 |
 | [Control\Lsa](hklm/system/controlset/control/lsa/index.md) | LSA 运行配置。 |
 | [Control\Lsa\Security Packages](hklm/system/controlset/control/lsa/security-packages.md) | LSA 安全支持包列表。 |
@@ -54,6 +58,8 @@
 | 路径 | 内容 |
 |---|---|
 | [Microsoft\Active Setup](hklm/software/microsoft/active-setup.md) | 每用户初始化组件定义。 |
+| [Microsoft\Command Processor](hklm/software/microsoft/command-processor.md) | 机器级 `cmd.exe` 配置。 |
+| [Windows\CurrentVersion\App Paths](hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 |
 | [Windows\CurrentVersion\Run](hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
 | [ProfileList](hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 路径映射。 |
 | [Winlogon](hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | 交互式登录配置。 |
@@ -65,6 +71,7 @@
 | [Windows Search\VolumeInfoCache](hklm/software/microsoft/windows-search/volumeinfocache.md) | Windows Search 卷信息缓存。 |
 | [Policies](hklm/software/policies.md) | 机器级策略写入位置。 |
 | [Policies\Microsoft\Windows Defender](hklm/software/policies/microsoft/windows-defender.md) | Defender 策略位置。 |
+| [Policies\Microsoft\WindowsFirewall](hklm/software/policies/microsoft/windowsfirewall.md) | Windows Firewall 策略位置。 |
 | [Microsoft\Windows Defender](hklm/software/microsoft/windows-defender.md) | Defender 配置和状态相关项。 |
 | [NetworkList\Profiles](hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络配置文件。 |
 | [Uninstall](hklm/software/microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |

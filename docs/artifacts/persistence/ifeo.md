@@ -7,56 +7,56 @@ tags:
 
 # Image File Execution Options
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge high">检测价值 高</span>
-<span class="rfh-badge">劫持</span>
-</div>
+此页保留 IFEO artifact 的补充细节。主入口请先查看注册表位置页和取证场景页。
 
-Image File Execution Options, commonly IFEO, 原本用于调试和兼容性配置。攻击者常滥用 `Debugger` value 劫持目标进程启动。
+## 对应注册表位置
 
-## 注册表路径
-
-| Hive | Path |
+| 位置 | 说明 |
 |---|---|
-| `HKLM\SOFTWARE` | `Microsoft\Windows NT\CurrentVersion\Image File Execution Options\<ImageName>` |
+| [HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options](../../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | 按映像名生效的调试、兼容性和启动相关配置。 |
 
-## 取证含义
+## 字段语义
 
-当 `<ImageName>` 下存在 `Debugger` value 时，系统可能在目标可执行文件启动时先启动指定调试器命令。
+| Value / 子键 | 类型 | 含义 |
+|---|---|---|
+| `<ImageName>` | Key | 目标可执行文件名，例如 `notepad.exe`。 |
+| `Debugger` | `REG_SZ` | 目标进程启动时调用的调试器命令。 |
+| `GlobalFlag` | `REG_DWORD` | 调试 / 诊断标志。 |
+| `SilentProcessExit` | Key | 进程退出监控相关配置。 |
 
-## 可以证明
-
-- 某个可执行文件存在 IFEO 配置。
-- `Debugger` 指向的命令可能被用于进程启动劫持。
-
-## 不能证明
-
-- 目标进程一定被启动过。
-- `Debugger` 命令一定成功执行。
-- 所有 IFEO 配置都是恶意，开发工具也会使用。
-
-## 检测思路
-
-- 非开发环境中出现 `Debugger` value。
-- `Debugger` 指向用户可写目录或脚本解释器。
-- 针对安全工具、浏览器、办公软件、系统工具的 IFEO 配置。
-- `sethc.exe`、`utilman.exe` 等辅助功能程序相关劫持。
-
-## 采集方式
+## 采集与工具
 
 ```powershell
 Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" |
   ForEach-Object {
     $p = Get-ItemProperty $_.PsPath -ErrorAction SilentlyContinue
-    if ($p.Debugger) { $p }
+    if ($p.Debugger) { [pscustomobject]@{Image=$_.PSChildName; Debugger=$p.Debugger} }
   }
 ```
 
+- Autoruns / Autorunsc：查看 IFEO 和调试器配置。
+- Registry Explorer / RECmd：离线查看 SOFTWARE hive。
+- KAPE / Velociraptor：跨主机枚举 `Debugger` 和相关键。
+
+## 常见误读
+
+- IFEO key 存在不等于目标程序已启动。
+- `Debugger` 指向命令不等于命令成功执行。
+- 开发工具、调试器、兼容性工具和 EDR 可能合法使用 IFEO。
+
 ## 交叉验证
 
-- Sysmon Registry Set events
-- Process creation logs
-- Security tool tampering alerts
-- File system timeline for debugger binary
+- Sysmon Event ID 13、Security 4657、EDR registry telemetry。
+- 目标程序启动记录、调试器进程创建、命令行和父子进程关系。
+- 调试器二进制路径、签名、哈希和文件系统时间线。
 
+## 相关场景
+
+- [自启动与持久化](../../questions/persistence.md)
+- [程序执行痕迹](../../questions/execution.md)
+- [常规注册表检查](../../questions/registry-checklist.md)
+
+## 参考资料
+
+- [MITRE ATT&CK: Image File Execution Options Injection](https://attack.mitre.org/techniques/T1546/012/)
+- [Microsoft Sysinternals: Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)

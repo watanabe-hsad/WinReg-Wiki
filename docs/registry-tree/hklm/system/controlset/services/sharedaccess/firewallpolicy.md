@@ -36,7 +36,7 @@
 ## 注意事项
 
 - 注册表规则存在不等于对应网络连接发生。
-- GPO / MDM 可能覆盖本地配置；需要结合策略结果和运行时防火墙状态。
+- GPO / MDM 可能覆盖本地配置；需要结合策略结果、`WindowsFirewall` 策略路径和运行时防火墙状态。
 - 防火墙服务、规则命中和网络流量需要日志或 EDR 验证。
 
 ## 取证提示
@@ -55,6 +55,7 @@
 - [Services](../index.md)
 - [Tcpip](../tcpip.md)
 - [HKLM Policies](../../../../software/policies.md)
+- [WindowsFirewall Policies](../../../../software/policies/microsoft/windowsfirewall.md)
 
 ## 补充阅读
 

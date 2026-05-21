@@ -34,6 +34,32 @@ Current content model:
 
 ## Last Completed Round
 
+- Continued the registry-tree dictionary expansion with the next HKLM-focused batch:
+  - `HKLM\SOFTWARE\Microsoft\Command Processor`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
+  - `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\BootExecute`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\PendingFileRenameOperations`
+- Updated `mkdocs.yml`, `docs/registry-tree/index.md`, `HKLM\SOFTWARE`, `HKLM\SYSTEM`, `ControlSet00x`, `Policies`, `FirewallPolicy`, and `Session Manager\Environment` pages so the new pages are reachable through the native registry tree.
+- Updated scenario pages so primary links include the new registry-location pages:
+  - `registry-checklist.md`
+  - `persistence.md`
+  - `execution.md`
+  - `anti-forensics.md`
+  - `policy-security.md`
+  - `network.md`
+  - `software-install.md`
+  - `questions/index.md`
+- Compressed these additional artifact pages into supplemental entries:
+  - `drivers.md`
+  - `appinit-dlls.md`
+  - `ifeo.md`
+- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
+
+## Previous Completed Round
+
 - Expanded and normalized registry-location reference pages so `注册表位置` remains the primary dictionary entry point.
 - Added or rewrote these registry-location pages in the short key/value style:
   - `HKCU\Environment`
@@ -66,7 +92,7 @@ Current content model:
   - `services.md`
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. Artifact pages remain supplemental/internal and are intentionally not part of the primary top-level navigation.
 
-## Previous Completed Round
+## Earlier Completed Round
 
 - Refined the site into a registry-first dual-entry knowledge base:
   - scenario pages now use `取证场景 -> 注册表位置` as the main flow;
@@ -94,7 +120,7 @@ Current content model:
 - Updated key registry-location pages to include `相关场景` and changed old `相关 Artifact` sections to `补充阅读` where touched.
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
 
-## Earlier Completed Round
+## Older Completed Round
 
 - Renamed the site and repository metadata to `WinReg Wiki`.
 - Switched `origin` to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
@@ -164,8 +190,8 @@ Both commands completed successfully. The generated index remained valid for 42 
 - Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
 - Continue cleaning older registry-tree pages into the same short dictionary structure used by the latest HKCU/HKLM additions.
 - Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
-- Add deeper registry-location pages for `HKLM\SOFTWARE\Microsoft\Command Processor`, `HKLM\SOFTWARE\Microsoft\WindowsFirewall`, `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`, `BootExecute`, `App Paths`, and `LogonUI`.
-- Add remaining registry artifacts only after the architecture settles: KnownDLLs, App Paths, Winlogon Notify, BootExecute, CachedLogonsCount, LogonUI.
+- Add deeper registry-location pages for `LogonUI`, `Winlogon\Notify`, `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCertDlls`, `AeDebug`, and `Policies\System`.
+- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, and BootExecute if they need structured YAML-backed supplement pages.
 - Add contribution guide and source-quality expectations.
 - Choose a license and add a `LICENSE` file.
 
