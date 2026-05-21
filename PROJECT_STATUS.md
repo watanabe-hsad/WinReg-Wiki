@@ -34,6 +34,32 @@ Current content model:
 
 ## Last Completed Round
 
+- Added and normalized another login/policy/execution-focused registry-tree batch:
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\AppCertDlls`
+  - `HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
+- Rewrote existing `Winlogon` and `Image File Execution Options` registry-tree pages into the current short dictionary structure.
+- Updated scenario pages so primary links include the new registry-location pages:
+  - `registry-checklist.md`
+  - `persistence.md`
+  - `execution.md`
+  - `anti-forensics.md`
+  - `policy-security.md`
+  - `accounts-security.md`
+  - `software-install.md`
+  - `questions/index.md`
+- Compressed these artifact pages into supplemental entries:
+  - `winlogon-userinit.md`
+  - `winlogon-shell.md`
+  - `uac-policies.md`
+  - `specialaccounts-userlist.md`
+- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
+
+## Previous Completed Round
+
 - Continued the registry-tree dictionary expansion with the next HKLM-focused batch:
   - `HKLM\SOFTWARE\Microsoft\Command Processor`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
@@ -58,7 +84,7 @@ Current content model:
   - `ifeo.md`
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
 
-## Previous Completed Round
+## Earlier Completed Round
 
 - Expanded and normalized registry-location reference pages so `注册表位置` remains the primary dictionary entry point.
 - Added or rewrote these registry-location pages in the short key/value style:
@@ -92,7 +118,7 @@ Current content model:
   - `services.md`
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. Artifact pages remain supplemental/internal and are intentionally not part of the primary top-level navigation.
 
-## Earlier Completed Round
+## Older Completed Round
 
 - Refined the site into a registry-first dual-entry knowledge base:
   - scenario pages now use `取证场景 -> 注册表位置` as the main flow;
@@ -120,7 +146,7 @@ Current content model:
 - Updated key registry-location pages to include `相关场景` and changed old `相关 Artifact` sections to `补充阅读` where touched.
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
 
-## Older Completed Round
+## Initial Completed Round
 
 - Renamed the site and repository metadata to `WinReg Wiki`.
 - Switched `origin` to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
@@ -190,8 +216,8 @@ Both commands completed successfully. The generated index remained valid for 42 
 - Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
 - Continue cleaning older registry-tree pages into the same short dictionary structure used by the latest HKCU/HKLM additions.
 - Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
-- Add deeper registry-location pages for `LogonUI`, `Winlogon\Notify`, `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCertDlls`, `AeDebug`, and `Policies\System`.
-- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, and BootExecute if they need structured YAML-backed supplement pages.
+- Add deeper registry-location pages for `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCompatFlags` machine-level paths, `AppCompatFlags\Layers`, `Terminal Server\WinStations\RDP-Tcp`, `Credential Providers`, and `CachedLogonsCount`.
+- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, BootExecute, AeDebug, AppCertDlls, and AppCompatFlags if they need structured YAML-backed supplement pages.
 - Add contribution guide and source-quality expectations.
 - Choose a license and add a `LICENSE` file.
 

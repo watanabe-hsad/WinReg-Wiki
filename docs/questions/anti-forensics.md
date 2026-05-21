@@ -18,6 +18,8 @@
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | EventLog、Defender、EDR、日志相关服务配置。 | 服务配置异常要结合事件日志。 |
 | [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待删除或重命名队列。 | 队列存在不等于操作已完成。 |
 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 异常项需结合重启和文件证据。 |
+| [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 崩溃后调试器配置。 | 可解释异常调试器链路，不证明触发。 |
+| [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 | 需结合 GPO / MDM 和实际状态。 |
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量。 | 可解释命令环境变化。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 | `Path` 异常需结合进程证据。 |
 | [HKCU Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md) | 用户行为 artifact 所在入口。 | 缺失不是反取证证据本身。 |

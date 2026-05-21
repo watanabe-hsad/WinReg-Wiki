@@ -77,6 +77,9 @@ nav:
               - Microsoft:
                   - Command Processor: registry-tree/hkcu/software/microsoft/command-processor.md
                   - Terminal Server Client: registry-tree/hkcu/software/microsoft/terminal-server-client.md
+                  - Windows NT:
+                      - CurrentVersion:
+                          - AppCompatFlags: registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md
                   - Windows:
                       - CurrentVersion:
                           - Explorer: registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
@@ -106,15 +109,19 @@ nav:
                   - Command Processor: registry-tree/hklm/software/microsoft/command-processor.md
                   - Windows NT:
                       - CurrentVersion:
+                          - AeDebug: registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md
                           - EMDMgmt: registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md
                           - NetworkList\Profiles: registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
                           - ProfileList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
                           - Winlogon: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+                          - Winlogon\Notify: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md
                           - Image File Execution Options: registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md
                           - Windows: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md
                   - Windows:
                       - CurrentVersion:
                           - App Paths: registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md
+                          - Authentication\LogonUI: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md
+                          - Policies\System: registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md
                           - Run / RunOnce: registry-tree/hklm/software/microsoft/windows/currentversion/run.md
                           - Uninstall: registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md
                           - ShellServiceObjectDelayLoad: registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md
@@ -148,6 +155,7 @@ nav:
                       - ComputerName: registry-tree/hklm/system/controlset/control/computername.md
                       - Session Manager:
                           - registry-tree/hklm/system/controlset/control/session-manager/index.md
+                          - AppCertDlls: registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md
                           - BootExecute: registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md
                           - KnownDLLs: registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md
                           - PendingFileRenameOperations: registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md

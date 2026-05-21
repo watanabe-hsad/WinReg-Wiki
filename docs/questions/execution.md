@@ -14,7 +14,10 @@
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级 `Path`、`TEMP`、自定义变量。 | 说明执行环境，不证明执行。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级 `Path`、`ComSpec`、`PATHEXT`。 | 需结合具体进程环境。 |
 | [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径和短名称解析。 | 程序注册不等于执行。 |
+| [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 | 更偏程序存在 / 交互线索。 |
+| [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 | 需要崩溃和调试器进程证据。 |
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 需用模块加载证据证明实际加载。 |
+| [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 | 配置存在不等于 DLL 已加载。 |
 | [HKLM\SYSTEM\Services](../registry-tree/hklm/system/controlset/services/index.md) | BAM / DAM、服务、驱动和网络组件配置所在控制集。 | `Services\bam` 是运行线索；普通服务项只证明配置存在。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | driver service 配置。 | 要证明加载需结合驱动加载事件或内存/模块证据。 |
 | [HKLM Uninstall](../registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md) | 软件安装登记和路径线索。 | 证明安装登记，不证明执行。 |
@@ -25,7 +28,7 @@
 
 - UserAssist 与 Prefetch、BAM / DAM、进程日志指向同一程序、同一 SID 和接近时间时，程序执行判断更稳。
 - `cmd.exe` AutoRun、App Paths、`Path` 和 `ComSpec` 解释执行环境；是否触发要看进程创建和命令行。
-- 只有 ShimCache、MUICache、Uninstall 或 Amcache 时，优先写“程序存在 / 被记录过 / 安装登记存在”。
+- 只有 ShimCache、MUICache、AppCompatFlags、Uninstall 或 Amcache 时，优先写“程序存在 / 被记录过 / 安装登记存在”。
 - 对驱动、AppInit_DLLs、Print Monitors、LSA 包，先写“加载配置存在”；是否加载要另证。
 - 路径位于 `%AppData%`、`%Temp%`、`Downloads`、可移动盘或网络共享时，应记录来源路径和文件系统时间线。
 

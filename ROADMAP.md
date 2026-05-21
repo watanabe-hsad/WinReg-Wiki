@@ -41,7 +41,14 @@ Current project name: `WinReg Wiki`.
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\BootExecute`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\PendingFileRenameOperations`
-- Next: add or deepen `LogonUI`, `Winlogon\Notify`, `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCertDlls`, `AeDebug`, `Policies\System`, and additional HKCU network / shell policy locations.
+- Completed login/policy/execution reference pages:
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\AppCertDlls`
+  - `HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
+- Next: add or deepen `Session Manager\SubSystems`, `Session Manager\Memory Management`, machine-level `AppCompatFlags`, `Terminal Server\WinStations\RDP-Tcp`, Credential Providers, CachedLogonsCount, and additional HKCU network / shell policy locations.
 
 ## Phase 3: High-Value Artifacts
 
@@ -72,6 +79,7 @@ Current project name: `WinReg Wiki`.
 - Current status: `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, and `execution` now link to the latest registry-location pages before artifact supplements.
 - Current status: `command-processor-autorun`, `defender-policies`, `firewall-policies`, `audit-policy`, `run-keys`, and `services` artifact pages have been compressed into supplemental entries.
 - Current status: `drivers`, `appinit-dlls`, and `ifeo` artifact pages have also been compressed into supplemental entries.
+- Current status: `winlogon-userinit`, `winlogon-shell`, `uac-policies`, and `specialaccounts-userlist` artifact pages have also been compressed into supplemental entries.
 - Add Sigma-friendly registry path selectors for high-value persistence and policy weakening keys.
 - Add Sysmon, Security.evtx, Defender, TerminalServices, PowerShell, and EDR telemetry references per artifact.
 - Add Velociraptor and KAPE collection notes where useful.

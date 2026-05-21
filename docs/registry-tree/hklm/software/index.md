@@ -27,12 +27,16 @@ HKLM\SOFTWARE\WOW6432Node
 | [`Microsoft\Active Setup\Installed Components`](microsoft/active-setup.md) | Active Setup 机器级组件定义。 |
 | [`Microsoft\Command Processor`](microsoft/command-processor.md) | 机器级 `cmd.exe` 配置和 `AutoRun`。 |
 | [`Microsoft\Windows\CurrentVersion\App Paths`](microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 |
+| [`Microsoft\Windows\CurrentVersion\Authentication\LogonUI`](microsoft/windows/currentversion/authentication/logonui.md) | 登录界面相关状态和显示线索。 |
+| [`Microsoft\Windows\CurrentVersion\Policies\System`](microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 |
 | [`Microsoft\Windows\CurrentVersion\Run`](microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\RunOnce`](microsoft/windows/currentversion/run.md) | 机器级一次性登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\Uninstall`](microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |
 | [`Microsoft\Windows NT\CurrentVersion\Image File Execution Options`](microsoft/windows-nt/currentversion/ifeo.md) | IFEO、Debugger、进程启动相关配置。 |
+| [`Microsoft\Windows NT\CurrentVersion\AeDebug`](microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 |
 | [`Microsoft\Windows NT\CurrentVersion\Windows`](microsoft/windows-nt/currentversion/appinit-dlls.md) | `AppInit_DLLs`、`LoadAppInit_DLLs` 等。 |
 | [`Microsoft\Windows NT\CurrentVersion\Winlogon`](microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录等。 |
+| [`Microsoft\Windows NT\CurrentVersion\Winlogon\Notify`](microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 |
 | [`Microsoft\Windows NT\CurrentVersion\ProfileList`](microsoft/windows-nt/currentversion/profilelist.md) | SID 到用户 profile 路径的映射。 |
 | `Microsoft\Windows\CurrentVersion\Explorer` | Explorer 机器级配置、StartupApproved。 |
 | [`Microsoft\Windows\CurrentVersion\ShellServiceObjectDelayLoad`](microsoft/windows/currentversion/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载配置。 |
@@ -44,7 +48,6 @@ HKLM\SOFTWARE\WOW6432Node
 | [`Policies`](policies.md) | GPO / MDM / 本地策略写入位置。 |
 | [`Policies\Microsoft\Windows Defender`](policies/microsoft/windows-defender.md) | Defender 策略和排除项。 |
 | [`Policies\Microsoft\WindowsFirewall`](policies/microsoft/windowsfirewall.md) | Windows Firewall 策略配置。 |
-| `Microsoft\Windows\CurrentVersion\Policies\System` | UAC 和部分系统策略。 |
 | `Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList` | 登录界面隐藏用户配置。 |
 | [`WOW6432Node`](wow6432node.md) | 32 位应用注册表视图。 |
 | [`Classes`](classes.md) | 机器级文件关联、COM、协议处理器。 |
@@ -63,6 +66,7 @@ HKLM\SOFTWARE\WOW6432Node
 - [自启动与持久化](../../../questions/persistence.md)
 - [安全策略与防护配置](../../../questions/policy-security.md)
 - [程序执行痕迹](../../../questions/execution.md)
+- [账户与安全](../../../questions/accounts-security.md)
 - [网络与系统环境](../../../questions/network.md)
 - [常规注册表检查](../../../questions/registry-checklist.md)
 

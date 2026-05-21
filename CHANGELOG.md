@@ -8,6 +8,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-location pages for login, UAC, compatibility, and debug-related locations:
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\AppCertDlls`
+  - `HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
 - Added registry-location pages for the next HKLM reference batch:
   - `HKLM\SOFTWARE\Microsoft\Command Processor`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
@@ -88,6 +95,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Updated scenario pages so `registry-checklist`, `persistence`, `execution`, `anti-forensics`, `policy-security`, `accounts-security`, `software-install`, and the scenario index link to the new LogonUI / Policies\System / Winlogon Notify / AeDebug / AppCertDlls / AppCompatFlags pages.
+- Rewrote `Winlogon` and `Image File Execution Options` registry-tree pages into the short dictionary structure.
+- Compressed additional artifact pages into supplemental entries:
+  - `docs/artifacts/persistence/winlogon-userinit.md`
+  - `docs/artifacts/persistence/winlogon-shell.md`
+  - `docs/artifacts/security/uac-policies.md`
+  - `docs/artifacts/security/specialaccounts-userlist.md`
 - Updated scenario pages so `registry-checklist`, `persistence`, `execution`, `anti-forensics`, `policy-security`, `network`, `software-install`, and the scenario index link to the new HKLM registry-location pages.
 - Updated registry-tree navigation and overview pages for Session Manager, App Paths, HKLM Command Processor, and WindowsFirewall policies.
 - Compressed additional artifact pages into supplemental entries:
@@ -143,6 +157,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the LogonUI / UAC / Winlogon Notify / AppCompatFlags expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the HKLM Session Manager / App Paths / WindowsFirewall expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-tree expansion and artifact compression.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-first scenario rewrite.

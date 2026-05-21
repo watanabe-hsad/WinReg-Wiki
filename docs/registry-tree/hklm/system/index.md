@@ -59,6 +59,7 @@ HKLM\SYSTEM\ControlSet002
 | [`ControlSet00x\Control\TimeZoneInformation`](controlset/control/timezone.md) | 时区和 Bias。 |
 | [`ControlSet00x\Control\ComputerName`](controlset/control/computername.md) | 主机名。 |
 | [`ControlSet00x\Control\Session Manager`](controlset/control/session-manager/index.md) | 启动早期、KnownDLLs、环境变量和延迟文件操作队列。 |
+| [`ControlSet00x\Control\Session Manager\AppCertDlls`](controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 |
 | [`ControlSet00x\Control\Session Manager\BootExecute`](controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 |
 | [`ControlSet00x\Control\Session Manager\KnownDLLs`](controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 |
 | [`ControlSet00x\Control\Session Manager\PendingFileRenameOperations`](controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 |

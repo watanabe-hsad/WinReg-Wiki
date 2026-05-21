@@ -60,10 +60,14 @@
 | [Microsoft\Active Setup](hklm/software/microsoft/active-setup.md) | 每用户初始化组件定义。 |
 | [Microsoft\Command Processor](hklm/software/microsoft/command-processor.md) | 机器级 `cmd.exe` 配置。 |
 | [Windows\CurrentVersion\App Paths](hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 |
+| [Windows\CurrentVersion\Authentication\LogonUI](hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面相关状态和显示线索。 |
+| [Windows\CurrentVersion\Policies\System](hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 |
 | [Windows\CurrentVersion\Run](hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
 | [ProfileList](hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 路径映射。 |
 | [Winlogon](hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | 交互式登录配置。 |
+| [Winlogon\Notify](hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 |
 | [Image File Execution Options](hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | 按进程名生效的启动配置。 |
+| [AeDebug](hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 |
 | [Windows NT\CurrentVersion\Windows](hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md) | `AppInit_DLLs` 相关配置。 |
 | [Windows\CurrentVersion\ShellServiceObjectDelayLoad](hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 |
 | [Microsoft\Windows Portable Devices](hklm/software/microsoft/windows-portable-devices.md) | WPD / MTP 设备元数据。 |
@@ -95,6 +99,7 @@
 | [RecentDocs](hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU。 |
 | [Internet Settings](hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet。 |
 | [Internet Settings\ZoneMap](hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 |
+| [AppCompatFlags](hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 |
 | [Terminal Server Client](hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端历史。 |
 | [Classes](hkcu/software/classes.md) | 用户级文件关联和 COM。 |
 

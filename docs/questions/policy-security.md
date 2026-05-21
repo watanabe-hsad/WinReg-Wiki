@@ -9,6 +9,7 @@
 | 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
 | [Policies](../registry-tree/hklm/software/policies.md) | GPO / MDM / 本地策略写入位置。 | 值存在不说明来源。 |
+| [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 | 策略值不等于实际提权行为。 |
 | [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender 本地配置和排除项线索。 | 需结合 Tamper Protection 和 Defender 日志。 |
 | [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | Defender 策略禁用、排除项和实时保护相关值。 | 策略值不等于实际防护状态。 |
 | [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall profile 和规则配置。 | 规则存在不等于连接发生。 |
@@ -19,6 +20,7 @@
 | [LSA Security Packages](../registry-tree/hklm/system/controlset/control/lsa/security-packages.md) | 安全包列表。 | 列表变化不等于 DLL 已加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 本地安全策略、审计策略、LSA Secrets。 | 需要专门工具解析。 |
 | [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 允许状态、端口和 NLA。 | 允许远程桌面不等于登录发生。 |
+| [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户和 SID 显示线索。 | 不证明登录成功。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 配置。 | 需结合驱动加载、签名和 Code Integrity。 |
 
 ## 判断要点

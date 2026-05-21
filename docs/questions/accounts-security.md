@@ -13,6 +13,8 @@
 | [HKEY_USERS](../registry-tree/hku/index.md) | 已加载用户 hive 集合。 | live 树只显示已加载 hive。 |
 | [NTUSER.DAT](../registry-tree/hku/ntuser.md) | 用户级配置和行为线索来源。 | 需要先映射 SID。 |
 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `SpecialAccounts\UserList`、自动登录等。 | 隐藏登录界面不等于账户不存在。 |
+| [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户、显示名和选中 SID。 | 不证明登录成功。 |
+| [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC、远程本地账户过滤和登录提示相关策略。 | 需结合策略来源和登录事实。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | LSA 包、RunAsPPL 和认证相关配置。 | 未知包需验证文件、签名和模块加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 安全策略、LSA Secrets、审计相关数据。 | 需要谨慎解析，避免直接手工解释二进制数据。 |
 
@@ -20,7 +22,7 @@
 
 - 先用 ProfileList 建立 SID、用户名目录、用户 hive 的对应关系。
 - 新 SID、临时 profile、`.bak` profile、异常 profile 路径需要和登录日志、文件系统时间线关联。
-- `SpecialAccounts\UserList` 可隐藏登录界面显示，但不等于禁用账户。
+- `SpecialAccounts\UserList` 和 LogonUI 值可解释登录界面显示状态，但不等于账户启用状态或登录成功。
 - LSA 包新增条目时，记录 DLL 名称、路径来源、签名和是否存在模块加载证据。
 
 ## 交叉验证

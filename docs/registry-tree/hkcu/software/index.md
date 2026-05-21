@@ -23,6 +23,7 @@
 | [`Microsoft\Windows\CurrentVersion\Explorer\MountPoints2`](microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷、盘符和网络共享。 |
 | [`Microsoft\Windows\CurrentVersion\Internet Settings`](microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet 设置。 |
 | [`Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap`](microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 |
+| [`Microsoft\Windows NT\CurrentVersion\AppCompatFlags`](microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 |
 | [`Classes`](classes.md) | 用户级 Classes，通常来自 `UsrClass.dat`。 |
 
 ## 注意
@@ -37,6 +38,8 @@
 
 - [自启动与持久化](../../../questions/persistence.md)
 - [Shell / Explorer 用户行为](../../../questions/shell-explorer.md)
+- [程序执行痕迹](../../../questions/execution.md)
+- [软件安装与卸载](../../../questions/software-install.md)
 - [网络与系统环境](../../../questions/network.md)
 - [常规注册表检查](../../../questions/registry-checklist.md)
 

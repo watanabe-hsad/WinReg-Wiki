@@ -15,6 +15,7 @@
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量和 `Path`。 | 影响进程环境，不等于命令执行。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量和 `Path`。 | 需要结合具体进程环境。 |
 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 需要重启和执行证据。 |
+| [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 | 非空配置需验证模块加载。 |
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 需结合基线和模块加载。 |
 | [Active Setup](../registry-tree/hklm/software/microsoft/active-setup.md) | 每用户初始化命令。 | 需比对 HKLM 组件和 HKCU stub。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务和驱动配置。 | 服务配置存在不等于已启动。 |
@@ -22,6 +23,7 @@
 | [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试和 EDR 也可能使用。 |
 | [AppInit_DLLs](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md) | User32 相关 DLL 加载配置。 | 是否加载取决于系统配置和进程类型。 |
 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录和隐藏账户配置。 | 登录事实要靠事件日志。 |
+| [Winlogon\Notify](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 | 配置存在不等于 DLL 已加载。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、通知包、安全包配置。 | 未知 DLL 需验证文件和模块加载。 |
 | [ShellServiceObjectDelayLoad](../registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 | COM CLSID 需回到 Classes 解析。 |
 | [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 可解释短名称解析和搜索路径，不证明执行。 |
