@@ -136,7 +136,7 @@ StartupApproved 主要见于 Windows 8/10/11 的启动应用管理机制；Windo
 ## 相关页面
 
 - 场景：[自启动与持久化](../../questions/persistence.md)
-- 注册表位置：[HKCU Explorer](../../registry-tree/hkcu/explorer.md)、[HKLM\SOFTWARE](../../registry-tree/hklm/software.md)
+- 注册表位置：[HKCU Explorer](../../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md)、[HKLM\SOFTWARE](../../registry-tree/hklm/software/index.md)
 
 ## 参考资料
 

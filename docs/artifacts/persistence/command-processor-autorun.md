@@ -131,7 +131,7 @@ tags:
 ## 相关页面
 
 - 场景：[自启动与持久化](../../questions/persistence.md)
-- 注册表位置：[HKCU\Software](../../registry-tree/hkcu/software.md)、[HKLM\SOFTWARE](../../registry-tree/hklm/software.md)
+- 注册表位置：[HKCU\Software](../../registry-tree/hkcu/software/index.md)、[HKLM\SOFTWARE](../../registry-tree/hklm/software/index.md)
 
 ## 参考资料
 

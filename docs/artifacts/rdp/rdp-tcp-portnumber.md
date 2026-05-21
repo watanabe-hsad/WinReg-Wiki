@@ -133,4 +133,4 @@ Windows 客户端和 Server 通常使用该路径。远程桌面服务角色、R
 ## 相关页面
 
 - 场景：[RDP 与远程访问](../../questions/rdp.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system.md)
+- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)

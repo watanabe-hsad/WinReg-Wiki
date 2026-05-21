@@ -131,5 +131,5 @@ ReadyBoost 从 Windows Vista 引入。部分资料指出 SSD 系统上 ReadyBoos
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt](../../registry-tree/hklm/software/emdmgmt.md)
+- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt](../../registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md)
 

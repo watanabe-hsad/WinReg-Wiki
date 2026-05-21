@@ -42,7 +42,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 - Added GitHub Pages deployment workflow at `.github/workflows/pages.yml`.
 - Added project handoff and maintenance documents: `PROJECT_STATUS.md`, `ROADMAP.md`, and `CHANGELOG.md`.
 - Added GitHub-ready README content with project positioning, local usage, content principles, current scope, contribution notes, and license status.
-- Initialized local git repository on branch `main` and configured `origin` as `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`.
+- Initialized local git repository on branch `main`; `origin` is now configured as `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
 - Added generated artifact data index output target: `docs/artifacts/generated-index.md`.
 - Added missing YAML records for previously existing artifact pages: UserAssist, Amcache, ShimCache / AppCompatCache, Services, IFEO, Terminal Server Client, USBSTOR, and MountedDevices.
 - Added user behavior artifact pages and YAML:
@@ -62,6 +62,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Renamed the project display name and repository metadata to `WinReg Wiki`.
+- Switched repository metadata from the old handbook repository to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
+- Simplified top-level navigation to `首页`, `注册表位置`, and `取证场景`, with `贡献` and `标签` as auxiliary entries.
+- Moved artifact indexes and detection engineering under `取证场景` instead of keeping them as top-level tabs.
+- Reworked `注册表位置` navigation to use section index pages and removed visible `概览` child items.
+- Moved registry-tree files into a directory hierarchy closer to native Windows registry paths.
+- Rewrote the homepage as a compact `WinReg Wiki` entry page.
 - Updated `mkdocs.yml` so the new USB/device and persistence artifacts appear in `注册表 Artifact`, and the new path pages appear under `注册表位置`.
 - Updated `docs/artifacts/index.md`, scenario pages, detection page, and registry-tree overview pages to link the new artifacts.
 - Regenerated `docs/artifacts/generated-index.md`; it now includes 42 YAML-backed artifacts.
@@ -87,6 +94,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the `WinReg Wiki` navigation and file-tree rewrite.
 - `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used briefly for local preview of `注册表位置`, `注册表 Artifact`, and `结构化数据索引`.
 - `.venv/bin/python scripts/generate-artifact-index.py` completed successfully and wrote `docs/artifacts/generated-index.md`.
 - `.venv/bin/mkdocs build --strict` completed successfully.

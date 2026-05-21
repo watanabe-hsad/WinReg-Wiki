@@ -134,5 +134,5 @@ Windows 10/11 对 WPD/MTP 设备支持较完整。Windows 7/8 也可能存在相
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM](../../registry-tree/hklm/system/swd-wpdbusenum.md)
+- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM](../../registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md)
 

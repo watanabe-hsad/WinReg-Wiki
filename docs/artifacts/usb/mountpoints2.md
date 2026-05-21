@@ -128,7 +128,7 @@ Windows 7/10/11 都可能存在 MountPoints2，但子键形态、自动播放相
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)、[Shell / Explorer 用户行为](../../questions/shell-explorer.md)
-- 注册表位置：[HKCU Explorer](../../registry-tree/hkcu/explorer.md)、[NTUSER.DAT](../../registry-tree/hku/ntuser.md)
+- 注册表位置：[HKCU Explorer](../../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md)、[NTUSER.DAT](../../registry-tree/hku/ntuser.md)
 
 ## 参考资料
 

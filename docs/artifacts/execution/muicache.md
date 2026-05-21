@@ -129,7 +129,7 @@ Windows 7、Windows 10、Windows 11 的 MUICache 路径和 value 命名存在差
 ## 相关页面
 
 - 场景：[程序执行](../../questions/execution.md)、[Shell / Explorer 用户行为](../../questions/shell-explorer.md)
-- 注册表位置：[HKEY_CLASSES_ROOT](../../registry-tree/hkey-classes-root.md)、[UsrClass.dat](../../registry-tree/hku/usrclass.md)
+- 注册表位置：[HKEY_CLASSES_ROOT](../../registry-tree/hkcr/index.md)、[UsrClass.dat](../../registry-tree/hku/usrclass.md)
 
 ## 参考资料
 

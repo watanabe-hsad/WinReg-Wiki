@@ -133,7 +133,7 @@ BAM 主要见于 Windows 10 及后续版本；Windows 7 不应预期存在同等
 ## 相关页面
 
 - 场景：[程序执行](../../questions/execution.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system.md)、[HKEY_LOCAL_MACHINE](../../registry-tree/hkey-local-machine.md)
+- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)、[HKEY_LOCAL_MACHINE](../../registry-tree/hklm/index.md)
 
 ## 参考资料
 

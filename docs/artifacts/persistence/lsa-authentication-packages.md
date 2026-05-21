@@ -133,7 +133,7 @@ Windows 7/10/11/Server 都存在 LSA 相关配置，但默认值、Credential Gu
 ## 相关页面
 
 - 场景：[自启动与持久化](../../questions/persistence.md)、[账户与安全](../../questions/accounts-security.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system.md)、[HKLM\SECURITY](../../registry-tree/hklm/security.md)
+- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)、[HKLM\SECURITY](../../registry-tree/hklm/security.md)
 
 ## 参考资料
 

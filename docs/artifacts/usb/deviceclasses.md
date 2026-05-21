@@ -131,5 +131,5 @@ tags:
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses](../../registry-tree/hklm/system/deviceclasses.md)
+- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses](../../registry-tree/hklm/system/controlset/control/deviceclasses.md)
 

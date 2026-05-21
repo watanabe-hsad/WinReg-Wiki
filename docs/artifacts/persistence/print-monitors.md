@@ -134,5 +134,5 @@ Windows 7 / 10 / 11 / Server 都可能存在该路径。默认监视器、打印
 ## 相关页面
 
 - 场景：[自启动与持久化](../../questions/persistence.md)
-- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Control\Print\Monitors](../../registry-tree/hklm/system/print-monitors.md)
+- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Control\Print\Monitors](../../registry-tree/hklm/system/controlset/control/print-monitors.md)
 

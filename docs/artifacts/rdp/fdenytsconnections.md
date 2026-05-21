@@ -131,4 +131,4 @@ Windows 7/10/11/Server 都常见该配置，但策略、GPO、MDM、服务器角
 ## 相关页面
 
 - 场景：[RDP 与远程访问](../../questions/rdp.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system.md)
+- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)

@@ -133,4 +133,4 @@ RunMRU 在 Windows 7/10/11 常见，但 Windows 版本、隐私设置、Run dial
 ## 相关页面
 
 - 场景：[Shell / Explorer 用户行为](../../questions/shell-explorer.md)
-- 注册表位置：[HKEY_CURRENT_USER](../../registry-tree/hkey-current-user.md), [HKCU Explorer](../../registry-tree/hkcu/explorer.md), [HKEY_USERS](../../registry-tree/hkey-users.md)
+- 注册表位置：[HKEY_CURRENT_USER](../../registry-tree/hkcu/index.md), [HKCU Explorer](../../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md), [HKEY_USERS](../../registry-tree/hku/index.md)

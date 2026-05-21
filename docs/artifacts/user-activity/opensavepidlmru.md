@@ -135,4 +135,4 @@ Windows 7/10/11 常见该路径。不同 common dialog 版本、应用框架、U
 ## 相关页面
 
 - 场景：[Shell / Explorer 用户行为](../../questions/shell-explorer.md)
-- 注册表位置：[HKEY_CURRENT_USER](../../registry-tree/hkey-current-user.md), [HKCU Explorer](../../registry-tree/hkcu/explorer.md)
+- 注册表位置：[HKEY_CURRENT_USER](../../registry-tree/hkcu/index.md), [HKCU Explorer](../../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md)

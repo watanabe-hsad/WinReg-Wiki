@@ -136,5 +136,5 @@ tags:
 ## 相关页面
 
 - 场景：[自启动与持久化](../../questions/persistence.md)、[Shell / Explorer 用户行为](../../questions/shell-explorer.md)
-- 注册表位置：[HKLM\SOFTWARE\...\ShellServiceObjectDelayLoad](../../registry-tree/hklm/software/shellserviceobjectdelayload.md)
+- 注册表位置：[HKLM\SOFTWARE\...\ShellServiceObjectDelayLoad](../../registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md)
 

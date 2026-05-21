@@ -1,8 +1,8 @@
-site_name: Windows 注册表取证与检测手册
-site_description: 面向 DFIR、威胁狩猎和检测工程的 Windows Registry Artifact Handbook
+site_name: WinReg Wiki
+site_description: Windows 注册表键值速查与取证线索
 site_url: http://hsad.xyz/windows-registry-forensics-handbook/
-repo_name: watanabe-hsad/windows-registry-forensics-handbook
-repo_url: https://github.com/watanabe-hsad/windows-registry-forensics-handbook
+repo_name: watanabe-hsad/WinReg-Wiki
+repo_url: https://github.com/watanabe-hsad/WinReg-Wiki
 edit_uri: edit/main/docs/
 
 theme:
@@ -63,10 +63,85 @@ plugins:
 
 nav:
   - 首页: index.md
-  - 基础概念:
-      - 注册表基础: getting-started/registry-basics.md
-      - 时间戳语义: getting-started/timestamps.md
-  - 调查场景:
+  - 注册表位置:
+      - registry-tree/index.md
+      - HKEY_CLASSES_ROOT:
+          - registry-tree/hkcr/index.md
+      - HKEY_CURRENT_USER:
+          - registry-tree/hkcu/index.md
+          - Software:
+              - registry-tree/hkcu/software/index.md
+              - Classes: registry-tree/hkcu/software/classes.md
+              - Microsoft:
+                  - Terminal Server Client: registry-tree/hkcu/software/microsoft/terminal-server-client.md
+                  - Windows:
+                      - CurrentVersion:
+                          - Explorer: registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+                          - RunMRU: registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md
+                          - RecentDocs: registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md
+                          - ComDlg32: registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md
+                          - Internet Settings: registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md
+      - HKEY_LOCAL_MACHINE:
+          - registry-tree/hklm/index.md
+          - SAM: registry-tree/hklm/sam.md
+          - SECURITY: registry-tree/hklm/security.md
+          - SOFTWARE:
+              - registry-tree/hklm/software/index.md
+              - Classes: registry-tree/hklm/software/classes.md
+              - Policies: registry-tree/hklm/software/policies.md
+              - WOW6432Node: registry-tree/hklm/software/wow6432node.md
+              - Microsoft:
+                  - Active Setup: registry-tree/hklm/software/microsoft/active-setup.md
+                  - Windows NT:
+                      - CurrentVersion:
+                          - EMDMgmt: registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md
+                          - ProfileList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
+                          - Winlogon: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+                          - Image File Execution Options: registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md
+                          - Windows: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md
+                  - Windows:
+                      - CurrentVersion:
+                          - Uninstall: registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md
+                          - ShellServiceObjectDelayLoad: registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md
+                  - Windows Defender: registry-tree/hklm/software/microsoft/windows-defender.md
+                  - Windows Portable Devices: registry-tree/hklm/software/microsoft/windows-portable-devices.md
+                  - Windows Search:
+                      - VolumeInfoCache: registry-tree/hklm/software/microsoft/windows-search/volumeinfocache.md
+          - SYSTEM:
+              - registry-tree/hklm/system/index.md
+              - Select: registry-tree/hklm/system/select.md
+              - MountedDevices: registry-tree/hklm/system/mounteddevices.md
+              - ControlSet00x:
+                  - registry-tree/hklm/system/controlset/index.md
+                  - Services:
+                      - registry-tree/hklm/system/controlset/services/index.md
+                      - Drivers: registry-tree/hklm/system/controlset/services/drivers.md
+                      - Tcpip: registry-tree/hklm/system/controlset/services/tcpip.md
+                  - Enum:
+                      - registry-tree/hklm/system/controlset/enum/index.md
+                      - USB: registry-tree/hklm/system/controlset/enum/usb.md
+                      - SWD\WPDBUSENUM: registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md
+                  - Control:
+                      - DeviceClasses: registry-tree/hklm/system/controlset/control/deviceclasses.md
+                      - Terminal Server: registry-tree/hklm/system/controlset/control/terminal-server.md
+                      - TimeZoneInformation: registry-tree/hklm/system/controlset/control/timezone.md
+                      - ComputerName: registry-tree/hklm/system/controlset/control/computername.md
+                      - Print\Monitors: registry-tree/hklm/system/controlset/control/print-monitors.md
+                      - Lsa:
+                          - registry-tree/hklm/system/controlset/control/lsa/index.md
+                          - Security Packages: registry-tree/hklm/system/controlset/control/lsa/security-packages.md
+          - HARDWARE: registry-tree/hklm/hardware.md
+          - BCD00000000: registry-tree/hklm/bcd.md
+      - HKEY_USERS:
+          - registry-tree/hku/index.md
+          - .DEFAULT: registry-tree/hku/default.md
+          - 服务账户 SID: registry-tree/hku/service-sids.md
+          - SID 映射: registry-tree/hku/sid-mapping.md
+          - NTUSER.DAT: registry-tree/hku/ntuser.md
+          - UsrClass.dat: registry-tree/hku/usrclass.md
+      - HKEY_CURRENT_CONFIG:
+          - registry-tree/hkcc/index.md
+  - 取证场景:
       - questions/index.md
       - 程序执行: questions/execution.md
       - Shell / Explorer 用户行为: questions/shell-explorer.md
@@ -78,134 +153,9 @@ nav:
       - 网络与系统环境: questions/network.md
       - 软件安装与卸载: questions/software-install.md
       - 反取证与清理痕迹: questions/anti-forensics.md
-  - 注册表位置:
-      - 总览: registry-tree/index.md
-      - HKEY_CLASSES_ROOT: registry-tree/hkey-classes-root.md
-      - HKEY_CURRENT_USER:
-          - 概览: registry-tree/hkey-current-user.md
-          - Software:
-              - 概览: registry-tree/hkcu/software.md
-              - Microsoft:
-                  - Windows:
-                      - CurrentVersion:
-                          - Explorer:
-                              - 概览: registry-tree/hkcu/explorer.md
-                              - RunMRU: registry-tree/hkcu/software/runmru.md
-                              - RecentDocs: registry-tree/hkcu/software/recentdocs.md
-                              - ComDlg32: registry-tree/hkcu/software/comdlg32.md
-                          - Internet Settings: registry-tree/hkcu/software/internet-settings.md
-                  - Terminal Server Client: registry-tree/hkcu/terminal-server-client.md
-              - Classes: registry-tree/hkcu/software/classes.md
-      - HKEY_LOCAL_MACHINE:
-          - 概览: registry-tree/hkey-local-machine.md
-          - SAM: registry-tree/hklm/sam.md
-          - SECURITY: registry-tree/hklm/security.md
-          - SOFTWARE:
-              - 概览: registry-tree/hklm/software.md
-              - Microsoft:
-                  - Windows NT:
-                      - CurrentVersion:
-                          - EMDMgmt: registry-tree/hklm/software/emdmgmt.md
-                          - ProfileList: registry-tree/hklm/software/profilelist.md
-                          - Winlogon: registry-tree/hklm/software/winlogon.md
-                          - Image File Execution Options: registry-tree/hklm/software/ifeo.md
-                          - Windows: registry-tree/hklm/software/appinit-dlls.md
-                  - Windows:
-                      - CurrentVersion:
-                          - Uninstall: registry-tree/hklm/software/uninstall.md
-                          - ShellServiceObjectDelayLoad: registry-tree/hklm/software/shellserviceobjectdelayload.md
-                  - Windows Defender: registry-tree/hklm/software/defender.md
-                  - Active Setup: registry-tree/hklm/software/active-setup.md
-                  - Windows Portable Devices: registry-tree/hklm/software/portable-devices.md
-                  - Windows Search\VolumeInfoCache: registry-tree/hklm/software/volumeinfocache.md
-              - Policies: registry-tree/hklm/software/policies.md
-              - WOW6432Node: registry-tree/hklm/software/wow6432node.md
-              - Classes: registry-tree/hklm/software/classes.md
-          - SYSTEM:
-              - 概览: registry-tree/hklm/system.md
-              - Select: registry-tree/hklm/system/select.md
-              - ControlSet00x:
-                  - 概览: registry-tree/hklm/system/controlset.md
-                  - Services:
-                      - 概览: registry-tree/hklm/system/services.md
-                      - Drivers: registry-tree/hklm/system/drivers.md
-                      - Services\Tcpip: registry-tree/hklm/system/tcpip.md
-                  - Enum:
-                      - 概览: registry-tree/hklm/system/enum.md
-                      - USB: registry-tree/hklm/system/usb.md
-                      - SWD\WPDBUSENUM: registry-tree/hklm/system/swd-wpdbusenum.md
-                  - Control:
-                      - DeviceClasses: registry-tree/hklm/system/deviceclasses.md
-                      - Terminal Server: registry-tree/hklm/system/terminal-server.md
-                      - TimeZoneInformation: registry-tree/hklm/system/timezone.md
-                      - ComputerName: registry-tree/hklm/system/computername.md
-                      - Print\Monitors: registry-tree/hklm/system/print-monitors.md
-                      - Lsa:
-                          - 概览: registry-tree/hklm/system/lsa.md
-                          - Security Packages: registry-tree/hklm/system/lsa-security-packages.md
-              - MountedDevices: registry-tree/hklm/system/mounteddevices.md
-          - HARDWARE: registry-tree/hklm/hardware.md
-          - BCD00000000: registry-tree/hklm/bcd.md
-      - HKEY_USERS:
-          - 概览: registry-tree/hkey-users.md
-          - .DEFAULT: registry-tree/hku/default.md
-          - 服务账户 SID: registry-tree/hku/service-sids.md
-          - SID 映射: registry-tree/hku/sid-mapping.md
-          - NTUSER.DAT: registry-tree/hku/ntuser.md
-          - UsrClass.dat: registry-tree/hku/usrclass.md
-      - HKEY_CURRENT_CONFIG: registry-tree/hkey-current-config.md
-  - 注册表 Artifact:
-      - 总览: artifacts/index.md
+      - Artifact 索引: artifacts/index.md
       - 结构化数据索引: artifacts/generated-index.md
-      - 持久化 / 自启动:
-          - Run / RunOnce: artifacts/persistence/run-keys.md
-          - Active Setup: artifacts/persistence/active-setup.md
-          - StartupApproved: artifacts/persistence/startupapproved.md
-          - Services: artifacts/persistence/services.md
-          - Drivers: artifacts/persistence/drivers.md
-          - IFEO: artifacts/persistence/ifeo.md
-          - AppInit_DLLs: artifacts/persistence/appinit-dlls.md
-          - Winlogon Userinit: artifacts/persistence/winlogon-userinit.md
-          - Winlogon Shell: artifacts/persistence/winlogon-shell.md
-          - LSA Authentication Packages: artifacts/persistence/lsa-authentication-packages.md
-          - LSA Security Packages: artifacts/persistence/lsa-security-packages.md
-          - Command Processor AutoRun: artifacts/persistence/command-processor-autorun.md
-          - ShellServiceObjectDelayLoad: artifacts/persistence/shellserviceobjectdelayload.md
-          - Print Monitors: artifacts/persistence/print-monitors.md
-      - 程序执行 / 程序存在:
-          - UserAssist: artifacts/execution/userassist.md
-          - BAM / DAM: artifacts/execution/bam-dam.md
-          - Amcache: artifacts/execution/amcache.md
-          - ShimCache: artifacts/execution/shimcache.md
-          - MUICache: artifacts/execution/muicache.md
-      - 用户行为:
-          - RunMRU: artifacts/user-activity/runmru.md
-          - RecentDocs: artifacts/user-activity/recentdocs.md
-          - OpenSavePidlMRU: artifacts/user-activity/opensavepidlmru.md
-          - LastVisitedPidlMRU: artifacts/user-activity/lastvisitedpidlmru.md
-      - USB / 外接设备:
-          - USB: artifacts/usb/usb.md
-          - USBSTOR: artifacts/usb/usbstor.md
-          - DeviceClasses: artifacts/usb/deviceclasses.md
-          - Enum SWD WPDBUSENUM: artifacts/usb/swd-wpdbusenum.md
-          - MountedDevices: artifacts/usb/mounteddevices.md
-          - MountPoints2: artifacts/usb/mountpoints2.md
-          - EMDMgmt: artifacts/usb/emdmgmt.md
-          - Portable Devices: artifacts/usb/portable-devices.md
-          - VolumeInfoCache: artifacts/usb/volumeinfocache.md
-      - RDP / 远程访问:
-          - Terminal Server Client: artifacts/rdp/terminal-server-client.md
-          - fDenyTSConnections: artifacts/rdp/fdenytsconnections.md
-          - RDP-Tcp PortNumber: artifacts/rdp/rdp-tcp-portnumber.md
-          - CredSSP / NLA: artifacts/rdp/credssp-nla.md
-      - 账户与安全策略:
-          - ProfileList: artifacts/security/profilelist.md
-          - Defender Policies: artifacts/security/defender-policies.md
-          - UAC Policies: artifacts/security/uac-policies.md
-          - Firewall Policies: artifacts/security/firewall-policies.md
-          - Audit Policy: artifacts/security/audit-policy.md
-          - SpecialAccounts\UserList: artifacts/security/specialaccounts-userlist.md
-  - 检测工程: detection/index.md
+      - 检测工程: detection/index.md
   - 贡献:
       - 页面模板: contributing/template.md
   - 标签: tags.md

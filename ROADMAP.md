@@ -1,15 +1,19 @@
 # Roadmap
 
+Current project name: `WinReg Wiki`.
+
 ## Phase 1: Core Structure
 
-- Keep the homepage as a dual entry point: investigation scenarios and Windows native registry tree.
+- Keep the homepage as a compact Wiki entry page.
+- Keep top-level navigation limited to `首页`, `注册表位置`, and `取证场景`.
 - Keep MkDocs Material configuration simple and avoid heavy theme customization.
 - Maintain a consistent artifact page template with evidence semantics, timestamp notes, detection ideas, false positives, collection, tooling, and cross validation.
 - Keep `data/artifacts/*.yml` alongside manual pages for structured future use.
 
 ## Phase 2: Registry Tree Depth
 
-- Current status: registry-location navigation now follows a Windows-registry-like hierarchy instead of investigation themes.
+- Current status: registry-location navigation uses section index pages and follows a Windows-registry-like hierarchy instead of investigation themes.
+- Current status: visible `概览` child items have been removed from registry-location navigation.
 - Completed path-reference pages: `HKLM\SYSTEM\Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, and `Lsa`.
 - Completed path-reference pages: `HKLM\SOFTWARE\ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, and `Classes`.
 - Completed path-reference pages: HKCU Explorer, ComDlg32, RunMRU, RecentDocs, Internet Settings, Classes, Terminal Server Client, plus HKU `.DEFAULT` and service-account SID pages.

@@ -1,6 +1,6 @@
-# 按调查场景查
+# 取证场景
 
-这个入口从真实调查问题出发。每个问题先给高价值注册表 artifact，再提醒必须交叉验证的日志、文件系统和 EDR 证据。
+这个入口按调查问题组织。注册表线索在这里解释证据语义、交叉验证和检测思路；路径本身的含义回到 [注册表位置](../registry-tree/index.md) 查询。
 
 | 调查问题 | 场景页 | 优先查看 | 辅助验证 |
 |---|---|---|---|
@@ -15,6 +15,14 @@
 | 是否安装或卸载过软件？ | [软件安装与卸载](software-install.md) | `Uninstall`, [Amcache](../artifacts/execution/amcache.md), [MUICache](../artifacts/execution/muicache.md), [UserAssist](../artifacts/execution/userassist.md) | MSI logs, Program Files, Prefetch, ShimCache |
 | 是否有反取证、清理痕迹或日志策略修改？ | [反取证与清理痕迹](anti-forensics.md) | [Defender Policies](../artifacts/security/defender-policies.md), `EventLog`, Audit Policy, [StartupApproved](../artifacts/persistence/startupapproved.md) | Event log gaps, 1102, PowerShell logs, EDR tamper events |
 | 是否存在 Shell / Explorer 相关用户行为痕迹？ | [Shell / Explorer 用户行为](shell-explorer.md) | [UserAssist](../artifacts/execution/userassist.md), [MUICache](../artifacts/execution/muicache.md), [MountPoints2](../artifacts/usb/mountpoints2.md), [RunMRU](../artifacts/user-activity/runmru.md), [RecentDocs](../artifacts/user-activity/recentdocs.md) | LNK, Jump Lists, ShellBags, file dialogs |
+
+## 索引
+
+| 入口 | 内容 |
+|---|---|
+| [Artifact 索引](../artifacts/index.md) | 按 artifact 类型查看证据语义、采集、误报和交叉验证。 |
+| [结构化数据索引](../artifacts/generated-index.md) | 从 `data/artifacts/*.yml` 生成的表格索引。 |
+| [检测工程](../detection/index.md) | 注册表检测规则的路径组合、误报和验证思路。 |
 
 ## 调查流程建议
 

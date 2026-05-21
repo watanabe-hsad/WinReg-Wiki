@@ -139,7 +139,7 @@ Windows 10/11 和 Server 的 Defender 平台、Tamper Protection、EDR in block 
 ## 相关页面
 
 - 场景：[安全策略与防护配置](../../questions/policy-security.md)、[反取证与清理痕迹](../../questions/anti-forensics.md)
-- 注册表位置：[HKLM\SOFTWARE](../../registry-tree/hklm/software.md)、[HKEY_LOCAL_MACHINE](../../registry-tree/hkey-local-machine.md)
+- 注册表位置：[HKLM\SOFTWARE](../../registry-tree/hklm/software/index.md)、[HKEY_LOCAL_MACHINE](../../registry-tree/hklm/index.md)
 
 ## 参考资料
 

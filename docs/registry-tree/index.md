@@ -6,11 +6,11 @@
 
 | 根键 | 内容 | 离线来源 |
 |---|---|---|
-| [HKEY_CLASSES_ROOT](hkey-classes-root.md) | 文件关联、COM、协议处理器的合并视图。 | `SOFTWARE\Classes` + 用户 `UsrClass.dat` |
-| [HKEY_CURRENT_USER](hkey-current-user.md) | 当前用户配置，映射到 `HKEY_USERS\<SID>`。 | 用户 `NTUSER.DAT`，部分内容来自 `UsrClass.dat` |
-| [HKEY_LOCAL_MACHINE](hkey-local-machine.md) | 机器级配置和系统数据库。 | `SAM`、`SECURITY`、`SOFTWARE`、`SYSTEM`、`BCD` |
-| [HKEY_USERS](hkey-users.md) | 已加载用户 hive、服务账户 hive 和默认账户 hive。 | `DEFAULT`、用户 `NTUSER.DAT` / `UsrClass.dat` |
-| [HKEY_CURRENT_CONFIG](hkey-current-config.md) | 当前硬件配置映射。 | `SYSTEM` 中的 Hardware Profiles |
+| [HKEY_CLASSES_ROOT](hkcr/index.md) | 文件关联、COM、协议处理器的合并视图。 | `SOFTWARE\Classes` + 用户 `UsrClass.dat` |
+| [HKEY_CURRENT_USER](hkcu/index.md) | 当前用户配置，映射到 `HKEY_USERS\<SID>`。 | 用户 `NTUSER.DAT`，部分内容来自 `UsrClass.dat` |
+| [HKEY_LOCAL_MACHINE](hklm/index.md) | 机器级配置和系统数据库。 | `SAM`、`SECURITY`、`SOFTWARE`、`SYSTEM`、`BCD` |
+| [HKEY_USERS](hku/index.md) | 已加载用户 hive、服务账户 hive 和默认账户 hive。 | `DEFAULT`、用户 `NTUSER.DAT` / `UsrClass.dat` |
+| [HKEY_CURRENT_CONFIG](hkcc/index.md) | 当前硬件配置映射。 | `SYSTEM` 中的 Hardware Profiles |
 
 ## HKEY_LOCAL_MACHINE
 
@@ -18,8 +18,8 @@
 |---|---|
 | [HKLM\SAM](hklm/sam.md) | 本地账户和组数据库。 |
 | [HKLM\SECURITY](hklm/security.md) | LSA、审计策略、安全策略。 |
-| [HKLM\SOFTWARE](hklm/software.md) | 软件、策略、ProfileList、Winlogon、Defender、Classes。 |
-| [HKLM\SYSTEM](hklm/system.md) | ControlSet、服务、驱动、设备、网络、RDP 服务端。 |
+| [HKLM\SOFTWARE](hklm/software/index.md) | 软件、策略、ProfileList、Winlogon、Defender、Classes。 |
+| [HKLM\SYSTEM](hklm/system/index.md) | ControlSet、服务、驱动、设备、网络、RDP 服务端。 |
 | [HKLM\HARDWARE](hklm/hardware.md) | 运行时硬件枚举。 |
 | [HKLM\BCD00000000](hklm/bcd.md) | 启动配置数据库映射。 |
 
@@ -28,38 +28,38 @@
 | 路径 | 内容 |
 |---|---|
 | [Select](hklm/system/select.md) | `CurrentControlSet` 到 `ControlSet00x` 的映射。 |
-| [ControlSet00x](hklm/system/controlset.md) | 真实控制集。 |
-| [ControlSet00x\Services](hklm/system/services.md) | 服务、驱动和网络组件配置。 |
-| [ControlSet00x\Services\<DriverName>](hklm/system/drivers.md) | 驱动服务配置。 |
-| [ControlSet00x\Enum](hklm/system/enum.md) | 设备枚举树。 |
-| [ControlSet00x\Enum\USB](hklm/system/usb.md) | USB 总线设备枚举。 |
-| [ControlSet00x\Enum\SWD\WPDBUSENUM](hklm/system/swd-wpdbusenum.md) | WPD / MTP 设备枚举。 |
-| [ControlSet00x\Control\DeviceClasses](hklm/system/deviceclasses.md) | 设备接口类注册。 |
+| [ControlSet00x](hklm/system/controlset/index.md) | 真实控制集。 |
+| [ControlSet00x\Services](hklm/system/controlset/services/index.md) | 服务、驱动和网络组件配置。 |
+| [ControlSet00x\Services\<DriverName>](hklm/system/controlset/services/drivers.md) | 驱动服务配置。 |
+| [ControlSet00x\Enum](hklm/system/controlset/enum/index.md) | 设备枚举树。 |
+| [ControlSet00x\Enum\USB](hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 |
+| [ControlSet00x\Enum\SWD\WPDBUSENUM](hklm/system/controlset/enum/swd-wpdbusenum.md) | WPD / MTP 设备枚举。 |
+| [ControlSet00x\Control\DeviceClasses](hklm/system/controlset/control/deviceclasses.md) | 设备接口类注册。 |
 | [MountedDevices](hklm/system/mounteddevices.md) | 卷、盘符和设备映射。 |
-| [Control\Terminal Server](hklm/system/terminal-server.md) | RDP 服务端配置。 |
-| [Control\Print\Monitors](hklm/system/print-monitors.md) | 打印端口监视器配置。 |
-| [Services\Tcpip](hklm/system/tcpip.md) | TCP/IP 全局和接口配置。 |
-| [Control\TimeZoneInformation](hklm/system/timezone.md) | 时区配置。 |
-| [Control\ComputerName](hklm/system/computername.md) | 计算机名配置。 |
-| [Control\Lsa](hklm/system/lsa.md) | LSA 运行配置。 |
-| [Control\Lsa\Security Packages](hklm/system/lsa-security-packages.md) | LSA 安全支持包列表。 |
+| [Control\Terminal Server](hklm/system/controlset/control/terminal-server.md) | RDP 服务端配置。 |
+| [Control\Print\Monitors](hklm/system/controlset/control/print-monitors.md) | 打印端口监视器配置。 |
+| [Services\Tcpip](hklm/system/controlset/services/tcpip.md) | TCP/IP 全局和接口配置。 |
+| [Control\TimeZoneInformation](hklm/system/controlset/control/timezone.md) | 时区配置。 |
+| [Control\ComputerName](hklm/system/controlset/control/computername.md) | 计算机名配置。 |
+| [Control\Lsa](hklm/system/controlset/control/lsa/index.md) | LSA 运行配置。 |
+| [Control\Lsa\Security Packages](hklm/system/controlset/control/lsa/security-packages.md) | LSA 安全支持包列表。 |
 
 ## HKLM\SOFTWARE 常见分支
 
 | 路径 | 内容 |
 |---|---|
-| [Microsoft\Active Setup](hklm/software/active-setup.md) | 每用户初始化组件定义。 |
-| [ProfileList](hklm/software/profilelist.md) | SID 到 profile 路径映射。 |
-| [Winlogon](hklm/software/winlogon.md) | 交互式登录配置。 |
-| [Image File Execution Options](hklm/software/ifeo.md) | 按进程名生效的启动配置。 |
-| [Windows NT\CurrentVersion\Windows](hklm/software/appinit-dlls.md) | `AppInit_DLLs` 相关配置。 |
-| [Windows\CurrentVersion\ShellServiceObjectDelayLoad](hklm/software/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 |
-| [Microsoft\Windows Portable Devices](hklm/software/portable-devices.md) | WPD / MTP 设备元数据。 |
-| [Windows NT\CurrentVersion\EMDMgmt](hklm/software/emdmgmt.md) | EMDMgmt / ReadyBoost 辅助记录。 |
-| [Windows Search\VolumeInfoCache](hklm/software/volumeinfocache.md) | Windows Search 卷信息缓存。 |
+| [Microsoft\Active Setup](hklm/software/microsoft/active-setup.md) | 每用户初始化组件定义。 |
+| [ProfileList](hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 路径映射。 |
+| [Winlogon](hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | 交互式登录配置。 |
+| [Image File Execution Options](hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | 按进程名生效的启动配置。 |
+| [Windows NT\CurrentVersion\Windows](hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md) | `AppInit_DLLs` 相关配置。 |
+| [Windows\CurrentVersion\ShellServiceObjectDelayLoad](hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 |
+| [Microsoft\Windows Portable Devices](hklm/software/microsoft/windows-portable-devices.md) | WPD / MTP 设备元数据。 |
+| [Windows NT\CurrentVersion\EMDMgmt](hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md) | EMDMgmt / ReadyBoost 辅助记录。 |
+| [Windows Search\VolumeInfoCache](hklm/software/microsoft/windows-search/volumeinfocache.md) | Windows Search 卷信息缓存。 |
 | [Policies](hklm/software/policies.md) | 机器级策略写入位置。 |
-| [Microsoft\Windows Defender](hklm/software/defender.md) | Defender 配置和状态相关项。 |
-| [Uninstall](hklm/software/uninstall.md) | 软件安装登记。 |
+| [Microsoft\Windows Defender](hklm/software/microsoft/windows-defender.md) | Defender 配置和状态相关项。 |
+| [Uninstall](hklm/software/microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |
 | [WOW6432Node](hklm/software/wow6432node.md) | 32 位应用注册表视图。 |
 | [Classes](hklm/software/classes.md) | 机器级文件关联和 COM。 |
 
@@ -67,13 +67,13 @@
 
 | 路径 | 内容 |
 |---|---|
-| [HKCU\Software](hkcu/software.md) | 用户软件和应用配置。 |
-| [Explorer](hkcu/explorer.md) | Shell / Explorer 用户级配置入口。 |
-| [ComDlg32](hkcu/software/comdlg32.md) | Common dialog MRU。 |
-| [RunMRU](hkcu/software/runmru.md) | Win+R 输入历史。 |
-| [RecentDocs](hkcu/software/recentdocs.md) | 最近文档名称和 MRU。 |
-| [Internet Settings](hkcu/software/internet-settings.md) | 用户代理、PAC、WinINet、ZoneMap。 |
-| [Terminal Server Client](hkcu/terminal-server-client.md) | MSTSC 客户端历史。 |
+| [HKCU\Software](hkcu/software/index.md) | 用户软件和应用配置。 |
+| [Explorer](hkcu/software/microsoft/windows/currentversion/explorer.md) | Shell / Explorer 用户级配置入口。 |
+| [ComDlg32](hkcu/software/microsoft/windows/currentversion/comdlg32.md) | Common dialog MRU。 |
+| [RunMRU](hkcu/software/microsoft/windows/currentversion/runmru.md) | Win+R 输入历史。 |
+| [RecentDocs](hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU。 |
+| [Internet Settings](hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet、ZoneMap。 |
+| [Terminal Server Client](hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端历史。 |
 | [Classes](hkcu/software/classes.md) | 用户级文件关联和 COM。 |
 
 ## HKEY_USERS

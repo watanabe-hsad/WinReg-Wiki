@@ -133,4 +133,4 @@ tags:
 ## 相关页面
 
 - 场景：[账户与安全](../../questions/accounts-security.md), [安全策略与防护配置](../../questions/policy-security.md)
-- 注册表位置：[HKLM\SOFTWARE](../../registry-tree/hklm/software.md)
+- 注册表位置：[HKLM\SOFTWARE](../../registry-tree/hklm/software/index.md)

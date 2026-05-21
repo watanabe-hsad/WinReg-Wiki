@@ -131,4 +131,4 @@ tags:
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache](../../registry-tree/hklm/software/volumeinfocache.md)
+- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache](../../registry-tree/hklm/software/microsoft/windows-search/volumeinfocache.md)

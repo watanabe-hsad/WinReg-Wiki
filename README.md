@@ -1,27 +1,23 @@
-# Windows Registry Forensics Handbook
+# WinReg Wiki
 
-Windows Registry Forensics Handbook is a MkDocs Material knowledge base for Windows registry forensics, DFIR, incident response, threat hunting, and detection engineering.
+WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and forensic leads.
 
-GitHub repository: `https://github.com/watanabe-hsad/windows-registry-forensics-handbook.git`
+GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
-The handbook is a registry artifact knowledge base. It prioritizes paths, value meanings, offline hive mapping, timestamp caveats, artifact semantics, and cross references.
+The project is organized as a wiki rather than a long-form handbook. Registry-location pages explain where keys live and what values mean. Forensic scenario and artifact pages explain evidence semantics, validation, false positives, collection, and tooling.
 
 ## Main Entry Points
 
-The site keeps two primary navigation paths:
-
-- Investigation scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, security policy changes, network configuration, software installation, and anti-forensics.
-- Native registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`, then map the live view back to offline hive files.
+- Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`.
+- Forensic scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, security policy changes, network configuration, software installation, and anti-forensics.
 
 ## Online Site
 
-The handbook is intended to be published with GitHub Pages:
+Current online address is still pending confirmation after the repository rename. The previously reachable project path is:
 
 http://hsad.xyz/windows-registry-forensics-handbook/
 
-The same project can also be served from the default GitHub Pages URL:
-
-https://watanabe-hsad.github.io/windows-registry-forensics-handbook/
+The GitHub Pages path for the new repository should be confirmed in GitHub Pages settings before documenting it as live.
 
 Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 
@@ -61,24 +57,23 @@ Generate the structured artifact data index:
 ## Content Principles
 
 - Keep pages concise and query-oriented.
-- For registry-tree pages, prioritize key meaning, value meaning, live/offline mapping, and linked artifacts.
-- Keep deeper evidence interpretation in artifact pages and scenario pages.
+- Registry-tree pages should read like a key/value dictionary: path, source hive, common values, short notes, related artifacts.
+- Keep deeper evidence interpretation in scenario pages and artifact pages.
 - Separate evidence strength clearly: configuration exists, program exists, user interaction, program execution, device presence, policy weakening, and malicious behavior are different claims.
 - Do not treat registry key LastWrite as a value creation time unless that is explicitly supported by the artifact and tool output.
 - Explain live-to-offline mappings accurately: `HKCU`, `HKCR`, `HKCC`, and `CurrentControlSet` are views or mappings, not simple standalone hive files.
-- Keep Windows version differences explicit. If the behavior is not verified for a version, mark it as pending verification instead of guessing.
-- Preserve artifact page structure so pages remain comparable and maintainable.
+- Keep Windows version differences explicit. If behavior is not verified for a version, mark it as pending verification instead of guessing.
 
 ## Current Scope
 
 Current coverage includes:
 
-- Program execution and program presence: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
-- Persistence and autoruns: Run / RunOnce, StartupApproved, Services, IFEO, Winlogon Userinit, Winlogon Shell, LSA Authentication Packages, Command Processor AutoRun.
-- USB and external devices: USBSTOR, MountedDevices, MountPoints2.
+- Registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM / HKCU subtrees.
+- Program execution and program presence artifacts: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
+- Persistence and autoruns: Run / RunOnce, StartupApproved, Services, Drivers, IFEO, Active Setup, AppInit_DLLs, Winlogon Userinit, Winlogon Shell, LSA Authentication Packages, LSA Security Packages, Command Processor AutoRun, ShellServiceObjectDelayLoad, Print Monitors.
+- USB and external devices: USB, USBSTOR, DeviceClasses, SWD WPDBUSENUM, MountedDevices, MountPoints2, EMDMgmt, Portable Devices, VolumeInfoCache.
 - RDP and remote access: Terminal Server Client, fDenyTSConnections, RDP-Tcp PortNumber, CredSSP / NLA.
 - Accounts and security policy: ProfileList, Defender Policies, UAC Policies, Firewall Policies, Audit Policy, SpecialAccounts\UserList.
-- Native registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM subtrees.
 
 ## Structured Data
 
@@ -107,7 +102,7 @@ Maintainer and future-agent handoff notes live in:
 - `ROADMAP.md`
 - `CHANGELOG.md`
 
-The local directory is currently still named `registry-forensics-handbook-demo`; the intended GitHub repository name is `windows-registry-forensics-handbook`.
+The local directory is currently still named `registry-forensics-handbook-demo`; the formal project name is `WinReg Wiki`.
 
 ## License
 

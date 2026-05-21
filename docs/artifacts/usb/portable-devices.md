@@ -131,5 +131,5 @@ Windows 10/11 的 WPD/MTP 栈较常见。不同设备厂商、驱动和连接模
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows Portable Devices](../../registry-tree/hklm/software/portable-devices.md)
+- 注册表位置：[HKLM\SOFTWARE\Microsoft\Windows Portable Devices](../../registry-tree/hklm/software/microsoft/windows-portable-devices.md)
 

@@ -1,49 +1,41 @@
-# Windows 注册表取证与检测手册
+# WinReg Wiki
 
-<p class="rfh-kicker">Registry Forensics & Detection Handbook</p>
+Windows 注册表键值速查与取证线索知识库。
 
-这个 demo 的目标不是做一份“注册表路径大全”，而是做一份调查导向的注册表地图：当你在做取证、应急响应、威胁狩猎或检测规则设计时，能快速知道该看哪里、能证明什么、不能证明什么、怎么交叉验证。
+## 怎么查
 
-## 两个入口
-
-<div class="grid cards" markdown>
-
-- **按调查场景查**
-
-    从真实问题进入，例如“有没有程序执行痕迹”“有没有自启动”“是否插入过 USB”“是否连接过 RDP”。
-
-    [进入调查场景](questions/index.md)
-
-- **按注册表位置查**
-
-    从 Windows 原生根键进入，例如 `HKEY_LOCAL_MACHINE`、`HKEY_CURRENT_USER`、`HKEY_USERS`，再落到 `SYSTEM`、`SOFTWARE`、`NTUSER.DAT`、`UsrClass.dat` 等离线 hive。
-
-    [进入注册表位置](registry-tree/index.md)
-
-</div>
-
-## 当前覆盖
-
-当前手册已经从 demo 扩展为按调查问题、注册表原生结构和注册表 Artifact 组织的查询型知识库，优先覆盖常见 DFIR 条目：
-
-| 场景 | 示例条目 |
+| 需求 | 入口 |
 |---|---|
-| 程序执行 / 程序存在 | [UserAssist](artifacts/execution/userassist.md), [Amcache](artifacts/execution/amcache.md), [ShimCache](artifacts/execution/shimcache.md), [BAM / DAM](artifacts/execution/bam-dam.md), [MUICache](artifacts/execution/muicache.md) |
-| 持久化 | [Run / RunOnce](artifacts/persistence/run-keys.md), [StartupApproved](artifacts/persistence/startupapproved.md), [Services](artifacts/persistence/services.md), [IFEO](artifacts/persistence/ifeo.md), [Winlogon Userinit](artifacts/persistence/winlogon-userinit.md), [Winlogon Shell](artifacts/persistence/winlogon-shell.md), [LSA Authentication Packages](artifacts/persistence/lsa-authentication-packages.md), [Command Processor AutoRun](artifacts/persistence/command-processor-autorun.md) |
-| USB / 外接设备 | [USBSTOR](artifacts/usb/usbstor.md), [MountedDevices](artifacts/usb/mounteddevices.md), [MountPoints2](artifacts/usb/mountpoints2.md) |
-| 远程访问 | [Terminal Server Client](artifacts/rdp/terminal-server-client.md), [fDenyTSConnections](artifacts/rdp/fdenytsconnections.md), [RDP-Tcp PortNumber](artifacts/rdp/rdp-tcp-portnumber.md), [CredSSP / NLA](artifacts/rdp/credssp-nla.md) |
-| 账户 / 安全 / 防护策略 | [ProfileList](artifacts/security/profilelist.md), [Defender Policies](artifacts/security/defender-policies.md), [LSA Authentication Packages](artifacts/persistence/lsa-authentication-packages.md) |
+| 查某个注册表路径、key 或 value 是什么 | [注册表位置](registry-tree/index.md) |
+| 按调查问题查相关线索 | [取证场景](questions/index.md) |
+| 查 artifact 的证据语义 | [取证场景 -> Artifact 索引](artifacts/index.md) |
+| 查基础概念 | [注册表基础](getting-started/registry-basics.md)、[时间戳语义](getting-started/timestamps.md) |
 
-## 页面原则
+## 注册表基础
 
-每个注册表 Artifact 页面都尽量回答这些问题：
+| 名称 | 简要说明 |
+|---|---|
+| `HKLM` | 机器级配置入口，离线主要来自 `SYSTEM`、`SOFTWARE`、`SAM`、`SECURITY` 等 hive。 |
+| `HKCU` | 当前用户视图，实际映射到 `HKU\<SID>`。离线通常对应目标用户的 `NTUSER.DAT`。 |
+| `HKU` | 已加载用户 hive 集合，包括普通用户、服务账户和 `.DEFAULT`。 |
+| `HKCR` | Classes 合并视图，来自 `HKLM\Software\Classes` 与 `HKCU\Software\Classes`。 |
+| `HKCC` | 当前硬件配置映射，通常指向 `HKLM\SYSTEM\CurrentControlSet\Hardware Profiles\Current`。 |
+| `SYSTEM` | 控制集、服务、驱动、设备、网络、RDP 服务端等机器级配置。 |
+| `SOFTWARE` | 软件、策略、Winlogon、ProfileList、Defender、COM / Classes 等机器级配置。 |
+| `SAM` | 本地账户和组数据库。 |
+| `SECURITY` | LSA、安全策略、审计策略等。 |
+| `NTUSER.DAT` | 单个用户的用户级注册表 hive。 |
+| `UsrClass.dat` | 用户级 Classes / Shell 相关 hive。 |
+| `BCD` | 启动配置数据库，可映射为 `HKLM\BCD00000000`。 |
+| live view | 正在运行系统中的注册表视图，包含 `HKCU`、`HKCR`、`HKCC`、`CurrentControlSet` 等映射。 |
+| offline hive | 离线镜像中的 hive 文件，需要手动加载并解析 SID、ControlSet 和用户目录。 |
+| `CurrentControlSet` | live 映射；离线时用 `HKLM\SYSTEM\Select\Current` 解析到 `ControlSet00x`。 |
+| key LastWrite | key 级更新时间，不等同某个 value 的创建时间。 |
 
-- 这个注册表项通常记录什么？
-- 它能证明什么，不能证明什么？
-- 时间戳语义是什么？
-- 攻击者可能怎么利用？
-- 检测时有哪些高信号特征？
-- 应该和哪些日志、文件或其他 artifact 交叉验证？
+## 内容边界
 
-!!! note "取证语义优先"
-    注册表很少单独定案。这个手册会尽量把“配置存在”“用户交互”“程序执行”“设备连接”“恶意行为”这些不同证据语义区分开。
+| 区域 | 放什么 |
+|---|---|
+| [注册表位置](registry-tree/index.md) | key / value 是什么、在哪里、来自哪个 hive、基本注意事项。 |
+| [取证场景](questions/index.md) | 按调查问题组织证据语义、交叉验证和检测思路。 |
+| [Artifact 索引](artifacts/index.md) | 具体 artifact 的路径、字段、证据边界、误报、采集和工具。 |

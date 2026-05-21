@@ -136,5 +136,5 @@ Windows 7 / 10 / 11 均存在 `Enum\USB`，但子键、属性 value 和设备栈
 ## 相关页面
 
 - 场景：[USB 与外接设备](../../questions/usb.md)
-- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Enum\USB](../../registry-tree/hklm/system/usb.md)
+- 注册表位置：[HKLM\SYSTEM\ControlSet00x\Enum\USB](../../registry-tree/hklm/system/controlset/enum/usb.md)
 
