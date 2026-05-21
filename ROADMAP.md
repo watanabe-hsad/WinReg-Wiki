@@ -79,7 +79,7 @@ Current project name: `WinReg Wiki`.
 - Current status: `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, and `execution` now link to the latest registry-location pages before artifact supplements.
 - Current status: `command-processor-autorun`, `defender-policies`, `firewall-policies`, `audit-policy`, `run-keys`, and `services` artifact pages have been compressed into supplemental entries.
 - Current status: `drivers`, `appinit-dlls`, and `ifeo` artifact pages have also been compressed into supplemental entries.
-- Current status: `winlogon-userinit`, `winlogon-shell`, `uac-policies`, and `specialaccounts-userlist` artifact pages have also been compressed into supplemental entries.
+- Current status: `winlogon-userinit`, `winlogon-shell`, `uac-policies`, `specialaccounts-userlist`, `profilelist`, and `terminal-server-client` artifact pages have also been compressed into supplemental entries.
 - Add Sigma-friendly registry path selectors for high-value persistence and policy weakening keys.
 - Add Sysmon, Security.evtx, Defender, TerminalServices, PowerShell, and EDR telemetry references per artifact.
 - Add Velociraptor and KAPE collection notes where useful.

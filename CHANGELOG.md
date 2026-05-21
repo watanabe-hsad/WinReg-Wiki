@@ -96,12 +96,14 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 ### Changed
 
 - Updated scenario pages so `registry-checklist`, `persistence`, `execution`, `anti-forensics`, `policy-security`, `accounts-security`, `software-install`, and the scenario index link to the new LogonUI / Policies\System / Winlogon Notify / AeDebug / AppCertDlls / AppCompatFlags pages.
-- Rewrote `Winlogon` and `Image File Execution Options` registry-tree pages into the short dictionary structure.
+- Rewrote `Winlogon`, `Image File Execution Options`, `ProfileList`, and `Terminal Server Client` registry-tree pages into the short dictionary structure.
 - Compressed additional artifact pages into supplemental entries:
   - `docs/artifacts/persistence/winlogon-userinit.md`
   - `docs/artifacts/persistence/winlogon-shell.md`
   - `docs/artifacts/security/uac-policies.md`
   - `docs/artifacts/security/specialaccounts-userlist.md`
+  - `docs/artifacts/security/profilelist.md`
+  - `docs/artifacts/rdp/terminal-server-client.md`
 - Updated scenario pages so `registry-checklist`, `persistence`, `execution`, `anti-forensics`, `policy-security`, `network`, `software-install`, and the scenario index link to the new HKLM registry-location pages.
 - Updated registry-tree navigation and overview pages for Session Manager, App Paths, HKLM Command Processor, and WindowsFirewall policies.
 - Compressed additional artifact pages into supplemental entries:

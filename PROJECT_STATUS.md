@@ -41,7 +41,7 @@ Current content model:
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\AppCertDlls`
   - `HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
-- Rewrote existing `Winlogon` and `Image File Execution Options` registry-tree pages into the current short dictionary structure.
+- Rewrote existing `Winlogon`, `Image File Execution Options`, `ProfileList`, and `Terminal Server Client` registry-tree pages into the current short dictionary structure.
 - Updated scenario pages so primary links include the new registry-location pages:
   - `registry-checklist.md`
   - `persistence.md`
@@ -56,6 +56,8 @@ Current content model:
   - `winlogon-shell.md`
   - `uac-policies.md`
   - `specialaccounts-userlist.md`
+  - `profilelist.md`
+  - `terminal-server-client.md`
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
 
 ## Previous Completed Round
