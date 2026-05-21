@@ -27,9 +27,14 @@
 | 常见写入者 | User Profile Service、登录流程、profile 创建/迁移流程。 |
 | 注意 | 多用户分析时先用这里映射 SID 和目录，再解析对应 `NTUSER.DAT` / `UsrClass.dat`。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [账户与安全](../../../../../../questions/accounts-security.md)
+- [常规注册表检查](../../../../../../questions/registry-checklist.md)
+- [Shell / Explorer 用户行为](../../../../../../questions/shell-explorer.md)
+
+## 补充阅读
 
 - [ProfileList](../../../../../../artifacts/security/profilelist.md)
 - [UserAssist](../../../../../../artifacts/execution/userassist.md)
 - [Terminal Server Client](../../../../../../artifacts/rdp/terminal-server-client.md)
-

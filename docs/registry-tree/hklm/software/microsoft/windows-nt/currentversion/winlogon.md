@@ -27,9 +27,14 @@
 | 常见写入者 | Windows 登录组件、系统设置、GPO、管理工具。 |
 | 注意 | 这里是登录配置，不等同于登录事件；登录是否发生需结合日志。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [自启动与持久化](../../../../../../questions/persistence.md)
+- [账户与安全](../../../../../../questions/accounts-security.md)
+- [常规注册表检查](../../../../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 - [Winlogon Userinit](../../../../../../artifacts/persistence/winlogon-userinit.md)
 - [Winlogon Shell](../../../../../../artifacts/persistence/winlogon-shell.md)
 - [SpecialAccounts\UserList](../../../../../../artifacts/security/specialaccounts-userlist.md)
-

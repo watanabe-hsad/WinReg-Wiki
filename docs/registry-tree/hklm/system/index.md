@@ -44,7 +44,7 @@ HKLM\SYSTEM\ControlSet002
 | `ControlSet00x\Services\bam\State\UserSettings\<SID>` | BAM 程序活动记录。 |
 | `ControlSet00x\Services\dam\State\UserSettings\<SID>` | DAM 相关记录。 |
 | [`ControlSet00x\Enum`](controlset/enum/index.md) | 设备枚举树。 |
-| `ControlSet00x\Enum\USBSTOR` | USB 存储设备枚举。 |
+| [`ControlSet00x\Enum\USBSTOR`](controlset/enum/usbstor.md) | USB 存储设备枚举。 |
 | [`ControlSet00x\Enum\USB`](controlset/enum/usb.md) | USB 设备枚举。 |
 | [`ControlSet00x\Enum\SWD\WPDBUSENUM`](controlset/enum/swd-wpdbusenum.md) | Windows Portable Devices 枚举。 |
 | [`ControlSet00x\Control\DeviceClasses`](controlset/control/deviceclasses.md) | 设备接口类注册。 |
@@ -70,7 +70,15 @@ HKLM\SYSTEM\ControlSet002
 | `MountedDevices` | 盘符可复用，需结合卷 GUID 和设备信息。 |
 | `TimeZoneInformation` | 会影响本地时间线解释。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [常规注册表检查](../../../questions/registry-checklist.md)
+- [自启动与持久化](../../../questions/persistence.md)
+- [USB 与外接设备](../../../questions/usb.md)
+- [RDP 与远程访问](../../../questions/rdp.md)
+- [安全策略与防护配置](../../../questions/policy-security.md)
+
+## 补充阅读
 
 [Services](../../../artifacts/persistence/services.md),
 [Drivers](../../../artifacts/persistence/drivers.md),

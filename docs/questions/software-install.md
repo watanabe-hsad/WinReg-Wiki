@@ -1,31 +1,46 @@
 # 软件安装与卸载
 
-软件安装调查要区分“安装记录”“程序文件存在”“程序执行”和“用户见过”。注册表 Uninstall 与 Amcache 常能提供软件和文件元数据，但卸载、清理和便携软件会留下不完整证据。
+## 检查目标
 
-## 优先级
+区分软件安装登记、程序文件存在、程序执行和用户见过程序这些不同证据语义。
 
-| 优先级 | Artifact / Path | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall` | 机器级软件安装/卸载记录 |
-| 高 | `HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall` | 用户级安装记录 |
-| 高 | [Amcache](../artifacts/execution/amcache.md) | 程序路径、哈希、版本和文件元数据 |
-| 中 | [MUICache](../artifacts/execution/muicache.md) | Shell 缓存的程序路径和显示名 |
-| 中 | [UserAssist](../artifacts/execution/userassist.md) | 用户交互执行线索 |
+| [HKLM Uninstall](../registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md) | 机器级软件安装 / 卸载登记。 | 不证明程序当前仍安装或执行过。 |
+| [HKLM\SOFTWARE](../registry-tree/hklm/software/index.md) | 软件、策略、Classes、Winlogon 等机器级入口。 | 需要进入具体子路径解释。 |
+| [WOW6432Node](../registry-tree/hklm/software/wow6432node.md) | 32 位应用注册表视图。 | 64 位系统需同时检查。 |
+| [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | 用户 Shell 交互程序线索。 | 不覆盖所有执行方式。 |
+| [HKCU Run](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级安装器或应用自启动。 | 配置存在不等于执行成功。 |
 
-## 高信号特征
+## 判断要点
 
-- 安装记录显示远控、隧道、压缩、加密或同步软件接近入侵窗口安装。
-- `InstallLocation` 位于用户可写目录或临时路径。
-- Uninstall 记录被删除但 Amcache、Prefetch、文件系统仍有残留。
-- `DisplayName` 伪装系统组件，`Publisher` 缺失或签名不一致。
+- `DisplayName`、`DisplayVersion`、`Publisher`、`InstallLocation`、`InstallDate` 和 `UninstallString` 要一起看。
+- `InstallDate` 是安装器写入的字符串，可靠性取决于安装器。
+- 便携软件可能没有 Uninstall 记录，但会出现在 Amcache、Prefetch、UserAssist 或文件系统时间线。
+- 卸载后 Uninstall 记录可能被删除，残留证据需要从文件系统和执行 artifact 还原。
 
 ## 交叉验证
 
 - MSI logs、Windows Installer events、Program Files、Start Menu、服务、计划任务。
-- Amcache、ShimCache、Prefetch、BAM/DAM、UserAssist。
+- Amcache、ShimCache、Prefetch、BAM / DAM、UserAssist。
 - `$MFT`、`$UsnJrnl`、下载记录、浏览器历史、软件自身日志。
 
-## 结论写法
+## 常见误判
 
-- Uninstall 记录可证明安装登记存在，不等于软件当前仍安装或执行过。
-- Amcache 和 MUICache 更偏程序存在/元数据，执行要用 Prefetch、BAM、UserAssist 或进程日志加强。
+- Uninstall 记录存在不等于软件当前仍存在。
+- `InstallDate` 不一定是文件落地时间或首次执行时间。
+- 正常远控、VPN、同步盘、压缩工具和管理代理也可能接近调查窗口安装。
+
+## 相关场景
+
+- [程序执行痕迹](execution.md)
+- [自启动与持久化](persistence.md)
+- [常规注册表检查](registry-checklist.md)
+
+## 补充阅读
+
+- [Amcache artifact](../artifacts/execution/amcache.md)
+- [MUICache artifact](../artifacts/execution/muicache.md)
+- [UserAssist artifact](../artifacts/execution/userassist.md)

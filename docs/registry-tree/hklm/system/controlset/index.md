@@ -26,9 +26,15 @@
 | 常见写入者 | Windows 启动过程、服务控制管理器、PnP、驱动、系统配置工具。 |
 | 注意 | 多个 `ControlSet00x` 可能并存；需要用 `Select\Current` 判断当前控制集。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [常规注册表检查](../../../../questions/registry-checklist.md)
+- [自启动与持久化](../../../../questions/persistence.md)
+- [USB 与外接设备](../../../../questions/usb.md)
+- [RDP 与远程访问](../../../../questions/rdp.md)
+
+## 补充阅读
 
 - [Services](../../../../artifacts/persistence/services.md)
 - [fDenyTSConnections](../../../../artifacts/rdp/fdenytsconnections.md)
 - [RDP-Tcp PortNumber](../../../../artifacts/rdp/rdp-tcp-portnumber.md)
-

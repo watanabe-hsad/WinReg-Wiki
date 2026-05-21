@@ -1,33 +1,53 @@
 # USB 与外接设备
 
-USB 调查通常要回答三个问题：设备是否出现过、何时连接过、是否发生文件访问或拷贝。注册表主要解决前两个问题的一部分。
+## 检查目标
 
-## 优先级
+判断系统是否识别过 USB / 外接设备、卷和盘符如何映射，以及哪个用户可能见过该卷或共享。
 
-| 优先级 | Artifact | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | [USB](../artifacts/usb/usb.md) | USB 总线层面的设备枚举，覆盖范围比 USBSTOR 更广 |
-| 高 | [USBSTOR](../artifacts/usb/usbstor.md) | USB 存储设备枚举、厂商、产品、序列号 |
-| 高 | [Enum SWD WPDBUSENUM](../artifacts/usb/swd-wpdbusenum.md) | WPD / MTP 设备枚举，例如手机、相机、便携媒体设备 |
-| 高 | [MountedDevices](../artifacts/usb/mounteddevices.md) | 卷标识与盘符映射线索 |
-| 高 | [MountPoints2](../artifacts/usb/mountpoints2.md) | 用户 SID 维度见过的卷、盘符或网络位置 |
-| 中 | [DeviceClasses](../artifacts/usb/deviceclasses.md) | 设备接口类与实例路径，适合连接 USB / 卷 / WPD 线索 |
-| 中 | [Portable Devices](../artifacts/usb/portable-devices.md) | Windows Portable Devices 元数据 |
-| 中 | [EMDMgmt](../artifacts/usb/emdmgmt.md) | ReadyBoost / 外接存储辅助记录 |
-| 中 | [VolumeInfoCache](../artifacts/usb/volumeinfocache.md) | Windows Search 记录的卷信息缓存 |
+| [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md) | USB 存储设备枚举、厂商、产品、序列号。 | 不证明用户访问文件。 |
+| [USB](../registry-tree/hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 | 覆盖非存储 USB，但语义更偏设备层。 |
+| [SWD\WPDBUSENUM](../registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md) | WPD / MTP 设备枚举。 | 适合手机、相机、便携媒体设备。 |
+| [DeviceClasses](../registry-tree/hklm/system/controlset/control/deviceclasses.md) | 设备接口类和实例路径。 | 需要关联具体接口 GUID。 |
+| [MountedDevices](../registry-tree/hklm/system/mounteddevices.md) | 卷 GUID、盘符、设备映射。 | 盘符可复用。 |
+| [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷、盘符或网络共享。 | 用户层记录，不证明复制。 |
+| [Portable Devices](../registry-tree/hklm/software/microsoft/windows-portable-devices.md) | Windows Portable Devices 元数据。 | 辅助识别设备显示名和 WPD 关系。 |
+| [EMDMgmt](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md) | ReadyBoost / 外接存储辅助记录。 | 不应单独作为连接或访问结论。 |
+| [VolumeInfoCache](../registry-tree/hklm/software/microsoft/windows-search/volumeinfocache.md) | Windows Search 卷信息缓存。 | 辅助卷信息，需交叉验证。 |
+
+## 判断要点
+
+- 先区分设备枚举、卷映射、用户见过卷和文件访问四类证据。
+- USBSTOR、USB、SWD、DeviceClasses 可互相补足设备层关系。
+- MountedDevices 可帮助关联卷 GUID 和盘符，但盘符可能复用。
+- MountPoints2、LNK、Jump Lists、RecentDocs 更接近用户视角。
 
 ## 交叉验证
 
-- `Microsoft-Windows-Partition/Diagnostic`
-- `Microsoft-Windows-DriverFrameworks-UserMode/Operational`
-- `SetupAPI.dev.log`
-- `DeviceSetupManager`、`Kernel-PnP`、Windows Portable Devices 相关日志
-- LNK、Jump Lists、RecentDocs
-- `$MFT`、`$UsnJrnl`、ShellBags
+- `SetupAPI.dev.log`、`Microsoft-Windows-Partition/Diagnostic`。
+- `Microsoft-Windows-DriverFrameworks-UserMode/Operational`、Kernel-PnP、DeviceSetupManager。
+- LNK、Jump Lists、RecentDocs、ShellBags、MountPoints2。
+- `$MFT`、`$UsnJrnl`、文件访问审计、EDR removable media telemetry。
 
-## 结论写法
+## 常见误判
 
-- `USBSTOR` 更偏设备枚举，`MountedDevices` 更偏卷和盘符映射，`MountPoints2` 更偏用户 Shell 是否见过该卷。
-- `USB` 和 `DeviceClasses` 能补足非存储 USB 或接口关系；`SWD\WPDBUSENUM` 和 `Portable Devices` 更适合手机、相机、MTP 设备。
-- `EMDMgmt`、`VolumeInfoCache` 更适合作为辅助线索，不应单独作为 USB 插入或文件访问结论。
-- 要证明文件复制，必须加入 LNK、Jump Lists、RecentDocs、ShellBags、文件系统日志或 EDR removable media 事件。
+- 设备枚举不等于文件复制。
+- MTP 设备不一定出现在 USBSTOR。
+- 同一盘符可能在不同时间指向不同卷。
+- 企业加密盘、备份盘、手机、读卡器和同步软件都可能留下正常记录。
+
+## 相关场景
+
+- [Shell / Explorer 用户行为](shell-explorer.md)
+- [常规注册表检查](registry-checklist.md)
+
+## 补充阅读
+
+- [USBSTOR artifact](../artifacts/usb/usbstor.md)
+- [USB artifact](../artifacts/usb/usb.md)
+- [MountedDevices artifact](../artifacts/usb/mounteddevices.md)
+- [MountPoints2 artifact](../artifacts/usb/mountpoints2.md)
+- [Portable Devices artifact](../artifacts/usb/portable-devices.md)

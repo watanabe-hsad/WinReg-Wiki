@@ -1,32 +1,49 @@
 # 账户与安全
 
-账户调查要区分账户对象、profile、登录行为和权限变化。注册表可以帮助映射 SID、发现隐藏账户线索和 LSA 风险，但权限授予和登录事实通常要靠事件日志确认。
+## 检查目标
 
-## 优先级
+确认本地账户、SID 到 profile 的映射、隐藏账户配置、LSA 相关配置和登录/权限事实之间的边界。
 
-| 优先级 | Artifact / Path | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | [ProfileList](../artifacts/security/profilelist.md) | SID 到用户目录映射，用户级 artifact 归属基础 |
-| 高 | `HKLM\SAM\SAM\Domains\Account\Users` | 本地账户 RID、状态和二进制账户记录 |
-| 高 | [SpecialAccounts\UserList](../artifacts/security/specialaccounts-userlist.md) | 登录界面隐藏账户线索 |
-| 高 | [LSA Authentication Packages](../artifacts/persistence/lsa-authentication-packages.md) | 认证包持久化和凭据访问风险 |
-| 中 | `HKLM\SECURITY\Policy` | 安全策略、LSA Secrets、审计相关数据 |
+| [ProfileList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 路径映射。 | 不证明账户仍存在或近期登录。 |
+| [SAM](../registry-tree/hklm/sam.md) | 本地账户和组数据库。 | 二进制字段需专门工具解析。 |
+| [HKEY_USERS](../registry-tree/hku/index.md) | 已加载用户 hive 集合。 | live 树只显示已加载 hive。 |
+| [NTUSER.DAT](../registry-tree/hku/ntuser.md) | 用户级配置和行为线索来源。 | 需要先映射 SID。 |
+| [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `SpecialAccounts\UserList`、自动登录等。 | 隐藏登录界面不等于账户不存在。 |
+| [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | LSA 包、RunAsPPL 和认证相关配置。 | 未知包需验证文件、签名和模块加载。 |
+| [SECURITY](../registry-tree/hklm/security.md) | 安全策略、LSA Secrets、审计相关数据。 | 需要谨慎解析，避免直接手工解释二进制数据。 |
 
-## 高信号特征
+## 判断要点
 
-- 新 SID 出现在 ProfileList 后，短时间内出现本地管理员组变化或用户级持久化。
-- `SpecialAccounts\UserList` 隐藏某个新建本地账户。
-- LSA 包新增非基线条目，且对应 DLL 无签名或创建时间接近入侵窗口。
-- Profile 路径指向非标准目录、临时目录或可移动卷。
+- 先用 ProfileList 建立 SID、用户名目录、用户 hive 的对应关系。
+- 新 SID、临时 profile、`.bak` profile、异常 profile 路径需要和登录日志、文件系统时间线关联。
+- `SpecialAccounts\UserList` 可隐藏登录界面显示，但不等于禁用账户。
+- LSA 包新增条目时，记录 DLL 名称、路径来源、签名和是否存在模块加载证据。
 
 ## 交叉验证
 
-- Security.evtx：`4720`、`4722`、`4726`、`4732`、`4733`、`4738`、`4672`、`4624`。
-- SAM hive、本地域控制器日志、本地组成员列表。
-- User Profile Service operational log。
-- 用户 `NTUSER.DAT`、`UsrClass.dat`、文件系统时间线。
+- Security.evtx：`4624`、`4625`、`4672`、`4720`、`4722`、`4726`、`4732`、`4733`、`4738`。
+- SAM hive、本地组成员、域控制器日志、User Profile Service operational log。
+- 用户 `NTUSER.DAT`、`UsrClass.dat`、profile 目录、文件系统时间线。
+- LSASS 模块、Code Integrity、EDR credential access telemetry。
 
-## 结论写法
+## 常见误判
 
-- ProfileList 可证明 SID 与 profile 的映射存在，不能单独证明账户仍存在或近期登录。
-- SAM 可证明本地账户数据库状态，域账户行为仍需域控制器和本机登录日志。
+- ProfileList 中存在 SID 映射不等于账户仍启用。
+- live `HKU` 中没有某用户 hive，不等于该用户不存在。
+- 隐藏账户配置可能来自管理需求、VDI、实验环境或 OEM 配置。
+
+## 相关场景
+
+- [RDP 与远程访问](rdp.md)
+- [安全策略与防护配置](policy-security.md)
+- [常规注册表检查](registry-checklist.md)
+
+## 补充阅读
+
+- [ProfileList artifact](../artifacts/security/profilelist.md)
+- [SpecialAccounts\UserList artifact](../artifacts/security/specialaccounts-userlist.md)
+- [LSA Authentication Packages artifact](../artifacts/persistence/lsa-authentication-packages.md)

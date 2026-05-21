@@ -25,8 +25,8 @@ HKLM\SOFTWARE\WOW6432Node
 | 路径 | 含义 |
 |---|---|
 | [`Microsoft\Active Setup\Installed Components`](microsoft/active-setup.md) | Active Setup 机器级组件定义。 |
-| `Microsoft\Windows\CurrentVersion\Run` | 机器级登录启动项。 |
-| `Microsoft\Windows\CurrentVersion\RunOnce` | 机器级一次性登录启动项。 |
+| [`Microsoft\Windows\CurrentVersion\Run`](microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
+| [`Microsoft\Windows\CurrentVersion\RunOnce`](microsoft/windows/currentversion/run.md) | 机器级一次性登录启动项。 |
 | [`Microsoft\Windows\CurrentVersion\Uninstall`](microsoft/windows/currentversion/uninstall.md) | 软件安装登记。 |
 | [`Microsoft\Windows NT\CurrentVersion\Image File Execution Options`](microsoft/windows-nt/currentversion/ifeo.md) | IFEO、Debugger、进程启动相关配置。 |
 | [`Microsoft\Windows NT\CurrentVersion\Windows`](microsoft/windows-nt/currentversion/appinit-dlls.md) | `AppInit_DLLs`、`LoadAppInit_DLLs` 等。 |
@@ -54,7 +54,13 @@ HKLM\SOFTWARE\WOW6432Node
 | Defender policy | 需结合平台版本、Tamper Protection 和 Defender 日志判断。 |
 | `Classes` | `HKCU\Software\Classes` 可参与覆盖，最终视图见 `HKCR`。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [自启动与持久化](../../../questions/persistence.md)
+- [安全策略与防护配置](../../../questions/policy-security.md)
+- [常规注册表检查](../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 [Run / RunOnce](../../../artifacts/persistence/run-keys.md),
 [Active Setup](../../../artifacts/persistence/active-setup.md),

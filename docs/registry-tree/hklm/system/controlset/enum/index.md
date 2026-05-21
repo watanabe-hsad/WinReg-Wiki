@@ -14,7 +14,7 @@
 | 名称 | 类型 | 含义 |
 |---|---|---|
 | `USB` | Key | USB 设备枚举。 |
-| `USBSTOR` | Key | USB mass storage 设备枚举。 |
+| [`USBSTOR`](usbstor.md) | Key | USB mass storage 设备枚举。 |
 | `SWD\WPDBUSENUM` | Key | Windows Portable Device 相关枚举。 |
 | `DeviceDesc` | `REG_SZ` / `REG_EXPAND_SZ` | 设备描述。 |
 | `FriendlyName` | `REG_SZ` | 友好名称。 |
@@ -29,7 +29,12 @@
 | 常见写入者 | Plug and Play Manager、设备驱动。 |
 | 注意 | 设备枚举说明系统识别过设备，不等于用户访问过设备中的文件。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [USB 与外接设备](../../../../../questions/usb.md)
+- [常规注册表检查](../../../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 - [USBSTOR](../../../../../artifacts/usb/usbstor.md)
 - [USB](../../../../../artifacts/usb/usb.md)

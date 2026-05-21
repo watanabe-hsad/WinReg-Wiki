@@ -8,7 +8,7 @@ Windows 注册表键值速查与取证线索知识库。
 |---|---|
 | 查某个注册表路径、key 或 value 是什么 | [注册表位置](registry-tree/index.md) |
 | 按调查问题查相关线索 | [取证场景](questions/index.md) |
-| 查 artifact 的证据语义 | [取证场景 -> Artifact 索引](artifacts/index.md) |
+| 查 artifact 的补充细节 | [取证场景 -> Artifact 补充索引](artifacts/index.md) |
 | 查基础概念 | [注册表基础](getting-started/registry-basics.md)、[时间戳语义](getting-started/timestamps.md) |
 
 ## 注册表基础
@@ -38,4 +38,4 @@ Windows 注册表键值速查与取证线索知识库。
 |---|---|
 | [注册表位置](registry-tree/index.md) | key / value 是什么、在哪里、来自哪个 hive、基本注意事项。 |
 | [取证场景](questions/index.md) | 按调查问题组织证据语义、交叉验证和检测思路。 |
-| [Artifact 索引](artifacts/index.md) | 具体 artifact 的路径、字段、证据边界、误报、采集和工具。 |
+| [Artifact 补充索引](artifacts/index.md) | 具体 artifact 的字段、证据边界、误报、采集和工具；不是主要阅读入口。 |

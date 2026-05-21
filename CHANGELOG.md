@@ -8,6 +8,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-first scenario page `docs/questions/registry-checklist.md` for 常规注册表检查.
+- Added registry-location pages for common scenario targets:
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2`
+  - `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`
 - Added USB / device artifact pages and YAML:
   - USB
   - DeviceClasses
@@ -62,6 +69,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Reworked `取证场景` pages into checklist-style investigation pages that primarily link to `docs/registry-tree/` registry-location pages.
+- Downgraded artifact pages from a major reader entry to supplemental/internal detail:
+  - `docs/artifacts/index.md` is now `Artifact 补充索引`;
+  - `scripts/generate-artifact-index.py` now describes generated YAML data as maintenance/review data;
+  - `docs/artifacts/generated-index.md` was regenerated with the new supplemental wording.
+- Updated `mkdocs.yml` to include `常规注册表检查` under `取证场景` and to add new registry-location pages under native tree navigation.
+- Updated key registry-location pages to add `相关场景` links and use `补充阅读` for artifact links where touched.
 - Renamed the project display name and repository metadata to `WinReg Wiki`.
 - Switched repository metadata from the old handbook repository to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
 - Simplified top-level navigation to `首页`, `注册表位置`, and `取证场景`, with `贡献` and `标签` as auxiliary entries.
@@ -94,6 +108,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-first scenario rewrite.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the `WinReg Wiki` navigation and file-tree rewrite.
 - `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used briefly for local preview of `注册表位置`, `注册表 Artifact`, and `结构化数据索引`.
 - `.venv/bin/python scripts/generate-artifact-index.py` completed successfully and wrote `docs/artifacts/generated-index.md`.

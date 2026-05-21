@@ -17,15 +17,15 @@
 
 | 路径 | 含义 |
 |---|---|
-| `HKLM\SYSTEM\Select` | `CurrentControlSet` 到 `ControlSet00x` 的映射。 |
-| `HKLM\SYSTEM\ControlSet00x\Services` | 服务、驱动、网络组件、部分系统组件配置。 |
-| `HKLM\SYSTEM\MountedDevices` | 卷 GUID、盘符和设备映射。 |
-| `HKLM\SYSTEM\ControlSet00x\Enum` | 设备枚举树。 |
-| `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList` | SID 到 profile 目录的映射。 |
-| `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run` | 机器级登录启动项。 |
-| `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon` | 登录链、Shell、Userinit 等。 |
-| `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options` | IFEO 和 Debugger 配置。 |
-| `HKLM\SOFTWARE\Policies` | 本地策略、GPO / MDM 写入结果。 |
+| [HKLM\SYSTEM\Select](system/select.md) | `CurrentControlSet` 到 `ControlSet00x` 的映射。 |
+| [HKLM\SYSTEM\ControlSet00x\Services](system/controlset/services/index.md) | 服务、驱动、网络组件、部分系统组件配置。 |
+| [HKLM\SYSTEM\MountedDevices](system/mounteddevices.md) | 卷 GUID、盘符和设备映射。 |
+| [HKLM\SYSTEM\ControlSet00x\Enum](system/controlset/enum/index.md) | 设备枚举树。 |
+| [HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList](software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 目录的映射。 |
+| [HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run](software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
+| [HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon](software/microsoft/windows-nt/currentversion/winlogon.md) | 登录链、Shell、Userinit 等。 |
+| [HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options](software/microsoft/windows-nt/currentversion/ifeo.md) | IFEO 和 Debugger 配置。 |
+| [HKLM\SOFTWARE\Policies](software/policies.md) | 本地策略、GPO / MDM 写入结果。 |
 
 ## 注意
 
@@ -36,7 +36,14 @@
 | `HARDWARE` | 运行时生成，不是常规离线 hive。 |
 | `.LOG1` / `.LOG2` | hive transaction log，采集时建议保留。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [常规注册表检查](../../questions/registry-checklist.md)
+- [自启动与持久化](../../questions/persistence.md)
+- [USB 与外接设备](../../questions/usb.md)
+- [账户与安全](../../questions/accounts-security.md)
+
+## 补充阅读
 
 [Services](../../artifacts/persistence/services.md),
 [Run / RunOnce](../../artifacts/persistence/run-keys.md),

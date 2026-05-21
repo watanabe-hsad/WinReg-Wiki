@@ -26,7 +26,14 @@
 | 常见写入者 | Windows 安全组件、认证包安装程序、策略或安全软件。 |
 | 注意 | value 语义与系统版本、安全产品和域环境有关；未知条目需要文件和签名验证。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [账户与安全](../../../../../../questions/accounts-security.md)
+- [安全策略与防护配置](../../../../../../questions/policy-security.md)
+- [自启动与持久化](../../../../../../questions/persistence.md)
+- [常规注册表检查](../../../../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 - [LSA Authentication Packages](../../../../../../artifacts/persistence/lsa-authentication-packages.md)
 - [LSA Security Packages](../../../../../../artifacts/persistence/lsa-security-packages.md)

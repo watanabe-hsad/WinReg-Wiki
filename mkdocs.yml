@@ -77,9 +77,12 @@ nav:
                   - Windows:
                       - CurrentVersion:
                           - Explorer: registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+                          - Run / RunOnce: registry-tree/hkcu/software/microsoft/windows/currentversion/run.md
+                          - UserAssist: registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md
                           - RunMRU: registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md
                           - RecentDocs: registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md
                           - ComDlg32: registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md
+                          - MountPoints2: registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md
                           - Internet Settings: registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md
       - HKEY_LOCAL_MACHINE:
           - registry-tree/hklm/index.md
@@ -101,6 +104,7 @@ nav:
                           - Windows: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md
                   - Windows:
                       - CurrentVersion:
+                          - Run / RunOnce: registry-tree/hklm/software/microsoft/windows/currentversion/run.md
                           - Uninstall: registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md
                           - ShellServiceObjectDelayLoad: registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md
                   - Windows Defender: registry-tree/hklm/software/microsoft/windows-defender.md
@@ -119,6 +123,7 @@ nav:
                       - Tcpip: registry-tree/hklm/system/controlset/services/tcpip.md
                   - Enum:
                       - registry-tree/hklm/system/controlset/enum/index.md
+                      - USBSTOR: registry-tree/hklm/system/controlset/enum/usbstor.md
                       - USB: registry-tree/hklm/system/controlset/enum/usb.md
                       - SWD\WPDBUSENUM: registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md
                   - Control:
@@ -143,6 +148,7 @@ nav:
           - registry-tree/hkcc/index.md
   - 取证场景:
       - questions/index.md
+      - 常规注册表检查: questions/registry-checklist.md
       - 程序执行: questions/execution.md
       - Shell / Explorer 用户行为: questions/shell-explorer.md
       - 自启动与持久化: questions/persistence.md
@@ -153,7 +159,7 @@ nav:
       - 网络与系统环境: questions/network.md
       - 软件安装与卸载: questions/software-install.md
       - 反取证与清理痕迹: questions/anti-forensics.md
-      - Artifact 索引: artifacts/index.md
+      - Artifact 补充索引: artifacts/index.md
       - 结构化数据索引: artifacts/generated-index.md
       - 检测工程: detection/index.md
   - 贡献:

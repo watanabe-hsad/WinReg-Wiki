@@ -29,9 +29,15 @@
 | 常见写入者 | Service Control Manager、驱动安装程序、系统组件、管理工具。 |
 | 注意 | 配置存在不等于服务成功启动；启动状态需结合事件日志或运行时状态。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [自启动与持久化](../../../../../questions/persistence.md)
+- [程序执行痕迹](../../../../../questions/execution.md)
+- [安全策略与防护配置](../../../../../questions/policy-security.md)
+- [常规注册表检查](../../../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 - [Services](../../../../../artifacts/persistence/services.md)
 - [Firewall Policies](../../../../../artifacts/security/firewall-policies.md)
 - [BAM / DAM](../../../../../artifacts/execution/bam-dam.md)
-

@@ -1,32 +1,41 @@
 # 网络与系统环境
 
-网络配置调查关注代理、DNS、接口、网络 profile、主机名和时区。注册表能说明配置状态与历史 profile，但网络连接事实仍需日志和流量验证。
+## 检查目标
 
-## 优先级
+确认代理、DNS、接口、主机名、时区和控制集映射等系统环境配置，为时间线和网络行为分析提供上下文。
 
-| 优先级 | Artifact / Path | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles` | 网络 profile 名称、类型和首次/最近连接线索 |
-| 高 | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters` | 主机名、域、DNS 和 TCP/IP 全局参数 |
-| 高 | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\<GUID>` | 网卡级 IP、DHCP、DNS 配置 |
-| 高 | `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings` | 用户级代理配置：`ProxyEnable`、`ProxyServer`、`AutoConfigURL` |
-| 中 | `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap` | IE/WinINet 区域映射，影响部分应用安全区域 |
+| [Tcpip](../registry-tree/hklm/system/controlset/services/tcpip.md) | TCP/IP 全局参数、接口 DNS、DHCP、网关。 | 配置存在不等于连接发生。 |
+| [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户级代理、PAC、WinINet 配置。 | 只影响使用相关 API 的应用。 |
+| [ComputerName](../registry-tree/hklm/system/controlset/control/computername.md) | 主机名和环境标识。 | 名称可能变更，需要时间线。 |
+| [TimeZoneInformation](../registry-tree/hklm/system/controlset/control/timezone.md) | 时区和 bias。 | 用于时间线归一化。 |
+| [Select](../registry-tree/hklm/system/select.md) | CurrentControlSet 映射。 | 离线分析必须先解析。 |
 
-## 高信号特征
+## 判断要点
 
-- 用户级代理指向本机异常端口、内网未知主机或公网代理。
-- `NameServer` 被手工设置为异常 DNS，且与 DHCP 配置冲突。
-- 网络 profile 名称、网关、DNS 和连接时间线与入侵窗口一致。
-- `AutoConfigURL` 指向可疑 PAC 文件。
+- 用户级代理指向本机异常端口、内网未知主机或公网代理时，记录 SID 和 profile。
+- `NameServer`、DHCP DNS、接口 GUID 需要分开解释。
+- 时区和主机名用于解释日志和时间线，不是安全事件本身。
+- 网络 profile 页面仍待补齐；当前可先结合 NetworkList 原始路径和事件日志。
 
 ## 交叉验证
 
 - DNS Client Operational、DHCP Client Operational、Windows Firewall logs。
-- NetFlow、代理日志、EDR network telemetry。
-- Browser history、WinINet/WinHTTP 代理配置、PowerShell 网络命令历史。
-- `TimeZoneInformation`、`ComputerName`、`Select / CurrentControlSet` 保证时间线和控制集正确。
+- NetFlow、代理日志、EDR network telemetry、浏览器历史。
+- WinHTTP 代理配置、PowerShell 网络命令历史、VPN / EDR 日志。
+- `TimeZoneInformation`、`ComputerName`、`Select / CurrentControlSet`。
 
-## 结论写法
+## 常见误判
 
-- 代理和 DNS 注册表值证明配置存在，不证明流量一定经过该配置。
-- DHCP 字段和手工 `NameServer` 字段要分开解释；同一接口可能有历史残留。
+- 代理和 DNS 注册表值证明配置存在，不证明所有流量经过该配置。
+- DHCP 历史残留可能与当前网络状态不同。
+- 手工 DNS、PAC 和企业代理可能来自正常管理策略。
+
+## 相关场景
+
+- [RDP 与远程访问](rdp.md)
+- [安全策略与防护配置](policy-security.md)
+- [常规注册表检查](registry-checklist.md)

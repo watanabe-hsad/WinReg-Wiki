@@ -4,6 +4,13 @@
 
 The project has been renamed and repositioned as `WinReg Wiki`: a concise Windows registry key/value lookup wiki with forensic leads. The current architecture is intentionally simple: `首页`, `注册表位置`, and `取证场景`.
 
+Current content model:
+
+- `首页`: explains the project scope, registry basics, and how to choose an entry point.
+- `注册表位置`: primary dictionary-style entry point. Pages explain key/value location, hive source, common values, default/common state, short caveats, related scenarios, and related registry positions.
+- `取证场景`: checklist-style investigation entry point. Scenario pages now primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
+- `docs/artifacts/`: supplemental/internal artifact detail. These pages are kept for field semantics, collection notes, parsing tools, false positives, and structured YAML data, but they are no longer the main reading path.
+
 ## Repository
 
 - Local path: `/Users/hsad/Documents/CodeProject/registry-forensics-handbook-demo`
@@ -18,14 +25,42 @@ The project has been renamed and repositioned as `WinReg Wiki`: a concise Window
 ## Current Structure
 
 - `docs/registry-tree/`: Windows native registry tree entry point. Root keys are directories with `index.md` files, using MkDocs Material `navigation.indexes` so section labels are clickable.
-- `docs/questions/`: forensic scenario entry point. Scenario pages carry evidence semantics, cross-validation, detection ideas, and links into artifact pages.
-- `docs/artifacts/`: manually written artifact pages. They are no longer a top-level navigation tab; users enter them from `取证场景 -> Artifact 索引` or related links.
+- `docs/questions/`: forensic scenario entry point. Scenario pages carry investigation checklists, evidence boundaries, cross-validation, common misreads, and primary links into registry-location pages.
+- `docs/artifacts/`: manually written artifact pages. They are no longer a top-level navigation tab or primary reader flow; users enter them from `取证场景 -> Artifact 补充索引` or supplemental reading links.
 - `data/artifacts/`: structured artifact YAML records. Current coverage is 42 artifact pages and 42 YAML records.
 - `scripts/generate-artifact-index.py`: reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
 - `mkdocs.yml`: site configuration and navigation. Top-level nav is now `首页`, `注册表位置`, `取证场景`, plus auxiliary `贡献` and `标签`.
 - `.github/workflows/pages.yml`: GitHub Actions workflow for MkDocs build and GitHub Pages deployment.
 
 ## Last Completed Round
+
+- Refined the site into a registry-first dual-entry knowledge base:
+  - scenario pages now use `取证场景 -> 注册表位置` as the main flow;
+  - artifact pages are explicitly documented as supplemental/internal detail;
+  - `docs/artifacts/index.md` is now `Artifact 补充索引`;
+  - `docs/artifacts/generated-index.md` explains that generated YAML data is for maintenance/review, not the primary reader path.
+- Added registry-location pages to cover common scenario links:
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2`
+  - `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`
+- Added `取证场景 / 常规注册表检查` at `docs/questions/registry-checklist.md`.
+- Reworked scenario pages into checklist-style pages with primary links to registry-location pages:
+  - `execution.md`
+  - `persistence.md`
+  - `rdp.md`
+  - `shell-explorer.md`
+  - `usb.md`
+  - `accounts-security.md`
+  - `policy-security.md`
+  - `network.md`
+  - `software-install.md`
+  - `anti-forensics.md`
+- Updated key registry-location pages to include `相关场景` and changed old `相关 Artifact` sections to `补充阅读` where touched.
+- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
+
+## Previous Completed Round
 
 - Renamed the site and repository metadata to `WinReg Wiki`.
 - Switched `origin` to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
@@ -60,8 +95,9 @@ Previous completed content state:
 
 - Treat the project as a Wiki, not a blog or long-form DFIR handbook.
 - Top-level navigation should stay small: homepage, registry tree, forensic scenarios.
-- `注册表位置` is a path dictionary. It should explain key/value meaning, live/offline location, common writers, and short caveats.
-- `取证场景` and artifact pages carry evidence interpretation, attacker usage, detection ideas, false positives, collection, and cross-validation.
+- `注册表位置` is the primary path dictionary. It should explain key/value meaning, live/offline location, common writers, default/common state, and short caveats.
+- `取证场景` carries investigation logic, cross-validation, common misreads, and links back to registry-location pages.
+- Artifact pages carry supplemental evidence interpretation, collection, parsing tools, false positives, and structured YAML data. Do not make artifact pages a top-level navigation system again unless the information architecture changes intentionally.
 - Keep English filenames and URLs; use Chinese navigation and display text where practical.
 - Keep `data/artifacts/*.yml` stable and backward-compatible. It drives the generated index and future exports.
 - Timestamp interpretation must stay conservative. Do not treat key LastWrite as the creation time of a specific value.
@@ -77,13 +113,14 @@ Last verified locally:
 .venv/bin/mkdocs build --strict
 ```
 
-The Material for MkDocs upstream warning about MkDocs 2.0 may appear during build; it is not currently a project build error.
+Both commands completed successfully after the registry-first scenario rewrite. The Material for MkDocs upstream warning about MkDocs 2.0 may appear during build; it is not currently a project build error. MkDocs may also print INFO that artifact pages are not in `nav`; this is expected because artifact pages are supplemental.
 
 ## Next Priorities
 
 - Confirm GitHub Pages settings for the new repository and decide whether the online path should remain under the old custom-domain path or move to a new path / subdomain.
-- Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra prose.
-- Add deeper registry-location pages for `HKCU\Environment`, user-level Run / Command Processor, ZoneMap, Printers, NetworkList, and TCP/IP Interfaces.
+- Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
+- Add deeper registry-location pages for `HKCU\Environment`, `HKCU\Software\Microsoft\Command Processor`, ZoneMap, Printers, NetworkList, TCP/IP Interfaces, EventLog, FirewallPolicy, and Defender policy subkeys.
+- Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
 - Add remaining registry artifacts only after the architecture settles: KnownDLLs, App Paths, Winlogon Notify, BootExecute, CachedLogonsCount, LogonUI.
 - Add contribution guide and source-quality expectations.
 - Choose a license and add a `LICENSE` file.

@@ -27,9 +27,14 @@
 | 常见写入者 | System Properties、Remote Desktop 设置、GPO、管理工具。 |
 | 注意 | 这里是服务端配置，不记录客户端连接历史，也不单独证明发生登录。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [RDP 与远程访问](../../../../../questions/rdp.md)
+- [常规注册表检查](../../../../../questions/registry-checklist.md)
+- [安全策略与防护配置](../../../../../questions/policy-security.md)
+
+## 补充阅读
 
 - [fDenyTSConnections](../../../../../artifacts/rdp/fdenytsconnections.md)
 - [RDP-Tcp PortNumber](../../../../../artifacts/rdp/rdp-tcp-portnumber.md)
 - [CredSSP / NLA](../../../../../artifacts/rdp/credssp-nla.md)
-

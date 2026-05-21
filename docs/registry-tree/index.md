@@ -32,6 +32,7 @@
 | [ControlSet00x\Services](hklm/system/controlset/services/index.md) | 服务、驱动和网络组件配置。 |
 | [ControlSet00x\Services\<DriverName>](hklm/system/controlset/services/drivers.md) | 驱动服务配置。 |
 | [ControlSet00x\Enum](hklm/system/controlset/enum/index.md) | 设备枚举树。 |
+| [ControlSet00x\Enum\USBSTOR](hklm/system/controlset/enum/usbstor.md) | USB 存储设备枚举。 |
 | [ControlSet00x\Enum\USB](hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 |
 | [ControlSet00x\Enum\SWD\WPDBUSENUM](hklm/system/controlset/enum/swd-wpdbusenum.md) | WPD / MTP 设备枚举。 |
 | [ControlSet00x\Control\DeviceClasses](hklm/system/controlset/control/deviceclasses.md) | 设备接口类注册。 |
@@ -49,6 +50,7 @@
 | 路径 | 内容 |
 |---|---|
 | [Microsoft\Active Setup](hklm/software/microsoft/active-setup.md) | 每用户初始化组件定义。 |
+| [Windows\CurrentVersion\Run](hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 |
 | [ProfileList](hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到 profile 路径映射。 |
 | [Winlogon](hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | 交互式登录配置。 |
 | [Image File Execution Options](hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | 按进程名生效的启动配置。 |
@@ -68,8 +70,11 @@
 | 路径 | 内容 |
 |---|---|
 | [HKCU\Software](hkcu/software/index.md) | 用户软件和应用配置。 |
+| [Run / RunOnce](hkcu/software/microsoft/windows/currentversion/run.md) | 用户级登录启动项。 |
 | [Explorer](hkcu/software/microsoft/windows/currentversion/explorer.md) | Shell / Explorer 用户级配置入口。 |
+| [UserAssist](hkcu/software/microsoft/windows/currentversion/userassist.md) | Explorer 相关程序交互记录。 |
 | [ComDlg32](hkcu/software/microsoft/windows/currentversion/comdlg32.md) | Common dialog MRU。 |
+| [MountPoints2](hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷、盘符或网络共享。 |
 | [RunMRU](hkcu/software/microsoft/windows/currentversion/runmru.md) | Win+R 输入历史。 |
 | [RecentDocs](hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU。 |
 | [Internet Settings](hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户代理、PAC、WinINet、ZoneMap。 |

@@ -27,8 +27,12 @@
 | 常见写入者 | Windows 时间/区域设置、GPO、系统安装或配置流程。 |
 | 注意 | 时间线归一化时应记录时区配置；注册表时间戳本身通常以 UTC 存储。 |
 
-## 相关 Artifact
+## 相关场景
+
+- [网络与系统环境](../../../../../questions/network.md)
+- [常规注册表检查](../../../../../questions/registry-checklist.md)
+
+## 补充阅读
 
 - 暂无专门 artifact 页面
 - [ProfileList](../../../../../artifacts/security/profilelist.md)
-

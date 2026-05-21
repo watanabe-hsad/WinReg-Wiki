@@ -1,38 +1,56 @@
 # 自启动与持久化
 
-持久化调查关注的是“系统或用户登录时，哪些命令会被自动触发”。注册表是最常见入口之一，但不应忽略计划任务、启动目录、WMI、服务二进制和安全产品策略。
+## 检查目标
 
-## 优先级
+确认系统启动、用户登录、Shell 加载、服务启动或认证链加载时是否存在自动执行配置。
 
-| 优先级 | Artifact | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | [Run / RunOnce](../artifacts/persistence/run-keys.md) | 用户级和机器级登录启动 |
-| 高 | [Active Setup](../artifacts/persistence/active-setup.md) | 用户登录初始化命令，适合跨用户触发 |
-| 高 | [StartupApproved](../artifacts/persistence/startupapproved.md) | 启动项启用/禁用状态，解释 Run key 是否可能生效 |
-| 高 | [Services](../artifacts/persistence/services.md) | 服务和驱动级持久化 |
-| 高 | [Drivers](../artifacts/persistence/drivers.md) | kernel / file system driver 启动配置 |
-| 高 | [IFEO](../artifacts/persistence/ifeo.md) | 调试器劫持、可执行文件劫持 |
-| 高 | [AppInit_DLLs](../artifacts/persistence/appinit-dlls.md) | User32 相关 DLL 加载链 |
-| 高 | [Winlogon Userinit](../artifacts/persistence/winlogon-userinit.md) | 登录初始化链追加命令 |
-| 高 | [Winlogon Shell](../artifacts/persistence/winlogon-shell.md) | 登录 Shell 替换或追加命令 |
-| 高 | [LSA Authentication Packages](../artifacts/persistence/lsa-authentication-packages.md) | LSASS 加载链和凭据访问风险 |
-| 高 | [LSA Security Packages](../artifacts/persistence/lsa-security-packages.md) | LSA SSP/AP 加载链和凭据访问风险 |
-| 高 | [Command Processor AutoRun](../artifacts/persistence/command-processor-autorun.md) | `cmd.exe` 启动自动命令 |
-| 中 | [ShellServiceObjectDelayLoad](../artifacts/persistence/shellserviceobjectdelayload.md) | Explorer Shell COM 加载 |
-| 中 | [Print Monitors](../artifacts/persistence/print-monitors.md) | Spooler monitor DLL 加载 |
+| [HKCU Run / RunOnce](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级登录启动项。 | 只作用于对应用户 SID。 |
+| [HKLM Run / RunOnce](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 | 32 位视图需看 `WOW6432Node`。 |
+| [Active Setup](../registry-tree/hklm/software/microsoft/active-setup.md) | 每用户初始化命令。 | 需比对 HKLM 组件和 HKCU stub。 |
+| [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务和驱动配置。 | 服务配置存在不等于已启动。 |
+| [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需验证签名、路径和加载事件。 |
+| [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试和 EDR 也可能使用。 |
+| [AppInit_DLLs](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md) | User32 相关 DLL 加载配置。 | 是否加载取决于系统配置和进程类型。 |
+| [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录和隐藏账户配置。 | 登录事实要靠事件日志。 |
+| [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、通知包、安全包配置。 | 未知 DLL 需验证文件和模块加载。 |
+| [ShellServiceObjectDelayLoad](../registry-tree/hklm/software/microsoft/windows/currentversion/shellserviceobjectdelayload.md) | Explorer Shell COM 延迟加载。 | COM CLSID 需回到 Classes 解析。 |
+| [Print Monitors](../registry-tree/hklm/system/controlset/control/print-monitors.md) | Spooler monitor DLL 配置。 | 打印机驱动和企业打印组件是常见正常来源。 |
 
-## 高信号特征
+## 判断要点
 
-- 命令指向用户可写目录，例如 `%AppData%`、`%Temp%`、`Downloads`。
-- 使用 `powershell.exe`、`wscript.exe`、`mshta.exe`、`rundll32.exe`、`regsvr32.exe`。
-- value name 或 service name 伪装成系统组件。
-- 路径不存在但注册表项残留。
-- 命令行异常长、混淆、编码或包含远程下载。
-- 驱动或 DLL 无签名、位于非标准目录，且配置变化与文件创建时间接近。
-- LSA、Print Monitor、AppInit 等加载链被非安装器进程修改。
+- 记录 value name、value data、命令行、文件路径、签名、文件是否存在和目录权限。
+- 命令指向用户可写目录、临时目录、可移动盘、网络共享或解释器时，需补进程和文件时间线。
+- LSA、Print Monitors、AppInit_DLLs、ShellServiceObjectDelayLoad 证明加载链配置存在；是否加载需要运行时证据。
+- StartupApproved 只解释启动项状态，完整命令仍要回到 Run key 或 Startup Folder。
 
-## 判断边界
+## 交叉验证
 
-- Run key、Winlogon、Active Setup、LSA、Command Processor AutoRun 都首先证明“配置存在”。是否执行要结合登录、重启、cmd 启动、LSASS 模块加载或进程创建日志。
-- StartupApproved 证明的是状态，不保存完整命令；必须回到 Run key 或 Startup Folder 查命令内容。
-- Drivers、AppInit_DLLs、Print Monitors 和 ShellServiceObjectDelayLoad 需要额外验证加载事件、模块列表、签名和运行时上下文。
+- Autoruns、Scheduled Tasks、Startup Folder、服务二进制、WMI 持久化。
+- Sysmon 1 / 6 / 7 / 12 / 13 / 14、Security 4688、System 服务事件。
+- Prefetch、BAM / DAM、Amcache、文件签名、EDR telemetry。
+- GroupPolicy、软件安装日志、管理员操作记录。
+
+## 常见误判
+
+- 正常更新器、同步盘、输入法、VPN、EDR、备份软件、打印驱动会写入自启动位置。
+- `RunOnce` 可能已执行并删除，也可能因权限或错误保留。
+- 服务项残留不代表服务当前存在或可启动。
+- key LastWrite 只说明 key 变化，不说明某个具体 value 的创建时间。
+
+## 相关场景
+
+- [程序执行痕迹](execution.md)
+- [安全策略与防护配置](policy-security.md)
+- [常规注册表检查](registry-checklist.md)
+
+## 补充阅读
+
+- [Run / RunOnce artifact](../artifacts/persistence/run-keys.md)
+- [Services artifact](../artifacts/persistence/services.md)
+- [IFEO artifact](../artifacts/persistence/ifeo.md)
+- [LSA Authentication Packages artifact](../artifacts/persistence/lsa-authentication-packages.md)
+- [Print Monitors artifact](../artifacts/persistence/print-monitors.md)

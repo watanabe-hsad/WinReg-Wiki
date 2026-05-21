@@ -1,32 +1,47 @@
 # 反取证与清理痕迹
 
-反取证调查关注日志被清理、审计被关闭、安全工具被削弱、关键 artifact 被删除或时间线出现异常空洞。注册表可以证明配置变化和清理目标，但“清理发生”通常需要事件日志、文件系统和 EDR 一起确认。
+## 检查目标
 
-## 优先级
+判断日志、审计、安全工具或常见注册表线索是否被配置削弱、清理或异常缺失。
 
-| 优先级 | Artifact / Path | 主要价值 |
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
-| 高 | [Defender Policies](../artifacts/security/defender-policies.md) | 防护削弱、排除项、禁用尝试 |
-| 高 | `HKLM\SYSTEM\CurrentControlSet\Services\EventLog` | 事件日志服务和通道配置 |
-| 高 | [Audit Policy](../artifacts/security/audit-policy.md) | 审计策略相关数据，影响日志可见性 |
-| 中 | [StartupApproved](../artifacts/persistence/startupapproved.md) | 启动项被禁用或状态被清理的线索 |
-| 中 | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | UAC 降级或关闭 |
+| [Policies](../registry-tree/hklm/software/policies.md) | 安全策略、UAC、Defender、防火墙策略入口。 | 值存在不等于实际生效。 |
+| [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender 排除项和本地状态线索。 | Tamper Protection 可能阻止生效。 |
+| [SECURITY](../registry-tree/hklm/security.md) | 审计和本地安全策略。 | 需要专门工具解析。 |
+| [Services](../registry-tree/hklm/system/controlset/services/index.md) | EventLog、Defender、EDR、日志相关服务配置。 | 服务配置异常要结合事件日志。 |
+| [HKCU Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md) | 用户行为 artifact 所在入口。 | 缺失不是反取证证据本身。 |
 
-## 高信号特征
+## 判断要点
 
-- Defender 排除项新增后，日志或 EDR 显示恶意文件落地。
-- 审计策略被关闭，随后关键时段 Security.evtx 出现空洞。
-- EventLog 服务配置异常，通道大小被调小，日志清理事件 `1102` 出现。
-- 多个用户 hive 中执行 artifact 同时缺失，但文件系统和 EDR 仍显示活动。
+- Defender 排除项、禁用尝试和审计策略变化应与日志、EDR 和进程记录对齐。
+- EventLog 服务配置异常、通道大小变化和日志清理事件要分开解释。
+- 多个用户 hive 中预期存在的 Shell 线索同时缺失时，才考虑清理方向。
+- “没有发现”只能写成证据缺口，不能直接写成清理结论。
 
 ## 交叉验证
 
 - Security.evtx `1102`、`4719`，System.evtx 服务事件。
-- Defender Operational、PowerShell logs、Sysmon 12/13/14。
+- Defender Operational、PowerShell logs、Sysmon 12 / 13 / 14。
 - `$MFT`、`$LogFile`、`$UsnJrnl`、Volume Shadow Copy。
 - EDR tamper alerts、GPO/MDM 变更、管理员操作记录。
 
-## 结论写法
+## 常见误判
 
-- “日志策略被修改”不等于“日志已被清理”；需要 1102、日志文件时间线或 EDR 支持。
-- “artifact 缺失”不是反取证证据本身，只有在应存在的上下文里缺失并伴随清理痕迹时才有意义。
+- GPO、MDM、安全产品和企业基线会正常调整审计、防火墙和 Defender 策略。
+- 用户行为 artifact 缺失可能来自未使用 Explorer、Server Core、短生命周期用户或采集范围不足。
+- 日志空洞可能来自日志轮转、通道大小设置或采集不完整。
+
+## 相关场景
+
+- [安全策略与防护配置](policy-security.md)
+- [程序执行痕迹](execution.md)
+- [常规注册表检查](registry-checklist.md)
+
+## 补充阅读
+
+- [Defender Policies artifact](../artifacts/security/defender-policies.md)
+- [Audit Policy artifact](../artifacts/security/audit-policy.md)
+- [StartupApproved artifact](../artifacts/persistence/startupapproved.md)

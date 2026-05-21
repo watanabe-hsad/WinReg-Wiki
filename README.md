@@ -4,12 +4,13 @@ WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value l
 
 GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
-The project is organized as a wiki rather than a long-form handbook. Registry-location pages explain where keys live and what values mean. Forensic scenario and artifact pages explain evidence semantics, validation, false positives, collection, and tooling.
+The project is organized as a wiki rather than a long-form handbook. Registry-location pages explain where keys live and what values mean. Forensic scenario pages explain investigation checks and cross-validation. Artifact pages are retained as supplemental entries for detailed field semantics, collection notes, parsing tools, and structured data.
 
 ## Main Entry Points
 
 - Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`.
 - Forensic scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, security policy changes, network configuration, software installation, and anti-forensics.
+- Artifact supplemental index: use only when a scenario or registry-location page needs deeper artifact-specific notes.
 
 ## Online Site
 
@@ -57,8 +58,8 @@ Generate the structured artifact data index:
 ## Content Principles
 
 - Keep pages concise and query-oriented.
-- Registry-tree pages should read like a key/value dictionary: path, source hive, common values, short notes, related artifacts.
-- Keep deeper evidence interpretation in scenario pages and artifact pages.
+- Registry-tree pages should read like a key/value dictionary: path, source hive, common values, short notes, related scenarios.
+- Keep deeper investigation logic in scenario pages; keep artifact pages as supplemental details rather than the main reading path.
 - Separate evidence strength clearly: configuration exists, program exists, user interaction, program execution, device presence, policy weakening, and malicious behavior are different claims.
 - Do not treat registry key LastWrite as a value creation time unless that is explicitly supported by the artifact and tool output.
 - Explain live-to-offline mappings accurately: `HKCU`, `HKCR`, `HKCC`, and `CurrentControlSet` are views or mappings, not simple standalone hive files.

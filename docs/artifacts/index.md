@@ -1,6 +1,8 @@
-# 注册表 Artifact
+# Artifact 补充索引
 
-这个入口按 registry artifact 类型组织，用于快速定位具体页面。结构化 YAML 生成的完整表格见 [结构化数据索引](generated-index.md)。
+本页保留 artifact 级补充条目，用于查看字段语义、采集、解析工具、误报和交叉验证细节。日常阅读优先从 [注册表位置](../registry-tree/index.md) 或 [取证场景](../questions/index.md) 进入。
+
+结构化 YAML 生成的完整表格见 [结构化数据索引](generated-index.md)。
 
 ## 程序执行 / 程序存在
 

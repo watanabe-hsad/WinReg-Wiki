@@ -7,7 +7,8 @@ Current project name: `WinReg Wiki`.
 - Keep the homepage as a compact Wiki entry page.
 - Keep top-level navigation limited to `首页`, `注册表位置`, and `取证场景`.
 - Keep MkDocs Material configuration simple and avoid heavy theme customization.
-- Maintain a consistent artifact page template with evidence semantics, timestamp notes, detection ideas, false positives, collection, tooling, and cross validation.
+- Treat registry-location pages and scenario pages as the two primary reader entry points.
+- Keep artifact pages as supplemental detail for evidence semantics, timestamp notes, detection ideas, false positives, collection, tooling, and cross validation.
 - Keep `data/artifacts/*.yml` alongside manual pages for structured future use.
 
 ## Phase 2: Registry Tree Depth
@@ -19,7 +20,8 @@ Current project name: `WinReg Wiki`.
 - Completed path-reference pages: HKCU Explorer, ComDlg32, RunMRU, RecentDocs, Internet Settings, Classes, Terminal Server Client, plus HKU `.DEFAULT` and service-account SID pages.
 - Completed path-reference pages: device-specific pages for USB, DeviceClasses, `SWD\WPDBUSENUM`, EMDMgmt, Portable Devices, and VolumeInfoCache.
 - Completed path-reference pages: persistence/load-chain pages for Active Setup, AppInit_DLLs, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, and driver service entries.
-- Next: add HKCU ZoneMap, Printers, Environment, user-level Run / Command Processor, and network profile pages.
+- Completed path-reference pages added for the registry-first scenario rewrite: HKLM Run / RunOnce, HKCU Run / RunOnce, UserAssist, MountPoints2, and USBSTOR.
+- Next: add HKCU ZoneMap, Printers, Environment, Command Processor, NetworkList, TCP/IP Interfaces, EventLog, FirewallPolicy, and Defender policy subkey pages.
 
 ## Phase 3: High-Value Artifacts
 
@@ -45,6 +47,8 @@ Current project name: `WinReg Wiki`.
 
 ## Phase 5: Detection Mappings and Tool Integration
 
+- Current status: scenario pages now link primarily to registry-location pages and keep artifact links as supplemental reading.
+- Current status: `取证场景 / 常规注册表检查` provides the first cross-scenario registry checklist.
 - Add Sigma-friendly registry path selectors for high-value persistence and policy weakening keys.
 - Add Sysmon, Security.evtx, Defender, TerminalServices, PowerShell, and EDR telemetry references per artifact.
 - Add Velociraptor and KAPE collection notes where useful.
