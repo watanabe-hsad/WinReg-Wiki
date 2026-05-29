@@ -25,7 +25,7 @@
 | 常见写入者 | Explorer / Shell。 |
 | 注意 | 文件名出现说明用户环境记录过该名称，不直接证明文件内容被读取。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [RecentDocs](../../../../../../artifacts/user-activity/recentdocs.md)
 - [OpenSavePidlMRU](../../../../../../artifacts/user-activity/opensavepidlmru.md)

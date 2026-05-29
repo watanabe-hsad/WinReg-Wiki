@@ -32,6 +32,6 @@
 | 用户级覆盖 | `HKCU\Software\Classes` 可能改变当前用户看到的文件关联或 COM 解析。 |
 | 离线分析 | 不存在单独的 `HKEY_CLASSES_ROOT` hive 文件。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [MUICache](../../artifacts/execution/muicache.md)

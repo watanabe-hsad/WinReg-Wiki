@@ -27,7 +27,7 @@
 | 常见写入者 | Windows Portable Devices、MTP/WPD 驱动、设备安装过程。 |
 | 注意 | 该位置常与 `SWD\WPDBUSENUM` 互相印证；不能单独证明文件访问。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Portable Devices](../../../../artifacts/usb/portable-devices.md)
 - [Enum SWD WPDBUSENUM](../../../../artifacts/usb/swd-wpdbusenum.md)

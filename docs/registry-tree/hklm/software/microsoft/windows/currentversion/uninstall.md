@@ -29,7 +29,7 @@
 | 常见写入者 | MSI、安装器、应用更新器。 |
 | 注意 | 登记项存在说明安装登记存在，不等于程序近期运行。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Amcache](../../../../../../artifacts/execution/amcache.md)
 - [MUICache](../../../../../../artifacts/execution/muicache.md)

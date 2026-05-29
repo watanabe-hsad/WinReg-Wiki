@@ -24,7 +24,7 @@
 | 常见写入者 | Explorer Run dialog。 |
 | 注意 | 输入历史不等于命令成功执行；需要结合进程、Prefetch、UserAssist 等证据。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [RunMRU](../../../../../../artifacts/user-activity/runmru.md)
 - [UserAssist](../../../../../../artifacts/execution/userassist.md)

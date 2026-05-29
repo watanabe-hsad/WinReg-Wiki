@@ -25,7 +25,7 @@
 | 常见写入者 | Mount Manager。 |
 | 注意 | 盘符可复用；分析时应同时保留卷 GUID、设备序列和时间线。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [MountedDevices](../../../artifacts/usb/mounteddevices.md)
 - [USBSTOR](../../../artifacts/usb/usbstor.md)

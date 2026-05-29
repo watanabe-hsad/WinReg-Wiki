@@ -27,7 +27,7 @@
 | 常见写入者 | Explorer common dialog、调用 common dialog 的应用。 |
 | 注意 | PIDL 需要专门解析；路径线索不等于文件内容被读取。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [OpenSavePidlMRU](../../../../../../artifacts/user-activity/opensavepidlmru.md)
 - [LastVisitedPidlMRU](../../../../../../artifacts/user-activity/lastvisitedpidlmru.md)

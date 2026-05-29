@@ -30,7 +30,7 @@
 | hive 时间 | 文件时间戳不等于内部 artifact 活动时间。 |
 | 加载状态 | hive 可被后台加载，不等于用户正在登录。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [UserAssist](../../artifacts/execution/userassist.md),
 [RunMRU](../../artifacts/user-activity/runmru.md),

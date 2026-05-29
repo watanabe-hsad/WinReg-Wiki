@@ -26,7 +26,7 @@
 | 常见写入者 | Windows 启动过程。 |
 | 注意 | 离线分析时不要直接假设 `ControlSet001` 是当前配置，应先读取 `Select\Current`。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Services](../../../artifacts/persistence/services.md)
 - [BAM / DAM](../../../artifacts/execution/bam-dam.md)

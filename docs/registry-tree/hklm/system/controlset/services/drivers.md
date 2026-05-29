@@ -28,7 +28,7 @@
 | 常见写入者 | 驱动安装器、PnP、Service Control Manager、系统组件。 |
 | 注意 | 驱动配置存在不等于驱动已加载；需结合 System.evtx、Sysmon 6、Code Integrity 或内存证据。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Drivers](../../../../../artifacts/persistence/drivers.md)
 - [Services](../../../../../artifacts/persistence/services.md)

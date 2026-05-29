@@ -26,7 +26,7 @@
 | 常见写入者 | Windows ReadyBoost / External Memory Device 组件。 |
 | 注意 | 该 key 不一定存在；它是辅助线索，不应代替 `USBSTOR`、`MountedDevices`、`MountPoints2`。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [EMDMgmt](../../../../../../artifacts/usb/emdmgmt.md)
 - [MountedDevices](../../../../../../artifacts/usb/mounteddevices.md)

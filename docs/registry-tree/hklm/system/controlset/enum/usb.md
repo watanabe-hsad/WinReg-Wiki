@@ -28,7 +28,7 @@
 | 常见写入者 | Plug and Play、USB 驱动栈、设备安装过程。 |
 | 注意 | 该路径不只包含存储设备；存储设备还需看 `USBSTOR`、卷和用户级 artifact。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [USB](../../../../../artifacts/usb/usb.md)
 - [USBSTOR](../../../../../artifacts/usb/usbstor.md)

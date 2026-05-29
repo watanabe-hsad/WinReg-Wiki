@@ -27,7 +27,7 @@
 | 常见写入者 | 应用安装器、COM 组件注册、系统组件。 |
 | 注意 | `HKCR` 是 `HKLM\SOFTWARE\Classes` 与用户级 `HKCU\Software\Classes` 的合并视图。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [MUICache](../../../artifacts/execution/muicache.md)
 - [IFEO](../../../artifacts/persistence/ifeo.md)

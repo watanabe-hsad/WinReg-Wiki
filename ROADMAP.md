@@ -54,7 +54,18 @@ Current project name: `WinReg Wiki`.
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers`
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList`
-- Next: add or deepen `Session Manager\SubSystems`, `Session Manager\Memory Management`, machine-level `AppCompatFlags`, `AppCompatFlags\Layers`, Credential Provider Filters, and additional HKCU network / shell policy locations.
+- Completed registry-tree normalization pass:
+  - remaining `## 相关 Artifact` headings in registry-location pages were renamed to `## 补充阅读`;
+  - scan now returns no registry-tree hits for old artifact-template headings or subjective priority phrases.
+- Completed follow-up reference pages:
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
+- Next: add or deepen Credential Provider Filters component-resolution notes, `Session Manager\Environment` examples, `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `Attachments`, and additional HKCU network / shell policy locations.
 
 ## Phase 3: High-Value Artifacts
 

@@ -26,7 +26,7 @@
 | 常见写入者 | Plug and Play、驱动安装程序、设备接口注册。 |
 | 注意 | 接口类 GUID 本身不是唯一物理设备；需与 `Enum`、`USBSTOR`、`MountedDevices` 关联。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [DeviceClasses](../../../../../artifacts/usb/deviceclasses.md)
 - [USB](../../../../../artifacts/usb/usb.md)

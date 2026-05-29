@@ -14,6 +14,8 @@
 | [RecentDocs](../registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和扩展名分组。 | 文件名出现不等于内容被读取。 |
 | [ComDlg32](../registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md) | 打开 / 保存对话框 MRU。 | PIDL 解析结果需结合应用和文件系统。 |
 | [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷、盘符或网络共享。 | 不证明文件复制或文件访问。 |
+| [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) | 用户级策略入口。 | 策略存在不说明来源。 |
+| [HKCU Policies\Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | Explorer UI 限制策略。 | UI 限制不等于底层访问事实。 |
 | [UsrClass.dat](../registry-tree/hku/usrclass.md) | 用户级 Classes / Shell 相关 hive。 | ShellBags、MUICache 等还需专门解析。 |
 
 ## 判断要点

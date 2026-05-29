@@ -26,7 +26,7 @@
 | 常见写入者 | Windows、身份认证组件、安全产品、VPN/MFA/智能卡组件。 |
 | 注意 | value 存在表示配置状态，不等同包已被 LSASS 加载。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [LSA Security Packages](../../../../../../artifacts/persistence/lsa-security-packages.md)
 - [LSA Authentication Packages](../../../../../../artifacts/persistence/lsa-authentication-packages.md)

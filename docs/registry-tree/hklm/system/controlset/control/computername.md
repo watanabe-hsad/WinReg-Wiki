@@ -26,7 +26,7 @@
 | 常见写入者 | Windows 安装、系统属性、重命名流程、域加入流程。 |
 | 注意 | 改名后可能存在当前值和 active 值不一致；需结合事件日志或系统信息确认。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - 暂无专门 artifact 页面
 - [Terminal Server Client](../../../../../artifacts/rdp/terminal-server-client.md)

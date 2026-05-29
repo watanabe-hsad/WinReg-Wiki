@@ -12,6 +12,7 @@
 | [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md) | 单个接口 IP、DNS、DHCP、网关和租约字段。 | DHCP 租约时间不是会话结束时间。 |
 | [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户级代理、PAC、WinINet 配置。 | 只影响使用相关 API 的应用。 |
 | [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 | 区域映射不等于站点访问。 |
+| [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) | 用户级策略入口。 | 策略来源需结合 GPO / MDM。 |
 | [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络 profile 名称、类别和连接时间线索。 | 时间字段需工具和时区处理。 |
 | [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | 防火墙 profile 和规则配置。 | 规则存在不等于连接发生。 |
 | [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md) | 防火墙策略路径。 | 需与本地 FirewallPolicy 和 ActiveStore 对照。 |

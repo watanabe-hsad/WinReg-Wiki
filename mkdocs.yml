@@ -92,6 +92,9 @@ nav:
                           - Internet Settings:
                               - registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md
                               - ZoneMap: registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md
+                          - Policies:
+                              - registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md
+                              - Explorer: registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md
       - HKEY_LOCAL_MACHINE:
           - registry-tree/hklm/index.md
           - SAM: registry-tree/hklm/sam.md
@@ -110,6 +113,9 @@ nav:
                   - Windows NT:
                       - CurrentVersion:
                           - AeDebug: registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md
+                          - AppCompatFlags:
+                              - registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md
+                              - Layers: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags/layers.md
                           - EMDMgmt: registry-tree/hklm/software/microsoft/windows-nt/currentversion/emdmgmt.md
                           - NetworkList\Profiles: registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
                           - ProfileList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
@@ -122,6 +128,7 @@ nav:
                   - Windows:
                       - CurrentVersion:
                           - App Paths: registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md
+                          - Authentication\Credential Provider Filters: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md
                           - Authentication\Credential Providers: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md
                           - Authentication\LogonUI: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md
                           - Policies\System: registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md
@@ -163,7 +170,9 @@ nav:
                           - AppCertDlls: registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md
                           - BootExecute: registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md
                           - KnownDLLs: registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md
+                          - Memory Management: registry-tree/hklm/system/controlset/control/session-manager/memory-management.md
                           - PendingFileRenameOperations: registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md
+                          - SubSystems: registry-tree/hklm/system/controlset/control/session-manager/subsystems.md
                           - Environment: registry-tree/hklm/system/controlset/control/session-manager/environment.md
                       - Print\Monitors: registry-tree/hklm/system/controlset/control/print-monitors.md
                       - Lsa:

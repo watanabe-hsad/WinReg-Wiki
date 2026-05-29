@@ -24,7 +24,10 @@
 | [CredSSP](../registry-tree/hklm/system/controlset/control/terminal-server/credssp.md) | CredSSP 认证兼容性策略。 | 需结合 GPO 和补丁级别。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户和 SID 显示线索。 | 不证明登录成功。 |
 | [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录凭据提供器注册。 | 第三方身份组件可能合法注册。 |
+| [Credential Provider Filters](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md) | 凭据提供器过滤器注册。 | 注册不等于某次登录使用。 |
 | [CachedLogonsCount](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md) | 域登录缓存数量配置。 | 不是缓存凭据本体。 |
+| [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) | 用户级策略入口。 | 需确认 SID 和策略来源。 |
+| [HKCU Policies\Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | 用户级 Explorer 策略。 | UI 限制不等于底层访问事实。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 配置。 | 需结合驱动加载、签名和 Code Integrity。 |
 
 ## 判断要点

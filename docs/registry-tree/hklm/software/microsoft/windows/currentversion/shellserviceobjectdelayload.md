@@ -26,7 +26,7 @@
 | 常见写入者 | Windows Shell 组件、Shell 扩展、同步盘、企业桌面软件。 |
 | 注意 | 需要从 CLSID 继续解析 DLL；HKCR 是合并视图，离线分析应看 `SOFTWARE\Classes` 和用户 `UsrClass.dat`。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [ShellServiceObjectDelayLoad](../../../../../../artifacts/persistence/shellserviceobjectdelayload.md)
 

@@ -24,7 +24,7 @@
 | 常见写入者 | 打印机驱动、Spooler、打印管理工具、安装程序。 |
 | 注意 | 配置存在不等于 DLL 已加载；加载状态需结合 Spooler 运行时证据。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Print Monitors](../../../../../artifacts/persistence/print-monitors.md)
 - [Services](../../../../../artifacts/persistence/services.md)

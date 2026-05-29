@@ -16,6 +16,8 @@
 | [HKLM Command Processor](../registry-tree/hklm/software/microsoft/command-processor.md) | 机器级 `cmd.exe` 配置和 `AutoRun`。 | 影响范围更大，但仍需进程证据。 |
 | [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 程序注册不等于执行。 |
 | [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 | 不单独证明执行成功。 |
+| [HKLM AppCompatFlags](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 机器级应用兼容性配置入口。 | 需和用户级配置区分。 |
+| [AppCompatFlags\Layers](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags/layers.md) | 机器级兼容层配置。 | 记录存在不等于程序执行。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务、驱动、网络组件配置。 | 服务配置存在不等于服务已启动。 |
 | [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道配置。 | 这里不是日志内容。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需结合驱动加载、签名和 Code Integrity。 |
@@ -25,12 +27,15 @@
 | [Winlogon\Notify](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 | 配置存在不等于 DLL 已加载。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户 / SID 显示线索。 | 不证明登录成功。 |
 | [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录界面凭据提供器注册。 | Provider 注册不等于某次登录使用。 |
+| [Credential Provider Filters](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md) | 凭据提供器过滤器注册。 | 第三方身份组件可能合法注册。 |
 | [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试器、开发工具和 EDR 也可能写入。 |
 | [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 | 需要崩溃和进程证据。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、安全包和 LSASS 保护相关配置。 | 未知 DLL 需验证路径、签名和模块加载。 |
 | [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 | 非空配置需验证模块加载。 |
 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 配置存在不等于已经重启执行。 |
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 异常需结合模块加载和基线。 |
+| [SubSystems](../registry-tree/hklm/system/controlset/control/session-manager/subsystems.md) | Windows 子系统初始化配置。 | 需和同版本基线对照。 |
+| [Memory Management](../registry-tree/hklm/system/controlset/control/session-manager/memory-management.md) | paging file 和内存管理配置。 | 配置不保存内存内容。 |
 | [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 | 队列存在不等于文件已删除。 |
 | [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关。 | 允许连接不等于发生登录。 |
 | [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA 和安全层。 | 端口配置不等于正在监听。 |
@@ -52,6 +57,8 @@
 | [RecentDocs](../registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU 顺序。 | 文件名出现不等于内容被读取。 |
 | [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户级 WinINet 代理 / PAC。 | 不代表所有程序都使用该代理。 |
 | [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 | 映射存在不等于访问发生。 |
+| [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) | 用户级策略入口。 | 需确认对应用户 SID。 |
+| [HKCU Policies\Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | 用户级 Explorer 策略。 | UI 限制不等于底层访问事实。 |
 | [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络配置文件。 | 时间字段需工具解析。 |
 | [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md) | 接口 IP、DNS、DHCP、网关。 | DHCP 字段和静态字段要分开。 |
 | [HKCU Printers](../registry-tree/hkcu/printers.md) | 用户级打印机连接和配置。 | 不证明打印过文件。 |

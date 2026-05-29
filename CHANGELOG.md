@@ -8,6 +8,14 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added registry-location pages for registry-tree normalization follow-up:
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
 - Added registry-location pages for RDP listener and account/login policy details:
   - `HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP`
@@ -101,6 +109,8 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Normalized registry-location pages by replacing remaining `## 相关 Artifact` headings with `## 补充阅读`.
+- Updated `registry-checklist`, `persistence`, `execution`, `accounts-security`, `policy-security`, `anti-forensics`, `software-install`, `shell-explorer`, and `network` so primary links include the new registry-location pages.
 - Updated `registry-checklist`, `rdp`, `accounts-security`, and `policy-security` so their primary links include the new RDP listener, CredSSP, cached logons, Credential Providers, and SpecialAccounts registry-location pages.
 - Compressed additional RDP artifact pages into supplemental entries:
   - `docs/artifacts/rdp/fdenytsconnections.md`
@@ -170,6 +180,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-tree normalization and follow-up path expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the RDP listener / Credential Providers / CachedLogonsCount expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the LogonUI / UAC / Winlogon Notify / AppCompatFlags expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the HKLM Session Manager / App Paths / WindowsFirewall expansion.

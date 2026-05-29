@@ -27,7 +27,7 @@
 | 历史设备 | 历史设备调查优先看 `SYSTEM\Enum`、事件日志和设备安装日志。 |
 | 离线文件 | 不存在单独的 `HKEY_CURRENT_CONFIG` hive。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [Services](../../artifacts/persistence/services.md),
 [USBSTOR](../../artifacts/usb/usbstor.md),

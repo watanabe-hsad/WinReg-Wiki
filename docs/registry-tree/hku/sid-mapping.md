@@ -32,6 +32,6 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\<SID>
 | 域用户 | 域用户可能没有本地 SAM 用户记录。 |
 | 删除用户 | ProfileList 和目录可能残留。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [ProfileList](../../artifacts/security/profilelist.md)

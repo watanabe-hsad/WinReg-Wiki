@@ -27,7 +27,7 @@
 | 常见写入者 | Windows Portable Devices、MTP/WPD 驱动、Plug and Play。 |
 | 注意 | 常见于手机、相机、MTP 设备；不是所有 USB 存储都会出现。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Enum SWD WPDBUSENUM](../../../../../artifacts/usb/swd-wpdbusenum.md)
 - [Portable Devices](../../../../../artifacts/usb/portable-devices.md)

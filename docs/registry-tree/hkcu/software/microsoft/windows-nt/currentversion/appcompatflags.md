@@ -47,6 +47,7 @@
 ## 相关位置
 
 - [HKCU NTUSER.DAT](../../../../../hku/ntuser.md)
+- [HKLM AppCompatFlags](../../../../../hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md)
 - [UserAssist](../../windows/currentversion/userassist.md)
 - [HKLM Uninstall](../../../../../hklm/software/microsoft/windows/currentversion/uninstall.md)
 

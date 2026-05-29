@@ -26,7 +26,7 @@
 | 常见写入者 | Windows Search / 索引服务。 |
 | 注意 | 该位置是否存在和是否填充受 Windows Search 配置影响；不能单独证明 USB 插入或文件访问。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [VolumeInfoCache](../../../../../artifacts/usb/volumeinfocache.md)
 - [MountedDevices](../../../../../artifacts/usb/mounteddevices.md)

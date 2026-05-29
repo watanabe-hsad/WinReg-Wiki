@@ -26,7 +26,7 @@
 | 敏感数据 | LSA Secrets 可能包含凭据材料，处理时应控制输出范围。 |
 | 策略来源 | 本地策略、GPO、MDM 都可能写入相关配置。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [Audit Policy](../../artifacts/security/audit-policy.md),
 [LSA Authentication Packages](../../artifacts/persistence/lsa-authentication-packages.md)

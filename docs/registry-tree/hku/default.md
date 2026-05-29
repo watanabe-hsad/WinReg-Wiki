@@ -26,7 +26,7 @@
 | 常见写入者 | Windows 安装、登录界面、系统上下文配置。 |
 | 注意 | `.DEFAULT` 不是 `C:\Users\Default\NTUSER.DAT`，也不是当前登录用户。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - 暂无专门 artifact 页面
 - [ProfileList](../../artifacts/security/profilelist.md)

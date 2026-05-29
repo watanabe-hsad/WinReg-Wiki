@@ -26,7 +26,7 @@
 | 常见写入者 | Explorer、应用安装器、COM 注册、Shell 扩展。 |
 | 注意 | `HKCR` 会合并机器级和用户级 Classes；离线分析时不要把 `HKCR` 当成独立 hive。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [MUICache](../../../artifacts/execution/muicache.md)
 - [OpenSavePidlMRU](../../../artifacts/user-activity/opensavepidlmru.md)

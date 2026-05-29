@@ -35,6 +35,6 @@
 | 用户级覆盖 | 用户级 Classes 可影响当前用户的 COM 和文件关联解析。 |
 | ShellBags | 目录浏览线索，不等于文件打开或复制。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [MUICache](../../artifacts/execution/muicache.md)

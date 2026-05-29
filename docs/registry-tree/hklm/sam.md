@@ -26,6 +26,6 @@
 | 域用户 | 域用户 profile 可能存在，但不一定有本地 SAM 用户。 |
 | ProfileList | 用户目录映射在 `HKLM\SOFTWARE\...\ProfileList`，不在 SAM。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [ProfileList](../../artifacts/security/profilelist.md)

@@ -17,12 +17,14 @@
 | [SECURITY](../registry-tree/hklm/security.md) | 审计和本地安全策略。 | 需要专门工具解析。 |
 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | EventLog、Defender、EDR、日志相关服务配置。 | 服务配置异常要结合事件日志。 |
 | [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待删除或重命名队列。 | 队列存在不等于操作已完成。 |
+| [Memory Management](../registry-tree/hklm/system/controlset/control/session-manager/memory-management.md) | paging file 和关机清理相关配置。 | `ClearPageFileAtShutdown` 不证明某次关机已清理。 |
 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 异常项需结合重启和文件证据。 |
 | [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 崩溃后调试器配置。 | 可解释异常调试器链路，不证明触发。 |
 | [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 | 需结合 GPO / MDM 和实际状态。 |
 | [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量。 | 可解释命令环境变化。 |
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 | `Path` 异常需结合进程证据。 |
 | [HKCU Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md) | 用户行为 artifact 所在入口。 | 缺失不是反取证证据本身。 |
+| [HKCU Policies\Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | 用户级 Explorer UI 限制策略。 | UI 隐藏不等于底层文件被删除。 |
 
 ## 判断要点
 

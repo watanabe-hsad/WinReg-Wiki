@@ -29,7 +29,7 @@
 | 常见写入者 | Windows 组件、浏览器、Office、安装程序、企业软件。 |
 | 注意 | HKLM 定义和 HKCU 镜像需要一起看；配置存在不等于命令已执行。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Active Setup](../../../../artifacts/persistence/active-setup.md)
 

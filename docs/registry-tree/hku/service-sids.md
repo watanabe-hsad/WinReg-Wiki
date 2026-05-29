@@ -27,7 +27,7 @@
 | 常见写入者 | Windows 服务、系统组件、以服务账户运行的应用。 |
 | 注意 | 服务账户的 `HKCU` 与普通交互式用户不同；live 采集时应记录执行上下文。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Command Processor AutoRun](../../artifacts/persistence/command-processor-autorun.md)
 - [ProfileList](../../artifacts/security/profilelist.md)

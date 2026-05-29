@@ -24,7 +24,7 @@
 | 动态视图 | 适合 live triage，不适合作为历史设备连接的主要证据。 |
 | 历史设备 | 优先看 `SYSTEM\Enum`、`USBSTOR`、设备安装日志和事件日志。 |
 
-## 相关 Artifact
+## 补充阅读
 
 [USBSTOR](../../artifacts/usb/usbstor.md),
 [MountedDevices](../../artifacts/usb/mounteddevices.md)

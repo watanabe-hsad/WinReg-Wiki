@@ -13,6 +13,8 @@
 | [WOW6432Node](../registry-tree/hklm/software/wow6432node.md) | 32 位应用注册表视图。 | 64 位系统需同时检查。 |
 | [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 注册路径不等于程序执行。 |
 | [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 | 更偏程序存在 / 交互线索。 |
+| [HKLM AppCompatFlags](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 机器级兼容性配置入口。 | 可能来自兼容性数据库或安装过程。 |
+| [AppCompatFlags\Layers](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags/layers.md) | 机器级兼容层配置。 | 路径记录不等于程序当前存在。 |
 | [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | 用户 Shell 交互程序线索。 | 不覆盖所有执行方式。 |
 | [HKCU Run](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级安装器或应用自启动。 | 配置存在不等于执行成功。 |
 

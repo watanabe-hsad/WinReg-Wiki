@@ -26,7 +26,7 @@
 | 常见写入者 | 系统配置、旧版软件、安全软件、安装程序。 |
 | 注意 | 需要同时考虑启用状态、签名要求、Secure Boot、WOW6432Node 和进程是否加载 `User32.dll`。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [AppInit_DLLs](../../../../../../artifacts/persistence/appinit-dlls.md)
 

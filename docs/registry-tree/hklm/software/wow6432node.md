@@ -25,7 +25,7 @@
 | 常见写入者 | 32 位安装器、32 位应用、WOW64 注册表重定向。 |
 | 注意 | 分析 Run、Uninstall、COM 时应同时检查 64 位和 32 位视图。 |
 
-## 相关 Artifact
+## 补充阅读
 
 - [Run / RunOnce](../../../artifacts/persistence/run-keys.md)
 - [IFEO](../../../artifacts/persistence/ifeo.md)

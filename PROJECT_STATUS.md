@@ -34,6 +34,30 @@ Current content model:
 
 ## Last Completed Round
 
+- Normalized old registry-tree pages by replacing remaining `## 相关 Artifact` sections with `## 补充阅读`. A scan for `相关 Artifact`, English artifact-template headings, and subjective phrases now returns no hits in `docs/registry-tree`, `docs/questions`, or `docs/artifacts`.
+- Added registry-location pages:
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
+  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
+- Updated scenario pages so the new registry-location pages are linked from:
+  - `registry-checklist.md`
+  - `persistence.md`
+  - `execution.md`
+  - `accounts-security.md`
+  - `policy-security.md`
+  - `anti-forensics.md`
+  - `software-install.md`
+  - `shell-explorer.md`
+  - `network.md`
+- Registry-tree page count is now 95. Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
+- Site URL status remains pending confirmation. Current `site_url` still uses the previously reachable path `http://hsad.xyz/windows-registry-forensics-handbook/`. Possible future options: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`; the subdomain option is cleaner but requires DNS and GitHub Pages confirmation.
+
+## Previous Completed Round
+
 - Added RDP and account/login registry-location pages:
   - `HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP`

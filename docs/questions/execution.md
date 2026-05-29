@@ -15,8 +15,11 @@
 | [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级 `Path`、`ComSpec`、`PATHEXT`。 | 需结合具体进程环境。 |
 | [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径和短名称解析。 | 程序注册不等于执行。 |
 | [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 | 更偏程序存在 / 交互线索。 |
+| [HKLM AppCompatFlags](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 机器级应用兼容性入口。 | 配置范围不同于 HKCU。 |
+| [AppCompatFlags\Layers](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags/layers.md) | 机器级兼容层配置。 | 记录存在不等于程序执行。 |
 | [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 | 需要崩溃和调试器进程证据。 |
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 需用模块加载证据证明实际加载。 |
+| [SubSystems](../registry-tree/hklm/system/controlset/control/session-manager/subsystems.md) | Windows 子系统初始化配置。 | 需结合系统启动和基线验证。 |
 | [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 | 配置存在不等于 DLL 已加载。 |
 | [HKLM\SYSTEM\Services](../registry-tree/hklm/system/controlset/services/index.md) | BAM / DAM、服务、驱动和网络组件配置所在控制集。 | `Services\bam` 是运行线索；普通服务项只证明配置存在。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | driver service 配置。 | 要证明加载需结合驱动加载事件或内存/模块证据。 |

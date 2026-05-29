@@ -17,6 +17,7 @@
 | [SpecialAccounts\UserList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md) | 登录界面账户显示控制。 | 不启用、不禁用、不创建账户。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户、显示名和选中 SID。 | 不证明登录成功。 |
 | [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录界面凭据提供器注册。 | 注册存在不等于登录中使用。 |
+| [Credential Provider Filters](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md) | 凭据提供器过滤器注册。 | 需要解析 CLSID 和组件来源。 |
 | [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC、远程本地账户过滤和登录提示相关策略。 | 需结合策略来源和登录事实。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | LSA 包、RunAsPPL 和认证相关配置。 | 未知包需验证文件、签名和模块加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 安全策略、LSA Secrets、审计相关数据。 | 需要谨慎解析，避免直接手工解释二进制数据。 |
