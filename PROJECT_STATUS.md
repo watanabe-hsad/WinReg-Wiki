@@ -34,6 +34,26 @@ Current content model:
 
 ## Last Completed Round
 
+- Added RDP and account/login registry-location pages:
+  - `HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList`
+- Updated `mkdocs.yml` so the new pages are reachable through the native registry tree hierarchy without adding top-level navigation entries.
+- Updated scenario pages so primary links include the new RDP/login registry-location pages:
+  - `registry-checklist.md`
+  - `rdp.md`
+  - `accounts-security.md`
+  - `policy-security.md`
+- Compressed these RDP artifact pages into supplemental entries:
+  - `fdenytsconnections.md`
+  - `rdp-tcp-portnumber.md`
+  - `credssp-nla.md`
+- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
+
+## Previous Completed Round
+
 - Added and normalized another login/policy/execution-focused registry-tree batch:
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI`
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
@@ -218,8 +238,8 @@ Both commands completed successfully. The generated index remained valid for 42 
 - Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
 - Continue cleaning older registry-tree pages into the same short dictionary structure used by the latest HKCU/HKLM additions.
 - Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
-- Add deeper registry-location pages for `Session Manager\SubSystems`, `Session Manager\Memory Management`, `AppCompatFlags` machine-level paths, `AppCompatFlags\Layers`, `Terminal Server\WinStations\RDP-Tcp`, `Credential Providers`, and `CachedLogonsCount`.
-- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, BootExecute, AeDebug, AppCertDlls, and AppCompatFlags if they need structured YAML-backed supplement pages.
+- Add deeper registry-location pages for `Session Manager\SubSystems`, `Session Manager\Memory Management`, machine-level `AppCompatFlags`, `AppCompatFlags\Layers`, `Terminal Server\WinStations` policy subkeys, Credential Provider Filters, and additional HKCU network / shell policy locations.
+- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, BootExecute, AeDebug, AppCertDlls, Credential Providers, and AppCompatFlags if they need structured YAML-backed supplement pages.
 - Add contribution guide and source-quality expectations.
 - Choose a license and add a `LICENSE` file.
 

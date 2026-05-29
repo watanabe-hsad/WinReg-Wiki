@@ -33,6 +33,13 @@
 - [常规注册表检查](../../../../../questions/registry-checklist.md)
 - [安全策略与防护配置](../../../../../questions/policy-security.md)
 
+## 相关位置
+
+- [RDP-Tcp](terminal-server/rdp-tcp.md)
+- [CredSSP](terminal-server/credssp.md)
+- [FirewallPolicy](../services/sharedaccess/firewallpolicy.md)
+- [Tcpip Interfaces](../services/tcpip/parameters/interfaces.md)
+
 ## 补充阅读
 
 - [fDenyTSConnections](../../../../../artifacts/rdp/fdenytsconnections.md)

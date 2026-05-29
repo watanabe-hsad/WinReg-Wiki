@@ -8,127 +8,49 @@ tags:
 
 # fDenyTSConnections
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge high">检测价值 高</span>
-<span class="rfh-badge">RDP 服务端允许状态</span>
-</div>
+此页保留 `fDenyTSConnections` 的补充细节。主入口请先查看注册表位置页和取证场景页。
 
-## 摘要
+## 对应注册表位置
 
-`fDenyTSConnections` 表示本机是否拒绝远程桌面连接；`0` 通常表示允许 RDP 连接，`1` 通常表示拒绝，但它不能单独证明发生过 RDP 登录。
-
-## 注册表路径
-
-| View | Hive / File | Path | Value | Scope |
-|---|---|---|---|---|
-| Live path | `HKLM\SYSTEM` | `CurrentControlSet\Control\Terminal Server` | `fDenyTSConnections` | 机器级 |
-| Offline hive path | `SYSTEM` | `ControlSet00x\Control\Terminal Server` | `fDenyTSConnections` | 机器级 |
-
-## 原生注册表视图
-
-在 `regedit.exe` 中展开 `HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server`。离线时先通过 `HKLM\SYSTEM\Select` 映射当前 `ControlSet00x`。
-
-## 离线位置
-
-`C:\Windows\System32\Config\SYSTEM`。采集时保留 `SYSTEM.LOG1`、`SYSTEM.LOG2`，并记录当前 control set。
-
-## 字段含义
-
-| Field | Meaning |
+| 位置 | 说明 |
 |---|---|
-| `fDenyTSConnections=1` | 通常表示拒绝远程桌面连接 |
-| `fDenyTSConnections=0` | 通常表示允许远程桌面连接 |
-| key LastWrite | Terminal Server key 最近变化时间，不等于实际连接时间 |
+| [Terminal Server](../../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端允许 / 拒绝配置。 |
+| [RDP-Tcp](../../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA 和安全层配置。 |
 
-## 取证含义
+## 字段语义
 
-该值用于判断 RDP 服务端功能是否处于允许连接状态。它是远程访问调查中的配置证据，不是登录证据。若该值在入侵窗口内由 `1` 变为 `0`，应重点交叉验证防火墙、TerminalServices、Security.evtx 和服务状态。
+| Value | 类型 | 含义 |
+|---|---|---|
+| `fDenyTSConnections` | `REG_DWORD` | `0` 通常表示允许远程桌面连接，`1` 通常表示拒绝。 |
 
-## 可以证明
+## 采集与工具
 
-- 采集时或某个 control set 中存在 RDP 允许/拒绝配置。
-- 可辅助证明机器被配置为允许或禁止远程桌面连接。
-- key LastWrite 可提示 Terminal Server 配置区域最近变化。
+```cmd
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+```
 
-## 不能证明
+- Registry Explorer / RECmd：查看 `SYSTEM` hive、ControlSet 和 key LastWrite。
+- KAPE / Velociraptor：跨主机枚举 RDP 服务端配置。
 
-- RDP 登录发生过。
-- RDP 服务正在监听或防火墙已放行。
-- 具体是谁修改了配置。
-- RDP 连接成功、失败或持续时长。
+## 常见误读
 
-## 时间戳说明
-
-`Terminal Server` key LastWrite 可能由多个 value 或子键变化触发，不能直接视为 `fDenyTSConnections` 修改时间。应结合 Sysmon Event ID 13、Security 4657、Group Policy、Remote Desktop Services logs 或 EDR registry telemetry。
-
-## 系统版本差异
-
-Windows 7/10/11/Server 都常见该配置，但策略、GPO、MDM、服务器角色和远程管理工具会影响实际状态。Server Core 和企业基线行为需按环境验证。
-
-## 攻击滥用
-
-攻击者可通过注册表、PowerShell、`SystemPropertiesRemote.exe`、WMI 或组策略开启 RDP，以便交互式登录或横向移动。也可能临时开启后再关闭以减少暴露。
-
-## 检测思路
-
-- `fDenyTSConnections` 从 `1` 改为 `0`。
-- RDP 开启后短时间内新增防火墙规则、`TermService` 启动、`4624 LogonType 10` 或外部网络连接。
-- 非 IT 管理工具写入 `Control\Terminal Server\fDenyTSConnections`。
-
-## 常见误报
-
-- IT 运维开启远程桌面、服务器部署、GPO/MDM 策略、远程支持工具、实验室配置。
-
-## 采集方式
-
-=== "PowerShell"
-
-    ```powershell
-    Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" |
-      Select-Object fDenyTSConnections
-    ```
-
-=== "reg.exe"
-
-    ```cmd
-    reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
-    ```
-
-=== "Offline"
-
-    ```text
-    Load SYSTEM, resolve Select\Current, inspect ControlSet00x\Control\Terminal Server\fDenyTSConnections.
-    ```
-
-## 解析工具
-
-- Registry Explorer
-- RECmd
-- KAPE
-- Velociraptor
-- RegRipper
+- `fDenyTSConnections=0` 不等于发生过 RDP 登录。
+- 该值不证明防火墙已放行、端口正在监听或 TermService 正在运行。
+- key LastWrite 是 key 级时间，不是该 value 的独立修改时间。
 
 ## 交叉验证
 
-- Security.evtx `4624` LogonType `10`, `4778`, `4779`
-- TerminalServices-RemoteConnectionManager
-- TerminalServices-LocalSessionManager
-- Windows Firewall rules and logs
-- `TermService` service state
-- Network telemetry for TCP 3389 or configured RDP port
+- TerminalServices-RemoteConnectionManager、TerminalServices-LocalSessionManager。
+- Security.evtx `4624` LogonType `10`、`4778`、`4779`。
+- Windows Firewall rules、TermService 状态、网络 telemetry。
 
-## 示例结论
+## 相关场景
 
-- `fDenyTSConnections=0` in the current control set proves RDP was configured to allow connections at collection time; no conclusion about successful RDP logon should be made without Security.evtx or TerminalServices evidence.
-- Sysmon Event ID 13 shows `fDenyTSConnections` changed to `0` at `2026-05-18 03:14 UTC`, followed by firewall rule changes and `4624` LogonType `10`; together these support an RDP enablement and login timeline.
+- [RDP 与远程访问](../../questions/rdp.md)
+- [安全策略与防护配置](../../questions/policy-security.md)
+- [常规注册表检查](../../questions/registry-checklist.md)
 
 ## 参考资料
 
-- [Microsoft Learn: Enable Remote Desktop using Settings or PowerShell](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-allow-access)
+- [Microsoft Learn: Enable Remote Desktop](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-allow-access)
 - [MITRE ATT&CK: Remote Services - RDP](https://attack.mitre.org/techniques/T1021/001/)
-
-## 相关页面
-
-- 场景：[RDP 与远程访问](../../questions/rdp.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)

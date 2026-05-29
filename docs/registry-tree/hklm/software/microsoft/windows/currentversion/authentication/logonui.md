@@ -48,6 +48,7 @@
 
 ## 相关位置
 
+- [Credential Providers](credential-providers.md)
 - [ProfileList](../../../windows-nt/currentversion/profilelist.md)
 - [Winlogon](../../../windows-nt/currentversion/winlogon.md)
 - [Policies\System](../policies/system.md)

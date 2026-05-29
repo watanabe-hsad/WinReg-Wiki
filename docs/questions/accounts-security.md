@@ -13,7 +13,10 @@
 | [HKEY_USERS](../registry-tree/hku/index.md) | 已加载用户 hive 集合。 | live 树只显示已加载 hive。 |
 | [NTUSER.DAT](../registry-tree/hku/ntuser.md) | 用户级配置和行为线索来源。 | 需要先映射 SID。 |
 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `SpecialAccounts\UserList`、自动登录等。 | 隐藏登录界面不等于账户不存在。 |
+| [CachedLogonsCount](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md) | 域登录缓存数量配置。 | 不保存缓存凭据内容。 |
+| [SpecialAccounts\UserList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md) | 登录界面账户显示控制。 | 不启用、不禁用、不创建账户。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户、显示名和选中 SID。 | 不证明登录成功。 |
+| [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录界面凭据提供器注册。 | 注册存在不等于登录中使用。 |
 | [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC、远程本地账户过滤和登录提示相关策略。 | 需结合策略来源和登录事实。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | LSA 包、RunAsPPL 和认证相关配置。 | 未知包需验证文件、签名和模块加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 安全策略、LSA Secrets、审计相关数据。 | 需要谨慎解析，避免直接手工解释二进制数据。 |

@@ -24,6 +24,7 @@
 | `AutoAdminLogon` | `REG_SZ` | 自动登录开关。 | `0` / `1` | 需结合凭据存储和值。 |
 | `DefaultUserName` | `REG_SZ` | 自动登录或登录界面相关用户名。 | 用户名 | 不证明登录成功。 |
 | `DefaultDomainName` | `REG_SZ` | 默认域或主机名。 | 域名 / 主机名 | 与环境有关。 |
+| `CachedLogonsCount` | `REG_SZ` | 可缓存的域登录凭据数量。 | `0` 到 `50` | 不保存缓存凭据本体。 |
 | `SpecialAccounts\UserList` | Key | 登录界面账户显示控制。 | 用户名 -> `0` / `1` | 可隐藏登录 UI 显示。 |
 | `Notify` | Key | Winlogon notification package。 | 子键列表 | 旧式扩展点，需谨慎验证。 |
 
@@ -52,6 +53,8 @@
 ## 相关位置
 
 - [Winlogon\Notify](winlogon/notify.md)
+- [Winlogon\SpecialAccounts\UserList](winlogon/specialaccounts-userlist.md)
+- [CachedLogonsCount](winlogon/cachedlogonscount.md)
 - [LogonUI](../../windows/currentversion/authentication/logonui.md)
 - [Policies\System](../../windows/currentversion/policies/system.md)
 - [ProfileList](profilelist.md)

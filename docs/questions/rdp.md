@@ -9,7 +9,9 @@
 | 注册表位置 | 用途 | 判断边界 |
 |---|---|---|
 | [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端目标历史和用户名提示。 | 客户端侧记录不能证明本机被登录。 |
-| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关、listener、端口和 NLA。 | 允许连接不等于连接发生。 |
+| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关。 | 允许连接不等于连接发生。 |
+| [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA、安全层和连接限制。 | 配置存在不等于端口正在监听。 |
+| [CredSSP](../registry-tree/hklm/system/controlset/control/terminal-server/credssp.md) | RDP 认证兼容性和 encryption oracle remediation 策略。 | 策略值不等于登录成功。 |
 | [Firewall / Policies](../registry-tree/hklm/software/policies.md) | 防火墙策略和远程访问相关策略入口。 | 规则来源需结合 GPO/MDM。 |
 | [Tcpip](../registry-tree/hklm/system/controlset/services/tcpip.md) | 主机网络配置、接口和 DNS。 | 网络配置不等于连接事实。 |
 | [ComputerName](../registry-tree/hklm/system/controlset/control/computername.md) | 主机名和环境标识。 | 用于关联日志和远程连接记录。 |

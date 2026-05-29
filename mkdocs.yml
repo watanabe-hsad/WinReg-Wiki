@@ -114,12 +114,15 @@ nav:
                           - NetworkList\Profiles: registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
                           - ProfileList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
                           - Winlogon: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+                          - Winlogon\CachedLogonsCount: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md
                           - Winlogon\Notify: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md
+                          - Winlogon\SpecialAccounts\UserList: registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md
                           - Image File Execution Options: registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md
                           - Windows: registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md
                   - Windows:
                       - CurrentVersion:
                           - App Paths: registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md
+                          - Authentication\Credential Providers: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md
                           - Authentication\LogonUI: registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md
                           - Policies\System: registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md
                           - Run / RunOnce: registry-tree/hklm/software/microsoft/windows/currentversion/run.md
@@ -151,6 +154,8 @@ nav:
                   - Control:
                       - DeviceClasses: registry-tree/hklm/system/controlset/control/deviceclasses.md
                       - Terminal Server: registry-tree/hklm/system/controlset/control/terminal-server.md
+                      - Terminal Server\WinStations\RDP-Tcp: registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md
+                      - Terminal Server\CredSSP: registry-tree/hklm/system/controlset/control/terminal-server/credssp.md
                       - TimeZoneInformation: registry-tree/hklm/system/controlset/control/timezone.md
                       - ComputerName: registry-tree/hklm/system/controlset/control/computername.md
                       - Session Manager:

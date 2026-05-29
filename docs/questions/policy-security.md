@@ -19,8 +19,12 @@
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 需与同版本基线和模块加载核对。 |
 | [LSA Security Packages](../registry-tree/hklm/system/controlset/control/lsa/security-packages.md) | 安全包列表。 | 列表变化不等于 DLL 已加载。 |
 | [SECURITY](../registry-tree/hklm/security.md) | 本地安全策略、审计策略、LSA Secrets。 | 需要专门工具解析。 |
-| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 允许状态、端口和 NLA。 | 允许远程桌面不等于登录发生。 |
+| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 允许状态。 | 允许远程桌面不等于登录发生。 |
+| [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA 和安全层。 | 配置存在不等于端口可达。 |
+| [CredSSP](../registry-tree/hklm/system/controlset/control/terminal-server/credssp.md) | CredSSP 认证兼容性策略。 | 需结合 GPO 和补丁级别。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户和 SID 显示线索。 | 不证明登录成功。 |
+| [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录凭据提供器注册。 | 第三方身份组件可能合法注册。 |
+| [CachedLogonsCount](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md) | 域登录缓存数量配置。 | 不是缓存凭据本体。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 配置。 | 需结合驱动加载、签名和 Code Integrity。 |
 
 ## 判断要点

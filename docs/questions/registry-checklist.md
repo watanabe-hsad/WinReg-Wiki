@@ -20,8 +20,11 @@
 | [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道配置。 | 这里不是日志内容。 |
 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需结合驱动加载、签名和 Code Integrity。 |
 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录和隐藏账户相关配置。 | 登录事实要回到 Security.evtx。 |
+| [CachedLogonsCount](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md) | 域登录缓存数量配置。 | 不保存缓存凭据本体。 |
+| [SpecialAccounts\UserList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md) | 登录界面账户显示控制。 | 隐藏显示不等于账户不存在。 |
 | [Winlogon\Notify](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 | 配置存在不等于 DLL 已加载。 |
 | [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户 / SID 显示线索。 | 不证明登录成功。 |
+| [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录界面凭据提供器注册。 | Provider 注册不等于某次登录使用。 |
 | [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试器、开发工具和 EDR 也可能写入。 |
 | [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 | 需要崩溃和进程证据。 |
 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、安全包和 LSASS 保护相关配置。 | 未知 DLL 需验证路径、签名和模块加载。 |
@@ -29,7 +32,9 @@
 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 配置存在不等于已经重启执行。 |
 | [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 异常需结合模块加载和基线。 |
 | [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 | 队列存在不等于文件已删除。 |
-| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关、端口和 NLA。 | 允许连接不等于发生登录。 |
+| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关。 | 允许连接不等于发生登录。 |
+| [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA 和安全层。 | 端口配置不等于正在监听。 |
+| [CredSSP](../registry-tree/hklm/system/controlset/control/terminal-server/credssp.md) | CredSSP 认证兼容性策略。 | 策略值不等于连接事实。 |
 | [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端目标历史。 | 这是客户端侧记录。 |
 | [Policies](../registry-tree/hklm/software/policies.md) | GPO / MDM / 本地策略写入位置。 | 注册表值不直接说明策略来源。 |
 | [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 | 策略值不等于实际提权行为。 |

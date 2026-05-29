@@ -8,129 +8,49 @@ tags:
 
 # RDP-Tcp PortNumber
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge high">检测价值 高</span>
-<span class="rfh-badge">RDP 监听端口配置</span>
-</div>
+此页保留 `RDP-Tcp\PortNumber` 的补充细节。主入口请先查看注册表位置页和取证场景页。
 
-## 摘要
+## 对应注册表位置
 
-`WinStations\RDP-Tcp\PortNumber` 记录 RDP 服务端监听端口配置，默认通常为 `3389`，但显示时要注意十六进制和十进制差异。
-
-## 注册表路径
-
-| View | Hive / File | Path | Value | Scope |
-|---|---|---|---|---|
-| Live path | `HKLM\SYSTEM` | `CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp` | `PortNumber` | 机器级 |
-| Offline hive path | `SYSTEM` | `ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp` | `PortNumber` | 机器级 |
-
-## 原生注册表视图
-
-在 `regedit.exe` 中展开 `HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp`。`PortNumber` 是 DWORD，Regedit 可按十六进制或十进制显示。
-
-## 离线位置
-
-`C:\Windows\System32\Config\SYSTEM`。离线分析先解析 `SYSTEM\Select`，再读取当前 control set 的 `RDP-Tcp`。
-
-## 字段含义
-
-| Field | Meaning |
+| 位置 | 说明 |
 |---|---|
-| `PortNumber` | RDP-Tcp listener 端口，默认常见为 decimal `3389` / hex `0x00000d3d` |
-| key LastWrite | `RDP-Tcp` 配置 key 最近变化时间，不等于服务监听开始时间 |
+| [RDP-Tcp](../../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA、安全层和连接限制配置。 |
+| [Terminal Server](../../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端根配置。 |
 
-## 取证含义
+## 字段语义
 
-该值可证明 RDP 服务端被配置为使用哪个端口。非默认端口可能是管理员基线、暴露面管理，也可能是攻击者试图绕过简单扫描或安全策略。是否实际监听需用服务状态、网络连接和防火墙验证。
+| Value | 类型 | 含义 |
+|---|---|---|
+| `PortNumber` | `REG_DWORD` | RDP-Tcp listener 端口；默认常见为十进制 `3389` / 十六进制 `0x00000d3d`。 |
 
-## 可以证明
+## 采集与工具
 
-- RDP-Tcp listener 的注册表端口配置。
-- 端口是否偏离默认 `3389`。
-- RDP 服务端调查应查询哪个端口的网络和防火墙日志。
+```cmd
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber
+```
 
-## 不能证明
+- Registry Explorer / RECmd：读取 `SYSTEM` hive 中的 `RDP-Tcp`。
+- PowerShell / EDR：live 系统可核对监听端口、服务状态和防火墙规则。
 
-- 端口正在监听。
-- 防火墙允许该端口入站。
-- 有 RDP 登录或连接尝试。
-- 非默认端口一定恶意。
+## 常见误读
 
-## 时间戳说明
-
-`RDP-Tcp` key LastWrite 只能提示该 key 变化。`PortNumber` value 无独立时间戳。实际监听时间应结合 `TermService` 重启、系统重启、TerminalServices logs、netstat/EDR 网络 telemetry。
-
-## 系统版本差异
-
-Windows 客户端和 Server 通常使用该路径。远程桌面服务角色、RD Gateway、第三方远控或策略可能改变暴露面。默认端口和字段语义稳定，但生效需要服务重启或系统状态验证。
-
-## 攻击滥用
-
-攻击者可能把 RDP 改到非默认端口以规避粗糙扫描、与防火墙规则配套开放，或临时开启远程访问。也可能将端口改回默认掩盖变更。
-
-## 检测思路
-
-- `PortNumber` 被修改为非 `3389`。
-- 端口修改后出现防火墙放行、`TermService` 重启或外部连接。
-- 非 IT 工具或脚本修改 `WinStations\RDP-Tcp\PortNumber`。
-- 监听端口与资产基线不一致。
-
-## 常见误报
-
-- 合法安全基线要求更改 RDP 端口。
-- 跳板机、实验环境、托管服务和特殊运维策略。
-- 迁移、加固脚本或 GPO/MDM 统一下发。
-
-## 采集方式
-
-=== "PowerShell"
-
-    ```powershell
-    Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" |
-      Select-Object PortNumber
-    ```
-
-=== "reg.exe"
-
-    ```cmd
-    reg query "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber
-    ```
-
-=== "Offline"
-
-    ```text
-    Load SYSTEM, resolve Select\Current, inspect ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp\PortNumber.
-    ```
-
-## 解析工具
-
-- Registry Explorer
-- RECmd
-- KAPE
-- Velociraptor
-- RegRipper
+- `PortNumber` 是 DWORD，报告端口时要确认十六进制 / 十进制。
+- 非默认端口不一定恶意，可能来自基线、托管服务或运维策略。
+- 端口配置不证明正在监听、已放行或发生过连接。
 
 ## 交叉验证
 
-- `fDenyTSConnections`
-- Windows Firewall rules
-- `TermService` service state
-- `netstat` / EDR network telemetry
-- TerminalServices logs
-- Security.evtx LogonType `10`
+- `fDenyTSConnections`、TermService 状态、Windows Firewall rules。
+- `netstat`、EDR network telemetry、TerminalServices logs。
+- Security.evtx LogonType `10` 和外部连接记录。
 
-## 示例结论
+## 相关场景
 
-- `PortNumber` is `0x00001389`, which converts to decimal `5001`; this proves RDP-Tcp was configured for port `5001`, but does not prove the port was reachable or used.
-- RDP port changed from default, firewall rule opened the same port, and external connection telemetry followed within 10 minutes; together these support RDP exposure change during the incident window.
+- [RDP 与远程访问](../../questions/rdp.md)
+- [网络与系统环境](../../questions/network.md)
+- [常规注册表检查](../../questions/registry-checklist.md)
 
 ## 参考资料
 
 - [Microsoft Learn: Change the listening port for Remote Desktop](https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/change-listening-port-remote-desktop)
 - [MITRE ATT&CK: Remote Services - RDP](https://attack.mitre.org/techniques/T1021/001/)
-
-## 相关页面
-
-- 场景：[RDP 与远程访问](../../questions/rdp.md)
-- 注册表位置：[HKLM\SYSTEM](../../registry-tree/hklm/system/index.md)
