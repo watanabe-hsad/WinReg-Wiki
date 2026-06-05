@@ -50,3 +50,8 @@
 - [WOW6432Node](../../../wow6432node.md)
 - [Winlogon](../../windows-nt/currentversion/winlogon.md)
 
+## 补充阅读
+
+- [Run / RunOnce artifact](../../../../../../artifacts/persistence/run-keys.md)
+- [Microsoft Learn: Run and RunOnce registry keys](https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys)
+- [Microsoft Sysinternals: Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)

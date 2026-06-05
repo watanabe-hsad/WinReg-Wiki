@@ -1,6 +1,95 @@
-# Artifact 页面模板
+# 页面模板
 
-新增 artifact 时建议复制这个结构，避免页面越写越散。
+本页提供常用页面骨架。新增内容时优先新增或补强 `注册表位置` 页面；只有确实需要 artifact 级字段、工具和采集细节时，再维护 artifact 补充页。
+
+## 注册表位置页面
+
+```markdown
+# HKLM\...
+
+## 位置
+
+| 视图 | 路径 |
+|---|---|
+| Live | `HKLM\...` |
+| 离线 | `HIVE\...` |
+
+## 离线位置
+
+`C:\Windows\System32\Config\...`
+
+## 作用
+
+2 到 5 句话说明这个 key / value 在 Windows 中负责什么。
+
+## 常见子键和值
+
+| 名称 | 类型 | 含义 | 常见数据 / 状态 | 说明 |
+|---|---|---|---|---|
+| `ValueName` | `REG_*` | ... | ... | ... |
+
+## 默认状态与版本差异
+
+视 Windows 版本、角色和配置而定。
+
+## 注意事项
+
+- ...
+
+## 取证提示
+
+- ...
+
+## 相关场景
+
+- [常规注册表检查](../../questions/registry-checklist.md)
+
+## 相关位置
+
+- [...]
+
+## 补充阅读
+
+- [...]
+```
+
+## 取证场景页面
+
+```markdown
+# 场景名称
+
+## 检查目标
+
+一句话说明这个场景回答什么问题。
+
+## 优先查看的注册表位置
+
+| 注册表位置 | 用途 | 判断边界 |
+|---|---|---|
+| [路径名称](../registry-tree/...) | ... | ... |
+
+## 判断要点
+
+- ...
+
+## 交叉验证
+
+- 事件日志、文件系统、Prefetch、Amcache、ShimCache、SRUM、Defender 日志、EDR 等。
+
+## 常见误判
+
+- ...
+
+## 相关场景
+
+- [...]
+
+## 补充阅读
+
+- artifact 补充页，仅在需要字段或工具细节时添加。
+```
+
+## Artifact 补充页面
 
 ```markdown
 ---
@@ -11,102 +100,38 @@ tags:
 
 # Artifact Name
 
-<div class="rfh-meta" markdown>
-<span class="rfh-badge high">取证价值 高</span>
-<span class="rfh-badge medium">检测价值 中</span>
-<span class="rfh-badge">证据类型</span>
-</div>
+一句话说明该补充条目覆盖的字段或工具解析范围。
 
-一句话说明这个 artifact 的调查价值。
+## 对应注册表位置
 
-## 摘要
+- [...]
 
-一句话说明这个 artifact 的核心价值。
-
-## 注册表路径
-
-| 视图 | Hive / 文件 | 路径 | Value | 范围 |
-|---|---|---|---|---|
-| Live path | `HKCU` | `Software\...` | `ValueName` | Current user |
-| Offline hive path | `NTUSER.DAT` | `Software\...` | `ValueName` | User SID |
-
-## 原生注册表视图
-
-说明在 `regedit.exe` 中通常从哪里展开，以及 live 视图和真实 hive 的关系。
-
-## 离线位置
-
-说明离线镜像中对应哪个 hive 文件、是否需要 SID 映射或 ControlSet 解析。
-
-## 字段含义
+## 字段语义
 
 | 字段 | 含义 |
 |---|---|
-| value / subkey | 具体含义 |
+| `ValueName` | ... |
 
-## 取证含义
-
-说明它通常记录什么。
-
-## 可以证明
+## 采集注意事项
 
 - ...
-
-## 不能证明
-
-- ...
-
-## 时间戳说明
-
-说明 LastWrite、value 时间戳、工具解析差异。
-
-## 系统版本差异
-
-说明 Windows 7 / 10 / 11 / Server 差异；未知就写“待验证”。
-
-## 攻击滥用
-
-说明攻击者如何滥用这个位置或如何清理痕迹。
-
-## 检测思路
-
-- ...
-
-## 常见误报
-
-- ...
-
-## 采集方式
-
-```powershell
-Get-ItemProperty "HKCU:\..."
-```
 
 ## 解析工具
 
-- RECmd
 - Registry Explorer
-- RegRipper
+- RECmd
 - KAPE
 - Velociraptor
 
+## 常见误判
+
+- ...
+
 ## 交叉验证
 
-- Event Log
-- Prefetch
-- Amcache
-- File system timeline
+- ...
 
-## 示例结论
-
-- 报告风格判断句，明确证据强度。
-
-## 相关页面
-
-- 场景：...
-- 注册表位置：...
-
-## 参考资料
+## 参考
 
 - ...
 ```

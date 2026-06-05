@@ -50,3 +50,8 @@ UserAssist 更接近“用户通过 Shell 交互过程序”的线索，但不�
 - [RunMRU](runmru.md)
 - [RecentDocs](recentdocs.md)
 
+## 补充阅读
+
+- [UserAssist artifact](../../../../../../artifacts/execution/userassist.md)
+- [Eric Zimmerman tools: RECmd / Registry Explorer](https://ericzimmerman.github.io/#!index.md)
+- [SANS poster: Windows Forensic Analysis](https://www.sans.org/posters/windows-forensic-analysis/)

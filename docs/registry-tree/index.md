@@ -121,3 +121,7 @@
 | `HKCR` -> `HKLM\Software\Classes` + `HKCU\Software\Classes` | 合并视图，离线时不要当成单独 hive。 |
 | `HKCC` -> `HKLM\SYSTEM\CurrentControlSet\Hardware Profiles\Current` | 当前硬件 profile 映射。 |
 | `CurrentControlSet` -> `ControlSet00x` | 由 `HKLM\SYSTEM\Select\Current` 决定。 |
+
+## 维护视图
+
+- [注册表位置覆盖矩阵](coverage.md)

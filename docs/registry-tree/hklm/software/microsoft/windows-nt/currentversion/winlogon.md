@@ -64,3 +64,5 @@
 - [Winlogon Userinit artifact](../../../../../../artifacts/persistence/winlogon-userinit.md)
 - [Winlogon Shell artifact](../../../../../../artifacts/persistence/winlogon-shell.md)
 - [SpecialAccounts\UserList artifact](../../../../../../artifacts/security/specialaccounts-userlist.md)
+- [Microsoft Learn: Winlogon and Credential Providers](https://learn.microsoft.com/en-us/windows/win32/secauthn/winlogon-and-credential-providers)
+- [Microsoft Sysinternals: Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)

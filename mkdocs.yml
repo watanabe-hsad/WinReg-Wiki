@@ -189,6 +189,7 @@ nav:
           - UsrClass.dat: registry-tree/hku/usrclass.md
       - HKEY_CURRENT_CONFIG:
           - registry-tree/hkcc/index.md
+      - 覆盖矩阵: registry-tree/coverage.md
   - 取证场景:
       - questions/index.md
       - 常规注册表检查: questions/registry-checklist.md
@@ -206,5 +207,6 @@ nav:
       - 结构化数据索引: artifacts/generated-index.md
       - 检测工程: detection/index.md
   - 贡献:
+      - 贡献指南: contributing/index.md
       - 页面模板: contributing/template.md
   - 标签: tags.md

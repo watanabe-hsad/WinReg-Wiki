@@ -1,6 +1,6 @@
 # 检测工程
 
-注册表检测要把“路径命中”和“行为上下文”分开。许多合法软件会写入自启动项、服务和应用兼容性配置，因此检测规则应尽量描述高信号组合。
+注册表检测要把“路径命中”和“行为上下文”分开。许多合法软件会写入自启动项、服务和应用兼容性配置，因此检测规则应尽量描述可验证的组合。
 
 ## 通用策略
 
@@ -50,21 +50,25 @@ falsepositives:
 level: medium
 ```
 
-## 高价值检测入口
+## 常用检测入口
 
 | 检测问题 | 注册表入口 | 交叉验证 |
 |---|---|---|
-| 登录启动项指向用户可写目录 | [Run / RunOnce](../artifacts/persistence/run-keys.md), [StartupApproved](../artifacts/persistence/startupapproved.md) | Sysmon 13, Prefetch, BAM |
-| Winlogon 登录链被追加 | [Winlogon Userinit](../artifacts/persistence/winlogon-userinit.md), [Winlogon Shell](../artifacts/persistence/winlogon-shell.md) | 登录事件, 进程创建, Autoruns |
-| LSASS 加载链异常 | [LSA Authentication Packages](../artifacts/persistence/lsa-authentication-packages.md) | 模块加载, 文件签名, 重启时间线 |
-| LSA Security Packages 异常 | [LSA Security Packages](../artifacts/persistence/lsa-security-packages.md) | LSASS 模块, 文件签名, Security 4657 |
-| AppInit_DLLs 启用或指向异常 DLL | [AppInit_DLLs](../artifacts/persistence/appinit-dlls.md) | Sysmon 7, DLL 签名, WOW6432Node |
-| Active Setup 新增异常 StubPath | [Active Setup](../artifacts/persistence/active-setup.md) | 用户登录, 进程创建, Prefetch |
-| Print Monitor 注册异常 DLL | [Print Monitors](../artifacts/persistence/print-monitors.md) | Spooler 模块加载, PrintService, 文件签名 |
-| Kernel driver 持久化或易受攻击驱动 | [Drivers](../artifacts/persistence/drivers.md) | Sysmon 6, Code Integrity, System.evtx |
-| cmd.exe 启动钩子 | [Command Processor AutoRun](../artifacts/persistence/command-processor-autorun.md) | cmd 子进程, PowerShell logs |
-| Defender 被削弱 | [Defender Policies](../artifacts/security/defender-policies.md) | Defender Operational, GPO/MDM, EDR |
-| RDP 服务端暴露 | [fDenyTSConnections](../artifacts/rdp/fdenytsconnections.md), [RDP-Tcp PortNumber](../artifacts/rdp/rdp-tcp-portnumber.md), [Firewall Policies](../artifacts/security/firewall-policies.md) | TerminalServices, Security 4624, firewall logs |
-| 审计能力降低 | [Audit Policy](../artifacts/security/audit-policy.md) | Security 4719, GroupPolicy, event log gaps |
-| 隐藏账户 | [SpecialAccounts\UserList](../artifacts/security/specialaccounts-userlist.md), [ProfileList](../artifacts/security/profilelist.md) | SAM, Security 4720/4732/4738 |
-| 新外接设备出现 | [USB](../artifacts/usb/usb.md), [USBSTOR](../artifacts/usb/usbstor.md), [Enum SWD WPDBUSENUM](../artifacts/usb/swd-wpdbusenum.md) | SetupAPI.dev.log, DriverFrameworks, LNK/Jump Lists |
+| 登录启动项指向用户可写目录 | [HKCU Run](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md), [HKLM Run](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | Sysmon 13, Prefetch, BAM, StartupApproved |
+| Winlogon 登录链被追加 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | 登录事件, 进程创建, Autoruns |
+| LSASS 加载链异常 | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md), [LSA Security Packages](../registry-tree/hklm/system/controlset/control/lsa/security-packages.md) | 模块加载, 文件签名, 重启时间线 |
+| AppInit_DLLs 启用或指向异常 DLL | [AppInit_DLLs](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appinit-dlls.md) | Sysmon 7, DLL 签名, WOW6432Node |
+| Active Setup 新增异常 StubPath | [Active Setup](../registry-tree/hklm/software/microsoft/active-setup.md) | 用户登录, 进程创建, Prefetch |
+| Print Monitor 注册异常 DLL | [Print Monitors](../registry-tree/hklm/system/controlset/control/print-monitors.md) | Spooler 模块加载, PrintService, 文件签名 |
+| Kernel driver 持久化或易受攻击驱动 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | Sysmon 6, Code Integrity, System.evtx |
+| `cmd.exe` 启动钩子 | [HKCU Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md), [HKLM Command Processor](../registry-tree/hklm/software/microsoft/command-processor.md) | cmd 子进程, PowerShell logs |
+| Defender 配置被调整 | [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md), [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender Operational, GPO/MDM, EDR |
+| RDP 服务端配置变化 | [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md), [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md), [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | TerminalServices, Security 4624, firewall logs |
+| 审计或日志配置变化 | [SECURITY](../registry-tree/hklm/security.md), [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | Security 4719, GroupPolicy, event log gaps |
+| 账户显示或 profile 异常 | [SpecialAccounts\UserList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md), [ProfileList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md), [SAM](../registry-tree/hklm/sam.md) | SAM, Security 4720/4732/4738 |
+| 新外接设备出现 | [USB](../registry-tree/hklm/system/controlset/enum/usb.md), [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md), [SWD\WPDBUSENUM](../registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md) | SetupAPI.dev.log, DriverFrameworks, LNK/Jump Lists |
+
+## 补充阅读
+
+- [Artifact 补充索引](../artifacts/index.md)
+- [结构化数据索引](../artifacts/generated-index.md)

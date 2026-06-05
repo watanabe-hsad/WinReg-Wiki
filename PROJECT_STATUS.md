@@ -25,16 +25,45 @@ Current content model:
 ## Current Structure
 
 - `docs/registry-tree/`: Windows native registry tree entry point. Root keys are directories with `index.md` files, using MkDocs Material `navigation.indexes` so section labels are clickable.
+- `docs/registry-tree/coverage.md`: registry-location coverage matrix for current pages and next candidate paths.
 - `docs/questions/`: forensic scenario entry point. Scenario pages carry investigation checklists, evidence boundaries, cross-validation, common misreads, and primary links into registry-location pages.
 - `docs/artifacts/`: manually written artifact pages. They are no longer a top-level navigation tab or primary reader flow; users enter them from `取证场景 -> Artifact 补充索引` or supplemental reading links.
 - `data/artifacts/`: structured artifact YAML records. Current coverage is 42 artifact pages and 42 YAML records.
 - `scripts/generate-artifact-index.py`: reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
+- `scripts/check-content-style.py`: lightweight standard-library scan for old artifact headings, English artifact-template headings, subjective priority wording, and stale project/repository names.
 - `mkdocs.yml`: site configuration and navigation. Top-level nav is now `首页`, `注册表位置`, `取证场景`, plus auxiliary `贡献` and `标签`.
 - `.github/workflows/pages.yml`: GitHub Actions workflow for MkDocs build and GitHub Pages deployment.
 
 ## Last Completed Round
 
-- Normalized old registry-tree pages by replacing remaining `## 相关 Artifact` sections with `## 补充阅读`. A scan for `相关 Artifact`, English artifact-template headings, and subjective phrases now returns no hits in `docs/registry-tree`, `docs/questions`, or `docs/artifacts`.
+- Prepared the site for a public `v0.1` readiness state without changing the three-entry information architecture.
+- Added [注册表位置覆盖矩阵](docs/registry-tree/coverage.md) and linked it at the end of the `注册表位置` navigation.
+- Added [贡献指南](docs/contributing/index.md) and updated [页面模板](docs/contributing/template.md) so registry-location pages remain the primary content model and artifact pages remain supplemental.
+- Added `scripts/check-content-style.py` and wired it into `.github/workflows/pages.yml` after artifact index generation and before `mkdocs build --strict`.
+- Fixed the remaining subjective wording hit in `docs/detection/index.md` and rewrote detection entry links so the table now points primarily to `docs/registry-tree/` pages.
+- Strengthened high-visible registry-location pages with related scenarios, related positions, and references where useful:
+  - `HKLM\SYSTEM\Select`
+  - `HKLM\SYSTEM\ControlSet00x`
+  - `HKLM\SYSTEM\ControlSet00x\Services`
+  - `HKLM\SYSTEM\MountedDevices`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32`
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+- Registry-tree page count is now 96 including the new coverage matrix. Artifact content pages remain 42, with 42 YAML records. `docs/artifacts/index.md` and `docs/artifacts/generated-index.md` are supplemental/index pages and are not counted as artifact content pages.
+- Current navigation remains `首页`, `注册表位置`, `取证场景`, `贡献`, `标签`.
+- Git remote remains `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
+- Site URL status remains pending confirmation. Current `site_url` still uses the previously reachable path `http://hsad.xyz/windows-registry-forensics-handbook/`. Candidate future paths remain `https://hsad.xyz/winreg/` and `https://winreg.hsad.xyz/`; the subdomain option is cleaner but requires DNS and GitHub Pages confirmation.
+- License remains `TBD`. Recommended decision: content under `CC BY 4.0` plus scripts/site engineering under `MIT`, or repository-wide `MIT` if a single license is preferred.
+
+## Previous Completed Round
+
+- Normalized old registry-tree pages by replacing remaining artifact-link section headings with `## 补充阅读`. A scan for old artifact section headings, English artifact-template headings, and subjective phrases now returns no hits in `docs/registry-tree`, `docs/questions`, or `docs/artifacts`.
 - Added registry-location pages:
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
@@ -189,7 +218,7 @@ Current content model:
   - `network.md`
   - `software-install.md`
   - `anti-forensics.md`
-- Updated key registry-location pages to include `相关场景` and changed old `相关 Artifact` sections to `补充阅读` where touched.
+- Updated key registry-location pages to include `相关场景` and changed old artifact-link sections to `补充阅读` where touched.
 - Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
 
 ## Initial Completed Round
@@ -256,16 +285,24 @@ Latest verification for the registry-tree expansion and artifact compression:
 
 Both commands completed successfully. The generated index remained valid for 42 YAML-backed artifacts. The MkDocs Material upstream warning and MkDocs INFO about artifact pages outside `nav` are expected in the current architecture.
 
+Latest verification for v0.1 release readiness:
+
+```bash
+.venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/python scripts/check-content-style.py
+.venv/bin/mkdocs build --strict
+```
+
+Run these after content or navigation changes. The content style check is intentionally lightweight and only catches known stale phrases and naming regressions.
+
 ## Next Priorities
 
 - Confirm GitHub Pages settings for the new repository and decide whether the online path should remain under the old custom-domain path or move to a new path / subdomain.
-- Continue cleaning registry-tree pages into the short dictionary structure where older pages still have extra artifact-style prose.
-- Continue cleaning older registry-tree pages into the same short dictionary structure used by the latest HKCU/HKLM additions.
-- Continue migrating useful artifact facts into registry-location and scenario pages; keep artifacts as supplemental detail.
-- Add deeper registry-location pages for `Session Manager\SubSystems`, `Session Manager\Memory Management`, machine-level `AppCompatFlags`, `AppCompatFlags\Layers`, `Terminal Server\WinStations` policy subkeys, Credential Provider Filters, and additional HKCU network / shell policy locations.
-- Add remaining registry artifacts only after the architecture settles: CachedLogonsCount, LogonUI, Winlogon Notify, App Paths, KnownDLLs, BootExecute, AeDebug, AppCertDlls, Credential Providers, and AppCompatFlags if they need structured YAML-backed supplement pages.
-- Add contribution guide and source-quality expectations.
-- Choose a license and add a `LICENSE` file.
+- Choose a license and add a `LICENSE` file after maintainer confirmation.
+- Continue filling coverage-matrix candidates: HKCU Policies `System`, `Attachments`, `Associations`, Explorer `Advanced`, Explorer `TypedPaths`, ShellBags / BagMRU, `Enum\STORAGE`, and `DeviceContainers`.
+- Continue adding references to older registry-location pages where source quality is thin.
+- Continue migrating only concrete artifact details into registry-location and scenario pages; keep artifact pages supplemental.
+- Consider expanding the content style script only after the current simple checks prove useful.
 
 ## Notes For Next Agent
 

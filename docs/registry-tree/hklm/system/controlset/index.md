@@ -39,3 +39,7 @@
 - [Services](../../../../artifacts/persistence/services.md)
 - [fDenyTSConnections](../../../../artifacts/rdp/fdenytsconnections.md)
 - [RDP-Tcp PortNumber](../../../../artifacts/rdp/rdp-tcp-portnumber.md)
+
+## 参考
+
+- [Microsoft Learn: HKLM\SYSTEM\CurrentControlSet\Services registry tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree)

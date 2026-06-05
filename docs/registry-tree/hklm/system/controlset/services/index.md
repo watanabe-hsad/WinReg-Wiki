@@ -44,3 +44,8 @@
 - [Services](../../../../../artifacts/persistence/services.md)
 - [Firewall Policies](../../../../../artifacts/security/firewall-policies.md)
 - [BAM / DAM](../../../../../artifacts/execution/bam-dam.md)
+
+## 参考
+
+- [Microsoft Learn: HKLM\SYSTEM\CurrentControlSet\Services registry tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree)
+- [Microsoft Sysinternals: Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)

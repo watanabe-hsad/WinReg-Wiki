@@ -49,6 +49,12 @@ Strict build check:
 .venv/bin/mkdocs build --strict
 ```
 
+Content style check:
+
+```bash
+.venv/bin/python scripts/check-content-style.py
+```
+
 Generate the structured artifact data index:
 
 ```bash
@@ -69,6 +75,7 @@ Generate the structured artifact data index:
 
 Current coverage includes:
 
+- A maintenance coverage matrix at `docs/registry-tree/coverage.md`.
 - Registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM / HKCU subtrees.
 - Registry-location references for environment variables, Command Processor, Internet Settings / ZoneMap, Printers, NetworkList Profiles, TCP/IP interfaces, EventLog, FirewallPolicy, Defender policies, WindowsFirewall policies, App Paths, LogonUI, UAC policy, AppCompatFlags, AeDebug, Winlogon, and Session Manager locations.
 - Program execution and program presence artifacts: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
@@ -85,12 +92,13 @@ Manual narrative indexes such as `docs/artifacts/index.md` should not be overwri
 
 ## Contributing
 
-Contributions should follow the artifact template in `docs/contributing/template.md`.
+Contributions should follow the contribution guide in `docs/contributing/index.md` and the page templates in `docs/contributing/template.md`.
 
 Before opening a pull request, run:
 
 ```bash
 .venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/python scripts/check-content-style.py
 .venv/bin/mkdocs build --strict
 ```
 
@@ -108,4 +116,4 @@ The local directory is currently still named `registry-forensics-handbook-demo`;
 
 ## License
 
-License: TBD
+License: TBD. Current recommendation is to choose either a documentation / code split such as `CC BY 4.0` for content and `MIT` for scripts, or a single repository-wide `MIT` license if the maintainer wants the simplest option.

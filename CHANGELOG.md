@@ -8,6 +8,9 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added `docs/registry-tree/coverage.md` as a maintenance coverage matrix for current registry-location pages and next candidate paths.
+- Added `docs/contributing/index.md` with project positioning, page structure, source-quality, uncertainty, timestamp, naming, artifact/YAML, and pre-commit check guidance.
+- Added `scripts/check-content-style.py` for lightweight checks against old artifact headings, old template headings, subjective priority wording, and stale project/repository names.
 - Added registry-location pages for registry-tree normalization follow-up:
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
@@ -109,6 +112,12 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Updated `.github/workflows/pages.yml` so CI runs the content style check between generated index refresh and strict MkDocs build.
+- Updated `mkdocs.yml` to add `注册表位置 -> 覆盖矩阵` and `贡献 -> 贡献指南` without changing top-level navigation.
+- Updated `docs/detection/index.md` so common detection entry rows link primarily to registry-location pages rather than artifact pages.
+- Updated `docs/contributing/template.md` from an artifact-only template into registry-location, scenario, and supplemental-artifact templates.
+- Strengthened high-visible registry-location pages with related scenarios, related positions, and source links where useful.
+- Updated README with coverage, contribution guide, content style check, and license recommendation notes.
 - Normalized registry-location pages by replacing remaining `## 相关 Artifact` headings with `## 补充阅读`.
 - Updated `registry-checklist`, `persistence`, `execution`, `accounts-security`, `policy-security`, `anti-forensics`, `software-install`, `shell-explorer`, and `network` so primary links include the new registry-location pages.
 - Updated `registry-checklist`, `rdp`, `accounts-security`, and `policy-security` so their primary links include the new RDP listener, CredSSP, cached logons, Credential Providers, and SpecialAccounts registry-location pages.
@@ -180,6 +189,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py`, `.venv/bin/python scripts/check-content-style.py`, and `.venv/bin/mkdocs build --strict` were run after the v0.1 release-readiness updates.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the registry-tree normalization and follow-up path expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the RDP listener / Credential Providers / CachedLogonsCount expansion.
 - `.venv/bin/python scripts/generate-artifact-index.py` and `.venv/bin/mkdocs build --strict` were run after the LogonUI / UAC / Winlogon Notify / AppCompatFlags expansion.

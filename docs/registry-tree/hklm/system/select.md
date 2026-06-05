@@ -26,9 +26,24 @@
 | 常见写入者 | Windows 启动过程。 |
 | 注意 | 离线分析时不要直接假设 `ControlSet001` 是当前配置，应先读取 `Select\Current`。 |
 
+## 取证提示
+
+- 离线解释 `Services`、`Enum`、`Control` 等路径前，先确认当前控制集编号。
+- 比较多个 `ControlSet00x` 时，应记录每个控制集来源和是否为当前配置。
+
+## 相关场景
+
+- [常规注册表检查](../../../questions/registry-checklist.md)
+- [自启动与持久化](../../../questions/persistence.md)
+- [USB 与外接设备](../../../questions/usb.md)
+
+## 相关位置
+
+- [HKLM\SYSTEM](index.md)
+- [ControlSet00x](controlset/index.md)
+
 ## 补充阅读
 
 - [Services](../../../artifacts/persistence/services.md)
 - [BAM / DAM](../../../artifacts/execution/bam-dam.md)
 - [USBSTOR](../../../artifacts/usb/usbstor.md)
-

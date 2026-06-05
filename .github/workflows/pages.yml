@@ -39,6 +39,9 @@ jobs:
       - name: Generate artifact data index
         run: python scripts/generate-artifact-index.py
 
+      - name: Check content style
+        run: python scripts/check-content-style.py
+
       - name: Build MkDocs site
         run: mkdocs build --strict
 

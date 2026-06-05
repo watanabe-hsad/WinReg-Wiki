@@ -14,6 +14,7 @@ Current project name: `WinReg Wiki`.
 ## Phase 2: Registry Tree Depth
 
 - Current status: registry-location navigation uses section index pages and follows a Windows-registry-like hierarchy instead of investigation themes.
+- Current status: `docs/registry-tree/coverage.md` tracks covered, to-deepen, and planned registry locations by root key and topic.
 - Current status: visible `概览` child items have been removed from registry-location navigation.
 - Completed path-reference pages: `HKLM\SYSTEM\Select`, `ControlSet00x`, `Services`, `Enum`, `MountedDevices`, `Terminal Server`, `Tcpip`, `TimeZoneInformation`, `ComputerName`, and `Lsa`.
 - Completed path-reference pages: `HKLM\SOFTWARE\ProfileList`, `Winlogon`, `Image File Execution Options`, `Policies`, `Windows Defender`, `Uninstall`, `WOW6432Node`, and `Classes`.
@@ -55,7 +56,7 @@ Current project name: `WinReg Wiki`.
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers`
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList`
 - Completed registry-tree normalization pass:
-  - remaining `## 相关 Artifact` headings in registry-location pages were renamed to `## 补充阅读`;
+  - remaining artifact-link section headings in registry-location pages were renamed to `## 补充阅读`;
   - scan now returns no registry-tree hits for old artifact-template headings or subjective priority phrases.
 - Completed follow-up reference pages:
   - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
@@ -65,7 +66,7 @@ Current project name: `WinReg Wiki`.
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters`
   - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies`
   - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
-- Next: add or deepen Credential Provider Filters component-resolution notes, `Session Manager\Environment` examples, `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `Attachments`, and additional HKCU network / shell policy locations.
+- Next: use the coverage matrix to add or deepen `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`, `Attachments`, `Associations`, Explorer `Advanced`, Explorer `TypedPaths`, ShellBags / BagMRU, `Enum\STORAGE`, and `DeviceContainers`.
 
 ## Phase 3: High-Value Artifacts
 
@@ -92,6 +93,7 @@ Current project name: `WinReg Wiki`.
 ## Phase 5: Detection Mappings and Tool Integration
 
 - Current status: scenario pages now link primarily to registry-location pages and keep artifact links as supplemental reading.
+- Current status: `docs/detection/index.md` now links detection entry rows primarily to registry-location pages instead of artifact pages.
 - Current status: `取证场景 / 常规注册表检查` provides the first cross-scenario registry checklist.
 - Current status: `registry-checklist`, `network`, `policy-security`, `persistence`, `anti-forensics`, and `execution` now link to the latest registry-location pages before artifact supplements.
 - Current status: `command-processor-autorun`, `defender-policies`, `firewall-policies`, `audit-policy`, `run-keys`, and `services` artifact pages have been compressed into supplemental entries.
@@ -106,9 +108,11 @@ Current project name: `WinReg Wiki`.
 
 ## Phase 6: Publishing and Contribution Workflow
 
-- Finalize repository metadata and GitHub remote.
+- Current status: repository metadata and GitHub remote point to `watanabe-hsad/WinReg-Wiki`.
+- Current status: contribution guidance and source-quality expectations live in `docs/contributing/index.md`.
+- Current status: CI runs generated index refresh, content style check, and `mkdocs build --strict`.
+- Current status: README, registry-tree coverage, and contribution docs document the v0.1 content model.
 - Add `LICENSE` after the maintainer chooses a license.
-- Add contribution guidance and citation/source-quality expectations.
-- Add lightweight CI for `mkdocs build --strict` and generated index freshness.
-- Review README, homepage, navigation, and first-visit experience before publishing.
+- Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
+- Review homepage, navigation, and first-visit experience once the final URL is confirmed.
 - Tag a first release only after content and license are ready.
