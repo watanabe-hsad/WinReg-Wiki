@@ -10,27 +10,31 @@ theme:
   language: zh
   palette:
     - scheme: default
-      primary: indigo
-      accent: teal
+      primary: blue
+      accent: cyan
       toggle:
         icon: material/weather-night
         name: 切换到深色模式
     - scheme: slate
-      primary: indigo
-      accent: teal
+      primary: blue
+      accent: cyan
       toggle:
         icon: material/weather-sunny
         name: 切换到浅色模式
   features:
     - navigation.tabs
+    - navigation.sections
     - navigation.expand
     - navigation.indexes
+    - navigation.path
     - navigation.top
     - navigation.tracking
     - toc.follow
     - search.suggest
     - search.highlight
+    - search.share
     - content.code.copy
+    - content.tooltips
     - content.tabs.link
 
 extra_css:

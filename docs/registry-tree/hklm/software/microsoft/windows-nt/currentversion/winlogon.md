@@ -1,11 +1,16 @@
 # HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>交互式登录配置</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKLM</strong></div>
 <div><span>Hive</span><strong>SOFTWARE</strong></div>
-<div><span>Offline</span><strong>C:\Windows\System32\Config\SOFTWARE</strong></div>
-<div><span>Topics</span><strong>持久化 / 账户</strong></div>
-<div><span>Data</span><strong>stable / high</strong></div>
+<div><span>Offline file</span><strong>C:\Windows\System32\Config\SOFTWARE</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">持久化</span><span class="ww-chip ww-chip--topic">账户</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">账户与安全</span></div>
+<div><span>Data status</span><strong>stable / high</strong></div>
+</div>
 </div>
 
 ## 位置

@@ -2,12 +2,17 @@
 
 `HKLM\SYSTEM\Select` 记录 `CurrentControlSet` 与真实 `ControlSet00x` 的映射关系。
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>ControlSet 映射入口</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKLM</strong></div>
 <div><span>Hive</span><strong>SYSTEM</strong></div>
-<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div><span>Topics</span><strong>系统配置</strong></div>
-<div><span>Data</span><strong>stable / high</strong></div>
+<div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\Select</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">系统配置</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span></div>
+<div><span>Data status</span><strong>stable / high</strong></div>
+</div>
 </div>
 
 ## 位置

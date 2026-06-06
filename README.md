@@ -1,6 +1,6 @@
 # WinReg Wiki
 
-WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads.
+WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads. The current homepage is a search-first registry database landing page: start with search, quick path chips, registry path cards, or scenario cards.
 
 GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
@@ -8,8 +8,9 @@ The project is organized as a wiki, not a long-form incident response handbook. 
 
 ## Main Entry Points
 
-- Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`.
-- Forensic scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, policy changes, network configuration, software installation, and cleanup traces.
+- Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`; the registry entry now behaves like a compact Registry Explorer.
+- Structured registry index: use generated root / topic / hive tables when a database-style list is faster than browsing the native tree.
+- Forensic scenarios: start from cards for program execution, persistence, USB devices, RDP, account anomalies, policy changes, network configuration, software installation, and cleanup traces.
 - Artifact supplemental index: use when a scenario or registry-location page needs deeper artifact-specific notes.
 
 ## Online Site
@@ -83,6 +84,17 @@ Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 4. runs the content style check;
 5. runs `mkdocs build --strict`;
 6. deploys the generated `site/` directory to GitHub Pages.
+
+## Visual System
+
+The site keeps MkDocs Material and uses a small project-specific CSS system in `docs/stylesheets/extra.css`.
+
+- `ww-hero`, `ww-search-panel`, `ww-dashboard-grid`, and `ww-stat-card` shape the search-first homepage.
+- `ww-feature-card`, `ww-path-card`, `ww-root-card`, and `ww-scenario-card` provide database-style entry cards.
+- `ww-chip`, `ww-path-pill`, and `ww-fact-card` keep registry paths and page facts scannable.
+- Tables are styled for dense reference reading and use container-level horizontal scrolling on narrow screens.
+
+The visual direction is restrained: Microsoft Learn-like documentation clarity with RegSeek / DFIRHub-style search and database entry patterns. It intentionally avoids heavy frontend frameworks, marketing-page layout, and decorative visual effects.
 
 ## Content Principles
 

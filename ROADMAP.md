@@ -118,7 +118,9 @@ Current project name: `WinReg Wiki`.
 - Current status: contribution guidance and source-quality expectations live in `docs/contributing/index.md`.
 - Current status: CI runs artifact index generation, registry index generation, content style check, generated-file diff check, and `mkdocs build --strict`.
 - Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
-- Current status: visual / UX refresh is complete for the homepage, registry-tree entry, scenario entry, registry checklist, generated registry index, coverage matrix, and high-visible metadata summaries.
+- Current status: Visual UX Redesign is complete for the search-first homepage, Registry Explorer entry, scenario-card directory, registry checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
+- Current status: desktop, narrow/mobile, and dark-mode previews were checked locally with MkDocs serve; generated and checklist tables use container-level horizontal scrolling on narrow screens.
+- Next UI: refine search behavior when Material exposes a cleaner programmatic search trigger, add more topic-specific generated sections after registry YAML coverage expands, and consider a small screenshot set after the final production URL is confirmed.
 - Add `LICENSE` after the maintainer chooses a license.
 - Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
 - Review homepage, navigation, and first-visit experience once the final URL is confirmed.

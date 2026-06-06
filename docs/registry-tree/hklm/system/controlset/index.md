@@ -2,12 +2,17 @@
 
 `ControlSet00x` 是 Windows 保存系统控制配置的真实控制集，`CurrentControlSet` 是运行时映射。
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>真实控制集</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKLM</strong></div>
 <div><span>Hive</span><strong>SYSTEM</strong></div>
-<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div><span>Topics</span><strong>系统配置 / 设备 / 持久化</strong></div>
-<div><span>Data</span><strong>stable / high</strong></div>
+<div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\ControlSet00x</code><code>HKLM\SYSTEM\CurrentControlSet</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">系统配置</span><span class="ww-chip ww-chip--topic">设备</span><span class="ww-chip ww-chip--topic">持久化</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span></div>
+<div><span>Data status</span><strong>stable / high</strong></div>
+</div>
 </div>
 
 ## 位置

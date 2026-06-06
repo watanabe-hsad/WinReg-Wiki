@@ -2,12 +2,17 @@
 
 UserAssist 是 Explorer 维护的用户交互记录，常用于观察用户通过 Shell 触发过的程序线索。
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>Explorer 用户交互线索</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKCU / HKU&lt;SID&gt;</strong></div>
 <div><span>Hive</span><strong>NTUSER.DAT</strong></div>
-<div><span>Offline</span><strong>C:\Users\&lt;user&gt;\NTUSER.DAT</strong></div>
-<div><span>Topics</span><strong>程序执行 / 用户行为</strong></div>
-<div><span>Data</span><strong>manual / referenced</strong></div>
+<div><span>Offline file</span><strong>C:\Users\&lt;user&gt;\NTUSER.DAT</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">程序执行</span><span class="ww-chip ww-chip--topic">用户行为</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">程序执行</span><span class="ww-chip ww-chip--scenario">Shell / Explorer</span></div>
+<div><span>Data status</span><strong>manual / referenced</strong></div>
+</div>
 </div>
 
 ## 位置

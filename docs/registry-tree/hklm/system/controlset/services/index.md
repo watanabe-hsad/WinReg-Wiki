@@ -2,12 +2,17 @@
 
 `Services` 保存服务、驱动、网络组件和部分系统组件的配置。
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>服务与驱动配置入口</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKLM</strong></div>
 <div><span>Hive</span><strong>SYSTEM</strong></div>
-<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div><span>Topics</span><strong>系统配置 / 持久化 / 网络</strong></div>
-<div><span>Data</span><strong>stable / high</strong></div>
+<div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\CurrentControlSet\Services</code><code>HKLM\SYSTEM\ControlSet00x\Services</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">系统配置</span><span class="ww-chip ww-chip--topic">持久化</span><span class="ww-chip ww-chip--topic">网络</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">程序执行</span></div>
+<div><span>Data status</span><strong>stable / high</strong></div>
+</div>
 </div>
 
 ## 位置

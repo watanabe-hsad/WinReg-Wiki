@@ -6,7 +6,7 @@ The project is `WinReg Wiki`: a concise Chinese-first Windows registry key/value
 
 Current information architecture:
 
-- `首页`: compact wiki entry, registry basics, common path chips, and entry cards.
+- `首页`: search-first registry database landing with a visible search panel, quick path chips, dashboard stats, and popular registry path cards.
 - `注册表位置`: primary dictionary-style entry point organized by Windows native registry tree. Pages explain location, hive source, common values, state, caveats, related scenarios, and related registry positions.
 - `取证场景`: checklist-style investigation entry point. Scenario pages primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
 - `docs/artifacts/`: supplemental/internal artifact detail. Artifact pages are retained for field semantics, collection notes, parsing tools, common misreads, and YAML-backed artifact indexes. They are not a primary navigation model.
@@ -42,6 +42,61 @@ Current information architecture:
 
 ## Last Completed Round
 
+This round completed a focused `Visual UX Redesign`. It did not expand the registry data model, did not add artifact pages, and did not change the top-level navigation.
+
+Visual / UX changes:
+
+- Rebuilt `docs/index.md` as a search-first registry database landing page:
+  - first-screen hero with `WinReg Wiki`, a visible search panel, command-key hints, and quick registry chips;
+  - dashboard stats for registry pages, registry YAML, artifact supplements, and scenarios;
+  - three primary entry cards for Registry Explorer, Scenario Playbooks, and Structured Index;
+  - `Popular Registry Paths` cards for Select, Services, USBSTOR, MountedDevices, Run keys, UserAssist, Winlogon, and ProfileList.
+- Rebuilt `docs/registry-tree/index.md` as a Registry Explorer:
+  - root-key cards for HKCR, HKCU, HKLM, HKU, and HKCC;
+  - clear entry cards for `结构化索引` and `覆盖矩阵`;
+  - topic chips and commonly used path cards.
+- Rebuilt `docs/questions/index.md` as a scenario-card directory and kept artifact / generated-data links in a bottom supplemental section.
+- Reworked `docs/questions/registry-checklist.md` into a checklist dashboard with compact tables by investigation area.
+- Updated `scripts/generate-registry-index.py` so generated registry index and coverage pages use summary headers, dashboard stats, topic / hive / status badges, path pills, and grouped tables.
+- Regenerated:
+  - `docs/registry-tree/generated-index.md`
+  - `docs/registry-tree/coverage.md`
+- Rebuilt `docs/stylesheets/extra.css` into a larger `ww-*` visual system:
+  - `ww-hero`, `ww-search-panel`, `ww-dashboard-grid`, `ww-stat-card`;
+  - `ww-card-grid`, `ww-feature-card`, `ww-path-card`, `ww-root-card`, `ww-scenario-card`;
+  - `ww-chip`, `ww-chip--hive`, `ww-chip--topic`, `ww-chip--scenario`, `ww-chip--status`;
+  - `ww-path-pill`, `ww-fact-card`, `ww-fact-grid`, `ww-page-header`, `ww-supplemental`.
+- Upgraded Registry Fact Card presentation on 10 common registry-location pages:
+  - `HKLM\SYSTEM\Select`
+  - `HKLM\SYSTEM\ControlSet00x`
+  - `HKLM\SYSTEM\ControlSet00x\Services`
+  - `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`
+  - `HKLM\SYSTEM\MountedDevices`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
+- Updated `mkdocs.yml` Material configuration with blue/cyan palette plus supported navigation, search, and tooltip features.
+
+Local browser preview:
+
+- Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
+- Checked pages:
+  - `/`
+  - `/registry-tree/`
+  - `/registry-tree/generated-index/`
+  - `/registry-tree/coverage/`
+  - `/questions/`
+  - `/questions/registry-checklist/`
+  - `/registry-tree/hklm/system/select/`
+  - `/registry-tree/hklm/system/controlset/enum/usbstor/`
+- Checked desktop width, narrow/mobile width, and dark mode.
+- Result: no page-level horizontal overflow was observed. Generated tables and checklist tables use container-level horizontal scrolling on narrow screens. Home, scenario cards, registry explorer cards, generated index badges, path pills, and registry fact cards were readable in dark mode.
+- Browser console note: MkDocs Material emitted an `Incorrect use of <label for=FORM_ELEMENT>` issue from theme navigation markup; this was not introduced by project content.
+
+## Previous Completed Round
+
 This round prepared the v0.1 Data + UX Refactor.
 
 Data model changes:
@@ -71,7 +126,7 @@ Data model changes:
   - `winlogon-shell.yml` -> `hklm-software-winlogon`
   - `winlogon-userinit.yml` -> `hklm-software-winlogon`
 
-UX and content changes:
+Previous UX and content changes:
 
 - Refreshed `docs/index.md` with compact entry cards, current coverage stats, common path chips, registry basics, and a clear boundary between registry locations, scenarios, and artifact supplements.
 - Refreshed `docs/registry-tree/index.md` as a Registry Explorer-style root key entry with links to the structured index and coverage matrix.
@@ -111,9 +166,8 @@ Latest required validation results:
 - `.venv/bin/python scripts/generate-artifact-index.py`: passed; regenerated `docs/artifacts/generated-index.md`.
 - `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md` and `docs/registry-tree/coverage.md`.
 - `.venv/bin/python scripts/check-content-style.py`: passed.
-- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs may show the upstream MkDocs 2.0 deprecation warning; this is not a project failure.
-- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local preview after visual changes.
-- Browser preview checked homepage, registry tree index, structured registry index, coverage matrix, `HKLM\SYSTEM\Select`, scenario index, and registry checklist in desktop and narrow widths; no obvious layout break was observed.
+- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs may show the upstream MkDocs 2.0 warning; this is not a project failure.
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the redesign.
 
 ## License Status
 

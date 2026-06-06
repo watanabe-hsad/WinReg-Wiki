@@ -118,6 +118,14 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Redesigned the homepage into a search-first registry database landing page with a command-style search panel, quick path chips, dashboard stats, and popular registry path cards.
+- Redesigned the registry-tree entry page as a Registry Explorer with root-key cards, topic chips, structured-index entry, coverage-matrix entry, and common path cards.
+- Redesigned the scenario index into scenario cards with a stronger `常规注册表检查` start card and supplemental links kept below the main flow.
+- Redesigned `docs/questions/registry-checklist.md` as a checklist dashboard with compact sections for persistence, execution, user behavior, USB / devices, RDP, accounts, security policy, and network.
+- Updated `scripts/generate-registry-index.py` so generated registry pages use summary headers, dashboard stats, topic chips, hive / status badges, path pills, and clearer grouped tables.
+- Rebuilt `docs/stylesheets/extra.css` into a unified `ww-*` visual system for hero, search panel, dashboard stats, cards, chips, path pills, fact cards, generated indexes, supplemental sections, and responsive tables.
+- Upgraded Registry Fact Card visual treatment on the 10 high-visible registry-location pages from the registry data pilot.
+- Updated `mkdocs.yml` Material settings with blue/cyan palette and additional navigation, search, and tooltip features while keeping the same top-level navigation.
 - Refreshed the homepage with restrained wiki entry cards, current coverage stats, common path chips, registry basics, and clearer artifact boundary text.
 - Refreshed the registry-tree entry page as a root-key explorer with links to the structured index and coverage matrix.
 - Refreshed the scenario index into compact scenario cards with supplemental links kept below the main flow.
@@ -204,6 +212,8 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Verification
 
+- `.venv/bin/python scripts/generate-artifact-index.py`, `.venv/bin/python scripts/generate-registry-index.py`, `.venv/bin/python scripts/check-content-style.py`, and `.venv/bin/mkdocs build --strict` were run after the Visual UX Redesign.
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used to preview homepage, registry-tree entry, generated registry index, coverage matrix, scenario index, registry checklist, `HKLM\SYSTEM\Select`, and `USBSTOR` in desktop, narrow/mobile, and dark mode contexts.
 - `.venv/bin/python scripts/generate-artifact-index.py`, `.venv/bin/python scripts/generate-registry-index.py`, `.venv/bin/python scripts/check-content-style.py`, and `.venv/bin/mkdocs build --strict` were run after the v0.1 Data + UX Refactor.
 - `.venv/bin/mkdocs serve -a 127.0.0.1:8000` was used for local preview of homepage, registry-tree entry, generated registry index, coverage matrix, HKLM SYSTEM Select, scenario index, and registry checklist after visual changes.
 - `.venv/bin/python scripts/generate-artifact-index.py`, `.venv/bin/python scripts/check-content-style.py`, and `.venv/bin/mkdocs build --strict` were run after the v0.1 release-readiness updates.

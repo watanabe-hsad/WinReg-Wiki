@@ -2,12 +2,17 @@
 
 `MountedDevices` 保存卷标识、卷 GUID 和 DOS 盘符之间的映射。
 
-<div class="ww-meta-grid" markdown>
+<div class="ww-fact-card" markdown>
+<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>卷和盘符映射</strong></div>
+<div class="ww-fact-grid" markdown>
 <div><span>Root</span><strong>HKLM</strong></div>
 <div><span>Hive</span><strong>SYSTEM</strong></div>
-<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div><span>Topics</span><strong>设备</strong></div>
-<div><span>Data</span><strong>reviewed / medium</strong></div>
+<div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\MountedDevices</code></div>
+<div><span>Topics</span><span class="ww-chip ww-chip--topic">设备</span></div>
+<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span><span class="ww-chip ww-chip--scenario">Shell / Explorer</span></div>
+<div><span>Data status</span><strong>reviewed / medium</strong></div>
+</div>
 </div>
 
 ## 位置
