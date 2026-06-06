@@ -1,27 +1,74 @@
 # 取证场景
 
-这个入口按调查问题组织。主路径是“场景 -> 注册表位置”：先看相关 key / value 是什么，再用日志、文件系统和工具输出交叉验证。
+<p class="ww-lede">按调查问题进入，但主路径仍是“场景 -> 注册表位置”。先确认 key / value 是什么，再用日志、文件系统和工具输出交叉验证。</p>
 
-| 调查问题 | 场景页 | 优先查看的注册表位置 | 辅助验证 |
-|---|---|---|---|
-| 常规排查先看哪些注册表位置？ | [常规注册表检查](registry-checklist.md) | Run Keys, Services, Session Manager, EventLog, FirewallPolicy, Defender, NetworkList, USB, ProfileList, Explorer MRU | 事件日志、EDR、文件系统时间线 |
-| 程序是否执行过？ | [程序执行](execution.md) | [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md), [Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md), [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md), [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md), [Services\bam](../registry-tree/hklm/system/controlset/services/index.md), [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | Prefetch, SRUM, Amcache, ShimCache, Sysmon, EDR |
-| 用户是否打开过某文件或目录？ | [Shell / Explorer 用户行为](shell-explorer.md) | [Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md), [RunMRU](../registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md), [RecentDocs](../registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md), [ComDlg32](../registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md), [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | LNK, Jump Lists, ShellBags, `$UsnJrnl` |
-| 是否存在自启动或持久化？ | [自启动与持久化](persistence.md) | [HKCU Run](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md), [HKLM Run](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md), [Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md), [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md), [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md), [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md), [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md), [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md), [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | Autoruns, Scheduled Tasks, Startup Folder, Sysmon 12/13/14 |
-| 是否插入过 USB / 外接存储？ | [USB 与外接设备](usb.md) | [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md), [USB](../registry-tree/hklm/system/controlset/enum/usb.md), [SWD\WPDBUSENUM](../registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md), [MountedDevices](../registry-tree/hklm/system/mounteddevices.md), [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | SetupAPI.dev.log, Partition/Diagnostic, LNK, Jump Lists |
-| 是否发生 RDP / 远程访问？ | [RDP 与远程访问](rdp.md) | [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md), [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md), [Firewall / Policies](../registry-tree/hklm/software/policies.md) | Security.evtx, TerminalServices logs, firewall logs |
-| 是否存在账户新增、隐藏账户、权限异常？ | [账户与安全](accounts-security.md) | [ProfileList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md), [SAM](../registry-tree/hklm/sam.md), [HKEY_USERS](../registry-tree/hku/index.md), [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md), [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md), [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md), [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | Security 4720/4732/4672, SAM, local groups, domain logs |
-| 是否修改过安全策略、UAC、Defender、防火墙？ | [安全策略与防护配置](policy-security.md) | [Policies](../registry-tree/hklm/software/policies.md), [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md), [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md), [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md), [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md), [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md), [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | Defender logs, GroupPolicy, MDM, Sysmon 13 |
-| 是否存在代理、DNS、网络配置异常？ | [网络与系统环境](network.md) | [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md), [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md), [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md), [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md), [ComputerName](../registry-tree/hklm/system/controlset/control/computername.md), [TimeZoneInformation](../registry-tree/hklm/system/controlset/control/timezone.md) | DNS logs, DHCP logs, firewall, NetFlow, EDR network |
-| 是否安装或卸载过软件？ | [软件安装与卸载](software-install.md) | [Uninstall](../registry-tree/hklm/software/microsoft/windows/currentversion/uninstall.md), [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md), [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md), [HKLM\SOFTWARE](../registry-tree/hklm/software/index.md), [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | MSI logs, Program Files, Prefetch, ShimCache |
-| 是否有反取证、清理痕迹或日志策略修改？ | [反取证与清理痕迹](anti-forensics.md) | [Policies](../registry-tree/hklm/software/policies.md), [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md), [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md), [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md), [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md), [SECURITY](../registry-tree/hklm/security.md) | Event log gaps, 1102, PowerShell logs, EDR tamper events |
+<div class="ww-entry-grid ww-entry-grid--scenarios" markdown>
 
-## 补充索引
+<a class="ww-entry-card ww-entry-card--accent" href="registry-checklist/">
+  <span class="ww-entry-kicker">Start Here</span>
+  <strong>常规注册表检查</strong>
+  <span>第一次看注册表时优先检查的自启动、服务、设备、账户和策略路径。</span>
+</a>
+
+<a class="ww-entry-card" href="execution/">
+  <strong>程序执行</strong>
+  <span>UserAssist、Command Processor、App Paths、Services/BAM、Drivers 等。</span>
+</a>
+
+<a class="ww-entry-card" href="persistence/">
+  <strong>自启动与持久化</strong>
+  <span>Run Keys、Services、Winlogon、LSA、Session Manager、IFEO。</span>
+</a>
+
+<a class="ww-entry-card" href="usb/">
+  <strong>USB 与外接设备</strong>
+  <span>USBSTOR、USB、SWD\WPDBUSENUM、MountedDevices、MountPoints2。</span>
+</a>
+
+<a class="ww-entry-card" href="shell-explorer/">
+  <strong>Shell / Explorer 用户行为</strong>
+  <span>UserAssist、RunMRU、RecentDocs、ComDlg32、MountPoints2。</span>
+</a>
+
+<a class="ww-entry-card" href="rdp/">
+  <strong>RDP 与远程访问</strong>
+  <span>Terminal Server Client、Terminal Server、RDP-Tcp、CredSSP、防火墙。</span>
+</a>
+
+<a class="ww-entry-card" href="accounts-security/">
+  <strong>账户与安全</strong>
+  <span>ProfileList、SAM、HKEY_USERS、Winlogon、LogonUI、Credential Providers。</span>
+</a>
+
+<a class="ww-entry-card" href="policy-security/">
+  <strong>安全策略与防护配置</strong>
+  <span>Policies、Defender、FirewallPolicy、EventLog、LSA、UAC。</span>
+</a>
+
+<a class="ww-entry-card" href="network/">
+  <strong>网络与系统环境</strong>
+  <span>Tcpip Interfaces、NetworkList、Internet Settings、ZoneMap、TimeZone。</span>
+</a>
+
+<a class="ww-entry-card" href="software-install/">
+  <strong>软件安装与卸载</strong>
+  <span>Uninstall、App Paths、AppCompatFlags、SOFTWARE、UserAssist。</span>
+</a>
+
+<a class="ww-entry-card" href="anti-forensics/">
+  <strong>反取证与清理痕迹</strong>
+  <span>Defender Policies、EventLog、SECURITY、PendingFileRenameOperations。</span>
+</a>
+
+</div>
+
+## 补充入口
 
 | 入口 | 内容 |
 |---|---|
-| [Artifact 补充索引](../artifacts/index.md) | 保留 artifact 级证据语义、采集、误报和工具说明；不是主要阅读入口。 |
-| [结构化数据索引](../artifacts/generated-index.md) | 从 `data/artifacts/*.yml` 生成的内部数据表格。 |
+| [Artifact 补充索引](../artifacts/index.md) | artifact 级字段语义、采集、误报和工具说明；不是主要阅读入口。 |
+| [结构化 artifact 数据索引](../artifacts/generated-index.md) | 从 `data/artifacts/*.yml` 生成的内部数据表格。 |
+| [结构化注册表索引](../registry-tree/generated-index.md) | 从 `data/registry/*.yml` 生成的 registry 试点索引。 |
 | [检测工程](../detection/index.md) | 注册表检测规则的路径组合、误报和验证思路。 |
 
 ## 判断顺序
@@ -29,4 +76,4 @@
 1. 先确认路径归属：root key、hive、SID、ControlSet、32/64 位视图。
 2. 再解释证据语义：配置存在、设备枚举、用户交互、程序存在或策略值存在。
 3. 然后用日志、文件系统、工具输出和时间线交叉验证。
-4. 最后写清楚“能证明什么 / 不能证明什么”，避免把弱线索写成定案。
+4. 最后写清楚证据边界，避免把弱线索写成定案。

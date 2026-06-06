@@ -135,3 +135,59 @@ tags:
 
 - ...
 ```
+
+## Registry YAML 示例
+
+`data/registry/*.yml` 用于生成结构化索引和覆盖矩阵。正文页面仍需人工维护。
+
+```yaml
+id: hklm-example-path
+title: HKLM\SOFTWARE\Example
+page: docs/registry-tree/hklm/software/example.md
+summary: 一句话说明该位置负责什么。
+native_paths:
+  - HKLM\SOFTWARE\Example
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 系统配置
+category: 示例分类
+evidence_types:
+  - 配置项
+values:
+  - name: ValueName
+    type: REG_SZ
+    meaning: value 的含义。
+    common_data: 常见数据。
+    notes: 解释限制或注意事项。
+subkeys: []
+default_state: 视 Windows 版本、角色和配置而定。
+version_notes: 视 Windows 版本和配置而定。
+timestamp_notes: key LastWrite 是 key 级变化时间，不是单个 value 创建时间。
+forensic_notes:
+  - 只写短事实提示。
+common_misreads:
+  - 不要把配置存在直接写成行为发生。
+related_scenarios:
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM\SOFTWARE
+    path: docs/registry-tree/hklm/software/index.md
+related_artifacts: []
+tools:
+  - Registry Explorer
+references:
+  - title: Microsoft Learn
+    url: https://learn.microsoft.com/
+status: draft
+confidence: medium
+```
+
+生成命令：
+
+```bash
+.venv/bin/python scripts/generate-registry-index.py
+```

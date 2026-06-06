@@ -2,6 +2,14 @@
 
 UserAssist 是 Explorer 维护的用户交互记录，常用于观察用户通过 Shell 触发过的程序线索。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKCU / HKU&lt;SID&gt;</strong></div>
+<div><span>Hive</span><strong>NTUSER.DAT</strong></div>
+<div><span>Offline</span><strong>C:\Users\&lt;user&gt;\NTUSER.DAT</strong></div>
+<div><span>Topics</span><strong>程序执行 / 用户行为</strong></div>
+<div><span>Data</span><strong>manual / referenced</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

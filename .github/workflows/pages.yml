@@ -39,8 +39,14 @@ jobs:
       - name: Generate artifact data index
         run: python scripts/generate-artifact-index.py
 
+      - name: Generate registry data index
+        run: python scripts/generate-registry-index.py
+
       - name: Check content style
         run: python scripts/check-content-style.py
+
+      - name: Check generated indexes are committed
+        run: git diff --exit-code docs/artifacts/generated-index.md docs/registry-tree/generated-index.md docs/registry-tree/coverage.md
 
       - name: Build MkDocs site
         run: mkdocs build --strict

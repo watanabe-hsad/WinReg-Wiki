@@ -1,5 +1,7 @@
 id: usbstor
 title: USBSTOR
+registry_entry_ids:
+  - hklm-system-enum-usbstor
 category:
   - USB
   - Device

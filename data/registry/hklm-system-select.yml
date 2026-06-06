@@ -1,0 +1,71 @@
+id: hklm-system-select
+title: HKLM\SYSTEM\Select
+page: docs/registry-tree/hklm/system/select.md
+summary: CurrentControlSet 与真实 ControlSet00x 的映射关系。
+native_paths:
+  - HKLM\SYSTEM\Select
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 系统配置
+category: ControlSet 映射
+evidence_types:
+  - 控制集映射
+values:
+  - name: Current
+    type: REG_DWORD
+    meaning: 当前启动后映射为 CurrentControlSet 的控制集编号。
+    common_data: 控制集编号
+    notes: 离线分析时优先读取。
+  - name: Default
+    type: REG_DWORD
+    meaning: 下次启动默认使用的控制集编号。
+    common_data: 控制集编号
+    notes: 不一定等于当前运行配置。
+  - name: Failed
+    type: REG_DWORD
+    meaning: 最近一次失败启动相关控制集。
+    common_data: 0 或控制集编号
+    notes: 语义需结合启动失败上下文。
+  - name: LastKnownGood
+    type: REG_DWORD
+    meaning: 上一次已知良好配置对应的控制集编号。
+    common_data: 控制集编号
+    notes: 现代系统中仍需谨慎解释。
+subkeys: []
+default_state: 由 Windows 启动过程维护，正常系统通常包含 Current、Default、Failed、LastKnownGood。
+version_notes: 视 Windows 版本和启动恢复配置而定。
+timestamp_notes: Select key LastWrite 表示 key 级变化，不等于某个控制集内容的修改时间。
+forensic_notes:
+  - 离线解释 Services、Enum、Control 等路径前，先确认 Current 指向哪个 ControlSet00x。
+  - 比较多个 ControlSet00x 时，应记录每个控制集是否为当前配置。
+common_misreads:
+  - 直接把 ControlSet001 当作 CurrentControlSet。
+  - 把 Select 的 LastWrite 当作服务、设备或控制配置的修改时间。
+related_scenarios:
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+related_registry_pages:
+  - title: HKLM\SYSTEM
+    path: docs/registry-tree/hklm/system/index.md
+  - title: HKLM\SYSTEM\ControlSet00x
+    path: docs/registry-tree/hklm/system/controlset/index.md
+related_artifacts:
+  - services
+  - bam-dam
+  - usbstor
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+references:
+  - title: Microsoft Learn - Services registry tree
+    url: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree
+status: stable
+confidence: high

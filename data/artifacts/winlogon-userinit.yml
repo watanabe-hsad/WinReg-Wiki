@@ -1,5 +1,7 @@
 id: winlogon-userinit
 title: Winlogon\Userinit
+registry_entry_ids:
+  - hklm-software-winlogon
 category:
   - Persistence
   - Autoruns

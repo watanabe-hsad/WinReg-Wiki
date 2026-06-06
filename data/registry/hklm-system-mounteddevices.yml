@@ -1,0 +1,62 @@
+id: hklm-system-mounteddevices
+title: HKLM\SYSTEM\MountedDevices
+page: docs/registry-tree/hklm/system/mounteddevices.md
+summary: 卷 GUID、DOS 盘符和设备标识之间的映射。
+native_paths:
+  - HKLM\SYSTEM\MountedDevices
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 设备
+category: 卷与盘符映射
+evidence_types:
+  - 卷映射
+values:
+  - name: '\DosDevices\C:'
+    type: REG_BINARY
+    meaning: DOS 盘符到卷或设备的二进制映射。
+    common_data: 二进制数据
+    notes: 盘符可复用。
+  - name: '\??\Volume{GUID}'
+    type: REG_BINARY
+    meaning: 卷 GUID 到设备标识的映射。
+    common_data: 二进制数据
+    notes: 需工具解析和交叉验证。
+subkeys: []
+default_state: 系统盘和已挂载卷通常会产生记录。
+version_notes: 二进制数据含义受磁盘类型、分区、可移动设备、虚拟磁盘和系统版本影响。
+timestamp_notes: key LastWrite 表示映射 key 级变化，不提供每个 value 的独立创建时间。
+forensic_notes:
+  - 可帮助还原卷、盘符和设备关系。
+  - 需要与 USBSTOR、MountPoints2、LNK、Jump Lists 和文件系统时间线关联。
+common_misreads:
+  - 只凭盘符判断同一设备。
+  - 把机器级卷映射写成用户访问证据。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: USBSTOR
+    path: docs/registry-tree/hklm/system/controlset/enum/usbstor.md
+  - title: MountPoints2
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md
+related_artifacts:
+  - mounteddevices
+  - usbstor
+  - mountpoints2
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: SANS poster - Windows Forensic Analysis
+    url: https://www.sans.org/posters/windows-forensic-analysis/
+  - title: artefacts.help - MountedDevices
+    url: https://artefacts.help/windows_registry_mounteddevices.html
+status: reviewed
+confidence: medium

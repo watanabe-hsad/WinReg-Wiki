@@ -1,0 +1,65 @@
+id: hkcu-software-run
+title: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+page: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/run.md
+summary: 用户级登录启动项，只作用于对应用户 SID 的登录会话。
+native_paths:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+  - HKU\<SID>\Software\Microsoft\Windows\CurrentVersion\Run
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 持久化
+category: 用户级登录启动项
+evidence_types:
+  - 自启动配置
+values:
+  - name: <value name>
+    type: REG_SZ
+    meaning: 启动项名称。
+    common_data: 自定义名称
+    notes: 通常由软件、安装器或用户写入。
+  - name: <value data>
+    type: REG_SZ / REG_EXPAND_SZ
+    meaning: 启动命令、程序路径或带参数命令行。
+    common_data: 文件路径或命令行
+    notes: 需结合对应用户登录上下文解释。
+subkeys:
+  - name: RunOnce
+    meaning: 用户级一次性登录启动项。
+default_state: 默认可以为空；正常应用、同步盘、输入法、聊天软件和企业代理可能写入。
+version_notes: live HKCU 取决于当前进程上下文；离线应定位具体用户 hive。
+timestamp_notes: key LastWrite 是 key 级变化，不提供每个 value 的独立创建时间。
+forensic_notes:
+  - 能把自启动配置归属到具体用户。
+  - 配置存在不等于执行成功，需要结合用户登录、进程创建、StartupApproved、Prefetch、BAM / DAM 或 EDR。
+common_misreads:
+  - live 查询 HKCU 时未确认上下文。
+  - 把用户级自启动误写成全用户自启动。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Run / RunOnce
+    path: docs/registry-tree/hklm/software/microsoft/windows/currentversion/run.md
+  - title: NTUSER.DAT
+    path: docs/registry-tree/hku/ntuser.md
+  - title: HKCU Explorer
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+related_artifacts:
+  - run-keys
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Run and RunOnce registry keys
+    url: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys
+  - title: Microsoft Sysinternals - Autoruns
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+status: stable
+confidence: high

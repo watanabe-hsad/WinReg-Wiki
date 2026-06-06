@@ -1,5 +1,7 @@
 id: mounteddevices
 title: MountedDevices
+registry_entry_ids:
+  - hklm-system-mounteddevices
 category:
   - USB
   - Volume

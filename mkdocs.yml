@@ -65,6 +65,8 @@ nav:
   - 首页: index.md
   - 注册表位置:
       - registry-tree/index.md
+      - 结构化索引: registry-tree/generated-index.md
+      - 覆盖矩阵: registry-tree/coverage.md
       - HKEY_CLASSES_ROOT:
           - registry-tree/hkcr/index.md
       - HKEY_CURRENT_USER:
@@ -189,7 +191,6 @@ nav:
           - UsrClass.dat: registry-tree/hku/usrclass.md
       - HKEY_CURRENT_CONFIG:
           - registry-tree/hkcc/index.md
-      - 覆盖矩阵: registry-tree/coverage.md
   - 取证场景:
       - questions/index.md
       - 常规注册表检查: questions/registry-checklist.md
@@ -209,4 +210,5 @@ nav:
   - 贡献:
       - 贡献指南: contributing/index.md
       - 页面模板: contributing/template.md
+      - Registry 数据模型: contributing/registry-data-schema.md
   - 标签: tags.md

@@ -1,5 +1,7 @@
 id: winlogon-shell
 title: Winlogon\Shell
+registry_entry_ids:
+  - hklm-software-winlogon
 category:
   - Persistence
   - Autoruns

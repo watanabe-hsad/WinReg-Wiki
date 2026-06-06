@@ -1,0 +1,83 @@
+title: WinReg Wiki registry entry
+type: object
+required:
+  - id
+  - title
+  - native_paths
+  - root
+  - hive
+  - status
+  - confidence
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  page:
+    type: string
+  summary:
+    type: string
+  native_paths:
+    type: array
+    items:
+      type: string
+  root:
+    type: string
+  hive:
+    type: string
+  offline_files:
+    type: array
+    items:
+      type: string
+  topics:
+    type: array
+    items:
+      type: string
+  category:
+    type: string
+  evidence_types:
+    type: array
+    items:
+      type: string
+  values:
+    type: array
+  subkeys:
+    type: array
+  default_state:
+    type: string
+  version_notes:
+    type: string
+  timestamp_notes:
+    type: string
+  forensic_notes:
+    type: array
+    items:
+      type: string
+  common_misreads:
+    type: array
+    items:
+      type: string
+  related_scenarios:
+    type: array
+  related_registry_pages:
+    type: array
+  related_artifacts:
+    type: array
+    items:
+      type: string
+  tools:
+    type: array
+    items:
+      type: string
+  references:
+    type: array
+  status:
+    enum:
+      - draft
+      - reviewed
+      - stable
+  confidence:
+    enum:
+      - low
+      - medium
+      - high

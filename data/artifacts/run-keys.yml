@@ -1,5 +1,8 @@
 id: run-keys
 title: Run / RunOnce
+registry_entry_ids:
+  - hklm-software-run
+  - hkcu-software-run
 category:
   - Persistence
   - Autoruns

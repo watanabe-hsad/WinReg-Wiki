@@ -1,0 +1,73 @@
+id: hklm-system-enum-usbstor
+title: HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR
+page: docs/registry-tree/hklm/system/controlset/enum/usbstor.md
+summary: USB Mass Storage 设备枚举信息。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR
+  - HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 设备
+category: USB 存储设备枚举
+evidence_types:
+  - USB 设备枚举
+values:
+  - name: FriendlyName
+    type: REG_SZ
+    meaning: 设备友好名称。
+    common_data: 设备显示名
+    notes: 不一定存在。
+  - name: ParentIdPrefix
+    type: REG_SZ
+    meaning: 与设备实例关联的前缀。
+    common_data: 字符串
+    notes: 部分设备存在。
+  - name: ContainerID
+    type: REG_SZ
+    meaning: 设备容器 ID，可用于关联同一物理设备的接口。
+    common_data: GUID
+    notes: 需结合其他设备枚举路径。
+subkeys:
+  - name: <DeviceType&Vendor&Product&Revision>
+    meaning: 设备类别、厂商、产品和版本组合。
+  - name: <SerialOrInstanceId>
+    meaning: 设备序列号或实例 ID。
+default_state: 没有接入过 USB 存储设备的系统可能为空。
+version_notes: 设备是否暴露稳定序列号取决于硬件和驱动。
+timestamp_notes: 子键 LastWrite 可辅助时间线，但不是精确插入或拔出时间。
+forensic_notes:
+  - 说明系统枚举过 USB 存储设备，不等于用户访问过文件。
+  - 连接时间和盘符关系需要结合 SetupAPI.dev.log、MountedDevices、MountPoints2、LNK 和 Jump Lists。
+common_misreads:
+  - 把 USBSTOR 直接写成文件复制证据。
+  - 忽略无稳定序列号设备的实例 ID 差异。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Enum USB
+    path: docs/registry-tree/hklm/system/controlset/enum/usb.md
+  - title: MountedDevices
+    path: docs/registry-tree/hklm/system/mounteddevices.md
+  - title: MountPoints2
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md
+related_artifacts:
+  - usbstor
+  - usb
+  - mounteddevices
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+references:
+  - title: SANS poster - Windows Forensic Analysis
+    url: https://www.sans.org/posters/windows-forensic-analysis/
+  - title: artefacts.help - USBSTOR
+    url: https://artefacts.help/windows_registry_usbstor.html
+status: reviewed
+confidence: medium

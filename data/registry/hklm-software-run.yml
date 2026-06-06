@@ -1,0 +1,65 @@
+id: hklm-software-run
+title: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+page: docs/registry-tree/hklm/software/microsoft/windows/currentversion/run.md
+summary: 机器级登录启动项，适用于所有用户登录后的自动启动命令。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+  - HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 持久化
+category: 登录启动项
+evidence_types:
+  - 自启动配置
+values:
+  - name: <value name>
+    type: REG_SZ
+    meaning: 启动项名称，通常由软件或安装器自定义。
+    common_data: 自定义名称
+    notes: 名称可伪装。
+  - name: <value data>
+    type: REG_SZ / REG_EXPAND_SZ
+    meaning: 启动命令、程序路径或带参数命令行。
+    common_data: 文件路径或命令行
+    notes: 需验证路径、签名和命令行。
+subkeys:
+  - name: RunOnce
+    meaning: 一次性登录启动项。
+default_state: 默认可以为空；正常软件常写入更新器、同步客户端、输入法和管理代理。
+version_notes: 64 位 Windows 上 32 位程序可能写入 WOW6432Node 视图。
+timestamp_notes: key LastWrite 是 key 级变化，不提供每个 value 的独立创建时间。
+forensic_notes:
+  - 说明机器级自启动配置存在，不等于命令已执行。
+  - 执行判断需要结合登录事件、进程创建、Prefetch、BAM / DAM、EDR 或文件系统时间线。
+common_misreads:
+  - 把 Run key 存在写成程序已执行。
+  - 忽略 WOW6432Node。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKCU Run / RunOnce
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/run.md
+  - title: WOW6432Node
+    path: docs/registry-tree/hklm/software/wow6432node.md
+  - title: Winlogon
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+related_artifacts:
+  - run-keys
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Run and RunOnce registry keys
+    url: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys
+  - title: Microsoft Sysinternals - Autoruns
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+status: stable
+confidence: high

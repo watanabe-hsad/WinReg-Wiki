@@ -1,0 +1,94 @@
+id: hklm-system-controlset-services
+title: HKLM\SYSTEM\ControlSet00x\Services
+page: docs/registry-tree/hklm/system/controlset/services/index.md
+summary: 服务、驱动、网络组件和部分系统组件的配置入口。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Services
+  - HKLM\SYSTEM\ControlSet00x\Services
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 系统配置
+  - 持久化
+  - 网络
+category: 服务与驱动
+evidence_types:
+  - 服务配置
+  - 驱动配置
+values:
+  - name: ImagePath
+    type: REG_EXPAND_SZ / REG_SZ
+    meaning: 服务可执行文件、驱动路径或命令。
+    common_data: 文件路径或命令行
+    notes: 需验证文件是否存在、签名和目录权限。
+  - name: Type
+    type: REG_DWORD
+    meaning: 服务类型，例如 Win32 service、kernel driver、file system driver。
+    common_data: 视服务类型而定
+    notes: 需结合 Start 和服务类别解释。
+  - name: Start
+    type: REG_DWORD
+    meaning: 启动类型，例如 boot、system、auto、demand、disabled。
+    common_data: 0 到 4 常见
+    notes: 配置存在不等于服务已启动。
+  - name: DisplayName
+    type: REG_SZ
+    meaning: 服务显示名称。
+    common_data: 软件或系统组件自定义
+    notes: 名称可伪装。
+  - name: ObjectName
+    type: REG_SZ
+    meaning: 服务运行账户。
+    common_data: LocalSystem、NetworkService、LocalService 或指定账户
+    notes: 不同服务类型可能不存在。
+subkeys:
+  - name: EventLog
+    meaning: Windows Event Log 服务和通道配置。
+  - name: SharedAccess\Parameters\FirewallPolicy
+    meaning: Windows Defender Firewall 本地配置。
+  - name: Tcpip
+    meaning: TCP/IP 全局和接口配置。
+  - name: <ServiceName>\Parameters
+    meaning: 服务私有参数，具体含义由服务决定。
+default_state: 系统和软件会创建大量服务项。默认集合随 Windows 版本、角色和安装软件变化。
+version_notes: 服务项和默认 Start/Type 值随 Windows 版本、角色和组件安装状态变化。
+timestamp_notes: 单个服务 key LastWrite 表示服务配置 key 变化，不等于服务启动时间或二进制创建时间。
+forensic_notes:
+  - 自动启动服务、驱动和异常 ImagePath 是持久化和加载链调查入口。
+  - 服务配置存在不等于服务成功启动，需结合事件日志或运行时状态。
+common_misreads:
+  - 只看 DisplayName 判断合法性。
+  - 把服务项存在写成服务正在运行。
+  - 忽略离线 ControlSet 解析。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 程序执行痕迹
+    path: docs/questions/execution.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM\SYSTEM\ControlSet00x
+    path: docs/registry-tree/hklm/system/controlset/index.md
+  - title: Drivers
+    path: docs/registry-tree/hklm/system/controlset/services/drivers.md
+  - title: EventLog
+    path: docs/registry-tree/hklm/system/controlset/services/eventlog.md
+related_artifacts:
+  - services
+  - drivers
+  - bam-dam
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+  - Velociraptor
+references:
+  - title: Microsoft Learn - Services registry tree
+    url: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree
+  - title: Microsoft Sysinternals - Autoruns
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+status: stable
+confidence: high

@@ -1,0 +1,75 @@
+id: hklm-software-profilelist
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
+summary: SID 到用户 profile 目录的机器级映射。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 账户
+category: 用户配置文件映射
+evidence_types:
+  - SID 映射
+values:
+  - name: ProfileImagePath
+    type: REG_EXPAND_SZ
+    meaning: profile 目录路径。
+    common_data: '%SystemDrive%\Users\<User>'
+    notes: 可能指向临时、漫游或 VDI profile。
+  - name: Flags
+    type: REG_DWORD
+    meaning: profile 标志字段。
+    common_data: 视版本和状态而定
+    notes: 需用工具或基线解释。
+  - name: State
+    type: REG_DWORD
+    meaning: profile 加载 / 卸载相关状态。
+    common_data: 视状态而定
+    notes: 不等同于登录成功时间。
+  - name: ProfileLoadTimeHigh / ProfileLoadTimeLow
+    type: REG_DWORD
+    meaning: 部分版本存在的 profile 加载时间字段。
+    common_data: FILETIME 高低位
+    notes: 需工具解析。
+subkeys:
+  - name: <SID>
+    meaning: 单个用户、服务账户或系统账户 profile 记录。
+  - name: <SID>.bak
+    meaning: profile 重建或临时 profile 线索。
+default_state: 常见交互用户、系统账户和服务账户都可能出现在该位置。
+version_notes: 字段和 .bak 行为随 Windows 版本、域环境、漫游 profile、FSLogix / VDI 和修复流程变化。
+timestamp_notes: SID 子键 LastWrite 不等于用户首次登录或最后登录时间。
+forensic_notes:
+  - 解析用户级 hive 前先用 ProfileList 建立 SID 与目录映射。
+  - 非标准 ProfileImagePath、.bak 子键和临时 profile 可作为账户调查线索。
+common_misreads:
+  - ProfileList 记录不等于账户当前仍存在。
+  - 目录名不能直接当作账户名。
+related_scenarios:
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKEY_USERS
+    path: docs/registry-tree/hku/index.md
+  - title: NTUSER.DAT
+    path: docs/registry-tree/hku/ntuser.md
+  - title: UsrClass.dat
+    path: docs/registry-tree/hku/usrclass.md
+related_artifacts:
+  - profilelist
+tools:
+  - Registry Explorer
+  - RECmd
+  - KAPE
+references:
+  - title: Eric Zimmerman tools
+    url: https://ericzimmerman.github.io/#!index.md
+status: stable
+confidence: high

@@ -85,9 +85,15 @@ Current project name: `WinReg Wiki`.
 
 - Current status: every manual artifact page currently has a matching YAML record; after the USB/device and persistence expansion this is 42 artifact pages and 42 YAML records.
 - Current status: generated artifact index display is localized to Chinese while preserving YAML field names.
+- Current status: `data/registry/` MVP is established with 10 registry-location YAML records.
+- Current status: `scripts/generate-registry-index.py` generates `docs/registry-tree/generated-index.md` and `docs/registry-tree/coverage.md` without overwriting manual registry-location pages.
+- Current status: core artifact YAML records can link back to registry entries via `registry_entry_ids`.
+- Current status: `docs/contributing/registry-data-schema.md` documents the registry YAML field model and the relationship between registry data and artifact data.
 - Keep `scripts/generate-artifact-index.py` small and dependency-light.
 - Generate `docs/artifacts/generated-index.md` from YAML without overwriting manual narrative indexes.
-- Add stable fields for ATT&CK mappings, event IDs, collection commands, parser support, and confidence levels.
+- Next: expand registry YAML coverage to about 30 core pages before adding more generated index views.
+- Next: continue building artifact-to-registry relationships with `registry_entry_ids`.
+- Next: add stable fields for ATT&CK mappings, event IDs, collection commands, parser support, and confidence levels only when the page set is ready.
 - Consider exporting JSON later only if a real consumer appears.
 
 ## Phase 5: Detection Mappings and Tool Integration
@@ -110,9 +116,10 @@ Current project name: `WinReg Wiki`.
 
 - Current status: repository metadata and GitHub remote point to `watanabe-hsad/WinReg-Wiki`.
 - Current status: contribution guidance and source-quality expectations live in `docs/contributing/index.md`.
-- Current status: CI runs generated index refresh, content style check, and `mkdocs build --strict`.
-- Current status: README, registry-tree coverage, and contribution docs document the v0.1 content model.
+- Current status: CI runs artifact index generation, registry index generation, content style check, generated-file diff check, and `mkdocs build --strict`.
+- Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
+- Current status: visual / UX refresh is complete for the homepage, registry-tree entry, scenario entry, registry checklist, generated registry index, coverage matrix, and high-visible metadata summaries.
 - Add `LICENSE` after the maintainer chooses a license.
 - Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
 - Review homepage, navigation, and first-visit experience once the final URL is confirmed.
-- Tag a first release only after content and license are ready.
+- Next: prepare a `v0.1` tag after URL and License decisions are made.

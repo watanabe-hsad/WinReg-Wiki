@@ -2,6 +2,14 @@
 
 `MountedDevices` 保存卷标识、卷 GUID 和 DOS 盘符之间的映射。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKLM</strong></div>
+<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div><span>Topics</span><strong>设备</strong></div>
+<div><span>Data</span><strong>reviewed / medium</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

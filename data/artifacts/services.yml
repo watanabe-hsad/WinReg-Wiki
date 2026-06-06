@@ -1,5 +1,7 @@
 id: services
 title: Services
+registry_entry_ids:
+  - hklm-system-controlset-services
 category:
   - Persistence
   - Services

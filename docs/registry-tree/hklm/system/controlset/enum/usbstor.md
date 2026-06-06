@@ -2,6 +2,14 @@
 
 `USBSTOR` 保存 USB Mass Storage 设备枚举信息。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKLM</strong></div>
+<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div><span>Topics</span><strong>设备</strong></div>
+<div><span>Data</span><strong>reviewed / medium</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

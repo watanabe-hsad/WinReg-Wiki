@@ -2,6 +2,14 @@
 
 `ControlSet00x` 是 Windows 保存系统控制配置的真实控制集，`CurrentControlSet` 是运行时映射。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKLM</strong></div>
+<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div><span>Topics</span><strong>系统配置 / 设备 / 持久化</strong></div>
+<div><span>Data</span><strong>stable / high</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

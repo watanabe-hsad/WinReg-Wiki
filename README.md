@@ -1,31 +1,48 @@
 # WinReg Wiki
 
-WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and forensic leads.
+WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads.
 
 GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
-The project is organized as a wiki rather than a long-form handbook. Registry-location pages explain where keys live and what values mean. Forensic scenario pages explain investigation checks and cross-validation. Artifact pages are retained as supplemental entries for detailed field semantics, collection notes, parsing tools, and structured data.
+The project is organized as a wiki, not a long-form incident response handbook. Registry-location pages explain where keys live and what values mean. Forensic scenario pages combine registry locations into checklists. Artifact pages are retained as supplemental entries for field semantics, collection notes, parser support, and structured data.
 
 ## Main Entry Points
 
 - Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`.
-- Forensic scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, security policy changes, network configuration, software installation, and anti-forensics.
-- Artifact supplemental index: use only when a scenario or registry-location page needs deeper artifact-specific notes.
+- Forensic scenarios: start from questions such as program execution, persistence, USB devices, RDP, account anomalies, policy changes, network configuration, software installation, and cleanup traces.
+- Artifact supplemental index: use when a scenario or registry-location page needs deeper artifact-specific notes.
 
 ## Online Site
 
-Current online address is still pending confirmation after the repository rename. The previously reachable project path is:
+The current online address is still pending confirmation after the repository rename. The previously reachable project path is:
 
 http://hsad.xyz/windows-registry-forensics-handbook/
 
-The GitHub Pages path for the new repository should be confirmed in GitHub Pages settings before documenting it as live.
+Do not treat a shorter URL as live until GitHub Pages and DNS settings are confirmed. Candidate future paths:
 
-Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
+- `https://hsad.xyz/winreg/`
+- `https://winreg.hsad.xyz/`
 
-1. installs dependencies from `requirements.txt`;
-2. regenerates `docs/artifacts/generated-index.md` from `data/artifacts/*.yml`;
-3. runs `mkdocs build --strict`;
-4. deploys the generated `site/` directory to GitHub Pages.
+The subdomain option is cleaner for a long-lived wiki, but it requires maintainer confirmation.
+
+## Data Model
+
+Structured data is split by purpose:
+
+| Directory | Purpose |
+|---|---|
+| `data/registry/` | Registry-location facts for generated registry indexes and coverage. |
+| `data/artifacts/` | Artifact-level facts for supplemental artifact index pages. |
+
+Generated outputs:
+
+| Script | Output |
+|---|---|
+| `scripts/generate-registry-index.py` | `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md` |
+| `scripts/generate-artifact-index.py` | `docs/artifacts/generated-index.md` |
+| `scripts/check-content-style.py` | Fails on old project names, old artifact headings, English artifact-template headings, and subjective priority wording. |
+
+Markdown pages remain manually maintained. Generated index pages should not be edited by hand.
 
 ## Local Preview
 
@@ -33,76 +50,81 @@ Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python scripts/generate-artifact-index.py
-mkdocs serve
+.venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/python scripts/generate-registry-index.py
+.venv/bin/python scripts/check-content-style.py
+.venv/bin/mkdocs serve
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:8000/windows-registry-forensics-handbook/
 ```
+
+The path prefix comes from the current pending `site_url`. If the production URL is changed later, update this preview note together with `mkdocs.yml`.
 
 Strict build check:
 
 ```bash
+.venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/python scripts/generate-registry-index.py
+.venv/bin/python scripts/check-content-style.py
 .venv/bin/mkdocs build --strict
 ```
 
-Content style check:
+## GitHub Pages
 
-```bash
-.venv/bin/python scripts/check-content-style.py
-```
+Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 
-Generate the structured artifact data index:
-
-```bash
-.venv/bin/python scripts/generate-artifact-index.py
-```
+1. installs dependencies from `requirements.txt`;
+2. regenerates artifact and registry indexes;
+3. checks generated files are committed;
+4. runs the content style check;
+5. runs `mkdocs build --strict`;
+6. deploys the generated `site/` directory to GitHub Pages.
 
 ## Content Principles
 
 - Keep pages concise and query-oriented.
 - Registry-tree pages should read like a key/value dictionary: path, source hive, common values, short notes, related scenarios.
 - Keep deeper investigation logic in scenario pages; keep artifact pages as supplemental details rather than the main reading path.
-- Separate evidence strength clearly: configuration exists, program exists, user interaction, program execution, device presence, policy weakening, and malicious behavior are different claims.
+- Separate evidence strength clearly: configuration exists, program exists, user interaction, program execution, device presence, policy value exists, and malicious behavior are different claims.
 - Do not treat registry key LastWrite as a value creation time unless that is explicitly supported by the artifact and tool output.
 - Explain live-to-offline mappings accurately: `HKCU`, `HKCR`, `HKCC`, and `CurrentControlSet` are views or mappings, not simple standalone hive files.
-- Keep Windows version differences explicit. If behavior is not verified for a version, mark it as pending verification instead of guessing.
+- Keep Windows version differences explicit. If behavior is not verified for a version, write that it is version-dependent instead of guessing.
 
 ## Current Scope
 
 Current coverage includes:
 
-- A maintenance coverage matrix at `docs/registry-tree/coverage.md`.
 - Registry tree pages for HKCR, HKCU, HKLM, HKU, HKCC, and core HKLM / HKCU subtrees.
-- Registry-location references for environment variables, Command Processor, Internet Settings / ZoneMap, Printers, NetworkList Profiles, TCP/IP interfaces, EventLog, FirewallPolicy, Defender policies, WindowsFirewall policies, App Paths, LogonUI, UAC policy, AppCompatFlags, AeDebug, Winlogon, and Session Manager locations.
+- Generated registry structured index and coverage matrix under `docs/registry-tree/`.
+- Registry-location references for environment variables, Command Processor, Internet Settings / ZoneMap, Printers, NetworkList Profiles, TCP/IP interfaces, EventLog, FirewallPolicy, Defender policies, WindowsFirewall policies, App Paths, LogonUI, UAC policy, AppCompatFlags, AeDebug, Winlogon, Session Manager, USBSTOR, MountedDevices, Services, Run keys, and ProfileList.
 - Program execution and program presence artifacts: UserAssist, BAM / DAM, Amcache, ShimCache / AppCompatCache, MUICache.
 - Persistence and autoruns: Run / RunOnce, StartupApproved, Services, Drivers, IFEO, Active Setup, AppInit_DLLs, Winlogon Userinit, Winlogon Shell, LSA Authentication Packages, LSA Security Packages, Command Processor AutoRun, ShellServiceObjectDelayLoad, Print Monitors.
 - USB and external devices: USB, USBSTOR, DeviceClasses, SWD WPDBUSENUM, MountedDevices, MountPoints2, EMDMgmt, Portable Devices, VolumeInfoCache.
 - RDP and remote access: Terminal Server Client, fDenyTSConnections, RDP-Tcp PortNumber, CredSSP / NLA.
 - Accounts and security policy: ProfileList, Defender Policies, UAC Policies, Firewall Policies, Audit Policy, SpecialAccounts\UserList.
 
-## Structured Data
-
-Structured artifact data lives in `data/artifacts/*.yml`. The generator in `scripts/generate-artifact-index.py` reads those YAML files and writes a generated Markdown index to `docs/artifacts/generated-index.md`.
-
-Manual narrative indexes such as `docs/artifacts/index.md` should not be overwritten by generated output.
-
 ## Contributing
 
-Contributions should follow the contribution guide in `docs/contributing/index.md` and the page templates in `docs/contributing/template.md`.
+Contributions should follow:
+
+- `docs/contributing/index.md`
+- `docs/contributing/template.md`
+- `docs/contributing/registry-data-schema.md`
 
 Before opening a pull request, run:
 
 ```bash
 .venv/bin/python scripts/generate-artifact-index.py
+.venv/bin/python scripts/generate-registry-index.py
 .venv/bin/python scripts/check-content-style.py
 .venv/bin/mkdocs build --strict
 ```
 
-When adding or changing an artifact, update both the Markdown page and `data/artifacts/*.yml` if structured data exists for that artifact.
+When adding or changing an artifact, update both the Markdown page and `data/artifacts/*.yml` if structured data exists for that artifact. When adding structured registry facts, update `data/registry/*.yml`, regenerate the registry index, and keep the registry-tree Markdown page human maintained.
 
 ## Project Status
 

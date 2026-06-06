@@ -2,66 +2,41 @@
 
 ## 检查目标
 
-在常规排查中快速定位注册表中的自启动、服务、登录链、远程访问、设备、账户和安全策略线索。
+第一次检查注册表时，快速定位自启动、服务、登录链、远程访问、设备、账户、策略和网络配置线索。
 
-## 优先查看的注册表位置
+## 核心清单
 
-| 注册表位置 | 用途 | 注意 |
-|---|---|---|
-| [HKCU Run / RunOnce](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | 用户级登录启动项。 | 配置存在不等于执行成功。 |
-| [HKLM Run / RunOnce](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | 机器级登录启动项。 | 64 位系统还要看 `WOW6432Node`。 |
-| [HKCU Environment](../registry-tree/hkcu/environment.md) | 用户级环境变量。 | 已启动进程可能保留旧环境。 |
-| [HKLM Environment](../registry-tree/hklm/system/controlset/control/session-manager/environment.md) | 系统级环境变量。 | `Path` 变化不等于命令已执行。 |
-| [Command Processor](../registry-tree/hkcu/software/microsoft/command-processor.md) | 用户级 `cmd.exe` 配置和 `AutoRun`。 | `AutoRun` 存在不等于 `cmd.exe` 已启动。 |
-| [HKLM Command Processor](../registry-tree/hklm/software/microsoft/command-processor.md) | 机器级 `cmd.exe` 配置和 `AutoRun`。 | 影响范围更大，但仍需进程证据。 |
-| [App Paths](../registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md) | 应用程序注册路径。 | 程序注册不等于执行。 |
-| [AppCompatFlags](../registry-tree/hkcu/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 用户级兼容性配置和 PCA 记录。 | 不单独证明执行成功。 |
-| [HKLM AppCompatFlags](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags.md) | 机器级应用兼容性配置入口。 | 需和用户级配置区分。 |
-| [AppCompatFlags\Layers](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/appcompatflags/layers.md) | 机器级兼容层配置。 | 记录存在不等于程序执行。 |
-| [Services](../registry-tree/hklm/system/controlset/services/index.md) | 服务、驱动、网络组件配置。 | 服务配置存在不等于服务已启动。 |
-| [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | 事件日志通道配置。 | 这里不是日志内容。 |
-| [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | kernel / file system driver 启动配置。 | 需结合驱动加载、签名和 Code Integrity。 |
-| [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、自动登录和隐藏账户相关配置。 | 登录事实要回到 Security.evtx。 |
-| [CachedLogonsCount](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md) | 域登录缓存数量配置。 | 不保存缓存凭据本体。 |
-| [SpecialAccounts\UserList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md) | 登录界面账户显示控制。 | 隐藏显示不等于账户不存在。 |
-| [Winlogon\Notify](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md) | Winlogon notification package。 | 配置存在不等于 DLL 已加载。 |
-| [LogonUI](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md) | 登录界面最近用户 / SID 显示线索。 | 不证明登录成功。 |
-| [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | 登录界面凭据提供器注册。 | Provider 注册不等于某次登录使用。 |
-| [Credential Provider Filters](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md) | 凭据提供器过滤器注册。 | 第三方身份组件可能合法注册。 |
-| [IFEO](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 等进程启动相关配置。 | 正常调试器、开发工具和 EDR 也可能写入。 |
-| [AeDebug](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md) | 应用崩溃后调试器配置。 | 需要崩溃和进程证据。 |
-| [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、安全包和 LSASS 保护相关配置。 | 未知 DLL 需验证路径、签名和模块加载。 |
-| [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) | AppCert DLL 配置。 | 非空配置需验证模块加载。 |
-| [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) | 启动早期执行项。 | 配置存在不等于已经重启执行。 |
-| [KnownDLLs](../registry-tree/hklm/system/controlset/control/session-manager/knowndlls.md) | Known DLL 映射。 | 异常需结合模块加载和基线。 |
-| [SubSystems](../registry-tree/hklm/system/controlset/control/session-manager/subsystems.md) | Windows 子系统初始化配置。 | 需和同版本基线对照。 |
-| [Memory Management](../registry-tree/hklm/system/controlset/control/session-manager/memory-management.md) | paging file 和内存管理配置。 | 配置不保存内存内容。 |
-| [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 重启后待处理文件操作。 | 队列存在不等于文件已删除。 |
-| [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) | RDP 服务端开关。 | 允许连接不等于发生登录。 |
-| [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | RDP listener 端口、NLA 和安全层。 | 端口配置不等于正在监听。 |
-| [CredSSP](../registry-tree/hklm/system/controlset/control/terminal-server/credssp.md) | CredSSP 认证兼容性策略。 | 策略值不等于连接事实。 |
-| [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md) | MSTSC 客户端目标历史。 | 这是客户端侧记录。 |
-| [Policies](../registry-tree/hklm/software/policies.md) | GPO / MDM / 本地策略写入位置。 | 注册表值不直接说明策略来源。 |
-| [Policies\System](../registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md) | UAC 和系统安全策略。 | 策略值不等于实际提权行为。 |
-| [Windows Defender](../registry-tree/hklm/software/microsoft/windows-defender.md) | Defender 本地配置和排除项线索。 | 需结合 Tamper Protection 和 Defender 日志。 |
-| [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | Defender 策略位置。 | 策略值不等于实际防护状态。 |
-| [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) | Windows Defender Firewall 本地 profile 和规则配置。 | 规则存在不等于连接发生。 |
-| [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md) | Windows Firewall 策略配置。 | 策略值不等于 ActiveStore 状态。 |
-| [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md) | USB 存储设备枚举。 | 不证明文件复制。 |
-| [USB](../registry-tree/hklm/system/controlset/enum/usb.md) | USB 总线设备枚举。 | 可覆盖非存储 USB 设备。 |
-| [MountedDevices](../registry-tree/hklm/system/mounteddevices.md) | 卷 GUID、盘符和设备映射。 | 盘符可复用。 |
-| [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | 用户见过的卷或网络共享。 | 归属到用户，不直接证明访问文件。 |
-| [ProfileList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID 到用户 profile 的映射。 | 多用户分析先做 SID 映射。 |
-| [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | Explorer 相关程序交互线索。 | 不覆盖所有执行方式。 |
-| [RunMRU](../registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md) | Win+R 输入历史。 | 输入不等于执行成功。 |
-| [RecentDocs](../registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md) | 最近文档名称和 MRU 顺序。 | 文件名出现不等于内容被读取。 |
-| [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) | 用户级 WinINet 代理 / PAC。 | 不代表所有程序都使用该代理。 |
-| [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | URL 安全区域映射。 | 映射存在不等于访问发生。 |
-| [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) | 用户级策略入口。 | 需确认对应用户 SID。 |
-| [HKCU Policies\Explorer](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | 用户级 Explorer 策略。 | UI 限制不等于底层访问事实。 |
-| [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | 网络配置文件。 | 时间字段需工具解析。 |
-| [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md) | 接口 IP、DNS、DHCP、网关。 | DHCP 字段和静态字段要分开。 |
-| [HKCU Printers](../registry-tree/hkcu/printers.md) | 用户级打印机连接和配置。 | 不证明打印过文件。 |
+| 检查目标 | 注册表位置 | 关注字段 | 交叉验证 |
+|---|---|---|---|
+| 当前控制集 | [HKLM\SYSTEM\Select](../registry-tree/hklm/system/select.md) | `Current`、`Default`、`Failed`、`LastKnownGood` | `SYSTEM` hive、启动日志、多个 `ControlSet00x` 差异 |
+| 控制集主体 | [HKLM\SYSTEM\ControlSet00x](../registry-tree/hklm/system/controlset/index.md) | `Control`、`Enum`、`Services` | `Select\Current`、系统版本、驱动和服务基线 |
+| 机器级登录启动 | [HKLM Run / RunOnce](../registry-tree/hklm/software/microsoft/windows/currentversion/run.md) | value name、value data、`WOW6432Node` | 登录事件、进程创建、Prefetch、BAM / DAM、EDR |
+| 用户级登录启动 | [HKCU Run / RunOnce](../registry-tree/hkcu/software/microsoft/windows/currentversion/run.md) | value name、value data、用户 SID | 用户登录事件、StartupApproved、Prefetch、EDR |
+| 服务和驱动 | [Services](../registry-tree/hklm/system/controlset/services/index.md) | `ImagePath`、`Type`、`Start`、`ObjectName` | System.evtx、Service Control Manager、Autoruns、签名和路径 |
+| 驱动项 | [Drivers](../registry-tree/hklm/system/controlset/services/drivers.md) | `Type`、`Start`、`ImagePath` | Code Integrity、驱动文件、签名、EDR |
+| 登录链 | [Winlogon](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md) | `Userinit`、`Shell`、`AutoAdminLogon`、`Notify` | Security.evtx、SAM、ProfileList、Autoruns |
+| 凭据提供器 | [Credential Providers](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-providers.md) | Provider CLSID、注册路径 | LogonUI、安装软件、签名、EDR |
+| 凭据过滤器 | [Credential Provider Filters](../registry-tree/hklm/software/microsoft/windows/currentversion/authentication/credential-provider-filters.md) | Filter CLSID、注册路径 | LogonUI、身份组件、签名和安装记录 |
+| IFEO | [Image File Execution Options](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md) | `Debugger`、SilentProcessExit 相关值 | 进程创建、调试器路径、开发工具和 EDR 基线 |
+| Session Manager 执行链 | [BootExecute](../registry-tree/hklm/system/controlset/control/session-manager/bootexecute.md) / [AppCertDlls](../registry-tree/hklm/system/controlset/control/session-manager/appcertdlls.md) / [SubSystems](../registry-tree/hklm/system/controlset/control/session-manager/subsystems.md) | 启动项、DLL 路径、`Windows` 子系统参数 | 重启时间线、模块加载、同版本基线 |
+| 文件删除队列 | [PendingFileRenameOperations](../registry-tree/hklm/system/controlset/control/session-manager/pending-file-rename-operations.md) | 待重命名 / 删除路径 | 重启记录、文件系统时间线、`$UsnJrnl` |
+| RDP 服务端 | [Terminal Server](../registry-tree/hklm/system/controlset/control/terminal-server.md) / [RDP-Tcp](../registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md) | `fDenyTSConnections`、`PortNumber`、NLA 相关值 | TerminalServices 日志、防火墙、监听端口、Security.evtx |
+| RDP 客户端 | [Terminal Server Client](../registry-tree/hkcu/software/microsoft/terminal-server-client.md) | `Servers`、`Default`、MRU 项 | Jump Lists、LNK、RDP 缓存、用户登录上下文 |
+| LSA | [LSA](../registry-tree/hklm/system/controlset/control/lsa/index.md) | 认证包、安全包、LSASS 保护相关值 | LSASS 模块、签名、Security.evtx、EDR |
+| Defender 策略 | [Defender Policies](../registry-tree/hklm/software/policies/microsoft/windows-defender.md) | `Disable*`、排除项、实时防护相关值 | Defender Operational、Tamper Protection、GPO / MDM |
+| 防火墙配置 | [FirewallPolicy](../registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md) / [WindowsFirewall Policies](../registry-tree/hklm/software/policies/microsoft/windowsfirewall.md) | profile、规则、默认入站 / 出站动作 | Firewall 日志、ActiveStore、GPO / MDM、网络流量 |
+| 事件日志配置 | [EventLog](../registry-tree/hklm/system/controlset/services/eventlog.md) | `File`、`MaxSize`、`Retention`、`AutoBackupLogFiles` | 实际 `.evtx` 文件、EventLog 服务、日志截断线索 |
+| USB 存储 | [USBSTOR](../registry-tree/hklm/system/controlset/enum/usbstor.md) | 设备类型、厂商、产品、实例 ID、`FriendlyName` | SetupAPI.dev.log、Partition/Diagnostic、LNK、Jump Lists |
+| 卷和盘符 | [MountedDevices](../registry-tree/hklm/system/mounteddevices.md) | `\DosDevices\<letter>:`、`\??\Volume{GUID}` | USBSTOR、MountPoints2、卷 GUID、文件系统 |
+| 用户见过的卷 | [MountPoints2](../registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md) | Volume GUID、网络共享、用户 SID | LNK、Jump Lists、ShellBags、文件访问记录 |
+| 用户映射 | [ProfileList](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md) | SID、`ProfileImagePath`、`.bak`、`State` | SAM、域账户、Security.evtx、用户目录 |
+| 用户交互 | [UserAssist](../registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md) | ROT13 条目、计数、时间字段 | Prefetch、Amcache、BAM / DAM、LNK、EDR |
+| Shell 历史 | [RunMRU](../registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md) / [RecentDocs](../registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md) / [ComDlg32](../registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md) | MRUList、文件名、路径片段 | LNK、Jump Lists、ShellBags、文件系统 |
+| 代理和区域 | [Internet Settings](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings.md) / [ZoneMap](../registry-tree/hkcu/software/microsoft/windows/currentversion/internet-settings/zonemap.md) | `ProxyEnable`、`ProxyServer`、`AutoConfigURL`、区域编号 | 浏览器设置、WinINet 程序、代理日志、EDR 网络 |
+| 网络接口 | [Tcpip Interfaces](../registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md) | `EnableDHCP`、IP、DNS、网关、租约时间 | NetworkList、DHCP / DNS 日志、防火墙、EDR 网络 |
+| 网络配置文件 | [NetworkList Profiles](../registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md) | `ProfileName`、`Category`、`DateCreated`、`DateLastConnected` | WLAN / DHCP 日志、网络连接时间线 |
+| 用户策略 | [HKCU Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies.md) / [Explorer Policies](../registry-tree/hkcu/software/microsoft/windows/currentversion/policies/explorer.md) | Explorer 限制、控制面板、驱动器显示相关值 | GPO / MDM、用户 SID、Shell 行为 |
+| 打印配置 | [HKCU Printers](../registry-tree/hkcu/printers.md) | `Connections`、`DevModePerUser`、`Settings` | 打印事件、Spool 文件、文档文件系统记录 |
 
 ## 判断要点
 
@@ -95,3 +70,4 @@
 - [账户与安全](accounts-security.md)
 - [安全策略与防护配置](policy-security.md)
 - [网络与系统环境](network.md)
+- [反取证与清理痕迹](anti-forensics.md)

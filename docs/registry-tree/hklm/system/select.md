@@ -2,6 +2,14 @@
 
 `HKLM\SYSTEM\Select` 记录 `CurrentControlSet` 与真实 `ControlSet00x` 的映射关系。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKLM</strong></div>
+<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div><span>Topics</span><strong>系统配置</strong></div>
+<div><span>Data</span><strong>stable / high</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

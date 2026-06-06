@@ -1,0 +1,74 @@
+id: hklm-system-tcpip-interfaces
+title: HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces
+page: docs/registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md
+summary: 单个网络接口的 IP、DNS、DHCP、网关和租约配置。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
+  - HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 网络
+  - 系统配置
+category: TCP/IP 接口配置
+evidence_types:
+  - 网络配置
+values:
+  - name: EnableDHCP
+    type: REG_DWORD
+    meaning: 是否启用 DHCP。
+    common_data: 0 / 1
+    notes: 与静态字段互相解释。
+  - name: DhcpIPAddress
+    type: REG_SZ
+    meaning: DHCP 分配的 IP 地址。
+    common_data: IPv4 字符串
+    notes: 可能有历史残留。
+  - name: IPAddress
+    type: REG_MULTI_SZ
+    meaning: 静态 IP 地址。
+    common_data: IPv4 列表
+    notes: 静态配置时更有意义。
+  - name: NameServer
+    type: REG_SZ
+    meaning: 手工 DNS 配置。
+    common_data: DNS 列表
+    notes: 可能覆盖 DHCP DNS。
+  - name: LeaseObtainedTime
+    type: REG_DWORD
+    meaning: DHCP 租约获取时间。
+    common_data: Unix epoch 常见
+    notes: 不等于网络会话开始的完整证据。
+subkeys:
+  - name: <InterfaceGUID>
+    meaning: 单个网络接口配置，需要映射到具体网卡。
+default_state: 字段取决于 DHCP/静态、IPv4/IPv6、VPN、虚拟网卡和系统版本。
+version_notes: 不同 Windows 版本、网络组件和驱动可能产生不同字段组合。
+timestamp_notes: DHCP 租约字段有独立时间语义；key LastWrite 不能替代连接时间。
+forensic_notes:
+  - 异常 DNS、网关或静态 IP 可作为网络配置调查线索。
+  - 需与 NetworkList、DHCP/DNS 日志、防火墙日志和 EDR 网络记录交叉验证。
+common_misreads:
+  - 把 DHCP 租约时间写成主机在线结束时间。
+  - 忽略接口 GUID 与具体网卡的映射。
+related_scenarios:
+  - title: 网络与系统环境
+    path: docs/questions/network.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Tcpip
+    path: docs/registry-tree/hklm/system/controlset/services/tcpip.md
+  - title: NetworkList Profiles
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
+related_artifacts: []
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - TCP/IP and NBT configuration parameters
+    url: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/tcpip-and-nbt-configuration-parameters
+status: reviewed
+confidence: medium

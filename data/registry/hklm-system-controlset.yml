@@ -1,0 +1,66 @@
+id: hklm-system-controlset
+title: HKLM\SYSTEM\ControlSet00x
+page: docs/registry-tree/hklm/system/controlset/index.md
+summary: SYSTEM hive 中保存系统控制配置的真实控制集。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet
+  - HKLM\SYSTEM\ControlSet001
+  - HKLM\SYSTEM\ControlSet002
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 系统配置
+  - 设备
+  - 持久化
+category: 控制集
+evidence_types:
+  - 系统配置
+subkeys:
+  - name: Control
+    meaning: 系统控制配置，例如 LSA、Session Manager、Terminal Server、TimeZoneInformation、ComputerName。
+  - name: Enum
+    meaning: 设备枚举树。
+  - name: Services
+    meaning: 服务、驱动和网络组件配置。
+  - name: Hardware Profiles
+    meaning: 硬件配置 profile；HKCC 通常映射到 current profile。
+values: []
+default_state: 正常系统通常有一个或多个 ControlSet00x。CurrentControlSet 是 live 视图映射。
+version_notes: 控制集数量和内容取决于系统启动历史、硬件、服务和驱动配置。
+timestamp_notes: ControlSet00x key LastWrite 不能代表其下所有服务、设备或控制项的变化时间。
+forensic_notes:
+  - 离线分析时先通过 HKLM\SYSTEM\Select 判断当前控制集。
+  - 多个控制集并存时，应避免把非当前控制集配置误写为当前配置。
+common_misreads:
+  - 把 CurrentControlSet 当作离线 hive 中真实存在的固定路径。
+  - 忽略 ControlSet00x 之间可能存在差异。
+related_scenarios:
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: RDP 与远程访问
+    path: docs/questions/rdp.md
+related_registry_pages:
+  - title: HKLM\SYSTEM\Select
+    path: docs/registry-tree/hklm/system/select.md
+  - title: HKLM\SYSTEM\ControlSet00x\Services
+    path: docs/registry-tree/hklm/system/controlset/services/index.md
+  - title: HKLM\SYSTEM\ControlSet00x\Enum
+    path: docs/registry-tree/hklm/system/controlset/enum/index.md
+related_artifacts:
+  - services
+  - fdenytsconnections
+  - rdp-tcp-portnumber
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Services registry tree
+    url: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree
+status: stable
+confidence: high

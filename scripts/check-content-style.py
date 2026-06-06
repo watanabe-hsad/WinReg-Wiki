@@ -22,7 +22,7 @@ RULES = (
     Rule(
         name="旧 artifact 主入口标题",
         needles=("相关 Artifact",),
-        paths=("docs/registry-tree", "docs/questions", "docs/artifacts"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md"),
     ),
     Rule(
         name="英文 artifact 模板标题",
@@ -33,30 +33,31 @@ RULES = (
             "Detection Ideas",
             "Attacker Usage",
         ),
-        paths=("docs/registry-tree", "docs/questions", "docs/artifacts"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md"),
     ),
     Rule(
         name="主观优先级措辞",
         needles=("高价值", "非常重要", "强烈建议", "重点关注"),
-        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md"),
     ),
     Rule(
         name="旧项目显示名",
         needles=("Windows Registry Forensics Handbook",),
-        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "mkdocs.yml"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md", "mkdocs.yml"),
     ),
     Rule(
         name="旧仓库地址",
         needles=("watanabe-hsad/windows-registry-forensics-handbook",),
-        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "mkdocs.yml"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md", "mkdocs.yml"),
     ),
     Rule(
         name="旧仓库路径片段",
         needles=("windows-registry-forensics-handbook",),
-        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "mkdocs.yml"),
+        paths=("docs", "README.md", "PROJECT_STATUS.md", "ROADMAP.md", "CHANGELOG.md", "mkdocs.yml"),
         allow=(
             "README.md",
             "PROJECT_STATUS.md",
+            "CHANGELOG.md",
             "mkdocs.yml",
         ),
     ),

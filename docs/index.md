@@ -1,34 +1,67 @@
 # WinReg Wiki
 
-Windows 注册表键值速查与取证线索知识库。
+<p class="ww-lede">Windows 注册表键值速查与取证线索。</p>
 
-## 怎么查
+WinReg Wiki 是中文优先的 Windows 注册表知识库。主路径是按注册表位置查询 key / value 的含义；取证场景用于把路径组合成检查清单；artifact 页面保留为补充细节层。
 
-| 需求 | 入口 |
-|---|---|
-| 查某个注册表路径、key 或 value 是什么 | [注册表位置](registry-tree/index.md) |
-| 按调查问题查相关线索 | [取证场景](questions/index.md) |
-| 查 artifact 的补充细节 | [取证场景 -> Artifact 补充索引](artifacts/index.md) |
-| 查基础概念 | [注册表基础](getting-started/registry-basics.md)、[时间戳语义](getting-started/timestamps.md) |
+<div class="ww-entry-grid" markdown>
+
+<a class="ww-entry-card" href="registry-tree/">
+  <span class="ww-entry-kicker">Registry Tree</span>
+  <strong>按注册表位置查</strong>
+  <span>从 HKLM、HKCU、HKU、HKCR、HKCC 进入，查看路径、hive、value 和注意事项。</span>
+</a>
+
+<a class="ww-entry-card" href="questions/">
+  <span class="ww-entry-kicker">Scenarios</span>
+  <strong>按取证场景查</strong>
+  <span>从程序执行、自启动、USB、RDP、账户、安全策略和网络问题进入。</span>
+</a>
+
+<a class="ww-entry-card" href="registry-tree/generated-index/">
+  <span class="ww-entry-kicker">Structured Data</span>
+  <strong>看结构化索引</strong>
+  <span>由 data/registry 生成，按 hive 和主题查看当前结构化试点路径。</span>
+</a>
+
+</div>
+
+## 当前覆盖
+
+<div class="ww-stat-grid" markdown>
+
+<div class="ww-stat"><strong>97</strong><span>registry-tree Markdown</span></div>
+<div class="ww-stat"><strong>42</strong><span>artifact 补充页</span></div>
+<div class="ww-stat"><strong>42</strong><span>artifact YAML</span></div>
+<div class="ww-stat"><strong>10</strong><span>registry YAML 试点</span></div>
+
+</div>
+
+## 常用路径
+
+<div class="ww-chip-row" markdown>
+
+[Run Keys](registry-tree/hklm/software/microsoft/windows/currentversion/run.md){ .ww-path-chip }
+[Services](registry-tree/hklm/system/controlset/services/index.md){ .ww-path-chip }
+[USBSTOR](registry-tree/hklm/system/controlset/enum/usbstor.md){ .ww-path-chip }
+[UserAssist](registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md){ .ww-path-chip }
+[Winlogon](registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md){ .ww-path-chip }
+[ProfileList](registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md){ .ww-path-chip }
+[MountedDevices](registry-tree/hklm/system/mounteddevices.md){ .ww-path-chip }
+[Defender](registry-tree/hklm/software/policies/microsoft/windows-defender.md){ .ww-path-chip }
+[RDP](registry-tree/hklm/system/controlset/control/terminal-server.md){ .ww-path-chip }
+
+</div>
 
 ## 注册表基础
 
 | 名称 | 简要说明 |
 |---|---|
 | `HKLM` | 机器级配置入口，离线主要来自 `SYSTEM`、`SOFTWARE`、`SAM`、`SECURITY` 等 hive。 |
-| `HKCU` | 当前用户视图，实际映射到 `HKU\<SID>`。离线通常对应目标用户的 `NTUSER.DAT`。 |
+| `HKCU` | 当前用户视图，实际映射到 `HKU\<SID>`；离线通常对应目标用户的 `NTUSER.DAT`。 |
 | `HKU` | 已加载用户 hive 集合，包括普通用户、服务账户和 `.DEFAULT`。 |
 | `HKCR` | Classes 合并视图，来自 `HKLM\Software\Classes` 与 `HKCU\Software\Classes`。 |
 | `HKCC` | 当前硬件配置映射，通常指向 `HKLM\SYSTEM\CurrentControlSet\Hardware Profiles\Current`。 |
-| `SYSTEM` | 控制集、服务、驱动、设备、网络、RDP 服务端等机器级配置。 |
-| `SOFTWARE` | 软件、策略、Winlogon、ProfileList、Defender、COM / Classes 等机器级配置。 |
-| `SAM` | 本地账户和组数据库。 |
-| `SECURITY` | LSA、安全策略、审计策略等。 |
-| `NTUSER.DAT` | 单个用户的用户级注册表 hive。 |
-| `UsrClass.dat` | 用户级 Classes / Shell 相关 hive。 |
-| `BCD` | 启动配置数据库，可映射为 `HKLM\BCD00000000`。 |
-| live view | 正在运行系统中的注册表视图，包含 `HKCU`、`HKCR`、`HKCC`、`CurrentControlSet` 等映射。 |
-| offline hive | 离线镜像中的 hive 文件，需要手动加载并解析 SID、ControlSet 和用户目录。 |
 | `CurrentControlSet` | live 映射；离线时用 `HKLM\SYSTEM\Select\Current` 解析到 `ControlSet00x`。 |
 | key LastWrite | key 级更新时间，不等同某个 value 的创建时间。 |
 

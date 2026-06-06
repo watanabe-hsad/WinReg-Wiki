@@ -2,6 +2,14 @@
 
 `Services` 保存服务、驱动、网络组件和部分系统组件的配置。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKLM</strong></div>
+<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Offline</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
+<div><span>Topics</span><strong>系统配置 / 持久化 / 网络</strong></div>
+<div><span>Data</span><strong>stable / high</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |

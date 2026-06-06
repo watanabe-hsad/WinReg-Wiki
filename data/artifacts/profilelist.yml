@@ -1,5 +1,7 @@
 id: profilelist
 title: ProfileList
+registry_entry_ids:
+  - hklm-software-profilelist
 category:
   - Accounts
   - UserProfiles

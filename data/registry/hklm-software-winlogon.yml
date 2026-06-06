@@ -1,0 +1,81 @@
+id: hklm-software-winlogon
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+summary: 交互式登录流程、Shell、Userinit、自动登录和部分 Winlogon 扩展配置。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 持久化
+  - 账户
+category: 登录配置
+evidence_types:
+  - 登录配置
+  - 自启动配置
+values:
+  - name: Userinit
+    type: REG_SZ
+    meaning: 登录初始化程序列表。
+    common_data: C:\Windows\system32\userinit.exe, 常见
+    notes: 额外命令需验证来源。
+  - name: Shell
+    type: REG_SZ
+    meaning: 用户 Shell。
+    common_data: explorer.exe 常见
+    notes: 可被策略或环境修改。
+  - name: AutoAdminLogon
+    type: REG_SZ
+    meaning: 自动登录开关。
+    common_data: 0 / 1
+    notes: 需结合凭据存储和值。
+  - name: DefaultUserName
+    type: REG_SZ
+    meaning: 自动登录或登录界面相关用户名。
+    common_data: 用户名
+    notes: 不证明登录成功。
+subkeys:
+  - name: Notify
+    meaning: Winlogon notification package。
+  - name: SpecialAccounts\UserList
+    meaning: 登录界面账户显示控制。
+default_state: 默认值随 Windows 版本、域加入状态、自动登录配置和安全基线变化。
+version_notes: Userinit 和 Shell 常见默认值可作为线索，但仍应按系统版本和组织基线核对。
+timestamp_notes: Winlogon key LastWrite 可由多个 value 或子键变化触发，不能直接归因到某个 value。
+forensic_notes:
+  - 关注 Userinit / Shell 中追加的命令、非系统路径、脚本解释器或网络路径。
+  - 自动登录和隐藏账户线索应与 Security.evtx、SAM、ProfileList 和域日志交叉验证。
+common_misreads:
+  - 配置存在不等于命令或 DLL 已执行。
+  - DefaultUserName 与 AutoAdminLogon 不是登录成功证据。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Winlogon\Notify
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/notify.md
+  - title: SpecialAccounts\UserList
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md
+  - title: ProfileList
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
+related_artifacts:
+  - winlogon-userinit
+  - winlogon-shell
+  - specialaccounts-userlist
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Winlogon and Credential Providers
+    url: https://learn.microsoft.com/en-us/windows/win32/secauthn/winlogon-and-credential-providers
+  - title: Microsoft Sysinternals - Autoruns
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+status: stable
+confidence: high

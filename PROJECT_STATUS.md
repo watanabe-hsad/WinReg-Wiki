@@ -2,14 +2,14 @@
 
 ## Current Goal
 
-The project has been renamed and repositioned as `WinReg Wiki`: a concise Windows registry key/value lookup wiki with forensic leads. The current architecture is intentionally simple: `首页`, `注册表位置`, and `取证场景`.
+The project is `WinReg Wiki`: a concise Chinese-first Windows registry key/value lookup wiki with registry-related forensic leads. The current v0.1 direction is registry-path-first, scenario-assisted, and data-backed.
 
-Current content model:
+Current information architecture:
 
-- `首页`: explains the project scope, registry basics, and how to choose an entry point.
-- `注册表位置`: primary dictionary-style entry point. Pages explain key/value location, hive source, common values, default/common state, short caveats, related scenarios, and related registry positions.
-- `取证场景`: checklist-style investigation entry point. Scenario pages now primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
-- `docs/artifacts/`: supplemental/internal artifact detail. These pages are kept for field semantics, collection notes, parsing tools, false positives, and structured YAML data, but they are no longer the main reading path.
+- `首页`: compact wiki entry, registry basics, common path chips, and entry cards.
+- `注册表位置`: primary dictionary-style entry point organized by Windows native registry tree. Pages explain location, hive source, common values, state, caveats, related scenarios, and related registry positions.
+- `取证场景`: checklist-style investigation entry point. Scenario pages primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
+- `docs/artifacts/`: supplemental/internal artifact detail. Artifact pages are retained for field semantics, collection notes, parsing tools, common misreads, and YAML-backed artifact indexes. They are not a primary navigation model.
 
 ## Repository
 
@@ -18,296 +18,116 @@ Current content model:
 - GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 - Repository name: `WinReg-Wiki`
 - Default branch: `main`
+- Current remote: `origin https://github.com/watanabe-hsad/WinReg-Wiki.git`
 - Current online site: pending confirmation after repository rename.
-- Previously reachable custom-domain path: `http://hsad.xyz/windows-registry-forensics-handbook/`
+- Current `site_url`: `http://hsad.xyz/windows-registry-forensics-handbook/`
+- URL status: keep current `site_url` until DNS and GitHub Pages settings are confirmed. Candidate future paths remain `https://hsad.xyz/winreg/` and `https://winreg.hsad.xyz/`; the subdomain option is cleaner but requires maintainer confirmation.
 - Local directory note: the local folder still has the older `registry-forensics-handbook-demo` name. Do not rename it unless local tooling and references are checked.
 
 ## Current Structure
 
-- `docs/registry-tree/`: Windows native registry tree entry point. Root keys are directories with `index.md` files, using MkDocs Material `navigation.indexes` so section labels are clickable.
-- `docs/registry-tree/coverage.md`: registry-location coverage matrix for current pages and next candidate paths.
-- `docs/questions/`: forensic scenario entry point. Scenario pages carry investigation checklists, evidence boundaries, cross-validation, common misreads, and primary links into registry-location pages.
-- `docs/artifacts/`: manually written artifact pages. They are no longer a top-level navigation tab or primary reader flow; users enter them from `取证场景 -> Artifact 补充索引` or supplemental reading links.
-- `data/artifacts/`: structured artifact YAML records. Current coverage is 42 artifact pages and 42 YAML records.
+- `docs/registry-tree/`: Windows native registry tree entry point. Current count is 97 Markdown files, including `generated-index.md` and `coverage.md`.
+- `docs/registry-tree/generated-index.md`: generated structured registry index for readers. Output of `scripts/generate-registry-index.py`.
+- `docs/registry-tree/coverage.md`: generated registry coverage matrix for maintenance and next-path planning. Output of `scripts/generate-registry-index.py`.
+- `docs/questions/`: forensic scenario entry point. Current count is 12 Markdown files.
+- `docs/artifacts/`: supplemental artifact layer. Current count is 44 Markdown files total: 42 artifact content pages plus `index.md` and `generated-index.md`.
+- `data/registry/`: structured registry-location fact layer. Current pilot count is 10 YAML records.
+- `data/artifacts/`: structured artifact YAML records. Current count is 42 YAML records.
+- `schemas/registry-entry.schema.yml`: lightweight reference schema for registry YAML fields. It is documentation-oriented and does not add a validation dependency.
+- `scripts/generate-registry-index.py`: reads `data/registry/*.yml`, validates required fields and linked Markdown pages, and writes `docs/registry-tree/generated-index.md` plus `docs/registry-tree/coverage.md`.
 - `scripts/generate-artifact-index.py`: reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
 - `scripts/check-content-style.py`: lightweight standard-library scan for old artifact headings, English artifact-template headings, subjective priority wording, and stale project/repository names.
-- `mkdocs.yml`: site configuration and navigation. Top-level nav is now `首页`, `注册表位置`, `取证场景`, plus auxiliary `贡献` and `标签`.
+- `mkdocs.yml`: site configuration and navigation. Top-level nav remains `首页`, `注册表位置`, `取证场景`, `贡献`, `标签`.
 - `.github/workflows/pages.yml`: GitHub Actions workflow for MkDocs build and GitHub Pages deployment.
 
 ## Last Completed Round
 
-- Prepared the site for a public `v0.1` readiness state without changing the three-entry information architecture.
-- Added [注册表位置覆盖矩阵](docs/registry-tree/coverage.md) and linked it at the end of the `注册表位置` navigation.
-- Added [贡献指南](docs/contributing/index.md) and updated [页面模板](docs/contributing/template.md) so registry-location pages remain the primary content model and artifact pages remain supplemental.
-- Added `scripts/check-content-style.py` and wired it into `.github/workflows/pages.yml` after artifact index generation and before `mkdocs build --strict`.
-- Fixed the remaining subjective wording hit in `docs/detection/index.md` and rewrote detection entry links so the table now points primarily to `docs/registry-tree/` pages.
-- Strengthened high-visible registry-location pages with related scenarios, related positions, and references where useful:
+This round prepared the v0.1 Data + UX Refactor.
+
+Data model changes:
+
+- Added `data/registry/` as the structured registry-location fact layer.
+- Added 10 pilot registry YAML records:
+  - `hklm-system-select`
+  - `hklm-system-controlset`
+  - `hklm-system-controlset-services`
+  - `hklm-system-tcpip-interfaces`
+  - `hklm-system-enum-usbstor`
+  - `hklm-system-mounteddevices`
+  - `hklm-software-profilelist`
+  - `hklm-software-winlogon`
+  - `hklm-software-run`
+  - `hkcu-software-run`
+- Added `docs/contributing/registry-data-schema.md` and `schemas/registry-entry.schema.yml`.
+- Added `scripts/generate-registry-index.py` and generated:
+  - `docs/registry-tree/generated-index.md`
+  - `docs/registry-tree/coverage.md`
+- Added `registry_entry_ids` relationships to these artifact YAML files:
+  - `services.yml` -> `hklm-system-controlset-services`
+  - `usbstor.yml` -> `hklm-system-enum-usbstor`
+  - `mounteddevices.yml` -> `hklm-system-mounteddevices`
+  - `profilelist.yml` -> `hklm-software-profilelist`
+  - `run-keys.yml` -> `hklm-software-run`, `hkcu-software-run`
+  - `winlogon-shell.yml` -> `hklm-software-winlogon`
+  - `winlogon-userinit.yml` -> `hklm-software-winlogon`
+
+UX and content changes:
+
+- Refreshed `docs/index.md` with compact entry cards, current coverage stats, common path chips, registry basics, and a clear boundary between registry locations, scenarios, and artifact supplements.
+- Refreshed `docs/registry-tree/index.md` as a Registry Explorer-style root key entry with links to the structured index and coverage matrix.
+- Refreshed `docs/questions/index.md` as a scenario query entry with compact scenario cards and supplemental links.
+- Reworked `docs/questions/registry-checklist.md` into a four-column checklist: check target, registry location, fields, and cross-validation.
+- Added restrained `ww-*` styling in `docs/stylesheets/extra.css` for entry cards, stats, chips, generated-index topic chips, metadata summaries, and table readability.
+- Added summary metadata blocks to high-visible registry pages:
   - `HKLM\SYSTEM\Select`
   - `HKLM\SYSTEM\ControlSet00x`
   - `HKLM\SYSTEM\ControlSet00x\Services`
-  - `HKLM\SYSTEM\MountedDevices`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32`
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
-- Registry-tree page count is now 96 including the new coverage matrix. Artifact content pages remain 42, with 42 YAML records. `docs/artifacts/index.md` and `docs/artifacts/generated-index.md` are supplemental/index pages and are not counted as artifact content pages.
-- Current navigation remains `首页`, `注册表位置`, `取证场景`, `贡献`, `标签`.
-- Git remote remains `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
-- Site URL status remains pending confirmation. Current `site_url` still uses the previously reachable path `http://hsad.xyz/windows-registry-forensics-handbook/`. Candidate future paths remain `https://hsad.xyz/winreg/` and `https://winreg.hsad.xyz/`; the subdomain option is cleaner but requires DNS and GitHub Pages confirmation.
-- License remains `TBD`. Recommended decision: content under `CC BY 4.0` plus scripts/site engineering under `MIT`, or repository-wide `MIT` if a single license is preferred.
-
-## Previous Completed Round
-
-- Normalized old registry-tree pages by replacing remaining artifact-link section headings with `## 补充阅读`. A scan for old artifact section headings, English artifact-template headings, and subjective phrases now returns no hits in `docs/registry-tree`, `docs/questions`, or `docs/artifacts`.
-- Added registry-location pages:
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\SubSystems`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Memory Management`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider Filters`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
-- Updated scenario pages so the new registry-location pages are linked from:
-  - `registry-checklist.md`
-  - `persistence.md`
-  - `execution.md`
-  - `accounts-security.md`
-  - `policy-security.md`
-  - `anti-forensics.md`
-  - `software-install.md`
-  - `shell-explorer.md`
-  - `network.md`
-- Registry-tree page count is now 95. Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
-- Site URL status remains pending confirmation. Current `site_url` still uses the previously reachable path `http://hsad.xyz/windows-registry-forensics-handbook/`. Possible future options: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`; the subdomain option is cleaner but requires DNS and GitHub Pages confirmation.
-
-## Previous Completed Round
-
-- Added RDP and account/login registry-location pages:
-  - `HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList`
-- Updated `mkdocs.yml` so the new pages are reachable through the native registry tree hierarchy without adding top-level navigation entries.
-- Updated scenario pages so primary links include the new RDP/login registry-location pages:
-  - `registry-checklist.md`
-  - `rdp.md`
-  - `accounts-security.md`
-  - `policy-security.md`
-- Compressed these RDP artifact pages into supplemental entries:
-  - `fdenytsconnections.md`
-  - `rdp-tcp-portnumber.md`
-  - `credssp-nla.md`
-- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
-
-## Previous Completed Round
-
-- Added and normalized another login/policy/execution-focused registry-tree batch:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\AppCertDlls`
-  - `HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`
-- Rewrote existing `Winlogon`, `Image File Execution Options`, `ProfileList`, and `Terminal Server Client` registry-tree pages into the current short dictionary structure.
-- Updated scenario pages so primary links include the new registry-location pages:
-  - `registry-checklist.md`
-  - `persistence.md`
-  - `execution.md`
-  - `anti-forensics.md`
-  - `policy-security.md`
-  - `accounts-security.md`
-  - `software-install.md`
-  - `questions/index.md`
-- Compressed these artifact pages into supplemental entries:
-  - `winlogon-userinit.md`
-  - `winlogon-shell.md`
-  - `uac-policies.md`
-  - `specialaccounts-userlist.md`
-  - `profilelist.md`
-  - `terminal-server-client.md`
-- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
-
-## Previous Completed Round
-
-- Continued the registry-tree dictionary expansion with the next HKLM-focused batch:
-  - `HKLM\SOFTWARE\Microsoft\Command Processor`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths`
-  - `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\BootExecute`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\KnownDLLs`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\PendingFileRenameOperations`
-- Updated `mkdocs.yml`, `docs/registry-tree/index.md`, `HKLM\SOFTWARE`, `HKLM\SYSTEM`, `ControlSet00x`, `Policies`, `FirewallPolicy`, and `Session Manager\Environment` pages so the new pages are reachable through the native registry tree.
-- Updated scenario pages so primary links include the new registry-location pages:
-  - `registry-checklist.md`
-  - `persistence.md`
-  - `execution.md`
-  - `anti-forensics.md`
-  - `policy-security.md`
-  - `network.md`
-  - `software-install.md`
-  - `questions/index.md`
-- Compressed these additional artifact pages into supplemental entries:
-  - `drivers.md`
-  - `appinit-dlls.md`
-  - `ifeo.md`
-- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. No YAML field model changes were made.
-
-## Earlier Completed Round
-
-- Expanded and normalized registry-location reference pages so `注册表位置` remains the primary dictionary entry point.
-- Added or rewrote these registry-location pages in the short key/value style:
-  - `HKCU\Environment`
-  - `HKCU\Printers`
-  - `HKCU\Software\Microsoft\Command Processor`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap`
-  - `HKLM\SYSTEM\ControlSet00x\Services\EventLog`
-  - `HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy`
-  - `HKLM\SOFTWARE\Microsoft\Windows Defender`
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
-  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles`
-  - `HKLM\SYSTEM\ControlSet00x\Services\Tcpip\Parameters\Interfaces`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Session Manager\Environment`
-- Updated registry-tree overview/support pages so HKCU, HKLM SOFTWARE, HKLM SYSTEM, Services, Tcpip, and Policies point to the new pages.
-- Updated scenario pages so the main investigation path points to registry-location pages first:
-  - `registry-checklist.md`
-  - `network.md`
-  - `policy-security.md`
-  - `persistence.md`
-  - `anti-forensics.md`
-  - `execution.md`
-  - `questions/index.md`
-- Compressed these artifact pages into supplemental entries after moving their practical facts into registry-location/scenario pages:
-  - `command-processor-autorun.md`
-  - `defender-policies.md`
-  - `firewall-policies.md`
-  - `audit-policy.md`
-  - `run-keys.md`
-  - `services.md`
-- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records. Artifact pages remain supplemental/internal and are intentionally not part of the primary top-level navigation.
-
-## Older Completed Round
-
-- Refined the site into a registry-first dual-entry knowledge base:
-  - scenario pages now use `取证场景 -> 注册表位置` as the main flow;
-  - artifact pages are explicitly documented as supplemental/internal detail;
-  - `docs/artifacts/index.md` is now `Artifact 补充索引`;
-  - `docs/artifacts/generated-index.md` explains that generated YAML data is for maintenance/review, not the primary reader path.
-- Added registry-location pages to cover common scenario links:
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2`
   - `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`
-- Added `取证场景 / 常规注册表检查` at `docs/questions/registry-checklist.md`.
-- Reworked scenario pages into checklist-style pages with primary links to registry-location pages:
-  - `execution.md`
-  - `persistence.md`
-  - `rdp.md`
-  - `shell-explorer.md`
-  - `usb.md`
-  - `accounts-security.md`
-  - `policy-security.md`
-  - `network.md`
-  - `software-install.md`
-  - `anti-forensics.md`
-- Updated key registry-location pages to include `相关场景` and changed old artifact-link sections to `补充阅读` where touched.
-- Artifact/YAML inventory remains 42 artifact pages and 42 YAML records.
-
-## Initial Completed Round
-
-- Renamed the site and repository metadata to `WinReg Wiki`.
-- Switched `origin` to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
-- Kept `site_url` at the previously reachable custom-domain path until the new GitHub Pages path is confirmed.
-- Collapsed top-level navigation:
-  - removed `基础概念` from the top level and linked those pages from the homepage;
-  - removed `注册表 Artifact` from the top level and moved artifact indexes under `取证场景`;
-  - removed `检测工程` from the top level and moved it under `取证场景`.
-- Rebuilt `注册表位置` navigation as a registry-like section-index tree:
-  - `HKEY_CLASSES_ROOT` -> `docs/registry-tree/hkcr/index.md`
-  - `HKEY_CURRENT_USER` -> `docs/registry-tree/hkcu/index.md`
-  - `HKEY_LOCAL_MACHINE` -> `docs/registry-tree/hklm/index.md`
-  - `HKEY_USERS` -> `docs/registry-tree/hku/index.md`
-  - `HKEY_CURRENT_CONFIG` -> `docs/registry-tree/hkcc/index.md`
-- Removed visible `概览` child entries from registry-tree navigation. Click the section itself to open that level's `index.md`.
-- Moved HKCU/HKLM subtree pages deeper so paths better match native registry hierarchy, for example:
-  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer`
+  - `HKLM\SYSTEM\MountedDevices`
+  - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList`
   - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`
-  - `HKLM\SYSTEM\ControlSet00x\Services`
-  - `HKLM\SYSTEM\ControlSet00x\Control\Lsa`
-- Rewrote `docs/index.md` as a compact Wiki homepage.
-- Updated `README.md`, `CHANGELOG.md`, and `ROADMAP.md` for the new name and architecture.
+  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
+  - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
 
-Previous completed content state:
+Contribution and CI changes:
 
-- Added USB/device and persistence artifacts with matching YAML:
-  - USB, DeviceClasses, Enum SWD WPDBUSENUM, EMDMgmt, Portable Devices, VolumeInfoCache.
-  - Active Setup, AppInit_DLLs, ShellServiceObjectDelayLoad, Print Monitors, LSA Security Packages, Drivers.
-- Generated artifact index contains 42 YAML-backed artifacts.
+- Updated `docs/contributing/index.md` for registry YAML, generated registry pages, and updated pre-commit commands.
+- Updated `docs/contributing/template.md` with a registry YAML example.
+- Updated `README.md` to describe `data/registry/`, generated registry indexes, content style checks, CI behavior, and pending site URL.
+- Updated `.github/workflows/pages.yml` so CI now runs artifact generation, registry generation, content style check, generated-file diff check, and `mkdocs build --strict`.
+- Updated `mkdocs.yml` so `注册表位置` includes `结构化索引` and `覆盖矩阵`, and `贡献` includes `Registry 数据模型`.
 
-## Important Decisions
+## Artifact Layer Status
 
-- Treat the project as a Wiki, not a blog or long-form DFIR handbook.
-- Top-level navigation should stay small: homepage, registry tree, forensic scenarios.
-- `注册表位置` is the primary path dictionary. It should explain key/value meaning, live/offline location, common writers, default/common state, and short caveats.
-- `取证场景` carries investigation logic, cross-validation, common misreads, and links back to registry-location pages.
-- Artifact pages carry supplemental evidence interpretation, collection, parsing tools, false positives, and structured YAML data. Do not make artifact pages a top-level navigation system again unless the information architecture changes intentionally.
-- Keep English filenames and URLs; use Chinese navigation and display text where practical.
-- Keep `data/artifacts/*.yml` stable and backward-compatible. It drives the generated index and future exports.
-- Timestamp interpretation must stay conservative. Do not treat key LastWrite as the creation time of a specific value.
-- Mapping relationships must be explicit: `HKCU` maps to `HKU\<SID>`, `HKCR` is a merged Classes view, `HKCC` maps into `SYSTEM`, and `CurrentControlSet` is resolved through `HKLM\SYSTEM\Select`.
-- License remains `TBD`.
+- Artifact pages remain supplemental/internal. They are reachable from `取证场景` supplemental links and registry-location `补充阅读`, not from a top-level artifact tab.
+- Current artifact inventory is 42 content pages and 42 YAML records. `docs/artifacts/index.md` and `docs/artifacts/generated-index.md` are index pages and are not counted as artifact content pages.
+- New registry relationships were added with `registry_entry_ids`; no old artifact YAML fields were removed.
 
-## Verification
+## Validation
 
-Last verified locally:
+Latest required validation results:
 
-```bash
-.venv/bin/python scripts/generate-artifact-index.py
-.venv/bin/mkdocs build --strict
-```
+- `.venv/bin/python scripts/generate-artifact-index.py`: passed; regenerated `docs/artifacts/generated-index.md`.
+- `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md` and `docs/registry-tree/coverage.md`.
+- `.venv/bin/python scripts/check-content-style.py`: passed.
+- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs may show the upstream MkDocs 2.0 deprecation warning; this is not a project failure.
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local preview after visual changes.
+- Browser preview checked homepage, registry tree index, structured registry index, coverage matrix, `HKLM\SYSTEM\Select`, scenario index, and registry checklist in desktop and narrow widths; no obvious layout break was observed.
 
-Both commands completed successfully after the registry-first scenario rewrite. The Material for MkDocs upstream warning about MkDocs 2.0 may appear during build; it is not currently a project build error. MkDocs may also print INFO that artifact pages are not in `nav`; this is expected because artifact pages are supplemental.
+## License Status
 
-Latest verification for the registry-tree expansion and artifact compression:
+- Current License: `TBD`.
+- Recommended option A: documentation under `CC BY 4.0`, scripts and site engineering under `MIT`.
+- Recommended option B: repository-wide `MIT` if the maintainer wants a single simple license.
+- Do not add a `LICENSE` file until the maintainer confirms the choice.
 
-```bash
-.venv/bin/python scripts/generate-artifact-index.py
-.venv/bin/mkdocs build --strict
-```
+## Next Round Suggestions
 
-Both commands completed successfully. The generated index remained valid for 42 YAML-backed artifacts. The MkDocs Material upstream warning and MkDocs INFO about artifact pages outside `nav` are expected in the current architecture.
-
-Latest verification for v0.1 release readiness:
-
-```bash
-.venv/bin/python scripts/generate-artifact-index.py
-.venv/bin/python scripts/check-content-style.py
-.venv/bin/mkdocs build --strict
-```
-
-Run these after content or navigation changes. The content style check is intentionally lightweight and only catches known stale phrases and naming regressions.
-
-## Next Priorities
-
-- Confirm GitHub Pages settings for the new repository and decide whether the online path should remain under the old custom-domain path or move to a new path / subdomain.
-- Choose a license and add a `LICENSE` file after maintainer confirmation.
-- Continue filling coverage-matrix candidates: HKCU Policies `System`, `Attachments`, `Associations`, Explorer `Advanced`, Explorer `TypedPaths`, ShellBags / BagMRU, `Enum\STORAGE`, and `DeviceContainers`.
-- Continue adding references to older registry-location pages where source quality is thin.
-- Continue migrating only concrete artifact details into registry-location and scenario pages; keep artifact pages supplemental.
-- Consider expanding the content style script only after the current simple checks prove useful.
-
-## Notes For Next Agent
-
-- Current branch is `main`.
-- `origin` should point to `https://github.com/watanabe-hsad/WinReg-Wiki.git`.
-- Do not assume the new GitHub Pages URL is already live. Check repository Pages settings before documenting a new URL.
-- Preserve `site/` as ignored generated output.
-- Always run the generated index script and strict build after navigation or link changes.
+- Expand `data/registry/` from 10 pilot records to about 30 core registry pages.
+- Continue adding `registry_entry_ids` to artifact YAML where relationships are clear.
+- Add generated registry indexes by Hive, topic, tool support, and ATT&CK mapping only after the data model reaches enough coverage.
+- Confirm GitHub Pages and DNS, then decide whether to move from the old path to `https://winreg.hsad.xyz/` or `https://hsad.xyz/winreg/`.
+- Decide License and add `LICENSE`.
+- Prepare a `v0.1` tag after URL and License decisions are made.
+- Continue filling registry paths from the generated coverage candidate list: HKCU Policies System / Attachments / Associations, Explorer Advanced, TypedPaths, ShellBags / BagMRU, `Enum\STORAGE`, and `DeviceContainers`.

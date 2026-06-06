@@ -2,6 +2,14 @@
 
 用户级登录启动项位置，只作用于对应用户 SID 的登录会话。
 
+<div class="ww-meta-grid" markdown>
+<div><span>Root</span><strong>HKCU / HKU&lt;SID&gt;</strong></div>
+<div><span>Hive</span><strong>NTUSER.DAT</strong></div>
+<div><span>Offline</span><strong>C:\Users\&lt;user&gt;\NTUSER.DAT</strong></div>
+<div><span>Topics</span><strong>持久化</strong></div>
+<div><span>Data</span><strong>stable / high</strong></div>
+</div>
+
 ## 位置
 
 | 视图 | 路径 |
