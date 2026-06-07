@@ -8,6 +8,9 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added `docs/registry-tree/explorer.md` as a JSON-backed Registry Explorer with search, Hive filters, topic filters, status filters, result count, empty state, and registry entry cards.
+- Added `docs/assets/registry-index.json` as generated structured data for the Registry Explorer.
+- Added `docs/javascripts/registry-explorer.js` for vanilla-JavaScript Explorer rendering, filtering, and homepage search-panel focus behavior.
 - Added `data/registry/` as the structured registry-location fact layer.
 - Added 10 pilot registry YAML records for Select, ControlSet, Services, TCP/IP interfaces, USBSTOR, MountedDevices, ProfileList, Winlogon, HKLM Run, and HKCU Run.
 - Added `docs/contributing/registry-data-schema.md` and `schemas/registry-entry.schema.yml` for the registry data model.
@@ -118,6 +121,16 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Rebuilt the core UI around a RegSeek / DFIRHub inspired registry database experience:
+  - homepage first screen is now a search-first database landing with quick filters, stats, primary entry cards, and popular registry path cards;
+  - registry-tree entry page now pushes users toward the interactive Registry Explorer, generated index, and coverage matrix;
+  - scenario index now behaves as a scenario directory with a highlighted `常规注册表检查` entry;
+  - common registry checklist now uses compact checklist cards instead of broad Markdown tables.
+- Updated `scripts/generate-registry-index.py` to emit `docs/assets/registry-index.json` and to link generated registry pages back to the interactive Explorer.
+- Rebuilt `docs/stylesheets/extra.css` into a tokenized `ww-*` component system covering search panels, filter bars, badges, entry cards, Explorer cards, checklist cards, and upgraded fact cards.
+- Upgraded Registry Fact Card markup on the 10 high-visible registry-location pages to use a top status row, metadata grid, and topics / scenarios / related-data footer.
+- Updated `mkdocs.yml` to add `Explorer` under `注册表位置` and load `javascripts/registry-explorer.js`.
+- Updated GitHub Pages CI to verify the generated `docs/assets/registry-index.json` is committed.
 - Redesigned the homepage into a search-first registry database landing page with a command-style search panel, quick path chips, dashboard stats, and popular registry path cards.
 - Redesigned the registry-tree entry page as a Registry Explorer with root-key cards, topic chips, structured-index entry, coverage-matrix entry, and common path cards.
 - Redesigned the scenario index into scenario cards with a stronger `常规注册表检查` start card and supplemental links kept below the main flow.

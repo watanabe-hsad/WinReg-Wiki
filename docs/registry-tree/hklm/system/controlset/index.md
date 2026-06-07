@@ -3,15 +3,20 @@
 `ControlSet00x` 是 Windows 保存系统控制配置的真实控制集，`CurrentControlSet` 是运行时映射。
 
 <div class="ww-fact-card" markdown>
-<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>真实控制集</strong></div>
+<div class="ww-fact-card__top">
+<div><span class="ww-card-kicker">Registry Fact Card</span><strong>HKLM\SYSTEM\ControlSet00x</strong></div>
+<span class="ww-badge ww-badge--status">stable / high</span>
+</div>
 <div class="ww-fact-grid" markdown>
-<div><span>Root</span><strong>HKLM</strong></div>
-<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Root</span><span class="ww-badge ww-badge--hive">HKLM</span></div>
+<div><span>Hive</span><span class="ww-badge ww-badge--hive">SYSTEM</span></div>
 <div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\ControlSet00x</code><code>HKLM\SYSTEM\CurrentControlSet</code></div>
+<div class="ww-fact-wide"><span>Native path</span><div class="ww-path-stack"><span class="ww-path-pill">HKLM\SYSTEM\CurrentControlSet</span><span class="ww-path-pill">HKLM\SYSTEM\ControlSet001</span><span class="ww-path-pill">HKLM\SYSTEM\ControlSet002</span></div></div>
+</div>
+<div class="ww-fact-footer">
 <div><span>Topics</span><span class="ww-chip ww-chip--topic">系统配置</span><span class="ww-chip ww-chip--topic">设备</span><span class="ww-chip ww-chip--topic">持久化</span></div>
-<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span></div>
-<div><span>Data status</span><strong>stable / high</strong></div>
+<div><span>Scenarios</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span><span class="ww-chip ww-chip--scenario">RDP 与远程访问</span></div>
+<div><span>Related data</span><span class="ww-chip ww-chip--data">data/registry: hklm-system-controlset</span><span class="ww-chip ww-chip--data">artifact: services</span><span class="ww-chip ww-chip--data">artifact: fdenytsconnections</span><span class="ww-chip ww-chip--data">artifact: rdp-tcp-portnumber</span></div>
 </div>
 </div>
 

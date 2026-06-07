@@ -1,6 +1,6 @@
 # Registry 数据模型
 
-`data/registry/*.yml` 是注册表位置的结构化事实层。它服务于索引、覆盖矩阵和后续互链，不直接生成注册表位置正文。
+`data/registry/*.yml` 是注册表位置的结构化事实层。它服务于 Registry Explorer、结构化索引、覆盖矩阵和后续互链，不直接生成注册表位置正文。
 
 ## 基本原则
 
@@ -83,5 +83,6 @@ registry_entry_ids:
 
 - `docs/registry-tree/generated-index.md`
 - `docs/registry-tree/coverage.md`
+- `docs/assets/registry-index.json`
 
-这两个页面是生成文件，不要手工编辑。
+`generated-index.md`、`coverage.md` 和 `registry-index.json` 都是生成文件，不要手工编辑。`docs/registry-tree/explorer.md` 是人工维护页面，通过 `docs/javascripts/registry-explorer.js` 读取 JSON 并渲染筛选卡片。

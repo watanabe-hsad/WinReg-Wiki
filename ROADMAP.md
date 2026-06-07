@@ -86,7 +86,8 @@ Current project name: `WinReg Wiki`.
 - Current status: every manual artifact page currently has a matching YAML record; after the USB/device and persistence expansion this is 42 artifact pages and 42 YAML records.
 - Current status: generated artifact index display is localized to Chinese while preserving YAML field names.
 - Current status: `data/registry/` MVP is established with 10 registry-location YAML records.
-- Current status: `scripts/generate-registry-index.py` generates `docs/registry-tree/generated-index.md` and `docs/registry-tree/coverage.md` without overwriting manual registry-location pages.
+- Current status: `scripts/generate-registry-index.py` generates `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json` without overwriting manual registry-location pages.
+- Current status: `docs/registry-tree/explorer.md` consumes the generated JSON through vanilla JavaScript and provides search, Hive, topic, and status filters.
 - Current status: core artifact YAML records can link back to registry entries via `registry_entry_ids`.
 - Current status: `docs/contributing/registry-data-schema.md` documents the registry YAML field model and the relationship between registry data and artifact data.
 - Keep `scripts/generate-artifact-index.py` small and dependency-light.
@@ -94,7 +95,7 @@ Current project name: `WinReg Wiki`.
 - Next: expand registry YAML coverage to about 30 core pages before adding more generated index views.
 - Next: continue building artifact-to-registry relationships with `registry_entry_ids`.
 - Next: add stable fields for ATT&CK mappings, event IDs, collection commands, parser support, and confidence levels only when the page set is ready.
-- Consider exporting JSON later only if a real consumer appears.
+- Next: keep the JSON output stable while expanding registry YAML coverage; add new generated views only after the data reaches enough breadth.
 
 ## Phase 5: Detection Mappings and Tool Integration
 
@@ -118,9 +119,9 @@ Current project name: `WinReg Wiki`.
 - Current status: contribution guidance and source-quality expectations live in `docs/contributing/index.md`.
 - Current status: CI runs artifact index generation, registry index generation, content style check, generated-file diff check, and `mkdocs build --strict`.
 - Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
-- Current status: Visual UX Redesign is complete for the search-first homepage, Registry Explorer entry, scenario-card directory, registry checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
-- Current status: desktop, narrow/mobile, and dark-mode previews were checked locally with MkDocs serve; generated and checklist tables use container-level horizontal scrolling on narrow screens.
-- Next UI: refine search behavior when Material exposes a cleaner programmatic search trigger, add more topic-specific generated sections after registry YAML coverage expands, and consider a small screenshot set after the final production URL is confirmed.
+- Current status: RegSeek / DFIRHub inspired UI rebuild is complete for the search-first homepage, interactive Registry Explorer, registry-tree portal, scenario directory, checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
+- Current status: desktop, narrow/mobile, light-mode, and dark-mode previews were checked locally with MkDocs serve; Explorer JSON cards render and filters work.
+- Next UI: add richer Explorer sort/group controls after `data/registry` grows, add more topic-specific generated sections after registry YAML coverage expands, and consider a small screenshot set after the final production URL is confirmed.
 - Add `LICENSE` after the maintainer chooses a license.
 - Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
 - Review homepage, navigation, and first-visit experience once the final URL is confirmed.

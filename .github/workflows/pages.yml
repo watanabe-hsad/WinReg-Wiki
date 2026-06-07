@@ -46,7 +46,7 @@ jobs:
         run: python scripts/check-content-style.py
 
       - name: Check generated indexes are committed
-        run: git diff --exit-code docs/artifacts/generated-index.md docs/registry-tree/generated-index.md docs/registry-tree/coverage.md
+        run: git diff --exit-code docs/artifacts/generated-index.md docs/registry-tree/generated-index.md docs/registry-tree/coverage.md docs/assets/registry-index.json
 
       - name: Build MkDocs site
         run: mkdocs build --strict

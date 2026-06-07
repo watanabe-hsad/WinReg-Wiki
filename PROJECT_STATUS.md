@@ -26,7 +26,7 @@ Current information architecture:
 
 ## Current Structure
 
-- `docs/registry-tree/`: Windows native registry tree entry point. Current count is 97 Markdown files, including `generated-index.md` and `coverage.md`.
+- `docs/registry-tree/`: Windows native registry tree entry point. Current count is 98 Markdown files, including `explorer.md`, `generated-index.md`, and `coverage.md`.
 - `docs/registry-tree/generated-index.md`: generated structured registry index for readers. Output of `scripts/generate-registry-index.py`.
 - `docs/registry-tree/coverage.md`: generated registry coverage matrix for maintenance and next-path planning. Output of `scripts/generate-registry-index.py`.
 - `docs/questions/`: forensic scenario entry point. Current count is 12 Markdown files.
@@ -34,7 +34,7 @@ Current information architecture:
 - `data/registry/`: structured registry-location fact layer. Current pilot count is 10 YAML records.
 - `data/artifacts/`: structured artifact YAML records. Current count is 42 YAML records.
 - `schemas/registry-entry.schema.yml`: lightweight reference schema for registry YAML fields. It is documentation-oriented and does not add a validation dependency.
-- `scripts/generate-registry-index.py`: reads `data/registry/*.yml`, validates required fields and linked Markdown pages, and writes `docs/registry-tree/generated-index.md` plus `docs/registry-tree/coverage.md`.
+- `scripts/generate-registry-index.py`: reads `data/registry/*.yml`, validates required fields and linked Markdown pages, and writes `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
 - `scripts/generate-artifact-index.py`: reads `data/artifacts/*.yml` and writes `docs/artifacts/generated-index.md`.
 - `scripts/check-content-style.py`: lightweight standard-library scan for old artifact headings, English artifact-template headings, subjective priority wording, and stale project/repository names.
 - `mkdocs.yml`: site configuration and navigation. Top-level nav remains `首页`, `注册表位置`, `取证场景`, `贡献`, `标签`.
@@ -42,31 +42,32 @@ Current information architecture:
 
 ## Last Completed Round
 
-This round completed a focused `Visual UX Redesign`. It did not expand the registry data model, did not add artifact pages, and did not change the top-level navigation.
+This round completed a high-fidelity `RegSeek / DFIRHub inspired UI rebuild`. It did not expand registry content, did not add artifact pages, and did not change the top-level navigation. The focus was converting the site from a polished MkDocs document landing into a search-first registry database experience.
 
 Visual / UX changes:
 
-- Rebuilt `docs/index.md` as a search-first registry database landing page:
-  - first-screen hero with `WinReg Wiki`, a visible search panel, command-key hints, and quick registry chips;
-  - dashboard stats for registry pages, registry YAML, artifact supplements, and scenarios;
-  - three primary entry cards for Registry Explorer, Scenario Playbooks, and Structured Index;
-  - `Popular Registry Paths` cards for Select, Services, USBSTOR, MountedDevices, Run keys, UserAssist, Winlogon, and ProfileList.
-- Rebuilt `docs/registry-tree/index.md` as a Registry Explorer:
-  - root-key cards for HKCR, HKCU, HKLM, HKU, and HKCC;
-  - clear entry cards for `结构化索引` and `覆盖矩阵`;
-  - topic chips and commonly used path cards.
-- Rebuilt `docs/questions/index.md` as a scenario-card directory and kept artifact / generated-data links in a bottom supplemental section.
-- Reworked `docs/questions/registry-checklist.md` into a checklist dashboard with compact tables by investigation area.
-- Updated `scripts/generate-registry-index.py` so generated registry index and coverage pages use summary headers, dashboard stats, topic / hive / status badges, path pills, and grouped tables.
+- Rebuilt `docs/index.md` as a DFIRHub-like search-first database landing:
+  - product-style first screen with `WINDOWS REGISTRY KNOWLEDGE BASE`, command-style search panel, quick filters, dashboard stats, and three primary entry cards;
+  - `Popular Registry Paths` cards for Run Keys, Services, USBSTOR, UserAssist, Winlogon, ProfileList, MountedDevices, Defender Policies, RDP-Tcp, and Tcpip Interfaces.
+- Added `docs/registry-tree/explorer.md` as the new Registry Explorer page:
+  - search input, Hive filters, topic filters, status filters, result count, empty state, and card-based results;
+  - interactive behavior is implemented by `docs/javascripts/registry-explorer.js` with vanilla JavaScript.
+- Updated `scripts/generate-registry-index.py` to generate `docs/assets/registry-index.json` in addition to `generated-index.md` and `coverage.md`.
+- Updated `docs/registry-tree/index.md` into a Registry Explorer portal with a strong `Open Registry Explorer` entry, generated index / coverage entry cards, root-key cards, topic chips, and common registry areas.
+- Rebuilt `docs/questions/index.md` as a scenario directory with a highlighted `常规注册表检查` start card, scenario chips, scenario cards, and a weak supplemental section.
+- Reworked `docs/questions/registry-checklist.md` into a checklist dashboard with compact cards instead of large tables.
+- Updated `scripts/generate-registry-index.py` so generated registry index pages link to the Explorer and use clearer entry cards, summary headers, badges, path pills, and grouped tables.
 - Regenerated:
   - `docs/registry-tree/generated-index.md`
   - `docs/registry-tree/coverage.md`
-- Rebuilt `docs/stylesheets/extra.css` into a larger `ww-*` visual system:
-  - `ww-hero`, `ww-search-panel`, `ww-dashboard-grid`, `ww-stat-card`;
-  - `ww-card-grid`, `ww-feature-card`, `ww-path-card`, `ww-root-card`, `ww-scenario-card`;
-  - `ww-chip`, `ww-chip--hive`, `ww-chip--topic`, `ww-chip--scenario`, `ww-chip--status`;
-  - `ww-path-pill`, `ww-fact-card`, `ww-fact-grid`, `ww-page-header`, `ww-supplemental`.
-- Upgraded Registry Fact Card presentation on 10 common registry-location pages:
+  - `docs/assets/registry-index.json`
+- Rebuilt `docs/stylesheets/extra.css` into a product-style `ww-*` component system:
+  - design tokens for surfaces, borders, shadows, radii, spacing, and typography;
+  - layout classes: `ww-shell`, `ww-hero`, `ww-section`, `ww-dashboard-grid`;
+  - components: `ww-search-panel`, `ww-filter-bar`, `ww-chip`, `ww-badge`, `ww-feature-card`, `ww-path-card`, `ww-root-card`, `ww-scenario-card`, `ww-check-card`, `ww-stat-card`, `ww-path-pill`, `ww-empty-state`;
+  - generated / interactive components: `ww-registry-explorer`, `ww-explorer-toolbar`, `ww-explorer-results`, `ww-explorer-card`;
+  - upgraded fact components: `ww-fact-card`, `ww-fact-grid`, `ww-fact-footer`.
+- Upgraded Registry Fact Card structure on 10 common registry-location pages:
   - `HKLM\SYSTEM\Select`
   - `HKLM\SYSTEM\ControlSet00x`
   - `HKLM\SYSTEM\ControlSet00x\Services`
@@ -77,13 +78,16 @@ Visual / UX changes:
   - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run`
   - `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`
   - `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist`
-- Updated `mkdocs.yml` Material configuration with blue/cyan palette plus supported navigation, search, and tooltip features.
+- Updated `mkdocs.yml` so `注册表位置` includes `Explorer` and the site loads `javascripts/registry-explorer.js`.
+- Updated `.github/workflows/pages.yml` so CI checks the generated `docs/assets/registry-index.json`.
+- Updated README and registry data schema documentation for the JSON-backed Explorer.
 
 Local browser preview:
 
 - Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
-- Checked pages:
+- Checked pages in this round:
   - `/`
+  - `/registry-tree/explorer/`
   - `/registry-tree/`
   - `/registry-tree/generated-index/`
   - `/registry-tree/coverage/`
@@ -91,13 +95,27 @@ Local browser preview:
   - `/questions/registry-checklist/`
   - `/registry-tree/hklm/system/select/`
   - `/registry-tree/hklm/system/controlset/enum/usbstor/`
-- Checked desktop width, narrow/mobile width, and dark mode.
-- Result: no page-level horizontal overflow was observed. Generated tables and checklist tables use container-level horizontal scrolling on narrow screens. Home, scenario cards, registry explorer cards, generated index badges, path pills, and registry fact cards were readable in dark mode.
-- Browser console note: MkDocs Material emitted an `Incorrect use of <label for=FORM_ELEMENT>` issue from theme navigation markup; this was not introduced by project content.
+- Checked desktop width, mobile width, and dark mode.
+- Result: Explorer JSON cards render, filters work, search panel is visible, chips wrap normally, and no page-level horizontal overflow was observed. Dark mode remains readable for cards, filters, path pills, and fact cards.
+- Browser console note: MkDocs Material may emit theme-level label warnings; these are not introduced by project content.
 
 ## Previous Completed Round
 
-This round prepared the v0.1 Data + UX Refactor.
+This previous round completed the first `Visual UX Redesign`.
+
+Visual / UX changes from that round:
+
+- Rebuilt the homepage as a search-first registry database landing page with a visible search panel, quick registry chips, dashboard stats, primary entry cards, and popular path cards.
+- Rebuilt `docs/registry-tree/index.md` as a root-key explorer with generated index and coverage links.
+- Rebuilt `docs/questions/index.md` as a scenario-card directory and kept artifact / generated-data links in a bottom supplemental section.
+- Reworked `docs/questions/registry-checklist.md` into a checklist dashboard with compact tables by investigation area.
+- Updated `scripts/generate-registry-index.py` so generated registry index and coverage pages use summary headers, dashboard stats, topic / hive / status badges, path pills, and grouped tables.
+- Rebuilt `docs/stylesheets/extra.css` into a larger `ww-*` visual system.
+- Added Registry Fact Card presentation on 10 common registry-location pages.
+
+## Earlier Completed Round
+
+This earlier round prepared the v0.1 Data + UX Refactor.
 
 Data model changes:
 
@@ -164,10 +182,12 @@ Contribution and CI changes:
 Latest required validation results:
 
 - `.venv/bin/python scripts/generate-artifact-index.py`: passed; regenerated `docs/artifacts/generated-index.md`.
-- `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md` and `docs/registry-tree/coverage.md`.
+- `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
 - `.venv/bin/python scripts/check-content-style.py`: passed.
-- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs may show the upstream MkDocs 2.0 warning; this is not a project failure.
+- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs showed the upstream MkDocs 2.0 warning; this is not a project failure. MkDocs also lists artifact detail pages outside `nav`, which is expected because artifact pages remain supplemental.
 - `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the redesign.
+- Browser preview checks: homepage, Registry Explorer, registry-tree portal, generated index, coverage matrix, scenario directory, registry checklist, `HKLM\SYSTEM\Select`, and `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`.
+- Visual result: desktop, mobile, light mode, and dark mode were checked. Explorer loaded 10 JSON records, keyword filtering for `USBSTOR` reduced results to one card, homepage search panel focused MkDocs search, and no horizontal overflow or console errors were observed.
 
 ## License Status
 

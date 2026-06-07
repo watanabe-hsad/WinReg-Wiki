@@ -3,15 +3,20 @@
 `MountedDevices` 保存卷标识、卷 GUID 和 DOS 盘符之间的映射。
 
 <div class="ww-fact-card" markdown>
-<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>卷和盘符映射</strong></div>
+<div class="ww-fact-card__top">
+<div><span class="ww-card-kicker">Registry Fact Card</span><strong>HKLM\SYSTEM\MountedDevices</strong></div>
+<span class="ww-badge ww-badge--status">reviewed / medium</span>
+</div>
 <div class="ww-fact-grid" markdown>
-<div><span>Root</span><strong>HKLM</strong></div>
-<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Root</span><span class="ww-badge ww-badge--hive">HKLM</span></div>
+<div><span>Hive</span><span class="ww-badge ww-badge--hive">SYSTEM</span></div>
 <div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\MountedDevices</code></div>
+<div class="ww-fact-wide"><span>Native path</span><div class="ww-path-stack"><span class="ww-path-pill">HKLM\SYSTEM\MountedDevices</span></div></div>
+</div>
+<div class="ww-fact-footer">
 <div><span>Topics</span><span class="ww-chip ww-chip--topic">设备</span></div>
-<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span><span class="ww-chip ww-chip--scenario">Shell / Explorer</span></div>
-<div><span>Data status</span><strong>reviewed / medium</strong></div>
+<div><span>Scenarios</span><span class="ww-chip ww-chip--scenario">USB 与外接设备</span><span class="ww-chip ww-chip--scenario">Shell / Explorer 用户行为</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span></div>
+<div><span>Related data</span><span class="ww-chip ww-chip--data">data/registry: hklm-system-mounteddevices</span><span class="ww-chip ww-chip--data">artifact: mounteddevices</span><span class="ww-chip ww-chip--data">artifact: usbstor</span><span class="ww-chip ww-chip--data">artifact: mountpoints2</span></div>
 </div>
 </div>
 

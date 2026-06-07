@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import json
 import os
 from pathlib import Path
 import sys
@@ -21,6 +22,7 @@ DOCS_DIR = ROOT / "docs"
 REGISTRY_TREE_DIR = DOCS_DIR / "registry-tree"
 GENERATED_INDEX = REGISTRY_TREE_DIR / "generated-index.md"
 COVERAGE = REGISTRY_TREE_DIR / "coverage.md"
+REGISTRY_JSON = DOCS_DIR / "assets" / "registry-index.json"
 
 REQUIRED_FIELDS = ("id", "title", "native_paths", "root", "hive")
 STATUS_LABELS = {
@@ -84,6 +86,26 @@ def link_to_doc(label: object, path: object, from_dir: Path = REGISTRY_TREE_DIR)
     return f"[{text}]({href})"
 
 
+def site_path(path: object) -> str:
+    rel_path = rel_doc(path)
+    if rel_path.startswith("docs/"):
+        rel_path = rel_path[5:]
+    if rel_path.endswith("/index.md"):
+        return rel_path[: -len("index.md")]
+    if rel_path.endswith(".md"):
+        return f"{rel_path[:-3]}/"
+    return rel_path
+
+
+def explorer_href(path: object) -> str:
+    target = site_path(path)
+    if not target:
+        return ""
+    if target.startswith("registry-tree/"):
+        return f"../{target[len('registry-tree/'):]}"
+    return f"../../{target}"
+
+
 def first_path(item: dict[str, object]) -> str:
     paths = as_text_list(item.get("native_paths"))
     return paths[0] if paths else ""
@@ -112,6 +134,99 @@ def scenario_links(item: dict[str, object]) -> str:
         else:
             links.append(md_escape(scenario))
     return "<br>".join(links)
+
+
+def scenario_titles(item: dict[str, object]) -> list[str]:
+    values: list[str] = []
+    for scenario in as_list(item.get("related_scenarios")):
+        if isinstance(scenario, dict):
+            title = str(scenario.get("title") or "").strip()
+            if title:
+                values.append(title)
+        else:
+            text = str(scenario).strip()
+            if text:
+                values.append(text)
+    return values
+
+
+def summarize_values(item: dict[str, object]) -> list[str]:
+    names: list[str] = []
+    for value in as_list(item.get("values")):
+        if isinstance(value, dict) and value.get("name"):
+            names.append(str(value["name"]))
+    return names[:8]
+
+
+def build_registry_json(entries: list[dict[str, object]]) -> dict[str, object]:
+    root_values = sorted(roots(entries))
+    topic_values = sorted(all_topics(entries))
+    scenario_values: set[str] = set()
+    status_counts: dict[str, int] = defaultdict(int)
+
+    json_entries: list[dict[str, object]] = []
+    for item in entries:
+        scenarios = scenario_titles(item)
+        scenario_values.update(scenarios)
+        status = str(item.get("status") or "draft")
+        status_counts[status] += 1
+
+        related_pages = []
+        for page in as_list(item.get("related_registry_pages")):
+            if isinstance(page, dict):
+                related_pages.append(
+                    {
+                        "title": str(page.get("title") or ""),
+                        "url": explorer_href(page.get("path")),
+                    }
+                )
+
+        references = []
+        for ref in as_list(item.get("references")):
+            if isinstance(ref, dict):
+                references.append(
+                    {
+                        "title": str(ref.get("title") or ""),
+                        "url": str(ref.get("url") or ""),
+                    }
+                )
+
+        json_entries.append(
+            {
+                "id": str(item.get("id") or ""),
+                "title": str(item.get("title") or ""),
+                "summary": str(item.get("summary") or ""),
+                "native_paths": as_text_list(item.get("native_paths")),
+                "root": str(item.get("root") or ""),
+                "hive": str(item.get("hive") or ""),
+                "offline_files": as_text_list(item.get("offline_files")),
+                "topics": as_text_list(item.get("topics")),
+                "category": str(item.get("category") or ""),
+                "evidence_types": as_text_list(item.get("evidence_types")),
+                "values": summarize_values(item),
+                "related_scenarios": scenarios,
+                "related_registry_pages": related_pages,
+                "related_artifacts": as_text_list(item.get("related_artifacts")),
+                "tools": as_text_list(item.get("tools")),
+                "references": references,
+                "status": status,
+                "confidence": str(item.get("confidence") or ""),
+                "page_url": explorer_href(item.get("page")),
+                "site_path": site_path(item.get("page")),
+            }
+        )
+
+    return {
+        "meta": {
+            "generated_by": "scripts/generate-registry-index.py",
+            "entries": len(entries),
+            "roots": root_values,
+            "topics": topic_values,
+            "scenarios": sorted(scenario_values),
+            "statuses": dict(sorted(status_counts.items())),
+        },
+        "entries": json_entries,
+    }
 
 
 def load_entries() -> tuple[list[dict[str, object]], list[str]]:
@@ -161,9 +276,9 @@ def build_generated_index(entries: list[dict[str, object]]) -> str:
         "<!-- This file is generated by scripts/generate-registry-index.py. Do not edit manually. -->",
         "",
         '<section class="ww-index-hero" markdown>',
-        '<p class="ww-hero-eyebrow">Generated Registry Index</p>',
+        '<p class="ww-hero-eyebrow">Structured Registry Index</p>',
         '<h1>结构化注册表索引</h1>',
-        '<p>本页由 <code>data/registry/*.yml</code> 生成，面向读者提供结构化路径入口。注册表位置正文仍由人工维护。</p>',
+        '<p>本页由 <code>data/registry/*.yml</code> 生成，面向读者提供稳定的路径索引。需要搜索和筛选时，优先使用 <a href="../explorer/">Registry Explorer</a>。</p>',
         '</section>',
         "",
         '<div class="ww-dashboard-grid" markdown>',
@@ -171,6 +286,12 @@ def build_generated_index(entries: list[dict[str, object]]) -> str:
         f'<div class="ww-stat-card"><span>root hives</span><strong>{len(root_values)}</strong><em>{", ".join(sorted(root_values))}</em></div>',
         f'<div class="ww-stat-card"><span>topics</span><strong>{len(topic_values)}</strong><em>结构化主题</em></div>',
         f'<div class="ww-stat-card"><span>status</span><strong>{status_counts.get("stable", 0)} / {status_counts.get("reviewed", 0)} / {status_counts.get("draft", 0)}</strong><em>stable / reviewed / draft</em></div>',
+        "</div>",
+        "",
+        '<div class="ww-card-grid ww-card-grid--three" markdown>',
+        '<a class="ww-feature-card ww-feature-card--index" href="../explorer/"><span class="ww-card-kicker">Filter view</span><strong>Open Registry Explorer</strong><span>按关键词、Hive、主题和状态筛选结构化 registry entry。</span></a>',
+        '<a class="ww-feature-card ww-feature-card--index" href="../coverage/"><span class="ww-card-kicker">Maintenance</span><strong>Coverage Matrix</strong><span>查看结构化覆盖范围、状态和下一阶段候选路径。</span></a>',
+        '<a class="ww-feature-card ww-feature-card--index" href="../"><span class="ww-card-kicker">Native tree</span><strong>Registry Tree</strong><span>回到 HKLM / HKCU / HKU / HKCR / HKCC 原生层级浏览。</span></a>',
         "</div>",
         "",
         '<div class="ww-chip-row" markdown>',
@@ -291,13 +412,19 @@ def main() -> None:
     entries, warnings = load_entries()
     GENERATED_INDEX.write_text(build_generated_index(entries), encoding="utf-8")
     COVERAGE.write_text(build_coverage(entries), encoding="utf-8")
+    REGISTRY_JSON.parent.mkdir(parents=True, exist_ok=True)
+    REGISTRY_JSON.write_text(
+        json.dumps(build_registry_json(entries), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     for warning in warnings:
         print(f"warning: {warning}", file=sys.stderr)
 
     print(
         f"Generated {len(entries)} registry entries into "
-        f"{GENERATED_INDEX.relative_to(ROOT)} and {COVERAGE.relative_to(ROOT)}"
+        f"{GENERATED_INDEX.relative_to(ROOT)}, {COVERAGE.relative_to(ROOT)}, "
+        f"and {REGISTRY_JSON.relative_to(ROOT)}"
     )
 
 

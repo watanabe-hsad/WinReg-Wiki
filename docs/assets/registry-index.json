@@ -1,0 +1,687 @@
+{
+  "meta": {
+    "generated_by": "scripts/generate-registry-index.py",
+    "entries": 10,
+    "roots": [
+      "HKCU",
+      "HKLM"
+    ],
+    "topics": [
+      "持久化",
+      "系统配置",
+      "网络",
+      "设备",
+      "账户"
+    ],
+    "scenarios": [
+      "RDP 与远程访问",
+      "Shell / Explorer 用户行为",
+      "USB 与外接设备",
+      "常规注册表检查",
+      "程序执行痕迹",
+      "网络与系统环境",
+      "自启动与持久化",
+      "账户与安全"
+    ],
+    "statuses": {
+      "reviewed": 3,
+      "stable": 7
+    }
+  },
+  "entries": [
+    {
+      "id": "hkcu-software-run",
+      "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "summary": "用户级登录启动项，只作用于对应用户 SID 的登录会话。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+        "HKU\\<SID>\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "持久化"
+      ],
+      "category": "用户级登录启动项",
+      "evidence_types": [
+        "自启动配置"
+      ],
+      "values": [
+        "<value name>",
+        "<value data>"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Run / RunOnce",
+          "url": "../hklm/software/microsoft/windows/currentversion/run/"
+        },
+        {
+          "title": "NTUSER.DAT",
+          "url": "../hku/ntuser/"
+        },
+        {
+          "title": "HKCU Explorer",
+          "url": "../hkcu/software/microsoft/windows/currentversion/explorer/"
+        }
+      ],
+      "related_artifacts": [
+        "run-keys"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Run and RunOnce registry keys",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys"
+        },
+        {
+          "title": "Microsoft Sysinternals - Autoruns",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hkcu/software/microsoft/windows/currentversion/run/",
+      "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/run/"
+    },
+    {
+      "id": "hklm-software-profilelist",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList",
+      "summary": "SID 到用户 profile 目录的机器级映射。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "账户"
+      ],
+      "category": "用户配置文件映射",
+      "evidence_types": [
+        "SID 映射"
+      ],
+      "values": [
+        "ProfileImagePath",
+        "Flags",
+        "State",
+        "ProfileLoadTimeHigh / ProfileLoadTimeLow"
+      ],
+      "related_scenarios": [
+        "账户与安全",
+        "Shell / Explorer 用户行为",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKEY_USERS",
+          "url": "../hku/"
+        },
+        {
+          "title": "NTUSER.DAT",
+          "url": "../hku/ntuser/"
+        },
+        {
+          "title": "UsrClass.dat",
+          "url": "../hku/usrclass/"
+        }
+      ],
+      "related_artifacts": [
+        "profilelist"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd",
+        "KAPE"
+      ],
+      "references": [
+        {
+          "title": "Eric Zimmerman tools",
+          "url": "https://ericzimmerman.github.io/#!index.md"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/profilelist/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist/"
+    },
+    {
+      "id": "hklm-software-winlogon",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+      "summary": "交互式登录流程、Shell、Userinit、自动登录和部分 Winlogon 扩展配置。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "持久化",
+        "账户"
+      ],
+      "category": "登录配置",
+      "evidence_types": [
+        "登录配置",
+        "自启动配置"
+      ],
+      "values": [
+        "Userinit",
+        "Shell",
+        "AutoAdminLogon",
+        "DefaultUserName"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "账户与安全",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Winlogon\\Notify",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/notify/"
+        },
+        {
+          "title": "SpecialAccounts\\UserList",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist/"
+        },
+        {
+          "title": "ProfileList",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/profilelist/"
+        }
+      ],
+      "related_artifacts": [
+        "winlogon-userinit",
+        "winlogon-shell",
+        "specialaccounts-userlist"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Winlogon and Credential Providers",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/secauthn/winlogon-and-credential-providers"
+        },
+        {
+          "title": "Microsoft Sysinternals - Autoruns",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/"
+    },
+    {
+      "id": "hklm-software-run",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "summary": "机器级登录启动项，适用于所有用户登录后的自动启动命令。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+        "HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "持久化"
+      ],
+      "category": "登录启动项",
+      "evidence_types": [
+        "自启动配置"
+      ],
+      "values": [
+        "<value name>",
+        "<value data>"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKCU Run / RunOnce",
+          "url": "../hkcu/software/microsoft/windows/currentversion/run/"
+        },
+        {
+          "title": "WOW6432Node",
+          "url": "../hklm/software/wow6432node/"
+        },
+        {
+          "title": "Winlogon",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/"
+        }
+      ],
+      "related_artifacts": [
+        "run-keys"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Run and RunOnce registry keys",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys"
+        },
+        {
+          "title": "Microsoft Sysinternals - Autoruns",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/software/microsoft/windows/currentversion/run/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows/currentversion/run/"
+    },
+    {
+      "id": "hklm-system-controlset",
+      "title": "HKLM\\SYSTEM\\ControlSet00x",
+      "summary": "SYSTEM hive 中保存系统控制配置的真实控制集。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet",
+        "HKLM\\SYSTEM\\ControlSet001",
+        "HKLM\\SYSTEM\\ControlSet002"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "系统配置",
+        "设备",
+        "持久化"
+      ],
+      "category": "控制集",
+      "evidence_types": [
+        "系统配置"
+      ],
+      "values": [],
+      "related_scenarios": [
+        "常规注册表检查",
+        "自启动与持久化",
+        "USB 与外接设备",
+        "RDP 与远程访问"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM\\SYSTEM\\Select",
+          "url": "../hklm/system/select/"
+        },
+        {
+          "title": "HKLM\\SYSTEM\\ControlSet00x\\Services",
+          "url": "../hklm/system/controlset/services/"
+        },
+        {
+          "title": "HKLM\\SYSTEM\\ControlSet00x\\Enum",
+          "url": "../hklm/system/controlset/enum/"
+        }
+      ],
+      "related_artifacts": [
+        "services",
+        "fdenytsconnections",
+        "rdp-tcp-portnumber"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Services registry tree",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/system/controlset/",
+      "site_path": "registry-tree/hklm/system/controlset/"
+    },
+    {
+      "id": "hklm-system-enum-usbstor",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Enum\\USBSTOR",
+      "summary": "USB Mass Storage 设备枚举信息。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR",
+        "HKLM\\SYSTEM\\ControlSet00x\\Enum\\USBSTOR"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "设备"
+      ],
+      "category": "USB 存储设备枚举",
+      "evidence_types": [
+        "USB 设备枚举"
+      ],
+      "values": [
+        "FriendlyName",
+        "ParentIdPrefix",
+        "ContainerID"
+      ],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Enum USB",
+          "url": "../hklm/system/controlset/enum/usb/"
+        },
+        {
+          "title": "MountedDevices",
+          "url": "../hklm/system/mounteddevices/"
+        },
+        {
+          "title": "MountPoints2",
+          "url": "../hkcu/software/microsoft/windows/currentversion/mountpoints2/"
+        }
+      ],
+      "related_artifacts": [
+        "usbstor",
+        "usb",
+        "mounteddevices"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd",
+        "KAPE"
+      ],
+      "references": [
+        {
+          "title": "SANS poster - Windows Forensic Analysis",
+          "url": "https://www.sans.org/posters/windows-forensic-analysis/"
+        },
+        {
+          "title": "artefacts.help - USBSTOR",
+          "url": "https://artefacts.help/windows_registry_usbstor.html"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/enum/usbstor/",
+      "site_path": "registry-tree/hklm/system/controlset/enum/usbstor/"
+    },
+    {
+      "id": "hklm-system-controlset-services",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Services",
+      "summary": "服务、驱动、网络组件和部分系统组件的配置入口。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Services",
+        "HKLM\\SYSTEM\\ControlSet00x\\Services"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "系统配置",
+        "持久化",
+        "网络"
+      ],
+      "category": "服务与驱动",
+      "evidence_types": [
+        "服务配置",
+        "驱动配置"
+      ],
+      "values": [
+        "ImagePath",
+        "Type",
+        "Start",
+        "DisplayName",
+        "ObjectName"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "程序执行痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM\\SYSTEM\\ControlSet00x",
+          "url": "../hklm/system/controlset/"
+        },
+        {
+          "title": "Drivers",
+          "url": "../hklm/system/controlset/services/drivers/"
+        },
+        {
+          "title": "EventLog",
+          "url": "../hklm/system/controlset/services/eventlog/"
+        }
+      ],
+      "related_artifacts": [
+        "services",
+        "drivers",
+        "bam-dam"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd",
+        "Velociraptor"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Services registry tree",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
+        },
+        {
+          "title": "Microsoft Sysinternals - Autoruns",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/system/controlset/services/",
+      "site_path": "registry-tree/hklm/system/controlset/services/"
+    },
+    {
+      "id": "hklm-system-tcpip-interfaces",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Services\\Tcpip\\Parameters\\Interfaces",
+      "summary": "单个网络接口的 IP、DNS、DHCP、网关和租约配置。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces",
+        "HKLM\\SYSTEM\\ControlSet00x\\Services\\Tcpip\\Parameters\\Interfaces"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "网络",
+        "系统配置"
+      ],
+      "category": "TCP/IP 接口配置",
+      "evidence_types": [
+        "网络配置"
+      ],
+      "values": [
+        "EnableDHCP",
+        "DhcpIPAddress",
+        "IPAddress",
+        "NameServer",
+        "LeaseObtainedTime"
+      ],
+      "related_scenarios": [
+        "网络与系统环境",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Tcpip",
+          "url": "../hklm/system/controlset/services/tcpip/"
+        },
+        {
+          "title": "NetworkList Profiles",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/networklist/profiles/"
+        }
+      ],
+      "related_artifacts": [],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - TCP/IP and NBT configuration parameters",
+          "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/tcpip-and-nbt-configuration-parameters"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/services/tcpip/parameters/interfaces/",
+      "site_path": "registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces/"
+    },
+    {
+      "id": "hklm-system-mounteddevices",
+      "title": "HKLM\\SYSTEM\\MountedDevices",
+      "summary": "卷 GUID、DOS 盘符和设备标识之间的映射。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\MountedDevices"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "设备"
+      ],
+      "category": "卷与盘符映射",
+      "evidence_types": [
+        "卷映射"
+      ],
+      "values": [
+        "\\DosDevices\\C:",
+        "\\??\\Volume{GUID}"
+      ],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "Shell / Explorer 用户行为",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "USBSTOR",
+          "url": "../hklm/system/controlset/enum/usbstor/"
+        },
+        {
+          "title": "MountPoints2",
+          "url": "../hkcu/software/microsoft/windows/currentversion/mountpoints2/"
+        }
+      ],
+      "related_artifacts": [
+        "mounteddevices",
+        "usbstor",
+        "mountpoints2"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "SANS poster - Windows Forensic Analysis",
+          "url": "https://www.sans.org/posters/windows-forensic-analysis/"
+        },
+        {
+          "title": "artefacts.help - MountedDevices",
+          "url": "https://artefacts.help/windows_registry_mounteddevices.html"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/mounteddevices/",
+      "site_path": "registry-tree/hklm/system/mounteddevices/"
+    },
+    {
+      "id": "hklm-system-select",
+      "title": "HKLM\\SYSTEM\\Select",
+      "summary": "CurrentControlSet 与真实 ControlSet00x 的映射关系。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\Select"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "系统配置"
+      ],
+      "category": "ControlSet 映射",
+      "evidence_types": [
+        "控制集映射"
+      ],
+      "values": [
+        "Current",
+        "Default",
+        "Failed",
+        "LastKnownGood"
+      ],
+      "related_scenarios": [
+        "常规注册表检查",
+        "自启动与持久化",
+        "USB 与外接设备"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM\\SYSTEM",
+          "url": "../hklm/system/"
+        },
+        {
+          "title": "HKLM\\SYSTEM\\ControlSet00x",
+          "url": "../hklm/system/controlset/"
+        }
+      ],
+      "related_artifacts": [
+        "services",
+        "bam-dam",
+        "usbstor"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd",
+        "KAPE"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Services registry tree",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
+        }
+      ],
+      "status": "stable",
+      "confidence": "high",
+      "page_url": "../hklm/system/select/",
+      "site_path": "registry-tree/hklm/system/select/"
+    }
+  ]
+}

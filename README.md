@@ -1,6 +1,6 @@
 # WinReg Wiki
 
-WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads. The current homepage is a search-first registry database landing page: start with search, quick path chips, registry path cards, or scenario cards.
+WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads. The current homepage is a search-first registry database landing page: start with search, quick filters, registry path cards, or scenario cards.
 
 GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
@@ -8,8 +8,9 @@ The project is organized as a wiki, not a long-form incident response handbook. 
 
 ## Main Entry Points
 
-- Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`; the registry entry now behaves like a compact Registry Explorer.
-- Structured registry index: use generated root / topic / hive tables when a database-style list is faster than browsing the native tree.
+- Registry Explorer: use the filterable card database generated from `data/registry/` to search by path, Hive, topic, status, or scenario.
+- Registry tree: start from Windows native roots such as `HKEY_LOCAL_MACHINE`, `HKEY_CURRENT_USER`, `HKEY_USERS`, `HKEY_CLASSES_ROOT`, and `HKEY_CURRENT_CONFIG`.
+- Structured registry index: use generated root / topic / hive tables when a static list is faster than interactive filtering.
 - Forensic scenarios: start from cards for program execution, persistence, USB devices, RDP, account anomalies, policy changes, network configuration, software installation, and cleanup traces.
 - Artifact supplemental index: use when a scenario or registry-location page needs deeper artifact-specific notes.
 
@@ -39,7 +40,7 @@ Generated outputs:
 
 | Script | Output |
 |---|---|
-| `scripts/generate-registry-index.py` | `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md` |
+| `scripts/generate-registry-index.py` | `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, `docs/assets/registry-index.json` |
 | `scripts/generate-artifact-index.py` | `docs/artifacts/generated-index.md` |
 | `scripts/check-content-style.py` | Fails on old project names, old artifact headings, English artifact-template headings, and subjective priority wording. |
 
@@ -90,11 +91,12 @@ Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 The site keeps MkDocs Material and uses a small project-specific CSS system in `docs/stylesheets/extra.css`.
 
 - `ww-hero`, `ww-search-panel`, `ww-dashboard-grid`, and `ww-stat-card` shape the search-first homepage.
-- `ww-feature-card`, `ww-path-card`, `ww-root-card`, and `ww-scenario-card` provide database-style entry cards.
-- `ww-chip`, `ww-path-pill`, and `ww-fact-card` keep registry paths and page facts scannable.
+- `ww-registry-explorer`, `ww-explorer-toolbar`, and `ww-explorer-card` power the JSON-backed Registry Explorer.
+- `ww-feature-card`, `ww-path-card`, `ww-root-card`, `ww-scenario-card`, and `ww-check-card` provide database-style entry and checklist cards.
+- `ww-chip`, `ww-badge`, `ww-path-pill`, and `ww-fact-card` keep registry paths and page facts scannable.
 - Tables are styled for dense reference reading and use container-level horizontal scrolling on narrow screens.
 
-The visual direction is restrained: Microsoft Learn-like documentation clarity with RegSeek / DFIRHub-style search and database entry patterns. It intentionally avoids heavy frontend frameworks, marketing-page layout, and decorative visual effects.
+The visual direction is restrained: Microsoft Learn-like documentation clarity with RegSeek / DFIRHub-style search, filters, dashboard stats, and database entry patterns. It intentionally avoids heavy frontend frameworks, marketing-page layout, and decorative visual effects.
 
 ## Content Principles
 
@@ -136,7 +138,7 @@ Before opening a pull request, run:
 .venv/bin/mkdocs build --strict
 ```
 
-When adding or changing an artifact, update both the Markdown page and `data/artifacts/*.yml` if structured data exists for that artifact. When adding structured registry facts, update `data/registry/*.yml`, regenerate the registry index, and keep the registry-tree Markdown page human maintained.
+When adding or changing an artifact, update both the Markdown page and `data/artifacts/*.yml` if structured data exists for that artifact. When adding structured registry facts, update `data/registry/*.yml`, regenerate the registry index and JSON, and keep the registry-tree Markdown page human maintained.
 
 ## Project Status
 

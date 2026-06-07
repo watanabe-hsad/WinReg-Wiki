@@ -3,15 +3,20 @@
 `Services` 保存服务、驱动、网络组件和部分系统组件的配置。
 
 <div class="ww-fact-card" markdown>
-<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>服务与驱动配置入口</strong></div>
+<div class="ww-fact-card__top">
+<div><span class="ww-card-kicker">Registry Fact Card</span><strong>HKLM\SYSTEM\ControlSet00x\Services</strong></div>
+<span class="ww-badge ww-badge--status">stable / high</span>
+</div>
 <div class="ww-fact-grid" markdown>
-<div><span>Root</span><strong>HKLM</strong></div>
-<div><span>Hive</span><strong>SYSTEM</strong></div>
+<div><span>Root</span><span class="ww-badge ww-badge--hive">HKLM</span></div>
+<div><span>Hive</span><span class="ww-badge ww-badge--hive">SYSTEM</span></div>
 <div><span>Offline file</span><strong>C:\Windows\System32\Config\SYSTEM</strong></div>
-<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SYSTEM\CurrentControlSet\Services</code><code>HKLM\SYSTEM\ControlSet00x\Services</code></div>
+<div class="ww-fact-wide"><span>Native path</span><div class="ww-path-stack"><span class="ww-path-pill">HKLM\SYSTEM\CurrentControlSet\Services</span><span class="ww-path-pill">HKLM\SYSTEM\ControlSet00x\Services</span></div></div>
+</div>
+<div class="ww-fact-footer">
 <div><span>Topics</span><span class="ww-chip ww-chip--topic">系统配置</span><span class="ww-chip ww-chip--topic">持久化</span><span class="ww-chip ww-chip--topic">网络</span></div>
-<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">程序执行</span></div>
-<div><span>Data status</span><strong>stable / high</strong></div>
+<div><span>Scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">程序执行痕迹</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span></div>
+<div><span>Related data</span><span class="ww-chip ww-chip--data">data/registry: hklm-system-controlset-services</span><span class="ww-chip ww-chip--data">artifact: services</span><span class="ww-chip ww-chip--data">artifact: drivers</span><span class="ww-chip ww-chip--data">artifact: bam-dam</span></div>
 </div>
 </div>
 

@@ -1,15 +1,20 @@
 # HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
 
 <div class="ww-fact-card" markdown>
-<div class="ww-fact-card__head"><span class="ww-card-kicker">Registry Fact Card</span><strong>交互式登录配置</strong></div>
+<div class="ww-fact-card__top">
+<div><span class="ww-card-kicker">Registry Fact Card</span><strong>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</strong></div>
+<span class="ww-badge ww-badge--status">stable / high</span>
+</div>
 <div class="ww-fact-grid" markdown>
-<div><span>Root</span><strong>HKLM</strong></div>
-<div><span>Hive</span><strong>SOFTWARE</strong></div>
+<div><span>Root</span><span class="ww-badge ww-badge--hive">HKLM</span></div>
+<div><span>Hive</span><span class="ww-badge ww-badge--hive">SOFTWARE</span></div>
 <div><span>Offline file</span><strong>C:\Windows\System32\Config\SOFTWARE</strong></div>
-<div class="ww-fact-wide"><span>Native path</span><code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code></div>
+<div class="ww-fact-wide"><span>Native path</span><div class="ww-path-stack"><span class="ww-path-pill">HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</span></div></div>
+</div>
+<div class="ww-fact-footer">
 <div><span>Topics</span><span class="ww-chip ww-chip--topic">持久化</span><span class="ww-chip ww-chip--topic">账户</span></div>
-<div><span>Related scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">账户与安全</span></div>
-<div><span>Data status</span><strong>stable / high</strong></div>
+<div><span>Scenarios</span><span class="ww-chip ww-chip--scenario">自启动与持久化</span><span class="ww-chip ww-chip--scenario">账户与安全</span><span class="ww-chip ww-chip--scenario">常规注册表检查</span></div>
+<div><span>Related data</span><span class="ww-chip ww-chip--data">data/registry: hklm-software-winlogon</span><span class="ww-chip ww-chip--data">artifact: winlogon-userinit</span><span class="ww-chip ww-chip--data">artifact: winlogon-shell</span><span class="ww-chip ww-chip--data">artifact: specialaccounts-userlist</span></div>
 </div>
 </div>
 

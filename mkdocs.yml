@@ -40,6 +40,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/registry-explorer.js
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -69,6 +72,7 @@ nav:
   - 首页: index.md
   - 注册表位置:
       - registry-tree/index.md
+      - Explorer: registry-tree/explorer.md
       - 结构化索引: registry-tree/generated-index.md
       - 覆盖矩阵: registry-tree/coverage.md
       - HKEY_CLASSES_ROOT:
