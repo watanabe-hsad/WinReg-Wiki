@@ -54,27 +54,41 @@
   };
 
   const pathPill = (value) =>
-    `<span class="ww-path-pill">${escapeHtml(value)}</span>`;
+    `<span class="ww-path-pill" title="${escapeHtml(value)}">${escapeHtml(value)}</span>`;
+
+  const shortPathLabel = (entry) => {
+    const firstPath = (entry.native_paths || [])[0] || entry.title || "";
+    const parts = String(firstPath)
+      .split("\\")
+      .map((part) => part.trim())
+      .filter(Boolean);
+    if (!parts.length) return entry.title || "Registry Entry";
+
+    const last = parts[parts.length - 1];
+    const prev = parts[parts.length - 2];
+    const generic = new Set(["Run", "Interfaces", "Parameters", "CurrentVersion"]);
+    if (prev && generic.has(last)) return `${prev}\\${last}`;
+    return last;
+  };
 
   const card = (entry) => {
-    const paths = (entry.native_paths || []).slice(0, 2).map(pathPill).join("");
-    const topics = (entry.topics || []).map((topic) => badge(topic, "topic")).join("");
+    const paths = (entry.native_paths || []).slice(0, 1).map(pathPill).join("");
+    const topics = (entry.topics || [])
+      .slice(0, 2)
+      .map((topic) => badge(topic, "topic"))
+      .join("");
     const scenarios = (entry.related_scenarios || [])
-      .slice(0, 3)
+      .slice(0, 2)
       .map((scenario) => badge(scenario, "scenario"))
       .join("");
-    const values = (entry.values || [])
-      .slice(0, 4)
-      .map((value) => `<code>${escapeHtml(value)}</code>`)
-      .join(" ");
     const href = entry.page_url || "#";
 
     return `
       <article class="ww-explorer-card">
         <div class="ww-explorer-card__top">
-          <div>
-            <span class="ww-card-kicker">${escapeHtml(entry.category || "Registry Entry")}</span>
-            <h2>${escapeHtml(entry.title || "Untitled")}</h2>
+          <div class="ww-explorer-card__title">
+            <h2>${escapeHtml(shortPathLabel(entry))}</h2>
+            <span>${escapeHtml(entry.hive || "-")}</span>
           </div>
           <div class="ww-explorer-card__badges">
             ${badge(entry.root, "hive")}
@@ -83,13 +97,8 @@
         </div>
         <div class="ww-explorer-card__paths">${paths}</div>
         <p>${escapeHtml(entry.summary || "暂无摘要。")}</p>
-        <dl class="ww-explorer-card__meta">
-          <div><dt>Hive</dt><dd>${escapeHtml(entry.hive || "-")}</dd></div>
-          <div><dt>Topics</dt><dd>${topics || '<span class="ww-muted">-</span>'}</dd></div>
-          <div><dt>Scenarios</dt><dd>${scenarios || '<span class="ww-muted">-</span>'}</dd></div>
-          <div><dt>Values</dt><dd>${values || '<span class="ww-muted">-</span>'}</dd></div>
-        </dl>
-        <a class="ww-card-link" href="${escapeHtml(href)}">Open registry page →</a>
+        <div class="ww-card-chips">${topics}${scenarios}</div>
+        <a class="ww-card-link" href="${escapeHtml(href)}">Open →</a>
       </article>
     `;
   };
@@ -111,10 +120,10 @@
     const scenarios = data.meta.scenarios || [];
 
     stats.innerHTML = `
-      <div class="ww-stat-card"><span>entries</span><strong>${entries.length}</strong><em>结构化记录</em></div>
-      <div class="ww-stat-card"><span>hives</span><strong>${roots.length}</strong><em>${escapeHtml(roots.join(" / ") || "-")}</em></div>
-      <div class="ww-stat-card"><span>topics</span><strong>${topics.length}</strong><em>可筛选主题</em></div>
-      <div class="ww-stat-card"><span>scenarios</span><strong>${scenarios.length}</strong><em>关联场景</em></div>
+      <div class="ww-stat-card"><strong>${entries.length}</strong><span>entries</span></div>
+      <div class="ww-stat-card"><strong>${roots.length}</strong><span>hives</span></div>
+      <div class="ww-stat-card"><strong>${topics.length}</strong><span>topics</span></div>
+      <div class="ww-stat-card"><strong>${scenarios.length}</strong><span>scenarios</span></div>
     `;
   };
 

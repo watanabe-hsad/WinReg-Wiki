@@ -121,6 +121,13 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Quieted the core UI after the RegSeek / DFIRHub rebuild:
+  - homepage now uses a compact title block, inline search bar, small filter chips, small metrics, compact entry cards, and dense popular path cards;
+  - Registry Explorer now uses a compact heading / toolbar and shorter result cards with short path labels, single-line path pills, and capped chip rows;
+  - registry-tree and scenario index pages now use smaller directory cards instead of large hero-style cards;
+  - common registry checklist starts with a compact heading and category chips;
+  - Registry Fact Cards were reduced from table-like panels to compact fact strips;
+  - `docs/stylesheets/extra.css` now removes viewport-width title scaling, reduces shadows, card padding, card gaps, metric sizes, and mobile search height.
 - Rebuilt the core UI around a RegSeek / DFIRHub inspired registry database experience:
   - homepage first screen is now a search-first database landing with quick filters, stats, primary entry cards, and popular registry path cards;
   - registry-tree entry page now pushes users toward the interactive Registry Explorer, generated index, and coverage matrix;

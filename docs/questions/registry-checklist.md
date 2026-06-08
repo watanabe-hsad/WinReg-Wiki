@@ -1,9 +1,9 @@
-# 常规注册表检查
-
-<section class="ww-page-header ww-page-header--checklist">
-  <p class="ww-hero-eyebrow">Registry Checklist</p>
-  <h1>第一次检查注册表时看哪里</h1>
-  <p>按主题扫关键路径。每一项只说明检查目标、注册表位置、关注字段和交叉验证来源。</p>
+<section class="ww-shell">
+  <div class="ww-compact-head">
+    <p class="ww-hero-eyebrow">Registry Checklist</p>
+    <h1>常规注册表检查</h1>
+    <p>按主题扫关键路径；每项只保留检查目标、注册表位置、关注字段和交叉验证来源。</p>
+  </div>
 </section>
 
 <div class="ww-chip-row ww-chip-row--filters">

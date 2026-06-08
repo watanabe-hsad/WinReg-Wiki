@@ -6,7 +6,7 @@ The project is `WinReg Wiki`: a concise Chinese-first Windows registry key/value
 
 Current information architecture:
 
-- `首页`: search-first registry database landing with a visible search panel, quick path chips, dashboard stats, and popular registry path cards.
+- `首页`: compact search-first registry database entrance with a quiet title block, inline search bar, small filter chips, metric row, and dense popular path cards.
 - `注册表位置`: primary dictionary-style entry point organized by Windows native registry tree. Pages explain location, hive source, common values, state, caveats, related scenarios, and related registry positions.
 - `取证场景`: checklist-style investigation entry point. Scenario pages primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
 - `docs/artifacts/`: supplemental/internal artifact detail. Artifact pages are retained for field semantics, collection notes, parsing tools, common misreads, and YAML-backed artifact indexes. They are not a primary navigation model.
@@ -41,6 +41,74 @@ Current information architecture:
 - `.github/workflows/pages.yml`: GitHub Actions workflow for MkDocs build and GitHub Pages deployment.
 
 ## Last Completed Round
+
+This round completed a `Quiet RegSeek-style UI Correction`. It did not expand content, did not change the data model, did not change the top-level navigation, and did not move artifact pages back into the primary entry model.
+
+Reason for this round:
+
+- The previous UI was functional but still felt too much like a large landing page.
+- Homepage title, hero area, card size, whitespace, and fact cards were too visually heavy for a registry lookup wiki.
+- The desired direction is closer to RegSeek / DFIRHub: search first, compact filters, dense data cards, and quiet Microsoft Learn-like reading surfaces.
+
+Quiet UI changes:
+
+- Rebuilt `docs/index.md` from a split hero into a compact database entrance:
+  - H1 is now `WinReg Wiki`, with a smaller title scale and no large hero card;
+  - search is a 52-60px inline bar below the title block;
+  - quick filters now prioritize registry paths and hives: HKLM, HKCU, SYSTEM, SOFTWARE, Run Keys, Services, USBSTOR, UserAssist, Winlogon, ProfileList, RDP, Defender;
+  - metric cards are small dashboard items instead of large stat blocks;
+  - primary entry cards are compact and under the target desktop height;
+  - popular registry path cards now use short path pills and smaller text.
+- Reworked `docs/registry-tree/explorer.md` into a quieter RegSeek-like database page:
+  - removed duplicate Markdown page title;
+  - replaced the large Explorer hero with a compact heading and toolbar;
+  - kept JSON-backed rendering and filters;
+  - Explorer result cards now use short path labels, single-line path pills, one-line summaries, and capped chip rows.
+- Updated `docs/javascripts/registry-explorer.js`:
+  - uses short path labels for card titles;
+  - keeps full paths in path-pill `title` text;
+  - limits visible topic / scenario chips so cards stay compact.
+- Reworked `docs/registry-tree/index.md` as a quiet directory entrance:
+  - small `Explorer / 结构化索引 / 覆盖矩阵` entry cards;
+  - compact root-key cards;
+  - common registry areas presented as dense path cards.
+- Reworked `docs/questions/index.md` as a compact scenario directory:
+  - small header;
+  - compact highlighted `常规注册表检查`;
+  - scenario cards use short descriptions and path chips;
+  - supplemental artifact / generated-data / detection links remain visually weaker at the bottom.
+- Updated `docs/questions/registry-checklist.md`:
+  - removed the large page-header block;
+  - kept checklist cards but made the page start with a compact title and category chips.
+- Rebuilt `docs/stylesheets/extra.css` around quiet constraints:
+  - removed viewport-width typography scaling;
+  - homepage H1 is capped at `2.1rem` desktop and `1.82rem` mobile;
+  - search bar is compact, with mobile staying around 59px and hiding shortcut chips at very narrow widths;
+  - metric numbers are `1.05rem`, metric rows are about 58px;
+  - card padding, gaps, radii, and shadows were reduced;
+  - Explorer result cards are about 139px on desktop;
+  - fact cards were changed from a table-like block into a compact fact strip.
+
+Current visual notes:
+
+- The site remains MkDocs Material with small project-specific `ww-*` CSS components.
+- The UI is intentionally quiet and dense. It avoids large hero cards, large pale-blue surfaces, thick shadows, gradients, decorative blobs, and marketing copy.
+- Registry Fact Cards are smaller and no longer table-like. The `HKLM\SYSTEM\Select` card is still taller than the ideal 160px because it preserves multiple scenario and related-data chips; forcing it smaller would hide useful facts.
+
+Local browser preview for this round:
+
+- Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
+- Checked pages:
+  - `/`
+  - `/registry-tree/explorer/`
+  - `/registry-tree/`
+  - `/questions/`
+  - `/questions/registry-checklist/`
+  - `/registry-tree/hklm/system/select/`
+- Checked desktop width, mobile width, and dark mode.
+- Result: no horizontal overflow, no console errors, mobile search bar stayed compact, Explorer rendered 10 JSON records, and clicking the HKCU Hive filter reduced results to `1 of 10 registry entries`.
+
+## Previous Completed Round
 
 This round completed a high-fidelity `RegSeek / DFIRHub inspired UI rebuild`. It did not expand registry content, did not add artifact pages, and did not change the top-level navigation. The focus was converting the site from a polished MkDocs document landing into a search-first registry database experience.
 
@@ -99,7 +167,7 @@ Local browser preview:
 - Result: Explorer JSON cards render, filters work, search panel is visible, chips wrap normally, and no page-level horizontal overflow was observed. Dark mode remains readable for cards, filters, path pills, and fact cards.
 - Browser console note: MkDocs Material may emit theme-level label warnings; these are not introduced by project content.
 
-## Previous Completed Round
+## Earlier Completed Round
 
 This previous round completed the first `Visual UX Redesign`.
 
@@ -185,9 +253,15 @@ Latest required validation results:
 - `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
 - `.venv/bin/python scripts/check-content-style.py`: passed.
 - `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs showed the upstream MkDocs 2.0 warning; this is not a project failure. MkDocs also lists artifact detail pages outside `nav`, which is expected because artifact pages remain supplemental.
-- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the redesign.
-- Browser preview checks: homepage, Registry Explorer, registry-tree portal, generated index, coverage matrix, scenario directory, registry checklist, `HKLM\SYSTEM\Select`, and `HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR`.
-- Visual result: desktop, mobile, light mode, and dark mode were checked. Explorer loaded 10 JSON records, keyword filtering for `USBSTOR` reduced results to one card, homepage search panel focused MkDocs search, and no horizontal overflow or console errors were observed.
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the quiet UI correction.
+- Browser preview checks: homepage, Registry Explorer, registry-tree portal, scenario directory, registry checklist, and `HKLM\SYSTEM\Select`.
+- Visual result:
+  - desktop homepage search bar measured about 57px high, metric cards about 58px, and primary entry cards about 104px;
+  - desktop Explorer cards measured about 139px after compact rendering;
+  - mobile homepage search bar measured about 59px and did not overflow;
+  - dark mode was checked on homepage, Explorer, and Registry Fact Card pages;
+  - no page-level horizontal overflow or console errors were observed;
+  - Explorer loaded 10 JSON records and clicking the HKCU filter reduced results to `1 of 10 registry entries`.
 
 ## License Status
 
