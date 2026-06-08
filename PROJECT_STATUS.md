@@ -42,7 +42,55 @@ Current information architecture:
 
 ## Last Completed Round
 
-This round expanded the Registry Explorer data backbone from the 10-entry MVP to 30 core registry records. It did not add new registry-tree Markdown pages, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
+This round enhanced the Registry Explorer controls now that the structured registry data set has 30 records. It did not expand content, did not change the data model, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
+
+Explorer interaction updates:
+
+- Added compact `Sort` and `Group` selects to `docs/registry-tree/explorer.md`:
+  - sort by path, hive, topic, or status;
+  - group by root hive, offline hive, topic, or status.
+- Added `Reset` and `Copy view` actions to the Explorer toolbar.
+- Updated `docs/javascripts/registry-explorer.js` so Explorer state is reflected in URL query parameters:
+  - `q`
+  - `root`
+  - `topic`
+  - `status`
+  - `sort`
+  - `group`
+- Direct links to filtered/grouped Explorer views now restore controls and result cards on page load.
+- Topic grouping now respects the selected topic when a topic filter is active, so multi-topic entries do not appear under an unrelated primary topic heading.
+- Added accessible `id` and `name` attributes to the Explorer search, sort, and group controls.
+- Updated `docs/stylesheets/extra.css` with quiet compact styles for Explorer controls, grouped sections, and grouped card grids.
+- Fixed fallback links in the Explorer no-JavaScript / JSON-load failure states so they resolve correctly from the built `/registry-tree/explorer/` URL.
+
+Local browser preview for this round:
+
+- Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
+- Checked pages:
+  - `/`
+  - `/registry-tree/explorer/`
+  - `/registry-tree/hklm/system/select/`
+- Checked desktop width, mobile width, and dark mode.
+- Verified Explorer behavior:
+  - default view rendered 30 cards;
+  - sort and group controls update the card order / grouped sections;
+  - direct query URL `root=HKCU&topic=用户行为&sort=topic&group=topic` restored controls and rendered 5 matching cards under the selected topic group;
+  - `firewall` search returned 2 matching cards;
+  - `Reset` returned controls to the default view;
+  - `Copy view` copied the current URL in the browser context;
+  - no horizontal overflow was observed on desktop or mobile;
+  - browser console had no project JavaScript errors after the accessibility field-label fix.
+
+Validation for this round:
+
+- `.venv/bin/python scripts/generate-artifact-index.py`: passed.
+- `.venv/bin/python scripts/generate-registry-index.py`: passed, generated 30 registry entries.
+- `.venv/bin/python scripts/check-content-style.py`: passed.
+- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs emitted its upstream MkDocs 2.0 warning, and MkDocs listed artifact detail pages outside `nav`; both are expected for this project state.
+
+## Previous Completed Round
+
+This previous round expanded the Registry Explorer data backbone from the 10-entry MVP to 30 core registry records. It did not add new registry-tree Markdown pages, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
 
 Registry data expansion:
 

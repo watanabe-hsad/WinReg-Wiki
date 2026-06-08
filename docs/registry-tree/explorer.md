@@ -6,10 +6,38 @@
   </div>
 
   <div class="ww-explorer-toolbar">
-    <label class="ww-explorer-search">
+    <label class="ww-explorer-search" for="registry-explorer-search">
       <span>Search</span>
-      <input type="search" data-registry-search placeholder="Search paths, values, topics..." autocomplete="off">
+      <input id="registry-explorer-search" name="registry-explorer-search" type="search" data-registry-search placeholder="Search paths, values, topics..." autocomplete="off">
     </label>
+
+    <div class="ww-explorer-controls">
+      <label class="ww-explorer-select" for="registry-explorer-sort">
+        <span>Sort</span>
+        <select id="registry-explorer-sort" name="registry-explorer-sort" data-registry-sort>
+          <option value="path">Path A-Z</option>
+          <option value="hive">Hive / path</option>
+          <option value="topic">Topic / path</option>
+          <option value="status">Status / path</option>
+        </select>
+      </label>
+
+      <label class="ww-explorer-select" for="registry-explorer-group">
+        <span>Group</span>
+        <select id="registry-explorer-group" name="registry-explorer-group" data-registry-group>
+          <option value="">No grouping</option>
+          <option value="root">Root hive</option>
+          <option value="hive">Offline hive</option>
+          <option value="topic">Topic</option>
+          <option value="status">Status</option>
+        </select>
+      </label>
+
+      <div class="ww-explorer-actions">
+        <button type="button" class="ww-filter-chip" data-registry-reset>Reset</button>
+        <button type="button" class="ww-filter-chip" data-registry-copy-link>Copy view</button>
+      </div>
+    </div>
 
     <div class="ww-filter-section">
       <span class="ww-filter-label">Hive</span>
@@ -50,19 +78,19 @@
   </div>
 
   <div class="ww-dashboard-grid ww-dashboard-grid--explorer" data-registry-stats>
-    <div class="ww-stat-card"><strong>10</strong><span>entries</span></div>
+    <div class="ww-stat-card"><strong>30</strong><span>entries</span></div>
     <div class="ww-stat-card"><strong>2</strong><span>hives</span></div>
-    <div class="ww-stat-card"><strong>5</strong><span>topics</span></div>
-    <div class="ww-stat-card"><strong>7</strong><span>scenarios</span></div>
+    <div class="ww-stat-card"><strong>9</strong><span>topics</span></div>
+    <div class="ww-stat-card"><strong>11</strong><span>scenarios</span></div>
   </div>
 
-  <div class="ww-explorer-count" data-registry-count>Loading registry entries...</div>
+  <div class="ww-explorer-count" data-registry-count aria-live="polite">Loading registry entries...</div>
   <div class="ww-explorer-results" data-registry-results></div>
 
   <noscript>
     <div class="ww-empty-state">
       <strong>当前浏览器未启用 JavaScript。</strong>
-      <span>请使用 <a href="generated-index.md">结构化索引</a> 或 <a href="coverage.md">覆盖矩阵</a> 查看同一批 registry entry。</span>
+      <span>请使用 <a href="../generated-index/">结构化索引</a> 或 <a href="../coverage/">覆盖矩阵</a> 查看同一批 registry entry。</span>
     </div>
   </noscript>
 </section>

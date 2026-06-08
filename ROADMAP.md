@@ -87,7 +87,7 @@ Current project name: `WinReg Wiki`.
 - Current status: generated artifact index display is localized to Chinese while preserving YAML field names.
 - Current status: `data/registry/` MVP has expanded from 10 pilot records to 30 core registry-location YAML records.
 - Current status: `scripts/generate-registry-index.py` generates `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json` without overwriting manual registry-location pages.
-- Current status: `docs/registry-tree/explorer.md` consumes the generated JSON through vanilla JavaScript and provides search, Hive, topic, and status filters.
+- Current status: `docs/registry-tree/explorer.md` consumes the generated JSON through vanilla JavaScript and provides search, Hive, topic, status, sort, group, reset, and shareable URL-state controls.
 - Current status: core artifact YAML records can link back to registry entries via `registry_entry_ids`.
 - Current status: `docs/contributing/registry-data-schema.md` documents the registry YAML field model and the relationship between registry data and artifact data.
 - Keep `scripts/generate-artifact-index.py` small and dependency-light.
@@ -121,7 +121,8 @@ Current project name: `WinReg Wiki`.
 - Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
 - Current status: RegSeek / DFIRHub inspired UI rebuild is complete for the search-first homepage, interactive Registry Explorer, registry-tree portal, scenario directory, checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
 - Current status: desktop, narrow/mobile, light-mode, and dark-mode previews were checked locally with MkDocs serve; Explorer JSON cards render and filters work.
-- Next UI: add richer Explorer sort/group controls now that `data/registry` has 30 records, add more topic-specific generated sections after coverage reaches about 50 records, and consider a small screenshot set after the final production URL is confirmed.
+- Current status: richer Explorer sort/group/reset/copy-view controls are in place and can restore filtered views from URL query parameters.
+- Next UI: add more topic-specific generated sections after coverage reaches about 50 records, and consider a small screenshot set after the final production URL is confirmed.
 - Add `LICENSE` after the maintainer chooses a license.
 - Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
 - Review homepage, navigation, and first-visit experience once the final URL is confirmed.

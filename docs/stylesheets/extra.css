@@ -949,6 +949,59 @@ a.ww-path-pill:hover {
   outline: none;
 }
 
+.md-typeset .ww-explorer-controls {
+  align-items: end;
+  display: grid;
+  gap: 0.38rem;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
+.md-typeset .ww-explorer-select {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.md-typeset .ww-explorer-select span,
+.md-typeset .ww-explorer-actions::before {
+  color: var(--ww-subtle);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.md-typeset .ww-explorer-select select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--ww-subtle) 50%) calc(100% - 0.72rem) 50% / 0.32rem 0.32rem no-repeat,
+    linear-gradient(135deg, var(--ww-subtle) 50%, transparent 50%) calc(100% - 0.52rem) 50% / 0.32rem 0.32rem no-repeat,
+    var(--ww-surface-soft);
+  border: 1px solid var(--ww-line);
+  border-radius: var(--ww-radius-sm);
+  color: var(--ww-ink);
+  font: inherit;
+  min-height: 2.15rem;
+  padding: 0.38rem 1.25rem 0.38rem 0.52rem;
+  width: 100%;
+}
+
+.md-typeset .ww-explorer-select select:focus {
+  border-color: var(--ww-blue);
+  box-shadow: 0 0 0 0.1rem var(--ww-focus);
+  outline: none;
+}
+
+.md-typeset .ww-explorer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.24rem;
+}
+
+.md-typeset .ww-explorer-actions::before {
+  content: "View";
+  flex-basis: 100%;
+}
+
 .md-typeset .ww-filter-section {
   align-items: flex-start;
   display: flex;
@@ -980,6 +1033,47 @@ a.ww-path-pill:hover {
 }
 
 .md-typeset .ww-explorer-results {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+}
+
+.md-typeset .ww-explorer-results--grouped {
+  grid-template-columns: 1fr;
+}
+
+.md-typeset .ww-explorer-group {
+  border-top: 1px solid var(--ww-line);
+  display: grid;
+  gap: 0.52rem;
+  padding-top: 0.55rem;
+}
+
+.md-typeset .ww-explorer-group:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.md-typeset .ww-explorer-group__heading {
+  align-items: baseline;
+  display: flex;
+  gap: 0.45rem;
+  justify-content: space-between;
+}
+
+.md-typeset .ww-explorer-group__heading h2 {
+  color: var(--ww-ink);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.md-typeset .ww-explorer-group__heading span {
+  color: var(--ww-muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.md-typeset .ww-explorer-group__grid {
   display: grid;
   gap: 0.65rem;
   grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
