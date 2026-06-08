@@ -29,7 +29,7 @@
 
   <div class="ww-dashboard-grid ww-dashboard-grid--landing">
     <div class="ww-stat-card"><strong>98</strong><span>registry pages</span></div>
-    <div class="ww-stat-card"><strong>10</strong><span>registry data</span></div>
+    <div class="ww-stat-card"><strong>30</strong><span>registry data</span></div>
     <div class="ww-stat-card"><strong>42</strong><span>artifacts</span></div>
     <div class="ww-stat-card"><strong>12</strong><span>scenarios</span></div>
   </div>

@@ -1,5 +1,7 @@
 id: runmru
 title: RunMRU
+registry_entry_ids:
+  - hkcu-runmru
 category:
   - UserActivity
   - Shell

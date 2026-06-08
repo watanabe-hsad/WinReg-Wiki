@@ -1,5 +1,7 @@
 id: terminal-server-client
 title: Terminal Server Client
+registry_entry_ids:
+  - hkcu-terminal-server-client
 category:
   - RDP
   - RemoteAccess

@@ -1,0 +1,63 @@
+id: hklm-system-deviceclasses
+title: HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses
+page: docs/registry-tree/hklm/system/controlset/control/deviceclasses.md
+summary: 设备接口类和接口实例的注册信息。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Control\DeviceClasses
+  - HKLM\SYSTEM\ControlSet00x\Control\DeviceClasses
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 设备
+category: 设备接口类
+evidence_types:
+  - 设备接口注册
+values:
+  - name: DeviceInstance
+    type: REG_SZ
+    meaning: 关联设备实例路径。
+    common_data: Enum 设备实例路径
+    notes: 不一定存在。
+  - name: SymbolicLink
+    type: REG_SZ / Key name
+    meaning: 设备接口符号链接或其组成部分。
+    common_data: 符号链接字符串
+    notes: 需结合接口类 GUID。
+subkeys:
+  - name: <InterfaceClassGuid>
+    meaning: 设备接口类 GUID。
+  - name: <interface instance>
+    meaning: 具体接口实例，名称中可能包含设备实例路径。
+default_state: 接口类数量和实例随设备、驱动和 Windows 版本变化。
+version_notes: 接口类 GUID 本身不是唯一物理设备；需与 Enum、USBSTOR、MountedDevices 关联。
+timestamp_notes: key LastWrite 是接口注册 key 级变化，不直接表示设备插拔时间。
+forensic_notes:
+  - 可用于把设备接口和 Enum 设备实例关联起来。
+  - 需要结合 USB、USBSTOR、MountedDevices 和用户级 MountPoints2。
+common_misreads:
+  - 把接口类 GUID 当作物理设备唯一 ID。
+  - 忽略同一物理设备的多个接口。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: USB
+    path: docs/registry-tree/hklm/system/controlset/enum/usb.md
+  - title: USBSTOR
+    path: docs/registry-tree/hklm/system/controlset/enum/usbstor.md
+  - title: MountedDevices
+    path: docs/registry-tree/hklm/system/mounteddevices.md
+related_artifacts:
+  - deviceclasses
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Device interface classes
+    url: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-interface-classes
+status: reviewed
+confidence: medium

@@ -1,5 +1,7 @@
 id: credssp-nla
 title: CredSSP / NLA
+registry_entry_ids:
+  - hklm-system-rdp-tcp
 category:
   - RDP
   - RemoteAccess

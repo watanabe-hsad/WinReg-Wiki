@@ -1,0 +1,67 @@
+id: hklm-software-networklist-profiles
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles.md
+summary: Windows 识别过的网络配置文件、网络名称、类别和连接时间相关字段。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 网络
+  - 系统配置
+category: 网络配置文件
+evidence_types:
+  - 网络环境线索
+values:
+  - name: ProfileName
+    type: REG_SZ
+    meaning: 网络显示名称。
+    common_data: Wi-Fi SSID、网络名、域网络名
+    notes: 名称可重复或变化。
+  - name: Category
+    type: REG_DWORD
+    meaning: 网络类别。
+    common_data: 0 Public、1 Private、2 DomainAuthenticated 常见
+    notes: 具体语义视版本而定。
+  - name: DateCreated
+    type: REG_BINARY
+    meaning: profile 创建时间。
+    common_data: SYSTEMTIME 结构常见
+    notes: 解析需工具支持。
+  - name: DateLastConnected
+    type: REG_BINARY
+    meaning: 最近连接时间。
+    common_data: SYSTEMTIME 结构常见
+    notes: 不是所有环境都可靠。
+subkeys:
+  - name: <ProfileGUID>
+    meaning: 单个网络 profile。
+default_state: 字段和时间格式随 Windows 版本和网络类型变化。
+version_notes: Wi-Fi、有线、VPN、域网络和虚拟网卡可能表现不同。
+timestamp_notes: DateCreated 和 DateLastConnected 需要使用可靠工具解析，并记录时区处理方式。
+forensic_notes:
+  - 可辅助确认主机曾处于哪个网络环境。
+  - 网络类别可能影响防火墙 profile，需要与防火墙配置交叉验证。
+common_misreads:
+  - 把网络 profile 写成某个进程产生网络连接。
+  - 把网络名称当作唯一网络标识。
+related_scenarios:
+  - title: 网络与系统环境
+    path: docs/questions/network.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Tcpip Interfaces
+    path: docs/registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces.md
+  - title: FirewallPolicy
+    path: docs/registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: SANS DFIR posters
+    url: https://www.sans.org/posters/
+status: reviewed
+confidence: medium

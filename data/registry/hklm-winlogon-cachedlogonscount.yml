@@ -1,0 +1,54 @@
+id: hklm-winlogon-cachedlogonscount
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\CachedLogonsCount
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount.md
+summary: 控制系统可缓存的域登录凭据数量。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon /v CachedLogonsCount
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 账户
+  - 策略
+category: 缓存域登录策略
+evidence_types:
+  - 登录策略配置
+values:
+  - name: CachedLogonsCount
+    type: REG_SZ
+    meaning: 可缓存的域登录次数。
+    common_data: 0 到 50
+    notes: 0 表示不缓存域登录凭据。
+subkeys: []
+default_state: Microsoft 文档说明 Windows Server 2008 之后默认值为 10；Windows Server 2003 默认值为 25。
+version_notes: 客户端和企业基线可能通过本地策略、GPO 或安全模板调整该值。
+timestamp_notes: Winlogon key LastWrite 是 key 级变化，不保存缓存凭据内容或登录事件时间。
+forensic_notes:
+  - 可辅助判断主机是否允许离线域登录。
+  - 低值或 0 可能来自安全基线；高值应结合组织策略解释。
+common_misreads:
+  - 把该值写成缓存凭据本体。
+  - 把 CachedLogonsCount=0 写成历史上没有缓存过。
+related_scenarios:
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Winlogon
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+  - title: Policies\System
+    path: docs/registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md
+  - title: SECURITY
+    path: docs/registry-tree/hklm/security.md
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Cached domain logon information
+    url: https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information
+status: reviewed
+confidence: high

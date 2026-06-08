@@ -1,0 +1,62 @@
+id: hkcu-userassist
+title: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
+page: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md
+summary: Explorer 维护的用户交互记录，可辅助观察用户通过 Shell 触发过的程序线索。
+native_paths:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count
+  - HKU\<SID>\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 用户行为
+  - 程序执行
+category: Shell 用户交互
+evidence_types:
+  - Explorer 交互记录
+  - 程序执行线索
+values:
+  - name: <ROT13 entry>
+    type: REG_BINARY
+    meaning: 编码后的路径、快捷方式或 Shell item 名称。
+    common_data: ROT13 编码名称和二进制数据
+    notes: 需要解析工具解释运行次数和时间字段。
+subkeys:
+  - name: <GUID>
+    meaning: UserAssist 分类 GUID，含义随 Windows 版本和交互类型变化。
+  - name: Count
+    meaning: 具体条目列表。
+default_state: 交互式桌面用户通常会有多个 GUID\Count 子键；少量使用 Explorer 的账户可能记录较少。
+version_notes: 字段结构和计数解释随 Windows 版本变化。
+timestamp_notes: 解析出的条目时间字段需记录工具和版本；key LastWrite 是容器更新时间。
+forensic_notes:
+  - 更接近用户通过 Shell 交互过程序的线索。
+  - 不能覆盖所有执行方式，也不能单独证明用户双击。
+common_misreads:
+  - 把运行次数当作真实进程创建次数。
+  - 忽略 ROT13 解码和工具版本差异。
+related_scenarios:
+  - title: 程序执行痕迹
+    path: docs/questions/execution.md
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKCU Explorer
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+  - title: RunMRU
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md
+related_artifacts:
+  - userassist
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Eric Zimmerman tools - RECmd / Registry Explorer
+    url: https://ericzimmerman.github.io/#!index.md
+  - title: SANS poster - Windows Forensic Analysis
+    url: https://www.sans.org/posters/windows-forensic-analysis/
+status: reviewed
+confidence: medium

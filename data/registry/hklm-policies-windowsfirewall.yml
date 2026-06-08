@@ -1,0 +1,74 @@
+id: hklm-policies-windowsfirewall
+title: HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall
+page: docs/registry-tree/hklm/software/policies/microsoft/windowsfirewall.md
+summary: Windows Firewall / Windows Defender Firewall 的策略配置位置之一。
+native_paths:
+  - HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 策略
+  - 网络
+category: 防火墙策略
+evidence_types:
+  - 防火墙策略配置
+values:
+  - name: EnableFirewall
+    type: REG_DWORD
+    meaning: profile 防火墙开关策略。
+    common_data: 0 / 1
+    notes: 是否生效需结合策略结果。
+  - name: DefaultInboundAction
+    type: REG_DWORD
+    meaning: 默认入站动作策略。
+    common_data: 视策略而定
+    notes: 需结合 profile 和规则。
+  - name: DisableNotifications
+    type: REG_DWORD
+    meaning: 通知策略。
+    common_data: 视策略而定
+    notes: 不等于关闭防火墙。
+subkeys:
+  - name: DomainProfile
+    meaning: 域网络 profile 策略。
+  - name: PrivateProfile
+    meaning: 专用网络 profile 策略。
+  - name: PublicProfile
+    meaning: 公用网络 profile 策略。
+  - name: FirewallRules
+    meaning: 策略规则集合。
+default_state: 未通过 GPO / MDM 配置防火墙策略的系统上该路径可能为空或不存在。
+version_notes: Windows 版本、域策略模板和 MDM 配置会影响 profile 名称与 value 集合。
+timestamp_notes: key LastWrite 表示策略配置 key 级变化，不证明网络连接或规则命中。
+forensic_notes:
+  - 可与 SYSTEM hive 下的 FirewallPolicy 对照，区分本地配置和策略覆盖线索。
+  - 关注远程管理端口、RDP、SMB、WinRM、全放行规则和 profile 关闭。
+common_misreads:
+  - 把策略路径存在写成当前 ActiveStore 完全相同。
+  - 把规则存在写成连接发生。
+related_scenarios:
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 网络与系统环境
+    path: docs/questions/network.md
+  - title: 反取证与清理痕迹
+    path: docs/questions/anti-forensics.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Policies
+    path: docs/registry-tree/hklm/software/policies.md
+  - title: FirewallPolicy
+    path: docs/registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md
+related_artifacts:
+  - firewall-policies
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Firewall CSP
+    url: https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp
+status: reviewed
+confidence: medium

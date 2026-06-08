@@ -1,0 +1,74 @@
+id: hklm-system-firewallpolicy
+title: HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy
+page: docs/registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md
+summary: Windows Defender Firewall 本地 profile 和规则配置的一部分。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy
+  - HKLM\SYSTEM\ControlSet00x\Services\SharedAccess\Parameters\FirewallPolicy
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 网络
+  - 策略
+category: 防火墙本地配置
+evidence_types:
+  - 防火墙规则配置
+  - 网络暴露策略
+values:
+  - name: EnableFirewall
+    type: REG_DWORD
+    meaning: profile 防火墙开关。
+    common_data: 0 或 1
+    notes: 是否生效需结合策略和服务状态。
+  - name: DefaultInboundAction
+    type: REG_DWORD
+    meaning: 默认入站行为。
+    common_data: 视 profile 而定
+    notes: 需结合规则解释。
+  - name: FirewallRules
+    type: Key
+    meaning: 本地防火墙规则集合。
+    common_data: 多个规则 value
+    notes: 规则数据通常为字符串格式。
+subkeys:
+  - name: DomainProfile
+    meaning: 域网络 profile 防火墙配置。
+  - name: PrivateProfile
+    meaning: 专用网络 profile 防火墙配置。
+  - name: PublicProfile
+    meaning: 公用网络 profile 防火墙配置。
+  - name: RestrictedServices
+    meaning: 受限服务规则。
+default_state: 默认 profile 配置随 Windows 版本、网络类型、域策略和安全基线变化。
+version_notes: GPO / MDM 可能覆盖本地配置；另见 SOFTWARE Policies 下的 WindowsFirewall。
+timestamp_notes: key LastWrite 是配置 key 级变化，不证明规则命中或网络连接发生。
+forensic_notes:
+  - 重点看 RDP、SMB、WinRM、远控、异常高端口或全放行规则。
+  - 与 Windows Firewall logs、Security.evtx、进程创建、网络流量和 GPO 记录交叉验证。
+common_misreads:
+  - 把规则存在写成连接发生。
+  - 忽略 GPO / MDM 覆盖和运行时防火墙状态。
+related_scenarios:
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 网络与系统环境
+    path: docs/questions/network.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Services
+    path: docs/registry-tree/hklm/system/controlset/services/index.md
+  - title: WindowsFirewall Policies
+    path: docs/registry-tree/hklm/software/policies/microsoft/windowsfirewall.md
+related_artifacts:
+  - firewall-policies
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Firewall CSP
+    url: https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp
+status: reviewed
+confidence: medium

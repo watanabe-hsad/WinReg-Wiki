@@ -1,0 +1,69 @@
+id: hklm-software-active-setup
+title: HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components
+page: docs/registry-tree/hklm/software/microsoft/active-setup.md
+summary: 机器级组件定义和每用户初始化命令配置。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components
+  - HKCU\Software\Microsoft\Active Setup\Installed Components
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 持久化
+  - 软件
+category: 每用户初始化配置
+evidence_types:
+  - 登录初始化配置
+values:
+  - name: StubPath
+    type: REG_SZ / REG_EXPAND_SZ
+    meaning: 初始化命令。
+    common_data: 程序路径或命令行
+    notes: 配置存在不等于命令已执行。
+  - name: Version
+    type: REG_SZ
+    meaning: HKLM / HKCU 版本比较相关。
+    common_data: 版本字符串
+    notes: 需与用户级镜像一起解释。
+  - name: IsInstalled
+    type: REG_DWORD
+    meaning: 安装状态标记。
+    common_data: 视组件而定
+    notes: 具体语义需结合组件。
+subkeys:
+  - name: <Component>
+    meaning: 组件 GUID 或名称。
+default_state: Windows 组件、浏览器、Office、安装程序和企业软件可能写入合法组件。
+version_notes: HKLM 定义和 HKCU 镜像比较行为随组件和 Windows 版本变化。
+timestamp_notes: key LastWrite 表示组件 key 变化，不等于 StubPath 执行时间。
+forensic_notes:
+  - HKLM 定义和 HKCU 镜像需要一起看。
+  - 执行判断需要结合用户登录、进程创建、文件系统和日志。
+common_misreads:
+  - 把 StubPath 存在写成命令已执行。
+  - 忽略 HKCU 用户级状态。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 软件安装与卸载
+    path: docs/questions/software-install.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM SOFTWARE
+    path: docs/registry-tree/hklm/software/index.md
+  - title: HKCU Software
+    path: docs/registry-tree/hkcu/software/index.md
+related_artifacts:
+  - active-setup
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Sysinternals - Autoruns
+    url: https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+status: reviewed
+confidence: medium

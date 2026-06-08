@@ -1,5 +1,7 @@
 id: specialaccounts-userlist
 title: SpecialAccounts\UserList
+registry_entry_ids:
+  - hklm-winlogon-specialaccounts-userlist
 category:
   - Accounts
   - SecurityPolicy

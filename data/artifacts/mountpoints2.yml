@@ -1,5 +1,7 @@
 id: mountpoints2
 title: MountPoints2
+registry_entry_ids:
+  - hkcu-mountpoints2
 category:
   - USB
   - UserActivity

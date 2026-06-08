@@ -1,0 +1,66 @@
+id: hkcu-terminal-server-client
+title: HKCU\Software\Microsoft\Terminal Server Client
+page: docs/registry-tree/hkcu/software/microsoft/terminal-server-client.md
+summary: 当前用户使用 Microsoft Remote Desktop Client / mstsc.exe 时产生的客户端侧目标历史。
+native_paths:
+  - HKCU\Software\Microsoft\Terminal Server Client
+  - HKU\<SID>\Software\Microsoft\Terminal Server Client
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 网络
+  - 用户行为
+category: RDP 客户端历史
+evidence_types:
+  - RDP 客户端目标历史
+values:
+  - name: Default\MRU*
+    type: REG_SZ
+    meaning: 最近输入或选择的连接目标。
+    common_data: 主机名、IP 或目标字符串
+    notes: MRU 顺序不等于连接成功顺序。
+  - name: Servers\<host>\UsernameHint
+    type: REG_SZ
+    meaning: UI 保存的用户名提示。
+    common_data: DOMAIN\user 或 user
+    notes: 不等于凭据仍存在或登录成功。
+subkeys:
+  - name: Default
+    meaning: MRU 目标列表。
+  - name: Servers\<host>
+    meaning: 单个目标主机记录。
+default_state: 未使用 MSTSC 的用户 hive 中该 key 可能不存在。
+version_notes: Windows 版本、Remote Desktop Client 版本、保存连接方式和企业策略会影响子键和值的出现。
+timestamp_notes: key LastWrite 是客户端配置 key 的更新时间，不证明连接成功时间。
+forensic_notes:
+  - 可辅助回答某用户是否配置或尝试连接过特定 RDP 目标。
+  - 需要与 Security.evtx、TerminalServices 日志、Jump Lists、Credential Manager 和目标主机日志交叉验证。
+common_misreads:
+  - 把客户端目标历史写成本机被 RDP 登录。
+  - 把 UsernameHint 写成可用凭据。
+related_scenarios:
+  - title: RDP 与远程访问
+    path: docs/questions/rdp.md
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: 网络与系统环境
+    path: docs/questions/network.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Terminal Server
+    path: docs/registry-tree/hklm/system/controlset/control/terminal-server.md
+  - title: ProfileList
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
+related_artifacts:
+  - terminal-server-client
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Remote Desktop clients
+    url: https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients
+status: reviewed
+confidence: medium

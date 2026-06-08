@@ -1,5 +1,7 @@
 id: swd-wpdbusenum
 title: Enum SWD WPDBUSENUM
+registry_entry_ids:
+  - hklm-system-swd-wpdbusenum
 category:
   - USB
   - Device
@@ -62,4 +64,3 @@ cross_validation:
 references:
   - "https://research.splunk.com/endpoint/52b48e8b-eb6e-48b0-b8f1-73273f6b134e/"
   - "https://artefacts.help/windows_registry_usb_activity.html"
-

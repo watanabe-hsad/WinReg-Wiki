@@ -1,0 +1,74 @@
+id: hklm-policies-windows-defender
+title: HKLM\SOFTWARE\Policies\Microsoft\Windows Defender
+page: docs/registry-tree/hklm/software/policies/microsoft/windows-defender.md
+summary: Microsoft Defender Antivirus 的策略配置位置之一。
+native_paths:
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 策略
+  - 软件
+category: Defender 策略
+evidence_types:
+  - 安全控制配置
+values:
+  - name: DisableAntiSpyware
+    type: REG_DWORD
+    meaning: 旧版 Defender 禁用相关策略。
+    common_data: 版本相关
+    notes: 新版本语义和有效性受限制。
+  - name: Real-Time Protection\DisableRealtimeMonitoring
+    type: REG_DWORD
+    meaning: 实时保护相关策略。
+    common_data: 0 / 1
+    notes: 需验证实际状态。
+  - name: Exclusions\Paths
+    type: Key
+    meaning: 路径排除项。
+    common_data: value 名可能为路径
+    notes: 需要检查来源和生效状态。
+subkeys:
+  - name: Real-Time Protection
+    meaning: 实时保护相关策略值。
+  - name: Exclusions\Paths
+    meaning: 路径排除项集合。
+  - name: Exclusions\Processes
+    meaning: 进程排除项集合。
+  - name: Exclusions\Extensions
+    meaning: 扩展名排除项集合。
+default_state: 未通过策略配置的系统上该路径可能为空或不存在。
+version_notes: 语义随 Windows 版本、Defender 平台版本、Tamper Protection、企业管理状态和第三方 AV 状态变化。
+timestamp_notes: key LastWrite 是策略 key 级变化，不等于 Defender 运行时状态变化时间。
+forensic_notes:
+  - 注册表中存在策略值说明配置存在或曾被写入，不等同运行时状态。
+  - 排除项需结合 Defender 日志、PowerShell / WMI 状态、GPO / MDM 结果和安全平台记录验证。
+common_misreads:
+  - 把某个禁用值直接写成 Defender 已关闭。
+  - 忽略 Tamper Protection 或企业管理覆盖。
+related_scenarios:
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 反取证与清理痕迹
+    path: docs/questions/anti-forensics.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Policies
+    path: docs/registry-tree/hklm/software/policies.md
+  - title: Windows Defender
+    path: docs/registry-tree/hklm/software/microsoft/windows-defender.md
+related_artifacts:
+  - defender-policies
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Policy CSP Defender
+    url: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender
+  - title: Microsoft Learn - Tamper protection
+    url: https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection
+status: reviewed
+confidence: medium

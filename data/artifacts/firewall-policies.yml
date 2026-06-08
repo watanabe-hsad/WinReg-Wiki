@@ -1,5 +1,8 @@
 id: firewall-policies
 title: Firewall Policies
+registry_entry_ids:
+  - hklm-system-firewallpolicy
+  - hklm-policies-windowsfirewall
 category:
   - SecurityPolicy
   - Firewall

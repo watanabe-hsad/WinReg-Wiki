@@ -1,0 +1,61 @@
+id: hkcu-runmru
+title: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+page: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md
+summary: Win+R Run dialog 的输入历史。
+native_paths:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 用户行为
+  - 程序执行
+category: Run dialog 输入历史
+evidence_types:
+  - 命令输入历史
+values:
+  - name: MRUList
+    type: REG_SZ
+    meaning: MRU 顺序，使用字母引用具体 value。
+    common_data: 字母序列
+    notes: 不表示每条命令的时间。
+  - name: a, b, c ...
+    type: REG_SZ
+    meaning: 用户输入过的命令、路径、URL 或 UNC。
+    common_data: 命令或路径字符串
+    notes: 输入历史不等于命令成功执行。
+subkeys: []
+default_state: 新账户或未使用 Run dialog 的用户可能为空。
+version_notes: 记录行为受 Explorer、隐私设置和用户清理影响。
+timestamp_notes: key LastWrite 是 key 级更新时间；每个输入 value 没有独立可靠时间戳。
+forensic_notes:
+  - 可辅助发现用户输入过的命令、路径、URL 或 UNC。
+  - 需要结合进程创建、Prefetch、UserAssist、日志或网络记录确认执行。
+common_misreads:
+  - 把输入历史写成命令已执行。
+  - 把 MRUList 当作时间戳。
+related_scenarios:
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 程序执行痕迹
+    path: docs/questions/execution.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKCU Explorer
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+  - title: UserAssist
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/userassist.md
+  - title: RecentDocs
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md
+related_artifacts:
+  - runmru
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Eric Zimmerman tools - RECmd / Registry Explorer
+    url: https://ericzimmerman.github.io/#!index.md
+status: reviewed
+confidence: medium

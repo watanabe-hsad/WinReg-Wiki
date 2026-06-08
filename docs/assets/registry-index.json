@@ -1,34 +1,343 @@
 {
   "meta": {
     "generated_by": "scripts/generate-registry-index.py",
-    "entries": 10,
+    "entries": 30,
     "roots": [
       "HKCU",
       "HKLM"
     ],
     "topics": [
       "持久化",
+      "用户行为",
+      "程序执行",
+      "策略",
       "系统配置",
       "网络",
       "设备",
-      "账户"
+      "账户",
+      "软件"
     ],
     "scenarios": [
       "RDP 与远程访问",
       "Shell / Explorer 用户行为",
       "USB 与外接设备",
+      "反取证与清理痕迹",
+      "安全策略与防护配置",
       "常规注册表检查",
       "程序执行痕迹",
       "网络与系统环境",
       "自启动与持久化",
-      "账户与安全"
+      "账户与安全",
+      "软件安装与卸载"
     ],
     "statuses": {
-      "reviewed": 3,
+      "reviewed": 23,
       "stable": 7
     }
   },
   "entries": [
+    {
+      "id": "hkcu-terminal-server-client",
+      "title": "HKCU\\Software\\Microsoft\\Terminal Server Client",
+      "summary": "当前用户使用 Microsoft Remote Desktop Client / mstsc.exe 时产生的客户端侧目标历史。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Terminal Server Client",
+        "HKU\\<SID>\\Software\\Microsoft\\Terminal Server Client"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "网络",
+        "用户行为"
+      ],
+      "category": "RDP 客户端历史",
+      "evidence_types": [
+        "RDP 客户端目标历史"
+      ],
+      "values": [
+        "Default\\MRU*",
+        "Servers\\<host>\\UsernameHint"
+      ],
+      "related_scenarios": [
+        "RDP 与远程访问",
+        "账户与安全",
+        "网络与系统环境",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Terminal Server",
+          "url": "../hklm/system/controlset/control/terminal-server/"
+        },
+        {
+          "title": "ProfileList",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/profilelist/"
+        }
+      ],
+      "related_artifacts": [
+        "terminal-server-client"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Remote Desktop clients",
+          "url": "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hkcu/software/microsoft/terminal-server-client/",
+      "site_path": "registry-tree/hkcu/software/microsoft/terminal-server-client/"
+    },
+    {
+      "id": "hkcu-mountpoints2",
+      "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2",
+      "summary": "当前用户 Shell 见过的卷、盘符、可移动介质或网络共享位置。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2",
+        "HKU\\<SID>\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "用户行为",
+        "设备"
+      ],
+      "category": "用户级卷和共享记录",
+      "evidence_types": [
+        "用户可见卷记录",
+        "网络共享线索"
+      ],
+      "values": [],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "Shell / Explorer 用户行为",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKCU Explorer",
+          "url": "../hkcu/software/microsoft/windows/currentversion/explorer/"
+        },
+        {
+          "title": "HKLM MountedDevices",
+          "url": "../hklm/system/mounteddevices/"
+        },
+        {
+          "title": "USBSTOR",
+          "url": "../hklm/system/controlset/enum/usbstor/"
+        }
+      ],
+      "related_artifacts": [
+        "mountpoints2"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Eric Zimmerman tools - RECmd / Registry Explorer",
+          "url": "https://ericzimmerman.github.io/#!index.md"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hkcu/software/microsoft/windows/currentversion/mountpoints2/",
+      "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2/"
+    },
+    {
+      "id": "hkcu-recentdocs",
+      "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs",
+      "summary": "Explorer 维护的最近文档名称、扩展名分组和 MRU 顺序。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "用户行为"
+      ],
+      "category": "最近文档",
+      "evidence_types": [
+        "最近文档名称",
+        "MRU 顺序"
+      ],
+      "values": [
+        "MRUListEx",
+        "<number>"
+      ],
+      "related_scenarios": [
+        "Shell / Explorer 用户行为",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKCU Explorer",
+          "url": "../hkcu/software/microsoft/windows/currentversion/explorer/"
+        },
+        {
+          "title": "RunMRU",
+          "url": "../hkcu/software/microsoft/windows/currentversion/runmru/"
+        },
+        {
+          "title": "ComDlg32",
+          "url": "../hkcu/software/microsoft/windows/currentversion/comdlg32/"
+        }
+      ],
+      "related_artifacts": [
+        "recentdocs"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Eric Zimmerman tools - RECmd / Registry Explorer",
+          "url": "https://ericzimmerman.github.io/#!index.md"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hkcu/software/microsoft/windows/currentversion/recentdocs/",
+      "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs/"
+    },
+    {
+      "id": "hkcu-runmru",
+      "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
+      "summary": "Win+R Run dialog 的输入历史。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "用户行为",
+        "程序执行"
+      ],
+      "category": "Run dialog 输入历史",
+      "evidence_types": [
+        "命令输入历史"
+      ],
+      "values": [
+        "MRUList",
+        "a, b, c ..."
+      ],
+      "related_scenarios": [
+        "Shell / Explorer 用户行为",
+        "程序执行痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKCU Explorer",
+          "url": "../hkcu/software/microsoft/windows/currentversion/explorer/"
+        },
+        {
+          "title": "UserAssist",
+          "url": "../hkcu/software/microsoft/windows/currentversion/userassist/"
+        },
+        {
+          "title": "RecentDocs",
+          "url": "../hkcu/software/microsoft/windows/currentversion/recentdocs/"
+        }
+      ],
+      "related_artifacts": [
+        "runmru"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Eric Zimmerman tools - RECmd / Registry Explorer",
+          "url": "https://ericzimmerman.github.io/#!index.md"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hkcu/software/microsoft/windows/currentversion/runmru/",
+      "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/runmru/"
+    },
+    {
+      "id": "hkcu-userassist",
+      "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist",
+      "summary": "Explorer 维护的用户交互记录，可辅助观察用户通过 Shell 触发过的程序线索。",
+      "native_paths": [
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{GUID}\\Count",
+        "HKU\\<SID>\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist\\{GUID}\\Count"
+      ],
+      "root": "HKCU",
+      "hive": "NTUSER.DAT",
+      "offline_files": [
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "用户行为",
+        "程序执行"
+      ],
+      "category": "Shell 用户交互",
+      "evidence_types": [
+        "Explorer 交互记录",
+        "程序执行线索"
+      ],
+      "values": [
+        "<ROT13 entry>"
+      ],
+      "related_scenarios": [
+        "程序执行痕迹",
+        "Shell / Explorer 用户行为",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKCU Explorer",
+          "url": "../hkcu/software/microsoft/windows/currentversion/explorer/"
+        },
+        {
+          "title": "RunMRU",
+          "url": "../hkcu/software/microsoft/windows/currentversion/runmru/"
+        }
+      ],
+      "related_artifacts": [
+        "userassist"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Eric Zimmerman tools - RECmd / Registry Explorer",
+          "url": "https://ericzimmerman.github.io/#!index.md"
+        },
+        {
+          "title": "SANS poster - Windows Forensic Analysis",
+          "url": "https://www.sans.org/posters/windows-forensic-analysis/"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hkcu/software/microsoft/windows/currentversion/userassist/",
+      "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/userassist/"
+    },
     {
       "id": "hkcu-software-run",
       "title": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -94,6 +403,183 @@
       "confidence": "high",
       "page_url": "../hkcu/software/microsoft/windows/currentversion/run/",
       "site_path": "registry-tree/hkcu/software/microsoft/windows/currentversion/run/"
+    },
+    {
+      "id": "hklm-software-active-setup",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components",
+      "summary": "机器级组件定义和每用户初始化命令配置。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Active Setup\\Installed Components",
+        "HKCU\\Software\\Microsoft\\Active Setup\\Installed Components"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE",
+        "C:\\Users\\<user>\\NTUSER.DAT"
+      ],
+      "topics": [
+        "持久化",
+        "软件"
+      ],
+      "category": "每用户初始化配置",
+      "evidence_types": [
+        "登录初始化配置"
+      ],
+      "values": [
+        "StubPath",
+        "Version",
+        "IsInstalled"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "软件安装与卸载",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM SOFTWARE",
+          "url": "../hklm/software/"
+        },
+        {
+          "title": "HKCU Software",
+          "url": "../hkcu/software/"
+        }
+      ],
+      "related_artifacts": [
+        "active-setup"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Sysinternals - Autoruns",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/microsoft/active-setup/",
+      "site_path": "registry-tree/hklm/software/microsoft/active-setup/"
+    },
+    {
+      "id": "hklm-software-ifeo",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options",
+      "summary": "按可执行文件名生效的进程启动、调试和诊断配置。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "持久化",
+        "程序执行"
+      ],
+      "category": "进程启动调试配置",
+      "evidence_types": [
+        "调试器配置",
+        "进程启动劫持线索"
+      ],
+      "values": [
+        "<ImageName>\\Debugger",
+        "<ImageName>\\GlobalFlag"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "程序执行痕迹",
+        "反取证与清理痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "AeDebug",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/aedebug/"
+        },
+        {
+          "title": "App Paths",
+          "url": "../hklm/software/microsoft/windows/currentversion/app-paths/"
+        }
+      ],
+      "related_artifacts": [
+        "ifeo"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "MITRE ATT&CK - Image File Execution Options Injection",
+          "url": "https://attack.mitre.org/techniques/T1546/012/"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "high",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/ifeo/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo/"
+    },
+    {
+      "id": "hklm-software-networklist-profiles",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles",
+      "summary": "Windows 识别过的网络配置文件、网络名称、类别和连接时间相关字段。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "网络",
+        "系统配置"
+      ],
+      "category": "网络配置文件",
+      "evidence_types": [
+        "网络环境线索"
+      ],
+      "values": [
+        "ProfileName",
+        "Category",
+        "DateCreated",
+        "DateLastConnected"
+      ],
+      "related_scenarios": [
+        "网络与系统环境",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Tcpip Interfaces",
+          "url": "../hklm/system/controlset/services/tcpip/parameters/interfaces/"
+        },
+        {
+          "title": "FirewallPolicy",
+          "url": "../hklm/system/controlset/services/sharedaccess/firewallpolicy/"
+        }
+      ],
+      "related_artifacts": [],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "SANS DFIR posters",
+          "url": "https://www.sans.org/posters/"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/networklist/profiles/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/networklist/profiles/"
     },
     {
       "id": "hklm-software-profilelist",
@@ -230,6 +716,187 @@
       "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/"
     },
     {
+      "id": "hklm-winlogon-cachedlogonscount",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\CachedLogonsCount",
+      "summary": "控制系统可缓存的域登录凭据数量。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon /v CachedLogonsCount"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "账户",
+        "策略"
+      ],
+      "category": "缓存域登录策略",
+      "evidence_types": [
+        "登录策略配置"
+      ],
+      "values": [
+        "CachedLogonsCount"
+      ],
+      "related_scenarios": [
+        "账户与安全",
+        "安全策略与防护配置",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Winlogon",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/"
+        },
+        {
+          "title": "Policies\\System",
+          "url": "../hklm/software/microsoft/windows/currentversion/policies/system/"
+        },
+        {
+          "title": "SECURITY",
+          "url": "../hklm/security/"
+        }
+      ],
+      "related_artifacts": [],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Cached domain logon information",
+          "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/cached-domain-logon-information"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "high",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/cachedlogonscount/"
+    },
+    {
+      "id": "hklm-winlogon-specialaccounts-userlist",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList",
+      "summary": "控制部分本地账户是否显示在登录界面用户列表中。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "账户",
+        "策略"
+      ],
+      "category": "登录界面账户显示",
+      "evidence_types": [
+        "账户显示策略"
+      ],
+      "values": [
+        "<AccountName>"
+      ],
+      "related_scenarios": [
+        "账户与安全",
+        "安全策略与防护配置",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Winlogon",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/"
+        },
+        {
+          "title": "LogonUI",
+          "url": "../hklm/software/microsoft/windows/currentversion/authentication/logonui/"
+        },
+        {
+          "title": "ProfileList",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/profilelist/"
+        }
+      ],
+      "related_artifacts": [
+        "specialaccounts-userlist"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Winlogon and logon UI policy reference",
+          "url": "https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/local-accounts"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist/"
+    },
+    {
+      "id": "hklm-software-policies-system",
+      "title": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "summary": "UAC、管理员审批模式、登录提示和部分系统安全策略。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "策略",
+        "账户"
+      ],
+      "category": "UAC 与系统策略",
+      "evidence_types": [
+        "安全策略配置"
+      ],
+      "values": [
+        "EnableLUA",
+        "PromptOnSecureDesktop",
+        "LocalAccountTokenFilterPolicy"
+      ],
+      "related_scenarios": [
+        "安全策略与防护配置",
+        "账户与安全",
+        "RDP 与远程访问",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Policies",
+          "url": "../hklm/software/policies/"
+        },
+        {
+          "title": "LogonUI",
+          "url": "../hklm/software/microsoft/windows/currentversion/authentication/logonui/"
+        },
+        {
+          "title": "Winlogon",
+          "url": "../hklm/software/microsoft/windows-nt/currentversion/winlogon/"
+        }
+      ],
+      "related_artifacts": [
+        "uac-policies"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - User Account Control settings and configuration",
+          "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/microsoft/windows/currentversion/policies/system/",
+      "site_path": "registry-tree/hklm/software/microsoft/windows/currentversion/policies/system/"
+    },
+    {
       "id": "hklm-software-run",
       "title": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
       "summary": "机器级登录启动项，适用于所有用户登录后的自动启动命令。",
@@ -296,6 +963,127 @@
       "site_path": "registry-tree/hklm/software/microsoft/windows/currentversion/run/"
     },
     {
+      "id": "hklm-policies-windows-defender",
+      "title": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "summary": "Microsoft Defender Antivirus 的策略配置位置之一。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "策略",
+        "软件"
+      ],
+      "category": "Defender 策略",
+      "evidence_types": [
+        "安全控制配置"
+      ],
+      "values": [
+        "DisableAntiSpyware",
+        "Real-Time Protection\\DisableRealtimeMonitoring",
+        "Exclusions\\Paths"
+      ],
+      "related_scenarios": [
+        "安全策略与防护配置",
+        "反取证与清理痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Policies",
+          "url": "../hklm/software/policies/"
+        },
+        {
+          "title": "Windows Defender",
+          "url": "../hklm/software/microsoft/windows-defender/"
+        }
+      ],
+      "related_artifacts": [
+        "defender-policies"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Policy CSP Defender",
+          "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender"
+        },
+        {
+          "title": "Microsoft Learn - Tamper protection",
+          "url": "https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/policies/microsoft/windows-defender/",
+      "site_path": "registry-tree/hklm/software/policies/microsoft/windows-defender/"
+    },
+    {
+      "id": "hklm-policies-windowsfirewall",
+      "title": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall",
+      "summary": "Windows Firewall / Windows Defender Firewall 的策略配置位置之一。",
+      "native_paths": [
+        "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall"
+      ],
+      "root": "HKLM",
+      "hive": "SOFTWARE",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SOFTWARE"
+      ],
+      "topics": [
+        "策略",
+        "网络"
+      ],
+      "category": "防火墙策略",
+      "evidence_types": [
+        "防火墙策略配置"
+      ],
+      "values": [
+        "EnableFirewall",
+        "DefaultInboundAction",
+        "DisableNotifications"
+      ],
+      "related_scenarios": [
+        "安全策略与防护配置",
+        "网络与系统环境",
+        "反取证与清理痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "HKLM Policies",
+          "url": "../hklm/software/policies/"
+        },
+        {
+          "title": "FirewallPolicy",
+          "url": "../hklm/system/controlset/services/sharedaccess/firewallpolicy/"
+        }
+      ],
+      "related_artifacts": [
+        "firewall-policies"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Firewall CSP",
+          "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/software/policies/microsoft/windowsfirewall/",
+      "site_path": "registry-tree/hklm/software/policies/microsoft/windowsfirewall/"
+    },
+    {
       "id": "hklm-system-controlset",
       "title": "HKLM\\SYSTEM\\ControlSet00x",
       "summary": "SYSTEM hive 中保存系统控制配置的真实控制集。",
@@ -358,6 +1146,310 @@
       "confidence": "high",
       "page_url": "../hklm/system/controlset/",
       "site_path": "registry-tree/hklm/system/controlset/"
+    },
+    {
+      "id": "hklm-system-deviceclasses",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Control\\DeviceClasses",
+      "summary": "设备接口类和接口实例的注册信息。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceClasses",
+        "HKLM\\SYSTEM\\ControlSet00x\\Control\\DeviceClasses"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "设备"
+      ],
+      "category": "设备接口类",
+      "evidence_types": [
+        "设备接口注册"
+      ],
+      "values": [
+        "DeviceInstance",
+        "SymbolicLink"
+      ],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "USB",
+          "url": "../hklm/system/controlset/enum/usb/"
+        },
+        {
+          "title": "USBSTOR",
+          "url": "../hklm/system/controlset/enum/usbstor/"
+        },
+        {
+          "title": "MountedDevices",
+          "url": "../hklm/system/mounteddevices/"
+        }
+      ],
+      "related_artifacts": [
+        "deviceclasses"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Device interface classes",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/overview-of-device-interface-classes"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/control/deviceclasses/",
+      "site_path": "registry-tree/hklm/system/controlset/control/deviceclasses/"
+    },
+    {
+      "id": "hklm-system-lsa-security-packages",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Control\\Lsa\\Security Packages",
+      "summary": "LSA 可使用的安全支持包列表配置。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v Security Packages",
+        "HKLM\\SYSTEM\\ControlSet00x\\Control\\Lsa /v Security Packages"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "持久化",
+        "账户"
+      ],
+      "category": "LSA 安全包配置",
+      "evidence_types": [
+        "LSASS 加载链配置"
+      ],
+      "values": [
+        "Security Packages",
+        "OSConfig\\Security Packages",
+        "RunAsPPL"
+      ],
+      "related_scenarios": [
+        "自启动与持久化",
+        "账户与安全",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Lsa",
+          "url": "../hklm/system/controlset/control/lsa/"
+        },
+        {
+          "title": "Services",
+          "url": "../hklm/system/controlset/services/"
+        }
+      ],
+      "related_artifacts": [
+        "lsa-security-packages",
+        "lsa-authentication-packages"
+      ],
+      "tools": [
+        "Autoruns",
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - LSA authentication",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/secauthn/lsa-authentication"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/control/lsa/security-packages/",
+      "site_path": "registry-tree/hklm/system/controlset/control/lsa/security-packages/"
+    },
+    {
+      "id": "hklm-system-rdp-tcp",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+      "summary": "RDP-Tcp listener 的服务端配置，包括端口、NLA、安全层和连接限制。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+        "HKLM\\SYSTEM\\ControlSet00x\\Control\\Terminal Server\\WinStations\\RDP-Tcp"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "网络",
+        "策略"
+      ],
+      "category": "RDP 服务端配置",
+      "evidence_types": [
+        "RDP listener 配置"
+      ],
+      "values": [
+        "PortNumber",
+        "UserAuthentication",
+        "SecurityLayer"
+      ],
+      "related_scenarios": [
+        "RDP 与远程访问",
+        "安全策略与防护配置",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Terminal Server",
+          "url": "../hklm/system/controlset/control/terminal-server/"
+        },
+        {
+          "title": "FirewallPolicy",
+          "url": "../hklm/system/controlset/services/sharedaccess/firewallpolicy/"
+        }
+      ],
+      "related_artifacts": [
+        "rdp-tcp-portnumber",
+        "credssp-nla"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Remote Desktop Services",
+          "url": "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/welcome-to-rds"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "high",
+      "page_url": "../hklm/system/controlset/control/terminal-server/rdp-tcp/",
+      "site_path": "registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp/"
+    },
+    {
+      "id": "hklm-system-swd-wpdbusenum",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Enum\\SWD\\WPDBUSENUM",
+      "summary": "Windows Portable Devices 相关设备枚举记录。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\SWD\\WPDBUSENUM",
+        "HKLM\\SYSTEM\\ControlSet00x\\Enum\\SWD\\WPDBUSENUM"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "设备"
+      ],
+      "category": "WPD / MTP 设备枚举",
+      "evidence_types": [
+        "便携设备枚举"
+      ],
+      "values": [
+        "FriendlyName",
+        "ContainerID",
+        "ParentIdPrefix"
+      ],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "USB",
+          "url": "../hklm/system/controlset/enum/usb/"
+        },
+        {
+          "title": "DeviceClasses",
+          "url": "../hklm/system/controlset/control/deviceclasses/"
+        },
+        {
+          "title": "Portable Devices",
+          "url": "../hklm/software/microsoft/windows-portable-devices/"
+        }
+      ],
+      "related_artifacts": [
+        "swd-wpdbusenum",
+        "portable-devices"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Windows Portable Devices",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/wpd_sdk/windows-portable-devices"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/enum/swd-wpdbusenum/",
+      "site_path": "registry-tree/hklm/system/controlset/enum/swd-wpdbusenum/"
+    },
+    {
+      "id": "hklm-system-enum-usb",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Enum\\USB",
+      "summary": "USB 总线层面枚举到的设备实例。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USB",
+        "HKLM\\SYSTEM\\ControlSet00x\\Enum\\USB"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "设备"
+      ],
+      "category": "USB 总线枚举",
+      "evidence_types": [
+        "USB 设备枚举"
+      ],
+      "values": [
+        "DeviceDesc",
+        "FriendlyName",
+        "ContainerID"
+      ],
+      "related_scenarios": [
+        "USB 与外接设备",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "USBSTOR",
+          "url": "../hklm/system/controlset/enum/usbstor/"
+        },
+        {
+          "title": "DeviceClasses",
+          "url": "../hklm/system/controlset/control/deviceclasses/"
+        },
+        {
+          "title": "MountedDevices",
+          "url": "../hklm/system/mounteddevices/"
+        }
+      ],
+      "related_artifacts": [
+        "usb"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Device identification strings",
+          "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/device-identification-strings"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/enum/usb/",
+      "site_path": "registry-tree/hklm/system/controlset/enum/usb/"
     },
     {
       "id": "hklm-system-enum-usbstor",
@@ -501,6 +1593,123 @@
       "confidence": "high",
       "page_url": "../hklm/system/controlset/services/",
       "site_path": "registry-tree/hklm/system/controlset/services/"
+    },
+    {
+      "id": "hklm-system-eventlog",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Services\\EventLog",
+      "summary": "Windows Event Log 服务下经典日志通道的注册表配置。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog",
+        "HKLM\\SYSTEM\\ControlSet00x\\Services\\EventLog"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "系统配置",
+        "策略"
+      ],
+      "category": "事件日志配置",
+      "evidence_types": [
+        "日志通道配置"
+      ],
+      "values": [
+        "File",
+        "MaxSize",
+        "Retention"
+      ],
+      "related_scenarios": [
+        "安全策略与防护配置",
+        "反取证与清理痕迹",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Services",
+          "url": "../hklm/system/controlset/services/"
+        },
+        {
+          "title": "SECURITY",
+          "url": "../hklm/security/"
+        }
+      ],
+      "related_artifacts": [],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Event Logging",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/eventlog/event-logging"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/services/eventlog/",
+      "site_path": "registry-tree/hklm/system/controlset/services/eventlog/"
+    },
+    {
+      "id": "hklm-system-firewallpolicy",
+      "title": "HKLM\\SYSTEM\\ControlSet00x\\Services\\SharedAccess\\Parameters\\FirewallPolicy",
+      "summary": "Windows Defender Firewall 本地 profile 和规则配置的一部分。",
+      "native_paths": [
+        "HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedAccess\\Parameters\\FirewallPolicy",
+        "HKLM\\SYSTEM\\ControlSet00x\\Services\\SharedAccess\\Parameters\\FirewallPolicy"
+      ],
+      "root": "HKLM",
+      "hive": "SYSTEM",
+      "offline_files": [
+        "C:\\Windows\\System32\\Config\\SYSTEM"
+      ],
+      "topics": [
+        "网络",
+        "策略"
+      ],
+      "category": "防火墙本地配置",
+      "evidence_types": [
+        "防火墙规则配置",
+        "网络暴露策略"
+      ],
+      "values": [
+        "EnableFirewall",
+        "DefaultInboundAction",
+        "FirewallRules"
+      ],
+      "related_scenarios": [
+        "安全策略与防护配置",
+        "网络与系统环境",
+        "常规注册表检查"
+      ],
+      "related_registry_pages": [
+        {
+          "title": "Services",
+          "url": "../hklm/system/controlset/services/"
+        },
+        {
+          "title": "WindowsFirewall Policies",
+          "url": "../hklm/software/policies/microsoft/windowsfirewall/"
+        }
+      ],
+      "related_artifacts": [
+        "firewall-policies"
+      ],
+      "tools": [
+        "Registry Explorer",
+        "RECmd"
+      ],
+      "references": [
+        {
+          "title": "Microsoft Learn - Firewall CSP",
+          "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp"
+        }
+      ],
+      "status": "reviewed",
+      "confidence": "medium",
+      "page_url": "../hklm/system/controlset/services/sharedaccess/firewallpolicy/",
+      "site_path": "registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy/"
     },
     {
       "id": "hklm-system-tcpip-interfaces",

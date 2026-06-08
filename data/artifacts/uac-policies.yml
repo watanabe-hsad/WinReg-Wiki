@@ -1,5 +1,7 @@
 id: uac-policies
 title: UAC Policies
+registry_entry_ids:
+  - hklm-software-policies-system
 category:
   - SecurityPolicy
   - UAC

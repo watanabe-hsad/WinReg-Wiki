@@ -31,7 +31,7 @@ Current information architecture:
 - `docs/registry-tree/coverage.md`: generated registry coverage matrix for maintenance and next-path planning. Output of `scripts/generate-registry-index.py`.
 - `docs/questions/`: forensic scenario entry point. Current count is 12 Markdown files.
 - `docs/artifacts/`: supplemental artifact layer. Current count is 44 Markdown files total: 42 artifact content pages plus `index.md` and `generated-index.md`.
-- `data/registry/`: structured registry-location fact layer. Current pilot count is 10 YAML records.
+- `data/registry/`: structured registry-location fact layer. Current core count is 30 YAML records.
 - `data/artifacts/`: structured artifact YAML records. Current count is 42 YAML records.
 - `schemas/registry-entry.schema.yml`: lightweight reference schema for registry YAML fields. It is documentation-oriented and does not add a validation dependency.
 - `scripts/generate-registry-index.py`: reads `data/registry/*.yml`, validates required fields and linked Markdown pages, and writes `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
@@ -41,6 +41,62 @@ Current information architecture:
 - `.github/workflows/pages.yml`: GitHub Actions workflow for MkDocs build and GitHub Pages deployment.
 
 ## Last Completed Round
+
+This round expanded the Registry Explorer data backbone from the 10-entry MVP to 30 core registry records. It did not add new registry-tree Markdown pages, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
+
+Registry data expansion:
+
+- Added 20 new `data/registry/*.yml` records:
+  - `hkcu-userassist`
+  - `hkcu-recentdocs`
+  - `hkcu-runmru`
+  - `hkcu-mountpoints2`
+  - `hkcu-terminal-server-client`
+  - `hklm-system-rdp-tcp`
+  - `hklm-policies-windows-defender`
+  - `hklm-policies-windowsfirewall`
+  - `hklm-software-policies-system`
+  - `hklm-software-ifeo`
+  - `hklm-software-active-setup`
+  - `hklm-system-eventlog`
+  - `hklm-software-networklist-profiles`
+  - `hklm-system-firewallpolicy`
+  - `hklm-system-enum-usb`
+  - `hklm-system-deviceclasses`
+  - `hklm-system-swd-wpdbusenum`
+  - `hklm-winlogon-specialaccounts-userlist`
+  - `hklm-winlogon-cachedlogonscount`
+  - `hklm-system-lsa-security-packages`
+- Current `data/registry/` coverage is now 30 records:
+  - 5 HKCU records;
+  - 25 HKLM records;
+  - 9 topic labels: 持久化, 用户行为, 程序执行, 策略, 系统配置, 网络, 设备, 账户, 软件.
+- Regenerated:
+  - `docs/registry-tree/generated-index.md`
+  - `docs/registry-tree/coverage.md`
+  - `docs/assets/registry-index.json`
+- Homepage metric now shows `30 registry data`.
+- README now documents current `data/registry/` coverage as 30 core records.
+
+Artifact relationship updates:
+
+- Added clear `registry_entry_ids` links for additional artifact YAML records:
+  - UserAssist, RecentDocs, RunMRU, MountPoints2, Terminal Server Client;
+  - RDP-Tcp PortNumber and CredSSP / NLA;
+  - Defender Policies, Firewall Policies, UAC Policies;
+  - IFEO, Active Setup;
+  - USB, DeviceClasses, SWD WPDBUSENUM, Portable Devices;
+  - SpecialAccounts\UserList;
+  - LSA Security Packages and LSA Authentication Packages.
+- No old artifact YAML fields were removed.
+- Artifact pages remain supplemental/internal and still stay outside the top-level navigation.
+
+Documentation updates:
+
+- Updated `README.md`, `ROADMAP.md`, `CHANGELOG.md`, and this status document for the 30-record registry data milestone.
+- `ROADMAP.md` now treats the 30-record data milestone as complete and moves the next target to about 50 registry records plus richer Explorer sort/group controls.
+
+## Previous Completed Round
 
 This round completed a `Quiet RegSeek-style UI Correction`. It did not expand content, did not change the data model, did not change the top-level navigation, and did not move artifact pages back into the primary entry model.
 
@@ -259,10 +315,10 @@ Contribution and CI changes:
 Latest required validation results:
 
 - `.venv/bin/python scripts/generate-artifact-index.py`: passed; regenerated `docs/artifacts/generated-index.md`.
-- `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 10 registry entries into `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
+- `.venv/bin/python scripts/generate-registry-index.py`: passed; generated 30 registry entries into `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json`.
 - `.venv/bin/python scripts/check-content-style.py`: passed.
 - `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs showed the upstream MkDocs 2.0 warning; this is not a project failure. MkDocs also lists artifact detail pages outside `nav`, which is expected because artifact pages remain supplemental.
-- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the quiet UI correction.
+- `.venv/bin/mkdocs serve -a 127.0.0.1:8000`: used for local visual preview after the quiet UI correction and the 30-record registry data expansion.
 - Browser preview checks: homepage, Registry Explorer, registry-tree portal, scenario directory, registry checklist, and `HKLM\SYSTEM\Select`.
 - Visual result:
   - desktop homepage search bar measured about 57px high, metric cards about 58px, and primary entry cards about 104px;
@@ -273,7 +329,9 @@ Latest required validation results:
   - dark mode was checked on homepage, Explorer, and Registry Fact Card pages;
   - dark mode header, cards, table headers, path pills, and fact-card borders remained visually separated;
   - no page-level horizontal overflow or JavaScript console errors were observed;
-  - Explorer loaded 10 JSON records and clicking the HKCU filter reduced results to `1 of 10 registry entries`.
+  - Explorer loaded 30 JSON records; JSON metadata reports 2 root hives, 9 topics, and 30 entries;
+  - Explorer filtering was checked after the data expansion: HKCU returned 6 entries, HKCU + 设备 returned 1 entry, and searching `firewall` after reset returned 2 entries;
+  - mobile Explorer rendered 30 single-column cards without horizontal overflow.
 
 ## License Status
 
@@ -284,8 +342,9 @@ Latest required validation results:
 
 ## Next Round Suggestions
 
-- Expand `data/registry/` from 10 pilot records to about 30 core registry pages.
-- Continue adding `registry_entry_ids` to artifact YAML where relationships are clear.
+- Expand `data/registry/` from 30 core records to about 50 records, prioritizing ShellBags / BagMRU, AppCompatFlags, StartupApproved, App Paths, BootExecute, KnownDLLs, TypedPaths, Explorer Advanced, and additional device/container paths.
+- Continue adding `registry_entry_ids` to artifact YAML where relationships are clear and not yet represented.
+- Add richer Registry Explorer sort/group controls now that the JSON dataset is large enough to benefit from them.
 - Add generated registry indexes by Hive, topic, tool support, and ATT&CK mapping only after the data model reaches enough coverage.
 - Confirm GitHub Pages and DNS, then decide whether to move from the old path to `https://winreg.hsad.xyz/` or `https://hsad.xyz/winreg/`.
 - Decide License and add `LICENSE`.

@@ -1,0 +1,59 @@
+id: hkcu-mountpoints2
+title: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2
+page: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/mountpoints2.md
+summary: 当前用户 Shell 见过的卷、盘符、可移动介质或网络共享位置。
+native_paths:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2
+  - HKU\<SID>\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 用户行为
+  - 设备
+category: 用户级卷和共享记录
+evidence_types:
+  - 用户可见卷记录
+  - 网络共享线索
+values: []
+subkeys:
+  - name: <volume-guid>
+    meaning: 用户 Shell 见过的卷标识或挂载点线索。
+  - name: "##server#share"
+    meaning: SMB / UNC 共享访问线索。
+  - name: Shell
+    meaning: 与 Shell 动作相关的历史配置或子项。
+default_state: 普通桌面用户可能有多个卷和共享记录。
+version_notes: Windows 版本、设备类型、Shell 使用方式和自动播放配置会影响子键形态。
+timestamp_notes: key LastWrite 表示 key 级更新时间，不等于文件复制或文件打开时间。
+forensic_notes:
+  - 可将卷或共享线索归属到具体用户。
+  - 文件访问和复制需要结合 LNK、Jump Lists、RecentDocs、ShellBags 或 EDR 事件。
+common_misreads:
+  - 把卷记录写成文件复制证据。
+  - 混淆机器级 MountedDevices 和用户级 MountPoints2。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKCU Explorer
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+  - title: HKLM MountedDevices
+    path: docs/registry-tree/hklm/system/mounteddevices.md
+  - title: USBSTOR
+    path: docs/registry-tree/hklm/system/controlset/enum/usbstor.md
+related_artifacts:
+  - mountpoints2
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Eric Zimmerman tools - RECmd / Registry Explorer
+    url: https://ericzimmerman.github.io/#!index.md
+status: reviewed
+confidence: medium

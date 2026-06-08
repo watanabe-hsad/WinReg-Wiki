@@ -33,7 +33,7 @@ Structured data is split by purpose:
 
 | Directory | Purpose |
 |---|---|
-| `data/registry/` | Registry-location facts for generated registry indexes and coverage. |
+| `data/registry/` | Registry-location facts for generated registry indexes and coverage. Current coverage: 30 core records. |
 | `data/artifacts/` | Artifact-level facts for supplemental artifact index pages. |
 
 Generated outputs:

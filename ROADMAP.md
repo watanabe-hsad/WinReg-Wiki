@@ -78,22 +78,22 @@ Current project name: `WinReg Wiki`.
 - Add remaining USB/device pages: deeper USBSTOR instance interpretation, `Enum\STORAGE`, DeviceContainers, device install properties, and per-user ShellBags/MountPoints2 variants.
 - Completed in current content set: fDenyTSConnections, RDP-Tcp PortNumber, CredSSP / NLA.
 - Add remaining RDP and remote access pages: Remote Assistance, RD Gateway / client cache if registry-backed evidence is identified.
-- Completed in current content set: UAC Policies, Audit Policy, Firewall Policies, SpecialAccounts\UserList.
-- Add remaining security and policy pages: CachedLogonsCount, LogonUI, local group membership details, SAM user record interpretation.
+- Completed in current content set: UAC Policies, Audit Policy, Firewall Policies, SpecialAccounts\UserList, CachedLogonsCount.
+- Add remaining security and policy pages: LogonUI, local group membership details, SAM user record interpretation.
 
 ## Phase 4: Structured Data and Generated Indexes
 
 - Current status: every manual artifact page currently has a matching YAML record; after the USB/device and persistence expansion this is 42 artifact pages and 42 YAML records.
 - Current status: generated artifact index display is localized to Chinese while preserving YAML field names.
-- Current status: `data/registry/` MVP is established with 10 registry-location YAML records.
+- Current status: `data/registry/` MVP has expanded from 10 pilot records to 30 core registry-location YAML records.
 - Current status: `scripts/generate-registry-index.py` generates `docs/registry-tree/generated-index.md`, `docs/registry-tree/coverage.md`, and `docs/assets/registry-index.json` without overwriting manual registry-location pages.
 - Current status: `docs/registry-tree/explorer.md` consumes the generated JSON through vanilla JavaScript and provides search, Hive, topic, and status filters.
 - Current status: core artifact YAML records can link back to registry entries via `registry_entry_ids`.
 - Current status: `docs/contributing/registry-data-schema.md` documents the registry YAML field model and the relationship between registry data and artifact data.
 - Keep `scripts/generate-artifact-index.py` small and dependency-light.
 - Generate `docs/artifacts/generated-index.md` from YAML without overwriting manual narrative indexes.
-- Next: expand registry YAML coverage to about 30 core pages before adding more generated index views.
-- Next: continue building artifact-to-registry relationships with `registry_entry_ids`.
+- Next: expand registry YAML coverage from 30 core records to about 50 records, prioritizing ShellBags / BagMRU, AppCompatFlags, StartupApproved, App Paths, BootExecute, KnownDLLs, TypedPaths, Explorer Advanced, and additional device/container paths.
+- Next: continue building artifact-to-registry relationships with `registry_entry_ids`, especially where artifact YAML still has no linked registry entry.
 - Next: add stable fields for ATT&CK mappings, event IDs, collection commands, parser support, and confidence levels only when the page set is ready.
 - Next: keep the JSON output stable while expanding registry YAML coverage; add new generated views only after the data reaches enough breadth.
 
@@ -121,7 +121,7 @@ Current project name: `WinReg Wiki`.
 - Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
 - Current status: RegSeek / DFIRHub inspired UI rebuild is complete for the search-first homepage, interactive Registry Explorer, registry-tree portal, scenario directory, checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
 - Current status: desktop, narrow/mobile, light-mode, and dark-mode previews were checked locally with MkDocs serve; Explorer JSON cards render and filters work.
-- Next UI: add richer Explorer sort/group controls after `data/registry` grows, add more topic-specific generated sections after registry YAML coverage expands, and consider a small screenshot set after the final production URL is confirmed.
+- Next UI: add richer Explorer sort/group controls now that `data/registry` has 30 records, add more topic-specific generated sections after coverage reaches about 50 records, and consider a small screenshot set after the final production URL is confirmed.
 - Add `LICENSE` after the maintainer chooses a license.
 - Confirm GitHub Pages / custom domain target before changing `site_url`. Candidate paths: `https://hsad.xyz/winreg/` or `https://winreg.hsad.xyz/`.
 - Review homepage, navigation, and first-visit experience once the final URL is confirmed.

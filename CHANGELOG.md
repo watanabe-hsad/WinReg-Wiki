@@ -8,6 +8,8 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Added
 
+- Added 20 more registry YAML records, expanding `data/registry/` from 10 pilot entries to 30 core records across user behavior, RDP, firewall, Defender, UAC, IFEO, Active Setup, EventLog, NetworkList, USB device, Winlogon, and LSA paths.
+- Added additional `registry_entry_ids` relationships for UserAssist, RecentDocs, RunMRU, MountPoints2, Terminal Server Client, RDP-Tcp, CredSSP / NLA, Defender Policies, Firewall Policies, UAC Policies, IFEO, Active Setup, USB, DeviceClasses, SWD WPDBUSENUM, Portable Devices, SpecialAccounts\UserList, and LSA package artifacts.
 - Added `docs/registry-tree/explorer.md` as a JSON-backed Registry Explorer with search, Hive filters, topic filters, status filters, result count, empty state, and registry entry cards.
 - Added `docs/assets/registry-index.json` as generated structured data for the Registry Explorer.
 - Added `docs/javascripts/registry-explorer.js` for vanilla-JavaScript Explorer rendering, filtering, and homepage search-panel focus behavior.

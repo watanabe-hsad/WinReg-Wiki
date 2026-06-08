@@ -1,0 +1,69 @@
+id: hklm-system-lsa-security-packages
+title: HKLM\SYSTEM\ControlSet00x\Control\Lsa\Security Packages
+page: docs/registry-tree/hklm/system/controlset/control/lsa/security-packages.md
+summary: LSA 可使用的安全支持包列表配置。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Control\Lsa /v Security Packages
+  - HKLM\SYSTEM\ControlSet00x\Control\Lsa /v Security Packages
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 持久化
+  - 账户
+category: LSA 安全包配置
+evidence_types:
+  - LSASS 加载链配置
+values:
+  - name: Security Packages
+    type: REG_MULTI_SZ
+    meaning: LSA 可使用的安全支持包列表。
+    common_data: 包名称列表
+    notes: 配置存在不等同包已被 LSASS 加载。
+  - name: OSConfig\Security Packages
+    type: REG_MULTI_SZ
+    meaning: 系统受限配置位置。
+    common_data: 包名称列表
+    notes: 版本语义需结合系统确认。
+  - name: RunAsPPL
+    type: REG_DWORD
+    meaning: LSA protection 配置。
+    common_data: 视系统和策略而定
+    notes: 与安全基线相关。
+subkeys:
+  - name: OSConfig
+    meaning: 部分系统上的 LSA 配置子项。
+default_state: 常见写入者包括 Windows、身份认证组件、安全产品、VPN、MFA 和智能卡组件。
+version_notes: LSA 相关 value 和保护机制随 Windows 版本、安全基线和企业认证组件变化。
+timestamp_notes: key LastWrite 是 LSA 配置 key 级变化；LSASS 实际加载需结合进程模块或事件记录。
+forensic_notes:
+  - 关注列表中异常包名、路径可疑的 SSP 或与新文件落地接近的变化。
+  - 需要与 LSASS 模块、文件签名、服务/驱动、EDR telemetry 和重启时间线验证。
+common_misreads:
+  - 把配置列表存在写成包已加载。
+  - 混淆 Security Packages 和 Authentication Packages。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Lsa
+    path: docs/registry-tree/hklm/system/controlset/control/lsa/index.md
+  - title: Services
+    path: docs/registry-tree/hklm/system/controlset/services/index.md
+related_artifacts:
+  - lsa-security-packages
+  - lsa-authentication-packages
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - LSA authentication
+    url: https://learn.microsoft.com/en-us/windows/win32/secauthn/lsa-authentication
+status: reviewed
+confidence: medium

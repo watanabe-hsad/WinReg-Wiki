@@ -1,5 +1,7 @@
 id: userassist
 title: UserAssist
+registry_entry_ids:
+  - hkcu-userassist
 category:
   - Execution
   - UserActivity

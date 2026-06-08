@@ -1,5 +1,7 @@
 id: lsa-security-packages
 title: LSA Security Packages
+registry_entry_ids:
+  - hklm-system-lsa-security-packages
 category:
   - Persistence
   - CredentialAccess
@@ -70,4 +72,3 @@ cross_validation:
 references:
   - "https://learn.microsoft.com/en-us/windows/win32/secauthn/restrictions-around-registering-and-installing-a-security-package"
   - "https://attack.mitre.org/techniques/T1547/005/"
-

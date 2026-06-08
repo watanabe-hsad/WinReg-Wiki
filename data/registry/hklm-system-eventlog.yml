@@ -1,0 +1,69 @@
+id: hklm-system-eventlog
+title: HKLM\SYSTEM\ControlSet00x\Services\EventLog
+page: docs/registry-tree/hklm/system/controlset/services/eventlog.md
+summary: Windows Event Log 服务下经典日志通道的注册表配置。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Services\EventLog
+  - HKLM\SYSTEM\ControlSet00x\Services\EventLog
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 系统配置
+  - 策略
+category: 事件日志配置
+evidence_types:
+  - 日志通道配置
+values:
+  - name: File
+    type: REG_EXPAND_SZ / REG_SZ
+    meaning: 日志文件路径。
+    common_data: "%SystemRoot%\\System32\\Winevt\\Logs\\..."
+    notes: 具体路径可被配置。
+  - name: MaxSize
+    type: REG_DWORD
+    meaning: 日志最大大小。
+    common_data: 视系统和策略而定
+    notes: 值过小可能影响保留时间。
+  - name: Retention
+    type: REG_DWORD
+    meaning: 保留策略。
+    common_data: 视配置而定
+    notes: 需结合通道实际配置解释。
+subkeys:
+  - name: Application
+    meaning: Application 日志配置。
+  - name: System
+    meaning: System 日志配置。
+  - name: Security
+    meaning: Security 日志配置。
+default_state: 默认大小和保留策略随 Windows 版本、角色、域策略和安全基线变化。
+version_notes: 现代 Windows 还存在大量通道配置在其他位置和 .evtx 元数据中体现。
+timestamp_notes: EventLog key LastWrite 是配置 key 级变化，不是日志事件发生时间。
+forensic_notes:
+  - MaxSize、Retention 或 AutoBackupLogFiles 的异常变化可作为日志可见性调查线索。
+  - 需要结合 Security 1102、4719、日志文件时间线、GPO 和 EDR tamper 事件验证。
+common_misreads:
+  - 从该 key 直接判断某个事件是否发生。
+  - 忽略审计策略和 .evtx 文件本身。
+related_scenarios:
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 反取证与清理痕迹
+    path: docs/questions/anti-forensics.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Services
+    path: docs/registry-tree/hklm/system/controlset/services/index.md
+  - title: SECURITY
+    path: docs/registry-tree/hklm/security.md
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Event Logging
+    url: https://learn.microsoft.com/en-us/windows/win32/eventlog/event-logging
+status: reviewed
+confidence: medium

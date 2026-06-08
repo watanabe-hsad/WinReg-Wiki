@@ -1,5 +1,7 @@
 id: defender-policies
 title: Defender Policies
+registry_entry_ids:
+  - hklm-policies-windows-defender
 category:
   - SecurityPolicy
   - Defender

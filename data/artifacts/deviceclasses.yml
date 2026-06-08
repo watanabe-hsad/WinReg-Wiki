@@ -1,5 +1,7 @@
 id: deviceclasses
 title: DeviceClasses
+registry_entry_ids:
+  - hklm-system-deviceclasses
 category:
   - USB
   - Device
@@ -63,4 +65,3 @@ cross_validation:
 references:
   - "https://learn.microsoft.com/en-gb/windows-hardware/drivers/install/hklm-system-currentcontrolset-control-registry-tree"
   - "https://artefacts.help/windows_registry_usb_activity.html"
-

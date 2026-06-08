@@ -1,0 +1,68 @@
+id: hklm-software-policies-system
+title: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+page: docs/registry-tree/hklm/software/microsoft/windows/currentversion/policies/system.md
+summary: UAC、管理员审批模式、登录提示和部分系统安全策略。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 策略
+  - 账户
+category: UAC 与系统策略
+evidence_types:
+  - 安全策略配置
+values:
+  - name: EnableLUA
+    type: REG_DWORD
+    meaning: UAC 总开关相关值。
+    common_data: 0 / 1
+    notes: 修改后通常需要重启才完整生效。
+  - name: PromptOnSecureDesktop
+    type: REG_DWORD
+    meaning: 是否在安全桌面显示 UAC 提示。
+    common_data: 0 / 1
+    notes: 需结合策略解释。
+  - name: LocalAccountTokenFilterPolicy
+    type: REG_DWORD
+    meaning: 本地账户远程 UAC 过滤相关值。
+    common_data: 默认常不存在
+    notes: 常用于远程管理语境。
+subkeys: []
+default_state: 默认值随 Windows 版本、SKU、安全基线和域策略变化。
+version_notes: 域策略、MDM 和安全基线可能覆盖本地配置。
+timestamp_notes: key LastWrite 是配置 key 级变化，不说明提权、登录或远程执行发生。
+forensic_notes:
+  - EnableLUA=0、PromptOnSecureDesktop=0、异常 LocalAccountTokenFilterPolicy 可作为安全策略变化线索。
+  - 需要与 GroupPolicy、Security.evtx、管理员操作、远程登录和服务创建记录交叉验证。
+common_misreads:
+  - 只凭单个 value 判断系统整体安全状态。
+  - 把 UAC 配置变化写成已经发生提权。
+related_scenarios:
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: RDP 与远程访问
+    path: docs/questions/rdp.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKLM Policies
+    path: docs/registry-tree/hklm/software/policies.md
+  - title: LogonUI
+    path: docs/registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md
+  - title: Winlogon
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+related_artifacts:
+  - uac-policies
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - User Account Control settings and configuration
+    url: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration
+status: reviewed
+confidence: medium

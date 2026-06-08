@@ -1,5 +1,7 @@
 id: active-setup
 title: Active Setup
+registry_entry_ids:
+  - hklm-software-active-setup
 category:
   - Persistence
   - Autoruns
@@ -68,4 +70,3 @@ cross_validation:
 references:
   - "https://attack.mitre.org/techniques/T1547/014/"
   - "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns"
-

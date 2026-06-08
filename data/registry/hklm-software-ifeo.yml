@@ -1,0 +1,67 @@
+id: hklm-software-ifeo
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/ifeo.md
+summary: 按可执行文件名生效的进程启动、调试和诊断配置。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 持久化
+  - 程序执行
+category: 进程启动调试配置
+evidence_types:
+  - 调试器配置
+  - 进程启动劫持线索
+values:
+  - name: <ImageName>\Debugger
+    type: REG_SZ
+    meaning: 目标进程启动时调用的调试器命令。
+    common_data: 调试器路径或命令行
+    notes: 可用于调试，也可被滥用。
+  - name: <ImageName>\GlobalFlag
+    type: REG_DWORD
+    meaning: 调试 / 诊断标志。
+    common_data: 视工具而定
+    notes: 需结合上下文解释。
+subkeys:
+  - name: <ImageName>
+    meaning: 目标可执行文件名。
+  - name: SilentProcessExit
+    meaning: 静默进程退出监控相关配置。
+default_state: 普通系统可能存在少量合法 IFEO 项；开发机、测试机、EDR 或诊断工具环境会出现更多配置。
+version_notes: 具体字段随 Windows 版本和工具变化。
+timestamp_notes: key LastWrite 表示 IFEO key 级变化；目标程序启动与否需另行验证。
+forensic_notes:
+  - 关注 Debugger 指向用户可写目录、脚本解释器、未知二进制或安全工具替换配置。
+  - 与进程创建日志、registry set telemetry、文件签名和目标程序启动时间线交叉验证。
+common_misreads:
+  - 把 IFEO 配置存在写成目标程序已启动。
+  - 忽略合法调试器、开发工具或 EDR 配置。
+related_scenarios:
+  - title: 自启动与持久化
+    path: docs/questions/persistence.md
+  - title: 程序执行痕迹
+    path: docs/questions/execution.md
+  - title: 反取证与清理痕迹
+    path: docs/questions/anti-forensics.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: AeDebug
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/aedebug.md
+  - title: App Paths
+    path: docs/registry-tree/hklm/software/microsoft/windows/currentversion/app-paths.md
+related_artifacts:
+  - ifeo
+tools:
+  - Autoruns
+  - Registry Explorer
+  - RECmd
+references:
+  - title: MITRE ATT&CK - Image File Execution Options Injection
+    url: https://attack.mitre.org/techniques/T1546/012/
+status: reviewed
+confidence: high

@@ -1,5 +1,7 @@
 id: recentdocs
 title: RecentDocs
+registry_entry_ids:
+  - hkcu-recentdocs
 category:
   - UserActivity
   - Shell

@@ -1,5 +1,7 @@
 id: portable-devices
 title: Portable Devices
+registry_entry_ids:
+  - hklm-system-swd-wpdbusenum
 category:
   - USB
   - Device
@@ -61,4 +63,3 @@ cross_validation:
   - ShellBags
 references:
   - "https://artefacts.help/windows_registry_usb_activity.html"
-

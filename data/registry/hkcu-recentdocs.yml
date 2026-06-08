@@ -1,0 +1,61 @@
+id: hkcu-recentdocs
+title: HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+page: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/recentdocs.md
+summary: Explorer 维护的最近文档名称、扩展名分组和 MRU 顺序。
+native_paths:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+root: HKCU
+hive: NTUSER.DAT
+offline_files:
+  - C:\Users\<user>\NTUSER.DAT
+topics:
+  - 用户行为
+category: 最近文档
+evidence_types:
+  - 最近文档名称
+  - MRU 顺序
+values:
+  - name: MRUListEx
+    type: REG_BINARY
+    meaning: 最近文档条目的 MRU 顺序。
+    common_data: 二进制序列
+    notes: 顺序列表，不是时间戳。
+  - name: <number>
+    type: REG_BINARY
+    meaning: 最近文档条目，通常可解析出文件名。
+    common_data: 文件名数据
+    notes: 不保存文件内容。
+subkeys:
+  - name: .<ext>
+    meaning: 按扩展名分组的最近文档。
+default_state: 新建或少量使用 Explorer 的账户可能为空。
+version_notes: 条目结构、扩展名分组和清理行为随 Windows 版本、用户配置和隐私设置变化。
+timestamp_notes: MRUListEx 只表示顺序；key LastWrite 是 key 级更新时间。
+forensic_notes:
+  - 文件名出现说明用户环境记录过该名称。
+  - 需要结合 LNK、Jump Lists、ShellBags 和文件系统时间线。
+common_misreads:
+  - 把文件名记录写成文件内容被读取。
+  - 把 MRU 顺序解释为精确时间线。
+related_scenarios:
+  - title: Shell / Explorer 用户行为
+    path: docs/questions/shell-explorer.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: HKCU Explorer
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/explorer.md
+  - title: RunMRU
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/runmru.md
+  - title: ComDlg32
+    path: docs/registry-tree/hkcu/software/microsoft/windows/currentversion/comdlg32.md
+related_artifacts:
+  - recentdocs
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Eric Zimmerman tools - RECmd / Registry Explorer
+    url: https://ericzimmerman.github.io/#!index.md
+status: reviewed
+confidence: medium

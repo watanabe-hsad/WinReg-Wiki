@@ -1,5 +1,7 @@
 id: lsa-authentication-packages
 title: LSA Authentication Packages
+registry_entry_ids:
+  - hklm-system-lsa-security-packages
 category:
   - Persistence
   - CredentialAccess

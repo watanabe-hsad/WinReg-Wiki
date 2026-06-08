@@ -1,0 +1,68 @@
+id: hklm-system-enum-usb
+title: HKLM\SYSTEM\ControlSet00x\Enum\USB
+page: docs/registry-tree/hklm/system/controlset/enum/usb.md
+summary: USB 总线层面枚举到的设备实例。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Enum\USB
+  - HKLM\SYSTEM\ControlSet00x\Enum\USB
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 设备
+category: USB 总线枚举
+evidence_types:
+  - USB 设备枚举
+values:
+  - name: DeviceDesc
+    type: REG_SZ
+    meaning: 设备描述字符串。
+    common_data: 设备描述
+    notes: 显示名可能来自驱动或设备信息。
+  - name: FriendlyName
+    type: REG_SZ
+    meaning: 设备友好名称。
+    common_data: 设备名称
+    notes: 不一定存在。
+  - name: ContainerID
+    type: REG_SZ
+    meaning: 设备容器 ID。
+    common_data: GUID
+    notes: 可用于关联同一物理设备的多个接口。
+subkeys:
+  - name: VID_xxxx&PID_yyyy
+    meaning: USB vendor ID 和 product ID 分组。
+  - name: <instance ID>
+    meaning: 设备实例，可能包含序列号或父级生成 ID。
+default_state: 该路径不只包含存储设备；普通系统可能包含多类 USB 外设。
+version_notes: 设备类型、驱动栈和 Windows 版本会影响子键和值。
+timestamp_notes: key LastWrite 是设备实例 key 级变化，不等于插拔全过程时间线。
+forensic_notes:
+  - 可辅助识别 USB 设备实例、VID/PID 和 ContainerID。
+  - 存储设备还需看 USBSTOR、MountedDevices、卷和用户级记录。
+common_misreads:
+  - 把 Enum\USB 中任意设备写成 USB 存储设备。
+  - 只凭 FriendlyName 做唯一设备识别。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: USBSTOR
+    path: docs/registry-tree/hklm/system/controlset/enum/usbstor.md
+  - title: DeviceClasses
+    path: docs/registry-tree/hklm/system/controlset/control/deviceclasses.md
+  - title: MountedDevices
+    path: docs/registry-tree/hklm/system/mounteddevices.md
+related_artifacts:
+  - usb
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Device identification strings
+    url: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/device-identification-strings
+status: reviewed
+confidence: medium

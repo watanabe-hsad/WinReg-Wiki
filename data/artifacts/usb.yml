@@ -1,5 +1,7 @@
 id: usb
 title: USB
+registry_entry_ids:
+  - hklm-system-enum-usb
 category:
   - USB
   - Device
@@ -65,4 +67,3 @@ cross_validation:
 references:
   - "https://learn.microsoft.com/en-ca/windows-hardware/drivers/install/hklm-system-currentcontrolset-enum-registry-tree"
   - "https://artefacts.help/windows_registry_usb_activity.html"
-

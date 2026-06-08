@@ -1,5 +1,7 @@
 id: rdp-tcp-portnumber
 title: RDP-Tcp PortNumber
+registry_entry_ids:
+  - hklm-system-rdp-tcp
 category:
   - RDP
   - RemoteAccess

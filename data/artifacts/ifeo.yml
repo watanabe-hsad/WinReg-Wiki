@@ -1,5 +1,7 @@
 id: ifeo
 title: Image File Execution Options
+registry_entry_ids:
+  - hklm-software-ifeo
 category:
   - Persistence
   - Hijacking

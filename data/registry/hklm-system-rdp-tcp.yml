@@ -1,0 +1,66 @@
+id: hklm-system-rdp-tcp
+title: HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp
+page: docs/registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp.md
+summary: RDP-Tcp listener 的服务端配置，包括端口、NLA、安全层和连接限制。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp
+  - HKLM\SYSTEM\ControlSet00x\Control\Terminal Server\WinStations\RDP-Tcp
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 网络
+  - 策略
+category: RDP 服务端配置
+evidence_types:
+  - RDP listener 配置
+values:
+  - name: PortNumber
+    type: REG_DWORD
+    meaning: RDP listener 端口。
+    common_data: 3389 / 0x00000d3d
+    notes: 报告中应明确十进制值。
+  - name: UserAuthentication
+    type: REG_DWORD
+    meaning: Network Level Authentication 相关配置。
+    common_data: 视版本和策略而定
+    notes: 需结合系统版本和策略解释。
+  - name: SecurityLayer
+    type: REG_DWORD
+    meaning: RDP 安全层配置。
+    common_data: 视版本和策略而定
+    notes: 降低安全层需结合基线判断。
+subkeys: []
+default_state: RDP-Tcp 路径在 Windows Client 和 Server 中常见；默认值受 SKU、角色、策略和安全基线影响。
+version_notes: 端口默认值较稳定；NLA 和安全层需按 Windows 版本与组织基线解释。
+timestamp_notes: RDP-Tcp key LastWrite 是配置 key 级变化，不说明 listener 启动或连接发生。
+forensic_notes:
+  - 非默认 PortNumber、NLA 关闭或安全层降低可作为远程访问配置变化线索。
+  - 需要与 TermService、防火墙规则、TerminalServices 日志和 Security.evtx 登录事件验证。
+common_misreads:
+  - 把 RDP-Tcp 配置存在写成端口正在监听。
+  - 忽略 SYSTEM\Select 中 CurrentControlSet 的映射。
+related_scenarios:
+  - title: RDP 与远程访问
+    path: docs/questions/rdp.md
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Terminal Server
+    path: docs/registry-tree/hklm/system/controlset/control/terminal-server.md
+  - title: FirewallPolicy
+    path: docs/registry-tree/hklm/system/controlset/services/sharedaccess/firewallpolicy.md
+related_artifacts:
+  - rdp-tcp-portnumber
+  - credssp-nla
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Remote Desktop Services
+    url: https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/welcome-to-rds
+status: reviewed
+confidence: high

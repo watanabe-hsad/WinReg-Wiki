@@ -1,0 +1,60 @@
+id: hklm-winlogon-specialaccounts-userlist
+title: HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+page: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/specialaccounts-userlist.md
+summary: 控制部分本地账户是否显示在登录界面用户列表中。
+native_paths:
+  - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+root: HKLM
+hive: SOFTWARE
+offline_files:
+  - C:\Windows\System32\Config\SOFTWARE
+topics:
+  - 账户
+  - 策略
+category: 登录界面账户显示
+evidence_types:
+  - 账户显示策略
+values:
+  - name: <AccountName>
+    type: REG_DWORD
+    meaning: 指定账户在登录界面中的显示控制。
+    common_data: 0 / 1
+    notes: 0 常被用于隐藏账户显示。
+subkeys:
+  - name: SpecialAccounts
+    meaning: Winlogon 下的特殊账户配置容器。
+  - name: UserList
+    meaning: 账户显示控制列表。
+default_state: 普通系统上该路径可能不存在。
+version_notes: 登录界面行为还受域策略、隐私设置、最后登录用户显示策略、系统版本和账户类型影响。
+timestamp_notes: key LastWrite 是显示控制列表的 key 级变化，不代表账户创建或登录时间。
+forensic_notes:
+  - AccountName=0 可作为登录 UI 隐藏账户线索。
+  - 需要与 SAM、Security.evtx、ProfileList 和 LogonUI 记录交叉验证。
+common_misreads:
+  - 把隐藏显示写成账户不存在或被禁用。
+  - 把 value name 当作 SID。
+related_scenarios:
+  - title: 账户与安全
+    path: docs/questions/accounts-security.md
+  - title: 安全策略与防护配置
+    path: docs/questions/policy-security.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: Winlogon
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon.md
+  - title: LogonUI
+    path: docs/registry-tree/hklm/software/microsoft/windows/currentversion/authentication/logonui.md
+  - title: ProfileList
+    path: docs/registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist.md
+related_artifacts:
+  - specialaccounts-userlist
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Winlogon and logon UI policy reference
+    url: https://learn.microsoft.com/en-us/windows/security/identity-protection/access-control/local-accounts
+status: reviewed
+confidence: medium

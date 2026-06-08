@@ -1,0 +1,67 @@
+id: hklm-system-swd-wpdbusenum
+title: HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM
+page: docs/registry-tree/hklm/system/controlset/enum/swd-wpdbusenum.md
+summary: Windows Portable Devices 相关设备枚举记录。
+native_paths:
+  - HKLM\SYSTEM\CurrentControlSet\Enum\SWD\WPDBUSENUM
+  - HKLM\SYSTEM\ControlSet00x\Enum\SWD\WPDBUSENUM
+root: HKLM
+hive: SYSTEM
+offline_files:
+  - C:\Windows\System32\Config\SYSTEM
+topics:
+  - 设备
+category: WPD / MTP 设备枚举
+evidence_types:
+  - 便携设备枚举
+values:
+  - name: FriendlyName
+    type: REG_SZ
+    meaning: 设备友好名称。
+    common_data: 手机、相机或 MTP 设备名称
+    notes: 名称可变化。
+  - name: ContainerID
+    type: REG_SZ
+    meaning: 可与 USB、DeviceClasses、Portable Devices 关联的容器 ID。
+    common_data: GUID
+    notes: 适合跨接口关联。
+  - name: ParentIdPrefix
+    type: REG_SZ
+    meaning: 父级 ID 前缀。
+    common_data: 设备相关字符串
+    notes: 并非所有设备都有。
+subkeys:
+  - name: <device instance>
+    meaning: WPD 设备实例。
+default_state: 常见于手机、相机、MTP 设备；不是所有 USB 存储都会出现。
+version_notes: 设备类型、WPD/MTP 驱动和 Windows 版本会影响字段。
+timestamp_notes: key LastWrite 是设备实例 key 级变化，不等于文件传输时间。
+forensic_notes:
+  - 可辅助识别 MTP/WPD 设备线索。
+  - 需要和 Portable Devices、USB、DeviceClasses、用户级记录交叉验证。
+common_misreads:
+  - 把 WPD 记录写成 USB Mass Storage 记录。
+  - 把设备出现写成文件传输发生。
+related_scenarios:
+  - title: USB 与外接设备
+    path: docs/questions/usb.md
+  - title: 常规注册表检查
+    path: docs/questions/registry-checklist.md
+related_registry_pages:
+  - title: USB
+    path: docs/registry-tree/hklm/system/controlset/enum/usb.md
+  - title: DeviceClasses
+    path: docs/registry-tree/hklm/system/controlset/control/deviceclasses.md
+  - title: Portable Devices
+    path: docs/registry-tree/hklm/software/microsoft/windows-portable-devices.md
+related_artifacts:
+  - swd-wpdbusenum
+  - portable-devices
+tools:
+  - Registry Explorer
+  - RECmd
+references:
+  - title: Microsoft Learn - Windows Portable Devices
+    url: https://learn.microsoft.com/en-us/windows/win32/wpd_sdk/windows-portable-devices
+status: reviewed
+confidence: medium
