@@ -121,6 +121,7 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Polished the quiet UI token system after browser review: refined light / slate borders, muted text, path pills, chips, focus rings, Material header/search treatment, subtle table zebra rows, and compact card hover states without changing content or navigation.
 - Quieted the core UI after the RegSeek / DFIRHub rebuild:
   - homepage now uses a compact title block, inline search bar, small filter chips, small metrics, compact entry cards, and dense popular path cards;
   - Registry Explorer now uses a compact heading / toolbar and shorter result cards with short path labels, single-line path pills, and capped chip rows;

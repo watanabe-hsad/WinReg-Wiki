@@ -95,6 +95,15 @@ Current visual notes:
 - The UI is intentionally quiet and dense. It avoids large hero cards, large pale-blue surfaces, thick shadows, gradients, decorative blobs, and marketing copy.
 - Registry Fact Cards are smaller and no longer table-like. The `HKLM\SYSTEM\Select` card is still taller than the ideal 160px because it preserves multiple scenario and related-data chips; forcing it smaller would hide useful facts.
 
+Follow-up visual token polish:
+
+- Refined `docs/stylesheets/extra.css` without changing content, navigation, data, or generated-page semantics.
+- Tightened light and slate mode tokens for borders, muted text, path pills, chips, and focus rings.
+- Set Material header / tabs to a quieter Windows-like blue and gave the built-in search box a restrained bordered treatment.
+- Added subtle table zebra rows and hover states for reference-page scanability.
+- Added clearer keyboard focus styles for search panels, filter chips, path pills, and registry cards.
+- Kept the UI within the quiet RegSeek-style constraints: no new hero treatment, no larger typography, no heavy shadows, and no new decorative surfaces.
+
 Local browser preview for this round:
 
 - Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
@@ -259,8 +268,11 @@ Latest required validation results:
   - desktop homepage search bar measured about 57px high, metric cards about 58px, and primary entry cards about 104px;
   - desktop Explorer cards measured about 139px after compact rendering;
   - mobile homepage search bar measured about 59px and did not overflow;
+  - mobile Explorer rendered the filter-first layout without horizontal overflow, with single-column result cards;
+  - mobile `HKLM\SYSTEM\Select` fact card kept path pills inside the viewport;
   - dark mode was checked on homepage, Explorer, and Registry Fact Card pages;
-  - no page-level horizontal overflow or console errors were observed;
+  - dark mode header, cards, table headers, path pills, and fact-card borders remained visually separated;
+  - no page-level horizontal overflow or JavaScript console errors were observed;
   - Explorer loaded 10 JSON records and clicking the HKCU filter reduced results to `1 of 10 registry entries`.
 
 ## License Status
