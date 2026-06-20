@@ -120,6 +120,7 @@ Current project name: `WinReg Wiki`.
 - Current status: CI runs artifact index generation, registry index generation, content style check, generated-file diff check, and `mkdocs build --strict`.
 - Current status: README, generated registry indexes, registry-tree coverage, and contribution docs document the v0.1 content model.
 - Current status: RegSeek / DFIRHub inspired UI rebuild is complete for the search-first homepage, interactive Registry Explorer, registry-tree portal, scenario directory, checklist dashboard, generated registry index, coverage matrix, and high-visible Registry Fact Cards.
+- Current status: homepage has been adjusted to the provided reference-design rhythm while keeping Chinese-first content and the current top-level navigation.
 - Current status: desktop, narrow/mobile, light-mode, and dark-mode previews were checked locally with MkDocs serve; Explorer JSON cards render and filters work.
 - Current status: richer Explorer sort/group/reset/copy-view controls are in place and can restore filtered views from URL query parameters.
 - Next UI: add more topic-specific generated sections after coverage reaches about 50 records, and consider a small screenshot set after the final production URL is confirmed.

@@ -1,6 +1,6 @@
 # WinReg Wiki
 
-WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads. The current homepage is a compact search-first registry database entrance: start with search, quick filters, registry path cards, or scenario cards.
+WinReg Wiki is a MkDocs Material knowledge base for Windows registry key/value lookup and registry-related forensic leads. The current homepage is a Chinese-first registry database entrance: start with search, quick filters, metric cards, primary entry cards, or common registry path cards.
 
 GitHub repository: `https://github.com/watanabe-hsad/WinReg-Wiki.git`
 
@@ -90,13 +90,13 @@ Deployment is handled by GitHub Actions. On each push to `main`, the workflow:
 
 The site keeps MkDocs Material and uses a small project-specific CSS system in `docs/stylesheets/extra.css`.
 
-- `ww-compact-head`, `ww-search-panel`, `ww-dashboard-grid`, and `ww-stat-card` shape the quiet search-first homepage.
+- `ww-shell--landing`, `ww-landing-head`, `ww-search-panel`, `ww-dashboard-grid`, and `ww-stat-card` shape the Chinese-first search-first homepage.
 - `ww-registry-explorer`, `ww-explorer-toolbar`, and `ww-explorer-card` power the compact JSON-backed Registry Explorer, including filter chips, sort/group controls, and shareable URL state.
 - `ww-feature-card`, `ww-path-card`, `ww-root-card`, `ww-scenario-card`, and `ww-check-card` provide database-style entry and checklist cards.
 - `ww-chip`, `ww-badge`, `ww-path-pill`, and `ww-fact-card` keep registry paths and page facts scannable.
 - Tables are styled for dense reference reading and use container-level horizontal scrolling on narrow screens.
 
-The visual direction is restrained and dense: Microsoft Learn-like documentation clarity with RegSeek / DFIRHub-style search, filters, dashboard stats, and compact database entry patterns. It intentionally avoids heavy frontend frameworks, marketing-page layout, oversized hero blocks, and decorative visual effects.
+The visual direction is a Chinese-first registry database entrance: MkDocs Material navigation, a reference-style centered search area, dashboard stats, and compact database entry patterns. It intentionally avoids heavy frontend frameworks, artifact-first navigation, and decorative visual effects.
 
 ## Content Principles
 

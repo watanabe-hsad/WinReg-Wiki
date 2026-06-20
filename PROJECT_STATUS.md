@@ -6,7 +6,7 @@ The project is `WinReg Wiki`: a concise Chinese-first Windows registry key/value
 
 Current information architecture:
 
-- `首页`: compact search-first registry database entrance with a quiet title block, inline search bar, small filter chips, metric row, and dense popular path cards.
+- `首页`: Chinese-first registry database entrance with a centered title, prominent search bar, quick chips, metric cards, three primary entry cards, and common registry path cards.
 - `注册表位置`: primary dictionary-style entry point organized by Windows native registry tree. Pages explain location, hive source, common values, state, caveats, related scenarios, and related registry positions.
 - `取证场景`: checklist-style investigation entry point. Scenario pages primarily link to `docs/registry-tree/` pages and then list cross-validation sources.
 - `docs/artifacts/`: supplemental/internal artifact detail. Artifact pages are retained for field semantics, collection notes, parsing tools, common misreads, and YAML-backed artifact indexes. They are not a primary navigation model.
@@ -42,7 +42,44 @@ Current information architecture:
 
 ## Last Completed Round
 
-This round enhanced the Registry Explorer controls now that the structured registry data set has 30 records. It did not expand content, did not change the data model, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
+This round adjusted the homepage to follow the provided reference design while keeping the project Chinese-first and preserving the current information architecture. It did not change the top-level navigation, did not move artifact pages into the primary entry model, and did not expand registry content.
+
+Homepage visual updates:
+
+- Reworked `docs/index.md` into a Chinese-first database entrance:
+  - centered `WinReg Wiki` title block;
+  - Chinese subtitle and one-line explanation;
+  - prominent central search bar using the existing MkDocs search trigger;
+  - centered quick chips for HKLM, HKCU, SYSTEM, SOFTWARE, Run Keys, Services, USBSTOR, UserAssist, Winlogon, ProfileList, RDP, and Defender;
+  - four visual metric cards for registry pages, structured registry records, supplemental artifact records, and forensic scenarios;
+  - three primary Chinese entry cards: `注册表位置`, `取证场景`, and `结构化索引`;
+  - `常用注册表路径` card grid with eight common paths.
+- Updated `docs/stylesheets/extra.css` with homepage-only landing styles:
+  - full-width homepage content by hiding MkDocs sidebars only when `.ww-shell--landing` is present;
+  - larger but bounded centered title;
+  - search bar styling closer to the provided reference;
+  - icon-like stat markers using text labels instead of external icon assets;
+  - wider entry cards and common path cards;
+  - mobile-specific title sizing.
+- Added `.pip-cache/` to `.gitignore` for local dependency installation cache.
+
+Local browser preview for this round:
+
+- Preview command: `.venv/bin/mkdocs serve -a 127.0.0.1:8000`.
+- Checked homepage at desktop width and mobile width.
+- Checked light and slate/dark mode.
+- Result: homepage has no horizontal overflow, top-level navigation remains Chinese, content is Chinese-first, search bar and cards are readable, and the browser console showed only the MkDocs live-reload log.
+
+Validation for this round:
+
+- `.venv/bin/python scripts/generate-artifact-index.py`: passed.
+- `.venv/bin/python scripts/generate-registry-index.py`: passed, generated 30 registry entries.
+- `.venv/bin/python scripts/check-content-style.py`: passed.
+- `.venv/bin/mkdocs build --strict`: passed. Material for MkDocs emitted its upstream MkDocs 2.0 warning, and MkDocs listed artifact detail pages outside `nav`; both are expected for this project state.
+
+## Previous Completed Round
+
+This previous round enhanced the Registry Explorer controls now that the structured registry data set has 30 records. It did not expand content, did not change the data model, did not change top-level navigation, and did not move artifact pages back into the primary entry model.
 
 Explorer interaction updates:
 

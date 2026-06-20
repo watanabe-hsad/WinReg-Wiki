@@ -1,18 +1,19 @@
 <section class="ww-shell ww-shell--landing">
-  <div class="ww-compact-head">
-    <p class="ww-hero-eyebrow">WINDOWS REGISTRY KNOWLEDGE BASE</p>
+  <div class="ww-landing-head">
+    <p class="ww-hero-eyebrow">WINDOWS 注册表知识库</p>
     <h1 class="ww-hero-title">WinReg Wiki</h1>
+    <span class="ww-title-underline" aria-hidden="true"></span>
     <p class="ww-hero-subtitle">Windows 注册表键值速查与取证线索</p>
     <p class="ww-hero-text">按原生注册表路径查询 key / value，按取证场景交叉验证线索。</p>
   </div>
 
-  <button class="ww-search-panel ww-search-panel--inline" type="button" data-ww-search-trigger>
+  <button class="ww-search-panel ww-search-panel--landing" type="button" data-ww-search-trigger>
     <span class="ww-search-icon">⌕</span>
-    <span class="ww-search-placeholder">搜索路径、值名、场景，例如 Run Keys / USBSTOR / Winlogon</span>
+    <span class="ww-search-placeholder">搜索注册表路径、值名、场景，例如 Run Keys / USBSTOR / Winlogon</span>
     <span class="ww-command-group"><kbd class="ww-command-key">/</kbd><kbd class="ww-command-key">Ctrl K</kbd></span>
   </button>
 
-  <div class="ww-chip-row ww-chip-row--filters">
+  <div class="ww-chip-row ww-chip-row--filters ww-chip-row--center">
     <a class="ww-chip ww-chip--hive" href="registry-tree/hklm/">HKLM</a>
     <a class="ww-chip ww-chip--hive" href="registry-tree/hkcu/">HKCU</a>
     <a class="ww-chip ww-chip--hive" href="registry-tree/hklm/system/">SYSTEM</a>
@@ -28,109 +29,116 @@
   </div>
 
   <div class="ww-dashboard-grid ww-dashboard-grid--landing">
-    <div class="ww-stat-card"><strong>98</strong><span>registry pages</span></div>
-    <div class="ww-stat-card"><strong>30</strong><span>registry data</span></div>
-    <div class="ww-stat-card"><strong>42</strong><span>artifacts</span></div>
-    <div class="ww-stat-card"><strong>12</strong><span>scenarios</span></div>
+    <div class="ww-stat-card">
+      <span class="ww-stat-icon">REG</span>
+      <strong>98</strong>
+      <span>注册表页面</span>
+      <em>按原生路径整理</em>
+    </div>
+    <div class="ww-stat-card">
+      <span class="ww-stat-icon">YML</span>
+      <strong>30</strong>
+      <span>结构化记录</span>
+      <em>data/registry</em>
+    </div>
+    <div class="ww-stat-card">
+      <span class="ww-stat-icon">ART</span>
+      <strong>42</strong>
+      <span>补充条目</span>
+      <em>artifact YAML</em>
+    </div>
+    <div class="ww-stat-card">
+      <span class="ww-stat-icon">SCN</span>
+      <strong>12</strong>
+      <span>取证场景</span>
+      <em>检查入口</em>
+    </div>
   </div>
 
-  <div class="ww-card-grid ww-card-grid--three ww-card-grid--entry">
+  <div class="ww-card-grid ww-card-grid--three ww-card-grid--entry ww-card-grid--landing-entry">
     <a class="ww-feature-card" href="registry-tree/explorer/">
       <span class="ww-card-mark">REG</span>
-      <strong>Registry Explorer</strong>
-      <span>按路径、Hive、主题筛选。</span>
-      <em>Open →</em>
+      <strong>注册表位置</strong>
+      <span>按 HKLM / HKCU / HKU / HKCR / HKCC 浏览原生注册表树，并使用 Explorer 筛选结构化记录。</span>
+      <em>打开 →</em>
     </a>
 
     <a class="ww-feature-card" href="questions/">
       <span class="ww-card-mark">SCN</span>
-      <strong>Scenario Playbooks</strong>
-      <span>场景检查清单入口。</span>
-      <em>Open →</em>
+      <strong>取证场景</strong>
+      <span>从程序执行、自启动、USB、RDP、账户、安全策略等问题进入检查清单。</span>
+      <em>打开 →</em>
     </a>
 
     <a class="ww-feature-card" href="registry-tree/generated-index/">
       <span class="ww-card-mark">IDX</span>
-      <strong>Structured Index</strong>
-      <span>data/registry 静态索引。</span>
-      <em>Open →</em>
+      <strong>结构化索引</strong>
+      <span>查看由 data/registry 生成的路径、Hive、主题、状态和相关场景索引。</span>
+      <em>打开 →</em>
     </a>
   </div>
 </section>
 
-<section class="ww-section">
-  <div class="ww-section-header">
-    <span>Popular Registry Paths</span>
-    <h2>常用路径入口</h2>
+<section class="ww-section ww-section--landing-paths">
+  <div class="ww-section-header ww-section-header--centerline">
+    <span>常用注册表路径</span>
   </div>
 
-  <div class="ww-card-grid ww-card-grid--paths">
+  <div class="ww-card-grid ww-card-grid--paths ww-card-grid--common-paths">
     <a class="ww-path-card" href="registry-tree/hklm/software/microsoft/windows/currentversion/run/">
-      <div class="ww-card-line"><strong>Run Keys</strong><span class="ww-chip ww-chip--hive">HKLM / HKCU</span></div>
-      <span class="ww-path-pill">...\CurrentVersion\Run</span>
-      <span>登录启动项配置。</span>
+      <div class="ww-card-line"><strong>Run Keys</strong><span class="ww-chip ww-chip--topic">启动项</span></div>
+      <span class="ww-path-pill">HKCU\Software\Microsoft\Windows\CurrentVersion\Run</span>
+      <span>用户登录时加载的启动项配置。</span>
     </a>
 
     <a class="ww-path-card" href="registry-tree/hklm/system/controlset/services/">
-      <div class="ww-card-line"><strong>Services</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
-      <span class="ww-path-pill">ControlSet00x\Services</span>
-      <span>服务与驱动配置。</span>
-    </a>
-
-    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/enum/usbstor/">
-      <div class="ww-card-line"><strong>USBSTOR</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
-      <span class="ww-path-pill">Enum\USBSTOR</span>
-      <span>USB 存储设备枚举。</span>
+      <div class="ww-card-line"><strong>Services</strong><span class="ww-chip ww-chip--topic">服务</span></div>
+      <span class="ww-path-pill">HKLM\SYSTEM\ControlSet00x\Services</span>
+      <span>服务与驱动的启动类型、镜像路径和账户配置。</span>
     </a>
 
     <a class="ww-path-card" href="registry-tree/hkcu/software/microsoft/windows/currentversion/userassist/">
-      <div class="ww-card-line"><strong>UserAssist</strong><span class="ww-chip ww-chip--hive">HKCU</span></div>
-      <span class="ww-path-pill">...\Explorer\UserAssist</span>
-      <span>Explorer 用户交互线索。</span>
+      <div class="ww-card-line"><strong>UserAssist</strong><span class="ww-chip ww-chip--scenario">用户行为</span></div>
+      <span class="ww-path-pill">HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist</span>
+      <span>Explorer 介导的程序交互线索。</span>
     </a>
 
-    <a class="ww-path-card" href="registry-tree/hklm/software/microsoft/windows-nt/currentversion/winlogon/">
-      <div class="ww-card-line"><strong>Winlogon</strong><span class="ww-chip ww-chip--hive">SOFTWARE</span></div>
-      <span class="ww-path-pill">...\Winlogon</span>
-      <span>登录初始化配置。</span>
-    </a>
-
-    <a class="ww-path-card" href="registry-tree/hklm/software/microsoft/windows-nt/currentversion/profilelist/">
-      <div class="ww-card-line"><strong>ProfileList</strong><span class="ww-chip ww-chip--hive">SOFTWARE</span></div>
-      <span class="ww-path-pill">...\ProfileList</span>
-      <span>SID 与 profile 映射。</span>
+    <a class="ww-path-card" href="registry-tree/hkcu/software/microsoft/windows/currentversion/runmru/">
+      <div class="ww-card-line"><strong>RunMRU</strong><span class="ww-chip ww-chip--scenario">用户行为</span></div>
+      <span class="ww-path-pill">HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU</span>
+      <span>运行对话框输入历史。</span>
     </a>
 
     <a class="ww-path-card" href="registry-tree/hklm/system/mounteddevices/">
       <div class="ww-card-line"><strong>MountedDevices</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
-      <span class="ww-path-pill">MountedDevices</span>
-      <span>卷 GUID 与盘符映射。</span>
+      <span class="ww-path-pill">HKLM\SYSTEM\MountedDevices</span>
+      <span>卷 GUID、盘符和二进制设备标识映射。</span>
     </a>
 
-    <a class="ww-path-card" href="registry-tree/hklm/software/policies/microsoft/windows-defender/">
-      <div class="ww-card-line"><strong>Defender Policies</strong><span class="ww-chip ww-chip--hive">Policies</span></div>
-      <span class="ww-path-pill">Windows Defender</span>
-      <span>防护策略配置。</span>
+    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/control/session-manager/">
+      <div class="ww-card-line"><strong>Session Manager</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
+      <span class="ww-path-pill">HKLM\SYSTEM\ControlSet00x\Control\Session Manager</span>
+      <span>启动阶段、兼容性缓存和会话初始化相关配置。</span>
     </a>
 
-    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/control/terminal-server/rdp-tcp/">
-      <div class="ww-card-line"><strong>RDP-Tcp</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
-      <span class="ww-path-pill">WinStations\RDP-Tcp</span>
-      <span>RDP listener 配置。</span>
+    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/enum/usbstor/">
+      <div class="ww-card-line"><strong>USBSTOR</strong><span class="ww-chip ww-chip--topic">设备</span></div>
+      <span class="ww-path-pill">HKLM\SYSTEM\ControlSet00x\Enum\USBSTOR</span>
+      <span>USB 存储设备枚举和实例线索。</span>
     </a>
 
-    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/services/tcpip/parameters/interfaces/">
-      <div class="ww-card-line"><strong>Tcpip Interfaces</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
-      <span class="ww-path-pill">Parameters\Interfaces</span>
-      <span>接口 IP / DNS / DHCP。</span>
+    <a class="ww-path-card" href="registry-tree/hklm/system/controlset/control/timezone/">
+      <div class="ww-card-line"><strong>TimeZoneInformation</strong><span class="ww-chip ww-chip--hive">SYSTEM</span></div>
+      <span class="ww-path-pill">HKLM\SYSTEM\ControlSet00x\Control\TimeZoneInformation</span>
+      <span>系统时区配置，适合与时间线解释交叉核对。</span>
     </a>
   </div>
 </section>
 
 <section class="ww-supplemental">
   <div class="ww-info-strip">
-    <span><strong>Registry first</strong> 路径页面解释 key / value。</span>
-    <span><strong>Scenario assisted</strong> 场景页组织交叉验证。</span>
-    <span><strong>Artifact supplemental</strong> artifact 保留补充细节。</span>
+    <span><strong>注册表优先</strong> 路径页面解释 key / value。</span>
+    <span><strong>场景辅助</strong> 取证场景页组织交叉验证。</span>
+    <span><strong>补充层</strong> artifact 保留字段和工具细节。</span>
   </div>
 </section>

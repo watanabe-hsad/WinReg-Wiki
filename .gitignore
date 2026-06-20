@@ -1,4 +1,5 @@
 .venv/
+.pip-cache/
 site/
 .cache/
 __pycache__/

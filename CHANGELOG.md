@@ -125,6 +125,8 @@ The format follows the spirit of Keep a Changelog, and this project has not publ
 
 ### Changed
 
+- Reworked the homepage to match the provided database-landing reference design while keeping Chinese-first content, current top-level navigation, and artifact pages as a supplemental layer.
+- Updated homepage-specific CSS for centered title/search, visual metric cards, wider entry cards, common path card grid, homepage-only sidebar hiding, and mobile title sizing.
 - Enhanced Registry Explorer rendering so grouped results stay compact and topic grouping respects the selected topic filter.
 - Improved Registry Explorer control accessibility by adding explicit IDs and names for search, sort, and group inputs.
 - Polished the quiet UI token system after browser review: refined light / slate borders, muted text, path pills, chips, focus rings, Material header/search treatment, subtle table zebra rows, and compact card hover states without changing content or navigation.
